@@ -17,13 +17,12 @@ import { Usuarios } from '../../models/usuarios';
 
 export class HomeComponent implements OnInit {
     
-    ngOnInit(): void { 
-      
-    this.loadUsuario();
+    ngOnInit(): void {       
+      this.loadUsuario();
     }
 
     constructor(private _usuariosService : UsuariosService,  private titulo:Title) {
-      this.titulo.setTitle("Ordutruk");
+      this.titulo.setTitle("OrduTruk");
     }
 
     public vistaActual: 'index' | 'resumen' | 'registrar' | 'acceder' = 'index';
