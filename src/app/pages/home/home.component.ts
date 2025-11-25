@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
       this.titulo.setTitle("Ordutruk");
     }
 
-    public vistaActual: 'index' | 'resumen' | 'registrar' | 'acceder' = 'index';
+    public vistaActual: 'index' | 'descripcion' | 'registrar' | 'acceder' = 'index';
     public usuarios: Usuarios[] = [];
 
 

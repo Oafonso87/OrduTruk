@@ -1,4 +1,12 @@
-<h1>Hola</h1>
-<div *ngFor="let usuario of usuarios">
-    <p>{{usuario.nombreTrabajador}}</p>
-</div>
+<ng-container [ngSwitch]="vistaActual">
+
+    
+    <!-- Página de inicio -->
+    <main *ngSwitchCase="'index'"></main>
+    <!-- En descripcion iria el quiénes somos -->
+    <main *ngSwitchCase="'descripcion'"></main>
+    <main *ngSwitchCase="'registrar'"></main>
+    <main *ngSwitchCase="'acceder'"></main>
+
+
+</ng-container>
