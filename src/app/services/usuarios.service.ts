@@ -7,38 +7,40 @@ import { Usuarios } from "../models/usuarios";
 
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UsuariosService {
 
-    private url: string = 'https://garcia-conde-jose-dwes04-te01.onrender.com/api/post/get';
+  private url: string = 'https://garcia-conde-jose-dwes04-te01.onrender.com/api/post/get';
 
-      private httpOptions = {
-        headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-        })
-      };
-    
-      constructor(public _http : HttpClient) {}      
-         
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
-      getUsuarios(): Observable<ApiResponse<Usuarios[]>> {
-        return this._http.get<ApiResponse<Usuarios[]>>(this.url);
-      }
+  constructor(public _http: HttpClient) { }
 
-    //   getUsuarioById(id: number): Observable<ApiResponse<Login>> {
-    //     return this._http.get<ApiResponse<Login>>(`${this.url}/${id}`);
-    //   }
 
-    //   createUsuario(login: Login): Observable<ApiResponse<Login>> {
-    //     return this._http.post<ApiResponse<Login>>(this.url, login, this.httpOptions);
-    //   }
+  getUsuarios(): Observable<ApiResponse<Usuarios[]>> {
+    return this._http.get<ApiResponse<Usuarios[]>>(this.url);
+  }
 
-    //   updateUsuario(login: Login): Observable<ApiResponse<Login>> {
-    //     return this._http.put<ApiResponse<Login>>(`${this.url}/${login.id}`, login, this.httpOptions);
-    //   }
+  //   getUsuarioById(id: number): Observable<ApiResponse<Login>> {
+  //     return this._http.get<ApiResponse<Login>>(`${this.url}/${id}`);
+  //   }
 
-    //   deleteUsuario(id: number): Observable<ApiResponse<any>> {
-    //     return this._http.delete<ApiResponse<any>>(`${this.url}/${id}`);
-    //   }
-    
+  //   createUsuario(login: Login): Observable<ApiResponse<Login>> {
+  //     return this._http.post<ApiResponse<Login>>(this.url, login, this.httpOptions);
+  //   }
+
+  //   updateUsuario(login: Login): Observable<ApiResponse<Login>> {
+  //     return this._http.put<ApiResponse<Login>>(`${this.url}/${login.id}`, login, this.httpOptions);
+  //   }
+
+  //   deleteUsuario(id: number): Observable<ApiResponse<any>> {
+  //     return this._http.delete<ApiResponse<any>>(`${this.url}/${id}`);
+  //   }
+
 }

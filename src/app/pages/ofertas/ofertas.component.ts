@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ofertas',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './ofertas.component.html',
-  styleUrl: './ofertas.component.css',
-  providers: []
+  styleUrl: './ofertas.component.css'
 })
 
 export class OfertasComponent implements OnInit {
-    
-    ngOnInit(): void {      
-    }
 
-    constructor() {}
+  ngOnInit(): void {
+  }
 
-    public vistaActual: 'listado' | 'detalle' | 'aniadir' = 'listado';
+  constructor() { }
+
+  public vistaActual: 'listado' | 'detalle' | 'aniadir' = 'listado';
 
 
 }
