@@ -1,1 +1,26 @@
-<p>acceso works!</p>
+<app-header></app-header>
+<div class="row">
+
+    <div class="col-6 acceso-content">
+        <div class="col-6">
+            <h1>Acceso</h1>
+            <h2>¡Bienvenido a OrduTruk!</h2>
+            <p>Al continuar, aceptas nuestros Términos de uso y reconoces que has leído nuestra Política de privacidad.
+            </p>
+            <p>Si aún no tienes cuenta <a routerLink="/registro">Registrate</a></p>
+        </div>
+
+        <div class="col-6 form-content">
+
+            <label>Correo electrónico</label>
+            <input type="email" placeholder="Correo">
+            <label>Contraseña</label>
+            <input type="password" placeholder="Contraseña">
+
+            <app-button>Acceder</app-button>
+        </div>
+    </div>
+    <div class="col-6 acceso-img"></div>
+
+</div>
+<app-footer></app-footer>

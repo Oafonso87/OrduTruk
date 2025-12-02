@@ -1,17 +1,31 @@
-<h1>Registro</h1>
-<h2>¡Bienvenido a OrduTruk!</h2>
-<p>Al continuar, aceptas nuestros Términos de uso y reconoces que has leído nuestra Política de privacidad.</p>
-<a href="#">Si ya tienes cuenta Accede</a>
+<app-header></app-header>
+<div class="row">
 
-<label>Nombre</label>
-<input type="text" placeholder="Nombre">
-<label>Apellido</label>
-<input type="text" placeholder="Apellido">
-<label>Dirección</label>
-<input type="text" placeholder="Dirección">
-<label>Correo electrónico</label>
-<input type="email" placeholder="Correo">
-<label>Contraseña</label>
-<input type="password" placeholder="Contraseña">
+    <div class="col-6 registro-content">
+        <div class="col-6">
+            <h1>Registro</h1>
+            <h2>¡Bienvenido a OrduTruk!</h2>
+            <p>Al continuar, aceptas nuestros Términos de uso y reconoces que has leído nuestra Política de privacidad.
+            </p>
+            <p>Si ya tienes cuenta <a routerLink="/acceso">Accede</a></p>
+        </div>
 
-<app-button>Registrarse</app-button>
+        <div class="col-6 form-content">
+            <label>Nombre</label>
+            <input type="text" placeholder="Nombre">
+            <label>Apellido</label>
+            <input type="text" placeholder="Apellido">
+            <label>Dirección</label>
+            <input type="text" placeholder="Dirección">
+            <label>Correo electrónico</label>
+            <input type="email" placeholder="Correo">
+            <label>Contraseña</label>
+            <input type="password" placeholder="Contraseña">
+
+            <app-button>Registrarse</app-button>
+        </div>
+    </div>
+    <div class="col-6 registro-img"></div>
+
+</div>
+<app-footer></app-footer>
