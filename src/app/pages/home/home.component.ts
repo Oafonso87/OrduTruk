@@ -9,11 +9,12 @@ import { ApiResponse } from '../../models/apiresponse';
 import { Usuarios } from '../../models/usuarios';
 import { Button } from '../../components/button/button';
 import { Header } from "../../components/header/header";
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Button, Header],
+  imports: [CommonModule, Button, Header, Footer],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

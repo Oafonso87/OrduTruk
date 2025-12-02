@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "@fontsource/bakbak-one";
+@import "@fontsource/bakbak-one/400.css";
+@import "@fontsource-variable/roboto";
+@import "@fontsource-variable/roboto/wght.css";
+@import "@fontsource-variable/roboto/wght-italic.css";
+
+app-root {
+    overflow-x: hidden;
+    display: block;
+}

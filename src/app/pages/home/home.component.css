@@ -1,4 +1,38 @@
+.home-img {
+    background-image: url('/assets/img/home.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    min-height: 734px;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: flex-start;
+    padding-top: 100px;
+}
+
 h1 {
-    background-color: red;
-    color: white;
+    font-family: 'Bakbak One', cursive;
+    color: #FFBA42;
+    font-size: 70px;
+    line-height: 70px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-family: 'Roboto Variable', sans-serif;
+    color: #424242;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    padding-right: 100px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
 }

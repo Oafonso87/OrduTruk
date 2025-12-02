@@ -8,6 +8,9 @@ import { Menu } from '../menu/menu';
   imports: [Ordutruk, Menu],
   templateUrl: './header.html',
   styleUrl: './header.css',
+  host: {
+    class: 'header',
+  },
 })
 export class Header {
 

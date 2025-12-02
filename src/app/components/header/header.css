@@ -1,0 +1,9 @@
+:host(.header) {
+    background-image: url('/assets/img/bg-header.png');
+    background-position: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 130px;
+    padding: 20px 50px 50px
+}
