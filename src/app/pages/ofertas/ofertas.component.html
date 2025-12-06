@@ -4,8 +4,8 @@
         <div class="header">
             <h1 class="title">Ofertas</h1>
             <div class="filter-container">
-                <h2 class="subtitle">Explora los servicios que tu comunidad está ofreciendo</h2>
-                <div class="d-flex align-items-center gap-2 mt-3 mb-2">
+                <h2 class="content">Explora los servicios que tu comunidad está ofreciendo</h2>
+                <div class="filtro-button">
                     <span>Filtrar</span>
                     <button class="btn btn-primary btn-sm rounded-circle" (click)="toggleFiltro()">
                         <i class="bi bi-filter"></i>
@@ -53,7 +53,7 @@
 
             <div class="oferta" *ngFor="let oferta of ofertas; let i = index">
                 <div>
-                    <img src="" alt="">
+                    <img src="/assets/img/ofertas.png" alt="Oferta">
                 </div>
                 <div>
                     <h3>Clases de Inglés Básico <span><i class="bi bi-clock"></i> 2h</span></h3>
