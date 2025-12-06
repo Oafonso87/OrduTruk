@@ -51,15 +51,15 @@
         </div>
         <div class="content-list">
 
-            <div class="oferta" *ngFor="let oferta of ofertas; let i = index">
-                <div>
+            <div class="row list-item" *ngFor="let oferta of ofertas; let i = index">
+                <div class="col-3 list-item-img">
                     <img src="/assets/img/ofertas.png" alt="Oferta">
                 </div>
-                <div>
-                    <h3>Clases de Inglés Básico <span><i class="bi bi-clock"></i> 2h</span></h3>
-                    <p>Profesor: María Pérez</p>
+                <div class="col-9 list-item-content">
+                    <h3 class="item-title">Clases de Inglés Básico <span><i class="bi bi-clock"></i> 2h</span></h3>
+                    <p class="item-tag">Idioms</p>
 
-                    <p>
+                    <p class="item-content">
                         Ofrezco clases de inglés nivel básico e intermedio. Tengo experiencia enseñando a adultos y
                         estudiantes. Podemos practicar conversación, gramática y preparación para exámenes. </p>
 
