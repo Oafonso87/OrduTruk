@@ -1,4 +1,4 @@
-@use '../../../styles/mixins' as *;
+@use 'styles/mixins' as *;
 
 .registro-content {
     display: flex;
@@ -10,7 +10,7 @@
     /*align-items: center;
     height: 100vh;*/
 
-    @include estilo-texto('titulo');
+    @include font('titulo');
 }
 
 .form-content {

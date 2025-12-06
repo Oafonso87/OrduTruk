@@ -37,8 +37,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
-            ]
+              "src/app/styles/global.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -95,8 +100,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
-            ]
+              "src/app/styles/global.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app"
+              ]
+            }
           }
         }
       }
