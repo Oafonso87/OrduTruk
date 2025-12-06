@@ -8,12 +8,16 @@
     /*align-items: center;
     height: 100vh;*/
 
-    padding: 50px 65px;
+    padding: 50px 65px 50px 65px;
+    //border: 1px solid red;
 
 
 }
 
-
+.intro {
+    padding-right: 65px;
+    //border: 1px solid blue;
+}
 
 .form-content {
     display: flex;
