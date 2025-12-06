@@ -1,18 +1,25 @@
 @use 'sass:map';
 
 $font-config: (
-    'titulo': (family: ('Montserrat', sans-serif),
-        weight: 700,
-        style: normal),
-    'texto': (family: ('Open Sans', sans-serif),
-        weight: 400,
-        style: normal)
+    'title': (font-family: ('Bakbak One', cursive),
+        color: #FFBA42,
+        font-size: 70px,
+        line-height: 70px),
+    'subtitle': (font-family: ('Roboto Variable', sans-serif),
+        color: #424242,
+        font-size: 32px,
+        line-height: 40px),
+    'content': (font-family: ('Roboto Variable', sans-serif),
+        color: #424242,
+        font-size: 16px,
+        line-height: 24px)
 );
 
 @mixin font($type) {
     $config: map.get($font-config, $type);
 
-    font-family: map.get($config, family);
-    font-weight: map.get($config, weight);
-    font-style: map.get($config, style);
+    font-family: map.get($config, font-family);
+    color: map.get($config, color);
+    font-size: map.get($config, font-size);
+    line-height: map.get($config, line-height);
 }

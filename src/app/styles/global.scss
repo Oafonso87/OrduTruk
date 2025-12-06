@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'styles/mixins' as *;
+
 
 @import "@fontsource/bakbak-one";
 @import "@fontsource/bakbak-one/400.css";
@@ -15,4 +17,56 @@ body {
     margin: 0;
     padding: 0;
     background-color: #fff;
+}
+
+.title {
+    @include font('title');
+}
+
+.subtitle {
+    @include font('subtitle');
+    font-weight: 300;
+}
+
+.content {
+    @include font('content');
+}
+
+.arrow-link {
+    text-decoration: none;
+    color: #0D6EFD;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    &::after {
+        content: '→';
+        font-size: 1.2em;
+        transition: transform 0.2s ease;
+    }
+
+    &:hover::after {
+        transform: translateX(3px);
+    }
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    //gap: 10px;
+
+    label {
+        border: 1px solid red;
+        width: 100%;
+    }
+
+    input {
+        border: 1px solid red;
+        width: 100%;
+        min-height: 48px;
+        border-radius: 10px;
+        padding: 4px 10px;
+    }
+
 }

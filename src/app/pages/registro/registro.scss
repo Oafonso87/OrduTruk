@@ -1,5 +1,3 @@
-@use 'styles/mixins' as *;
-
 .registro-content {
     display: flex;
     flex-direction: row;
@@ -10,8 +8,12 @@
     /*align-items: center;
     height: 100vh;*/
 
-    @include font('titulo');
+    padding: 50px 65px;
+
+
 }
+
+
 
 .form-content {
     display: flex;

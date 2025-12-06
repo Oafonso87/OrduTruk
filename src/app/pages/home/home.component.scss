@@ -1,3 +1,5 @@
+@use 'styles/mixins' as *;
+
 .home-img {
     background-image: url('/assets/img/home.png');
     background-position: center;
@@ -15,18 +17,24 @@
 }
 
 h1 {
+    /*
     font-family: 'Bakbak One', cursive;
     color: #FFBA42;
     font-size: 70px;
     line-height: 70px;
+    */
+    @include font('title');
     margin-bottom: 20px;
 }
 
 p {
+    /*
     font-family: 'Roboto Variable', sans-serif;
     color: #424242;
     font-size: 32px;
     line-height: 40px;
+    */
+    @include font('subtitle');
     font-weight: 300;
     margin-bottom: 40px;
     padding-right: 100px;
