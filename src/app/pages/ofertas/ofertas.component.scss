@@ -1,0 +1,32 @@
+.ofertas {
+    padding: 50px 65px;
+}
+
+.filtro {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.content-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 50px;
+    border: 1px solid red;
+}
+
+
+.oferta {
+    display: flex;
+
+    border: 1px solid blue
+}
+
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
