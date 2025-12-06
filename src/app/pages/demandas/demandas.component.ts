@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './demandas.component.html',
-  styleUrl: './demandas.component.css'
+  styleUrl: './demandas.component.scss'
 })
 
 export class DemandasComponent implements OnInit {

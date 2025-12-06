@@ -6,7 +6,7 @@ import { Button } from '../button/button';
   standalone: true,
   imports: [Button],
   templateUrl: './menu.html',
-  styleUrl: './menu.css',
+  styleUrl: './menu.scss',
 })
 export class Menu {
 

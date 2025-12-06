@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-ordutruk',
   standalone: true,
   templateUrl: './ordutruk.html',
-  styleUrl: './ordutruk.css',
+  styleUrl: './ordutruk.scss',
 })
 export class Ordutruk {
 

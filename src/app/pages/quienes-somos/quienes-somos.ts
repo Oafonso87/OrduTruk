@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-quienes-somos',
   standalone: false,
   templateUrl: './quienes-somos.html',
-  styleUrl: './quienes-somos.css',
+  styleUrl: './quienes-somos.scss',
 })
 export class QuienesSomos {
 

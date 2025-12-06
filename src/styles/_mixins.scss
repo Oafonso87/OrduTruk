@@ -1,0 +1,18 @@
+@use 'sass:map';
+
+$config-fuentes: (
+    'titulo': (family: ('Montserrat', sans-serif),
+        weight: 700,
+        style: normal),
+    'texto': (family: ('Open Sans', sans-serif),
+        weight: 400,
+        style: normal)
+);
+
+@mixin estilo-texto($tipo) {
+    $config: map.get($config-fuentes, $tipo);
+
+    font-family: map.get($config, family);
+    font-weight: map.get($config, weight);
+    font-style: map.get($config, style);
+}

@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './usuarios.component.html',
-  styleUrl: './usuarios.component.css'
+  styleUrl: './usuarios.component.scss'
 })
 
 export class UsuariosComponent implements OnInit {

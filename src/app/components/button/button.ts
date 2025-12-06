@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [RouterModule],
   templateUrl: './button.html',
-  styleUrl: './button.css',
+  styleUrl: './button.scss',
 })
 export class Button {
   @Input() label: string = '';

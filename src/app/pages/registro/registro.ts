@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [Button, Header, Footer, RouterLink],
   templateUrl: './registro.html',
-  styleUrl: './registro.css',
+  styleUrl: './registro.scss',
 })
 export class Registro {
 

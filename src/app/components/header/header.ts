@@ -7,7 +7,7 @@ import { Menu } from '../menu/menu';
   standalone: true,
   imports: [Ordutruk, Menu],
   templateUrl: './header.html',
-  styleUrl: './header.css',
+  styleUrl: './header.scss',
   host: {
     class: 'header',
   },

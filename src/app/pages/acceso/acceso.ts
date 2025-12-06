@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [Button, Header, Footer, RouterLink],
   templateUrl: './acceso.html',
-  styleUrl: './acceso.css',
+  styleUrl: './acceso.scss',
 })
 export class Acceso {
 

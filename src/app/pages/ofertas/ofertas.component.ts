@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './ofertas.component.html',
-  styleUrl: './ofertas.component.css'
+  styleUrl: './ofertas.component.scss'
 })
 
 export class OfertasComponent implements OnInit {
