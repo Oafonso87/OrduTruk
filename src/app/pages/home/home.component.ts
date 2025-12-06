@@ -10,11 +10,12 @@ import { Usuarios } from '../../models/usuarios';
 import { Button } from '../../components/button/button';
 import { Header } from "../../components/header/header";
 import { Footer } from '../../components/footer/footer';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, Button, Header, Footer],
+  imports: [CommonModule, Button, Header, Footer, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -22,7 +23,6 @@ import { Footer } from '../../components/footer/footer';
 export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
-
     this.loadUsuario();
   }
 
@@ -30,8 +30,17 @@ export class HomeComponent implements OnInit {
     this.titulo.setTitle("Ordutruk");
   }
 
-  public vistaActual: 'index' | 'resumen' | 'registrar' | 'acceder' = 'index';
+  public vistaActual: 'index' | 'descripcion' | 'registrar' | 'acceder' = 'index';
   public usuarios: Usuarios[] = [];
+
+  public nombreRegistro: string = '';
+  public apellidosRegistro: string = '';
+  public mailRegistro: string = '';
+  public passwordRegistro: string = '';
+  public direccionRegistro: string = '';
+
+
+
 
 
   loadUsuario() {
@@ -44,6 +53,30 @@ export class HomeComponent implements OnInit {
         console.error("Error al cargar los usuarios:", error);
       }
     });
+  }
+
+  registrarse() {
+    let nuevoUsuario: Usuarios = {
+      id: 0,
+      nombre: this.nombreRegistro,
+      apellidos: this.apellidosRegistro,
+      mail: this.mailRegistro,
+      password: this.passwordRegistro,
+      direccion: this.direccionRegistro
+    }
+
+  }
+
+  acceder() {
+
+  }
+
+  resetForm() {
+    this.nombreRegistro = '';
+    this.apellidosRegistro = '';
+    this.mailRegistro = '';
+    this.passwordRegistro = '';
+    this.direccionRegistro = '';
   }
 
 }
