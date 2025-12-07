@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="row">
+
+    <div class="col-6 registro-content">
+        <div class="col-6 intro">
+            <h1 class="title">Registro</h1>
+            <h2 class="subtitle">¡Bienvenido a OrduTruk!</h2>
+            <p class="content">Al continuar, aceptas nuestros <strong>Términos de uso</strong> y reconoces que has leído
+                nuestra <strong>Política de privacidad</strong>.</p>
+            <hr>
+            <p class="content">Si ya tienes cuenta <a class="arrow-link" routerLink="/acceso">Accede</a></p>
+        </div>
+
+        <div class="col-6 form-content">
+            <label>Nombre</label>
+            <input type="text">
+            <label>Apellido</label>
+            <input type="text">
+            <label>Dirección</label>
+            <input type="text">
+            <label>Correo electrónico</label>
+            <input type="email">
+            <label>Contraseña</label>
+            <input type="password">
+
+            <app-button label="Registrarse" [class]="'btn btn-primary'" class="w-100"></app-button>
+        </div>
+    </div>
+    <div class="col-6 registro-img"></div>
+
+</div>
+<app-footer></app-footer>

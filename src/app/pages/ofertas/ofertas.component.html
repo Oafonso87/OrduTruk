@@ -1,0 +1,99 @@
+<app-header></app-header>
+<div class="row">
+    <div class="col-md-12 ofertas">
+        <div class="header">
+            <h1 class="title">Ofertas</h1>
+            <div class="filter-container">
+                <h2 class="content">Explora los servicios que tu comunidad está ofreciendo</h2>
+                <div class="filtro-button">
+                    <span>Filtrar</span>
+                    <button class="btn btn-primary btn-sm rounded-circle" (click)="toggleFiltro()">
+                        <i class="bi bi-filter"></i>
+                    </button>
+                </div>
+            </div>
+
+
+
+
+            <div class="filtro" *ngIf="mostrarFiltro">
+                <select class="form-select" aria-label="Categoría">
+                    <option selected>Categoría</option>
+                    <option value="1">Educación</option>
+                    <option value="2">Salud</option>
+                    <option value="3">Tecnología</option>
+                    <option value="4">Hogar</option>
+                </select>
+
+                <select class="form-select" aria-label="Provincia">
+                    <option selected>Provincia</option>
+                    <option value="1">Bizkaia</option>
+                    <option value="2">Gipuzkoa</option>
+                    <option value="3">Araba</option>
+                </select>
+
+                <select class="form-select" aria-label="Localidad">
+                    <option selected>Localidad</option>
+                    <option value="1">Bilbao</option>
+                    <option value="2">Donostia</option>
+                    <option value="3">Vitoria-Gasteiz</option>
+                </select>
+
+                <select class="form-select" aria-label="Barrio">
+                    <option selected>Barrio</option>
+                    <option value="1">Casco Viejo</option>
+                    <option value="2">Abando</option>
+                    <option value="3">Deusto</option>
+                </select>
+            </div>
+
+
+        </div>
+        <div class="content-list">
+
+            <div class="row list-item" *ngFor="let oferta of ofertas; let i = index">
+                <div class="col-3 list-item-img">
+                    <img src="/assets/img/ofertas.png" alt="Oferta">
+                </div>
+                <div class="col-9 list-item-content">
+                    <h3 class="item-title">Clases de Inglés Básico <span><i class="bi bi-clock"></i> 2h</span></h3>
+                    <p class="item-tag">Idioms</p>
+
+                    <p class="item-content">
+                        Ofrezco clases de inglés nivel básico e intermedio. Tengo experiencia enseñando a adultos y
+                        estudiantes. Podemos practicar conversación, gramática y preparación para exámenes. </p>
+
+                    <span class="badge bg-primary">Bilbao</span>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+        <!-- Paginación -->
+        <nav aria-label="Navegación de páginas">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Siguiente</a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+
+
+
+</div>
+<app-footer></app-footer>

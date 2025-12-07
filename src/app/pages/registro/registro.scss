@@ -1,0 +1,45 @@
+.registro-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    /*justify-content: space-between;
+
+    /*align-items: center;
+    height: 100vh;*/
+
+    padding: 50px 65px 50px 65px;
+    //border: 1px solid red;
+
+
+}
+
+.intro {
+    padding-right: 65px;
+    //border: 1px solid blue;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.registro-img {
+    background-image: url('/assets/img/registro.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    min-height: 734px;
+}
+
+/*
+.registro-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: flex-start;
+    padding-top: 100px;
+}
+    */

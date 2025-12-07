@@ -1,122 +1,125 @@
+<app-header></app-header>
+<div class="row">
+    <div class="col-md-6 home-img"></div>
+    <div class="col-md-6 home-content">
+        <h1>Intercambia Tiempo, Construye Comunidad</h1>
+        <p>Una plataforma solidaria donde <strong>tu tiempo vale</strong>. Ofrece tus habilidades y recibe ayuda de tu
+            comunidad.</p>
+        <div class="btn-group">
+            <app-button label="Registrarse" routerLink="/registro" [class]="'btn btn-primary'"></app-button>
+            <app-button label="Acceder" routerLink="/acceso" [class]="'btn btn-outline-primary'"></app-button>
+        </div>
+    </div>
+
+</div>
+<app-footer></app-footer>
+
+
 @switch (vistaActual) {
-  @case ('index') {
-    <button (click)="vistaActual='descripcion'">Quiénes somos</button>
-    <button (click)="vistaActual='registrar'">Registrarse</button>
-    <button (click)="vistaActual='acceder'">Acceder</button>
-  }
-  @case ('descripcion') {
-    Case B.
-  }
-  @case ('registrar') {
-    <form #formRegistro="ngForm" (ngSubmit)="registrarse()">
-        <div>
-            <label for="nombreRegistro">Nombre</label>
-            <input type="text" id="nombreRegistro" name="nombreRegistro" 
-                [(ngModel)]="nombreRegistro" 
-                placeholder="" #campoNombre="ngModel" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
-            />
-            @if (campoNombre.touched && nombreRegistro.trim() === '') {
-                <span style="display: block; color: red;">El campo Nombre no puede estar vacío</span>
+@case ('index') {
+<button (click)="vistaActual='descripcion'">Quiénes somos</button>
+<button (click)="vistaActual='registrar'">Registrarse</button>
+<button (click)="vistaActual='acceder'">Acceder</button>
+}
+@case ('descripcion') {
+Case B.
+}
+@case ('registrar') {
+<form #formRegistro="ngForm" (ngSubmit)="registrarse()">
+    <div>
+        <label for="nombreRegistro">Nombre</label>
+        <input type="text" id="nombreRegistro" name="nombreRegistro" [(ngModel)]="nombreRegistro" placeholder=""
+            #campoNombre="ngModel" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" />
+        @if (campoNombre.touched && nombreRegistro.trim() === '') {
+        <span style="display: block; color: red;">El campo Nombre no puede estar vacío</span>
+        }
+        @else if (campoNombre.invalid && campoNombre.touched) {
+        <span style="display: block; color: red;">El Nombre solo puede contener letras</span>
+        }
+    </div>
+    <div>
+        <label for="apellidosRegistro">Apellidos</label>
+        <input type="text" id="apellidosRegistro" name="apellidosRegistro" [(ngModel)]="apellidosRegistro"
+            placeholder="" #campoApellidos="ngModel" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" />
+        @if (campoApellidos.touched && apellidosRegistro.trim() === '') {
+        <span style="display: block; color: red;">El campo Apellidos no puede estar vacío</span>
+        }
+        @else if (campoApellidos.invalid && campoApellidos.touched) {
+        <span style="display: block; color: red;">Los Apellidos solo pueden contener letras</span>
+        }
+    </div>
+    <div>
+        <label for="nombreRegistro">Correo Electrónico</label>
+        <input type="text" id="mailRegistro" name="mailRegistro" [(ngModel)]="mailRegistro" placeholder=""
+            #campoMail="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+        @if (campoMail.touched && campoMail.errors?.['required']) {
+        <span style="display: block; color: red;">El campo Correo Electrónico no puede estar vacío</span>
+        }
+        @else if (campoMail.touched && campoMail.errors?.['pattern']) {
+        <span style="display: block; color: red;">El correo electrónico no tiene el formato adecuado:
+            ****@****.***</span>
+        }
+    </div>
+    <div>
+        <label for="nombreRegistro">Contraseña</label>
+        <input type="text" id="passwordRegistro" name="passwordRegistro" [(ngModel)]="passwordRegistro"
+            placeholder="Mín. 6 caracteres" #campoPassword="ngModel" required minlength="6" />
+        @if(campoPassword.touched && passwordRegistro.trim() === '') {
+        <span style="display: block; color: red;">
+            El campo Contraseña no puede estar vacío
+        </span>
+        } @else if (campoPassword.touched && passwordRegistro.length < 6) { <span style="display: block; color: red;">
+            La contraseña tiene que tener como mínimo 6 caracterer
+            </span>
             }
-            @else if (campoNombre.invalid && campoNombre.touched) {
-                <span style="display: block; color: red;">El Nombre solo puede contener letras</span>
+    </div>
+    <div>
+        <label for="direccionRegistro">Dirección</label>
+        <input type="text" id="direccionRegistro" name="direccionRegistro" [(ngModel)]="direccionRegistro"
+            placeholder="" #campoDireccion="ngModel" required />
+        @if(campoDireccion.touched && direccionRegistro.trim() === '') {
+        <span style="display: block; color: red;">
+            El campo Dirección no puede estar vacío
+        </span>
+        }
+    </div>
+    <div>
+        <button [disabled]="!formRegistro.form.valid">Registrarse</button>
+    </div>
+</form>
+<p>Si ya tienes cuenta <a (click)="vistaActual='acceder'" style="cursor: pointer;">Accede</a></p>
+}
+@case ('acceder') {
+<form #formAcceso="ngForm" (ngSubmit)="acceder()">
+    <div>
+        <label for="nombreRegistro">Correo Electrónico</label>
+        <input type="text" id="mailRegistro" name="mailRegistro" [(ngModel)]="mailRegistro" placeholder=""
+            #campoMail="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+        @if (campoMail.touched && campoMail.errors?.['required']) {
+        <span style="display: block; color: red;">El campo Correo Electrónico no puede estar vacío</span>
+        }
+        @else if (campoMail.touched && campoMail.errors?.['pattern']) {
+        <span style="display: block; color: red;">El correo electrónico no tiene el formato adecuado:
+            ****@****.***</span>
+        }
+    </div>
+    <div>
+        <label for="nombreRegistro">Contraseña</label>
+        <input type="text" id="passwordRegistro" name="passwordRegistro" [(ngModel)]="passwordRegistro"
+            placeholder="Mín. 6 caracteres" #campoPassword="ngModel" required minlength="6" />
+        @if(campoPassword.touched && passwordRegistro.trim() === '') {
+        <span style="display: block; color: red;">
+            El campo Contraseña no puede estar vacío
+        </span>
+        } @else if (campoPassword.touched && passwordRegistro.length < 6) { <span style="display: block; color: red;">
+            La contraseña tiene que tener como mínimo 6 caracterer
+            </span>
             }
-        </div>
-        <div>
-            <label for="apellidosRegistro">Apellidos</label>
-            <input type="text" id="apellidosRegistro" name="apellidosRegistro" 
-                [(ngModel)]="apellidosRegistro" 
-                placeholder="" #campoApellidos="ngModel" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
-            />
-            @if (campoApellidos.touched && apellidosRegistro.trim() === '') {
-                <span style="display: block; color: red;">El campo Apellidos no puede estar vacío</span>
-            }
-            @else if (campoApellidos.invalid && campoApellidos.touched) {
-                <span style="display: block; color: red;">Los Apellidos solo pueden contener letras</span>
-            }
-        </div>
-        <div>
-            <label for="nombreRegistro">Correo Electrónico</label>
-            <input type="text" id="mailRegistro" name="mailRegistro" 
-                [(ngModel)]="mailRegistro" 
-                placeholder="" #campoMail="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            />
-            @if (campoMail.touched && campoMail.errors?.['required']) {
-                <span style="display: block; color: red;">El campo Correo Electrónico no puede estar vacío</span>
-            }
-            @else if (campoMail.touched && campoMail.errors?.['pattern']) {
-                <span style="display: block; color: red;">El correo electrónico no tiene el formato adecuado:  ****@****.***</span>
-            }
-        </div>
-        <div>
-            <label for="nombreRegistro">Contraseña</label>
-            <input type="text" id="passwordRegistro" name="passwordRegistro" 
-                [(ngModel)]="passwordRegistro" 
-                placeholder="Mín. 6 caracteres" #campoPassword="ngModel" required minlength="6"
-            />
-            @if(campoPassword.touched && passwordRegistro.trim() === '') {
-                <span style="display: block; color: red;">
-                    El campo Contraseña no puede estar vacío    
-                </span>
-            } @else if (campoPassword.touched && passwordRegistro.length < 6) {
-                <span style="display: block; color: red;">
-                    La contraseña tiene que tener como mínimo 6 caracterer    
-                </span>
-            }
-        </div>
-        <div>
-            <label for="direccionRegistro">Dirección</label>
-            <input type="text" id="direccionRegistro" name="direccionRegistro" 
-                [(ngModel)]="direccionRegistro" 
-                placeholder="" #campoDireccion="ngModel" required
-            />
-            @if(campoDireccion.touched && direccionRegistro.trim() === '') {
-                <span style="display: block; color: red;">
-                    El campo Dirección no puede estar vacío    
-                </span>
-            }
-        </div>
-        <div>  
-            <button [disabled]="!formRegistro.form.valid">Registrarse</button>
-        </div>
-    </form>
-    <p>Si ya tienes cuenta <a (click)="vistaActual='acceder'" style="cursor: pointer;">Accede</a></p>   
-  }
-   @case ('acceder') {
-    <form #formAcceso="ngForm" (ngSubmit)="acceder()">        
-        <div>
-            <label for="nombreRegistro">Correo Electrónico</label>
-            <input type="text" id="mailRegistro" name="mailRegistro" 
-                [(ngModel)]="mailRegistro" 
-                placeholder="" #campoMail="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            />
-            @if (campoMail.touched && campoMail.errors?.['required']) {
-                <span style="display: block; color: red;">El campo Correo Electrónico no puede estar vacío</span>
-            }
-            @else if (campoMail.touched && campoMail.errors?.['pattern']) {
-                <span style="display: block; color: red;">El correo electrónico no tiene el formato adecuado:  ****@****.***</span>
-            }
-        </div>
-        <div>
-            <label for="nombreRegistro">Contraseña</label>
-            <input type="text" id="passwordRegistro" name="passwordRegistro" 
-                [(ngModel)]="passwordRegistro" 
-                placeholder="Mín. 6 caracteres" #campoPassword="ngModel" required minlength="6"
-            />
-            @if(campoPassword.touched && passwordRegistro.trim() === '') {
-                <span style="display: block; color: red;">
-                    El campo Contraseña no puede estar vacío    
-                </span>
-            } @else if (campoPassword.touched && passwordRegistro.length < 6) {
-                <span style="display: block; color: red;">
-                    La contraseña tiene que tener como mínimo 6 caracterer    
-                </span>
-            }
-        </div>
-        <div>  
-            <button [disabled]="!formAcceso.form.valid">Acceder</button>
-        </div>
-    </form>
-    <p>Si aún no tienes cuenta <a (click)="vistaActual='registrar'" style="cursor: pointer;">Regístrate</a></p>
-  }
+    </div>
+    <div>
+        <button [disabled]="!formAcceso.form.valid">Acceder</button>
+    </div>
+</form>
+<p>Si aún no tienes cuenta <a (click)="vistaActual='registrar'" style="cursor: pointer;">Regístrate</a></p>
+}
 }
