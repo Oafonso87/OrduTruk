@@ -2,11 +2,11 @@
 @use 'styles/mixins' as *;
 
 
-@import "@fontsource/bakbak-one";
-@import "@fontsource/bakbak-one/400.css";
-@import "@fontsource-variable/roboto";
-@import "@fontsource-variable/roboto/wght.css";
-@import "@fontsource-variable/roboto/wght-italic.css";
+@use "@fontsource/bakbak-one" as *;
+@use "@fontsource/bakbak-one/400.css" as *;
+@use "@fontsource-variable/roboto" as *;
+@use "@fontsource-variable/roboto/wght.css" as *;
+@use "@fontsource-variable/roboto/wght-italic.css" as *;
 
 app-root {
     overflow-x: hidden;
