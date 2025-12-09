@@ -13,7 +13,7 @@
 
         <form class="col-6 form-content"  #formRegistro="ngForm" (ngSubmit)="registrar()">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombreRegistro" name="nombreRegistro" [(ngModel)]="nombre" placeholder=""
+            <input type="text" id="nombreRegistro" name="nombreRegistro" [(ngModel)]="nombre" (blur)="nombre = capitalizar(nombre)"
                 #campoNombre="ngModel" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" />
             @if (campoNombre.touched && nombre.trim() === '') {
             <span style="display: block; color: red;">El campo Nombre no puede estar vacío</span>
@@ -22,30 +22,20 @@
             <span style="display: block; color: red;">El Nombre solo puede contener letras</span>
             }
             <label for="apellidos">Apellidos</label>
-            <input type="text" id="apellidos" name="apellidos" [(ngModel)]="apellidos"
-                placeholder="" #campoApellidos="ngModel" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" />
+            <input type="text" id="apellidos" name="apellidos" [(ngModel)]="apellidos" (blur)="apellidos = capitalizar(apellidos)"
+                #campoApellidos="ngModel" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" />
             @if (campoApellidos.touched && apellidos.trim() === '') {
             <span style="display: block; color: red;">El campo Apellidos no puede estar vacío</span>
             }
             @else if (campoApellidos.invalid && campoApellidos.touched) {
             <span style="display: block; color: red;">Los Apellidos solo pueden contener letras</span>
             }
-            <!-- <label>Provincia</label>
-            <select>
-                <option value="all" disabled selected>Selecciona una provincia</option>
-                <option value=""></option>
-            </select>
-            <label>Ciudad</label>
-            <select>
-                <option value="all" disabled selected>Selecciona una población</option>
-                <option value=""></option>
-            </select> -->
             <label>Provincia</label>
-            <select name="provincia" [(ngModel)]="provincia" (change)="onProvinciaChange()" required>
-                <option value="0" disabled selected>Selecciona una provincia</option>
-                @for (provincia of provincias; track provincia.id) {
-                    <option [value]="provincia.id">{{ provincia.nombre }}</option>
-                }
+            <select name="provincia" [(ngModel)]="provincia" (ngModelChange)="onProvinciaChange($event)" required>
+            <option [value]="null" disabled>Selecciona una provincia</option>
+            @for (provincia of provincias; track provincia.id) {
+                <option [value]="provincia.id">{{ provincia.nombre }}</option>
+            }
             </select>
             <label>Ciudad</label>
             <select name="ciudad" [(ngModel)]="ciudad" [disabled]="!provincia" required>
@@ -54,8 +44,13 @@
                     <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
                 }
             </select>
-            <label>Dirección</label>
-            <input type="text">
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" [(ngModel)]="direccion" #campoDireccion="ngModel" (blur)="direccion = capitalizar(direccion)">
+            @if(campoDireccion.touched && direccion.trim() === '') {
+                <span style="display: block; color: red;">
+                    El campo Direccion no puede estar vacío
+                </span>
+            }
             <label for="mail">Correo Electrónico</label>
             <input type="email" id="mail" name="mail" [(ngModel)]="mail" placeholder=""
                 #campoMail="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />

@@ -32,8 +32,8 @@ export class UsuariosService {
     return this._http.get<ApiResponse<Usuario>>(`${this.url}/users/${id}`);
   }
 
-  createUsuario(user: Usuario): Observable<LoginResponse> {
-    return this._http.post<LoginResponse>(`${this.url}/register`, user, this.httpOptions);
+  createUsuario(user: Usuario): Observable<ApiResponse<LoginResponse>> {
+    return this._http.post<ApiResponse<LoginResponse>>(`${this.url}/register`, user, this.httpOptions);
   }
 
   updateUsuario(user: Usuario): Observable<ApiResponse<Usuario>> {
