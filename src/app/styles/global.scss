@@ -2,11 +2,11 @@
 @use 'styles/mixins' as *;
 
 
-@import "@fontsource/bakbak-one";
-@import "@fontsource/bakbak-one/400.css";
-@import "@fontsource-variable/roboto";
-@import "@fontsource-variable/roboto/wght.css";
-@import "@fontsource-variable/roboto/wght-italic.css";
+@use "@fontsource/bakbak-one" as *;
+@use "@fontsource/bakbak-one/400.css" as *;
+@use "@fontsource-variable/roboto" as *;
+@use "@fontsource-variable/roboto/wght.css" as *;
+@use "@fontsource-variable/roboto/wght-italic.css" as *;
 
 app-root {
     overflow-x: hidden;
@@ -122,6 +122,14 @@ body {
 .content-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 50px;
+    //border: 1px solid red;
+}
+
+.content-list-detail {
+    display: grid;
+    grid-template-columns: 30% 50% 20%;
     gap: 20px;
     margin-bottom: 50px;
     //border: 1px solid red;

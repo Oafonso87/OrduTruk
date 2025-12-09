@@ -7,10 +7,12 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { QuienesSomos } from './pages/quienes-somos/quienes-somos';
 import { Registro } from './pages/registro/registro';
 import { Acceso } from './pages/acceso/acceso';
+import { OfertasDetalle } from './pages/ofertas-detalle/ofertas-detalle';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'ofertas', component: OfertasComponent },
+    { path: 'ofertasdetalle', component: OfertasDetalle },
     { path: 'demandas', component: DemandasComponent },
     { path: 'usuarios', component: UsuariosComponent },
     { path: 'quienes-somos', component: QuienesSomos },

@@ -1,19 +1,17 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
+import { Button } from '../../components/button/button';
 
 @Component({
-  selector: 'app-ofertas',
+  selector: 'app-ofertas-detalle',
   standalone: true,
-  imports: [CommonModule, Header, Footer, RouterLink],
-  templateUrl: './ofertas.component.html',
-  styleUrl: './ofertas.component.scss'
+  imports: [CommonModule, Header, Footer, Button],
+  templateUrl: './ofertas-detalle.html',
+  styleUrl: './ofertas-detalle.scss',
 })
-
-export class OfertasComponent implements OnInit {
-
+export class OfertasDetalle implements OnInit {
   ngOnInit(): void {
   }
 
@@ -28,5 +26,4 @@ export class OfertasComponent implements OnInit {
   toggleFiltro(): void {
     this.mostrarFiltro = !this.mostrarFiltro;
   }
-
 }
