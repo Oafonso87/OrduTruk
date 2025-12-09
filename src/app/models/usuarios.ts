@@ -1,19 +1,14 @@
-export class Usuarios {
-
-    public id: number;
-    public nombre: string;
-    public apellidos: string;
-    public mail: string;
-    public password: string;
-    public direccion: string;
-
-    constructor(id: number, nombre: string, apellidos: string, mail: string, password: string, direccion: string) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.mail = mail;
-        this.password = password
-        this.direccion = direccion;
-    }
+export interface Usuario {
+    id: number;
+    nombre: string;
+    apellido: string;
+    email: string;
+    provincia_id: number;
+    ciudad_id: number;
+    descripcion: string;
+    horas_saldo: number;
+    valoracion: number
+    rol_id: number;
+    password: string;
+    direccion: string;    
 }
-
