@@ -3,67 +3,52 @@
     <div class="col-md-12 mensajes-usuario">
         <div class="header">
             <h1 class="title">Mensajes</h1>
-            <div class="filter-container">
-                <h2 class="content">Gestiona tus conversaciones con otros miembros</h2>
-            </div>
+            <div class="filter-container"></div>
         </div>
 
 
 
 
-        <div class="row back-link">
-            <a href="/" class="arrow-link-back mb-4 d-inline-block">Volver al inicio</a>
-        </div>
-        <div class="row content-list-detail">
 
+        <div class="row ">
 
-
-
-
-
-
-            <div class=" list-item-img">
-                <img src="/assets/img/ofertasdetalle.png" alt="Mensaje">
-            </div>
-            <div class=" list-item-content">
-                <h3 class="item-title">Conversación con María García</h3>
-                <p class="item-transaccion">Último mensaje <span><i class="bi bi-clock"></i> Hace 2 horas</span></p>
-
-                <p class="item-content">
-                    Hola! Me interesa mucho tu oferta de clases de inglés. ¿Podrías darme más información sobre
-                    los horarios disponibles y el método de enseñanza que utilizas?</p>
-
-                <p class="item-content">
-                    También me gustaría saber si tienes experiencia preparando para exámenes oficiales como el
-                    TOEFL o Cambridge. Muchas gracias por tu tiempo.
-                </p>
-
-
-                <div class="btn-group">
-                    <app-button label="Responder" [class]="'btn btn-primary'"></app-button>
-                    <app-button label="Archivar" [class]="'btn btn-outline-primary'"></app-button>
-                </div>
-
-
-            </div>
-
-
-
-
-            <div class="detalles">
-                <h2> Información del Chat</h2>
-
-                <ul>
-                    <li><strong>Contacto</strong>: María García</li>
-                    <li><strong>Estado</strong>:
-                        <i class="bi bi-circle-fill text-success"></i>
-                        <span>En línea</span>
-                    </li>
-                    <li><strong>Mensajes</strong>: 8</li>
-                    <li><strong>Tema</strong>: Clases de Inglés</li>
-                    <li><strong>Iniciado</strong>: 09/12/2024</li>
+            <div class="row list-item mensaje-list" *ngFor="let oferta of ofertas; let i = index">
+                <ul class="list-item-content">
+                    <li>22/06/2025</li>
+                    <li>Clases de Inglés Básico</li>
+                    <li>Voluntario: John Doe</li>
+                    <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
+                    <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
                 </ul>
             </div>
+
+
+            <!-- Paginación -->
+            <nav aria-label="Navegación de páginas">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Siguiente</a>
+                    </li>
+                </ul>
+            </nav>
+
+
+
+
+
+
+
+
+
+
 
         </div>
 

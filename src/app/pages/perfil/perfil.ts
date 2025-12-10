@@ -21,7 +21,7 @@ export class Perfil implements OnInit {
     public mostrarFiltro: boolean = false;
 
     // Array para repetir ofertas 6 veces
-    public ofertas = Array(6).fill(0);
+    public ofertas = Array(3).fill(0);
 
     toggleFiltro(): void {
         this.mostrarFiltro = !this.mostrarFiltro;

@@ -183,3 +183,23 @@ body {
     }
 
 }
+
+.mensaje-list {
+
+    display: flex;
+    flex-direction: column;
+
+    .list-item-content {
+        display: flex;
+        flex-direction: row;
+        //gap: 10px;
+        list-style: none;
+        padding: 0;
+        //border: 1px solid red;
+
+        li {
+            border: 1px solid #EBEBEB;
+            padding: 10px;
+        }
+    }
+}

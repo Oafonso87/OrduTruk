@@ -3,19 +3,14 @@
     <div class="col-md-12 perfil-usuario">
         <div class="header">
             <h1 class="title">Mi Perfil</h1>
-            <div class="filter-container">
-                <h2 class="content">Gestiona tu información personal y preferencias</h2>
-            </div>
+            <div class="filter-container"></div>
         </div>
 
 
 
 
-        <div class="row back-link">
-            <a href="/" class="arrow-link-back mb-4 d-inline-block">Volver al inicio</a>
-        </div>
-        <div class="row content-list-detail">
 
+        <div class="row content-list-detail form-content">
 
 
 
@@ -23,27 +18,90 @@
 
 
             <div class=" list-item-img">
-                <img src="/assets/img/ofertasdetalle.png" alt="Perfil">
+                <label for="direccion">Nombre</label>
+                <input type="text" id="direccion" name="direccion">
+                <label for="direccion">Apellidos</label>
+                <input type="text" id="direccion" name="direccion">
+                <label for="direccion">Correo electrónico</label>
+                <input type="text" id="direccion" name="direccion">
+                <label for="direccion">Contraseña</label>
+                <input type="text" id="direccion" name="direccion">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion">
+                <label for="direccion">Habilidades</label>
+                <input type="text" id="direccion" name="direccion">
+
+                <button type="submit" [class]="'btn btn-primary w-100'">
+                    Modificar
+                </button>
             </div>
             <div class=" list-item-content">
-                <h3 class="item-title">John Doe</h3>
-                <p class="item-transaccion">Miembro desde <span><i class="bi bi-calendar"></i> Enero 2024</span></p>
-
-                <p class="item-content">
-                    Apasionado por compartir conocimientos y ayudar a la comunidad. Me encanta enseñar idiomas y
-                    participar en actividades que fomenten el aprendizaje colaborativo.</p>
-
-                <p class="item-content">Intereses: Educación, Idiomas, Tecnología, Voluntariado.
-                    Siempre dispuesto a aprender cosas nuevas y compartir experiencias con otros miembros de la
-                    comunidad.
-                </p>
+                <h3 class="item-title">Historial</h3>
+                <p class="item-transaccion">Ofertas </p>
 
 
-                <div class="btn-group">
-                    <app-button label="Editar Perfil" [class]="'btn btn-primary'"></app-button>
-                    <app-button label="Cambiar Contraseña" [class]="'btn btn-outline-primary'"></app-button>
+
+
+                <div class="row list-item mensaje-list" *ngFor="let oferta of ofertas; let i = index">
+                    <ul class="list-item-content">
+                        <li>22/06/2025</li>
+                        <li>Clases de Inglés Básico</li>
+                        <li>Voluntario: John Doe</li>
+                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
+                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
+                    </ul>
                 </div>
 
+
+
+                <!-- Paginación -->
+                <nav aria-label="Navegación de páginas">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+
+
+
+                <hr>
+                <p class="item-transaccion">Demandas </p>
+
+                <div class="row list-item mensaje-list" *ngFor="let oferta of ofertas; let i = index">
+                    <ul class="list-item-content">
+                        <li>22/06/2025</li>
+                        <li>Clases de Inglés Básico</li>
+                        <li>Voluntario: John Doe</li>
+                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
+                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
+                    </ul>
+                </div>
+
+                <!-- Paginación -->
+                <nav aria-label="Navegación de páginas">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
 
             </div>
 
@@ -51,6 +109,10 @@
 
 
             <div class="detalles">
+
+                <!-- 
+
+
                 <h2> Información</h2>
 
                 <ul>
@@ -67,6 +129,8 @@
                     <li><strong>Provincia</strong>: Bizkaia</li>
                     <li><strong>Localidad</strong>: Bilbao</li>
                 </ul>
+
+            -->
             </div>
 
         </div>

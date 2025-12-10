@@ -23,6 +23,9 @@ export class Mensajes implements OnInit {
     // Array para repetir mensajes 6 veces
     public mensajes = Array(6).fill(0);
 
+    // Array para repetir ofertas 3 veces
+    public ofertas = Array(3).fill(0);
+
     toggleFiltro(): void {
         this.mostrarFiltro = !this.mostrarFiltro;
     }

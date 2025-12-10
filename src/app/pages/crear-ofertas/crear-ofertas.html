@@ -3,18 +3,14 @@
     <div class="col-md-12 crear-oferta">
         <div class="header">
             <h1 class="title">Crear Oferta</h1>
-            <div class="filter-container">
-                <h2 class="content">Comparte tus habilidades con la comunidad</h2>
-            </div>
+            <div class="filter-container"></div>
         </div>
 
 
 
 
-        <div class="row back-link">
-            <a href="/ofertas" class="arrow-link-back mb-4 d-inline-block">Volver al listado de Ofertas</a>
-        </div>
-        <div class="row content-list-detail">
+
+        <div class="row content-list-detail form-content">
 
 
 
@@ -23,55 +19,58 @@
 
 
             <div class=" list-item-img">
-                <img src="/assets/img/ofertasdetalle.png" alt="Oferta">
-            </div>
-            <div class=" list-item-content">
-                <h3 class="item-title">Clases de Inglés Básico </h3>
-                <p class="item-transaccion">Transacción <span><i class="bi bi-clock"></i> 2h</span></p>
+                <label for="direccion">Titulo</label>
+                <input type="text" id="direccion" name="direccion">
+                <label for="direccion">Categoria</label>
+                <select type="text" id="direccion" name="direccion">
+                    <option value="">Selecciona una categoria</option>
+                    <option value=""></option>
 
-                <p class="item-content">
-                    Ofrezco clases de inglés nivel básico e intermedio. Tengo experiencia enseñando a adultos y
-                    estudiantes. Podemos practicar conversación, gramática y preparación para exámenes.</p>
+                </select>
+                <label for="direccion">Provincia</label>
+                <select type="text" id="direccion" name="direccion">
+                    <option value="">Selecciona una categoria</option>
+                    <option value=""></option>
 
-                <p class="item-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                    printer
-                    took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-                    centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                    popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-                    more
-                    recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                </p>
+                </select>
+                <label for="direccion">Localidad</label>
+                <select type="text" id="direccion" name="direccion">
+                    <option value="">Selecciona una categoria</option>
+                    <option value=""></option>
+
+                </select>
 
 
-                <div class="btn-group">
-                    <app-button label="Publicar Oferta" [class]="'btn btn-primary'"></app-button>
-                    <app-button label="Cancelar" [class]="'btn btn-outline-primary'"></app-button>
-                </div>
 
 
             </div>
+            <div class=" list-item-content">
+
+                <label for="direccion">Transacción</label>
+                <div class="transaccion-input"><input type="text" id="direccion"
+                        name="direccion"><button>+</button><button>+</button></div>
+
+                <label for="direccion">Descripción</label>
+                <textarea name="" id=""></textarea>
+
+                <label for="direccion">Imagen</label>
+                <input type="file" id="direccion" name="direccion">
 
 
+                <button type="submit" [class]="'btn btn-primary w-100'">
+                    Crear Oferta
+                </button>
 
 
-            <div class="detalles">
-                <h2> Detalles</h2>
-
-                <ul>
-                    <li><strong>Voluntario</strong>: John Doe</li>
-                    <li><strong>Valoraciones</strong>:
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star text-warning"></i>
-                    </li>
-                    <li><strong>Categoria</strong>: Idiomas</li>
-                    <li><strong>Provincia</strong>: Bizkaia</li>
-                    <li><strong>Localidad</strong>: Bilbao</li>
-                </ul>
             </div>
+
+
+
+
+
+
+
+
 
         </div>
 
