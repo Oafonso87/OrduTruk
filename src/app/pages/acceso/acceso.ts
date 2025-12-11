@@ -38,6 +38,7 @@ export class Acceso {
         this._router.navigate(['/ofertas']);
       },
       error: (err) => {
+        window.alert("Credenciales incorrectas. Inténtelo de nuevo.");
         console.error('Error de login:', err);       
       }
     });
