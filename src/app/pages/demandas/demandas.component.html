@@ -35,19 +35,20 @@
             </div>
         </div>
         <div class="content-list">
-            @for (oferta of demandasPaginadas; track oferta.id) {
+            @for (demanda of demandasPaginadas; track demanda.id) {
                 <div class="row list-item">
                     <div class="col-3 list-item-img">
                         <img src="/assets/img/ofertas.png" alt="Oferta">
                     </div>
                     <div class="col-9 list-item-content">
-                        <h3 class="item-title"> <a routerLink="/ofertasdetalle">{{oferta.titulo}}<span><i
-                                        class="bi bi-clock me-1"></i>{{oferta.horas_estimadas}}</span></a></h3>
-                        <p class="item-tag">{{oferta.categoria.nombre}}</p>
+                        <h3 class="item-title"> 
+                            <a>{{demanda.titulo}}<span><i class="bi bi-clock me-1"></i>{{demanda.horas_estimadas}}</span></a>
+                        </h3>
+                        <p class="item-tag">{{demanda.categoria.nombre}}</p>
 
-                        <p class="item-content">{{oferta.descripcion}}</p>
+                        <p class="item-content">{{demanda.descripcion}}</p>
 
-                        <span class="badge bg-primary">{{oferta.ciudad_relacion.nombre}}</span>
+                        <span class="badge bg-primary">{{demanda.ciudad_relacion.nombre}}</span>
 
                     </div>
                 </div>

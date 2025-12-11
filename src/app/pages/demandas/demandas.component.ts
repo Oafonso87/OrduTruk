@@ -16,7 +16,7 @@ import { CategoriasService } from '../../services/categorias.service';
 @Component({
   selector: 'app-demandas',
   standalone: true,
-  imports: [CommonModule, Header, Footer, FormsModule],
+  imports: [CommonModule, Header, Footer, FormsModule, RouterLink],
   templateUrl: './demandas.component.html',
   styleUrl: './demandas.component.scss'
 })
