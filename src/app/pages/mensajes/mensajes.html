@@ -1,0 +1,66 @@
+<app-header></app-header>
+<div class="row">
+    <div class="col-md-12 mensajes-usuario">
+        <div class="header">
+            <h1 class="title">Mensajes</h1>
+            <div class="filter-container"></div>
+        </div>
+
+
+
+
+
+        <div class="row ">
+
+            <div class="row list-item mensaje-list" *ngFor="let oferta of ofertas; let i = index">
+                <ul class="list-item-content">
+                    <li>22/06/2025</li>
+                    <li>Clases de Inglés Básico</li>
+                    <li>Voluntario: John Doe</li>
+                    <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
+                    <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
+                </ul>
+            </div>
+
+
+            <!-- Paginación -->
+            <nav aria-label="Navegación de páginas">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Siguiente</a>
+                    </li>
+                </ul>
+            </nav>
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+</div>
+
+
+
+<app-footer></app-footer>
