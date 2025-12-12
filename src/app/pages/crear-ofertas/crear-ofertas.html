@@ -9,8 +9,8 @@
         <form class="row content-list-detail form-content" #formOferta="ngForm" (ngSubmit)="publicarOferta()">
 
             <div class=" list-item-img">
-                <label for="direccion">Titulo</label>
-                <input type="text" id="direccion" name="direccion" [(ngModel)]="titulo" #campoTitulo="ngModel" required>
+                <label for="titulo">Titulo</label>
+                <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" #campoTitulo="ngModel" required>
                  @if (campoTitulo.touched && titulo.trim() === '') {
                     <span style="display: block; color: red;">El campo Título no puede estar vacío</span>
                 }
@@ -35,9 +35,9 @@
             </div>
 
             <div class=" list-item-content">
-                <label for="direccion">Transacción</label>
+                <label for="transaccion">Transacción</label>
                 <div class="transaccion-input">
-                    <input type="text" id="direccion" name="direccion">
+                    <input type="text" id="transaccion" name="transaccion">
                     <button>-</button><button>+</button>
                 </div>
 
