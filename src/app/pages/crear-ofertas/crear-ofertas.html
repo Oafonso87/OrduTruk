@@ -6,62 +6,51 @@
             <div class="filter-container"></div>
         </div>
 
-
-
-
-
-        <div class="row content-list-detail form-content">
-
-
-
-
-
-
+        <form class="row content-list-detail form-content" #formOferta="ngForm" (ngSubmit)="publicarOferta()">
 
             <div class=" list-item-img">
                 <label for="direccion">Titulo</label>
-                <input type="text" id="direccion" name="direccion">
-                <label for="direccion">Categoria</label>
-                <select type="text" id="direccion" name="direccion">
-                    <option value="">Selecciona una categoria</option>
-                    <option value=""></option>
-
+                <input type="text" id="direccion" name="direccion" [(ngModel)]="titulo" #campoTitulo="ngModel" required>
+                 @if (campoTitulo.touched && titulo.trim() === '') {
+                    <span style="display: block; color: red;">El campo Título no puede estar vacío</span>
+                }
+                <select class="form-select" aria-label="Categoría" name="categoria" [(ngModel)]="categoria">
+                        <option [ngValue]="null">Categoría</option>
+                        @for (categoria of categorias; track categoria.id) {
+                            <option [value]="categoria.id">{{ categoria.nombre }}</option>
+                        }
                 </select>
-                <label for="direccion">Provincia</label>
-                <select type="text" id="direccion" name="direccion">
-                    <option value="">Selecciona una categoria</option>
-                    <option value=""></option>
-
+                <select class="form-select" aria-label="Provincia" name="provincia" [(ngModel)]="provincia" (ngModelChange)="onProvinciaChange($event)">
+                    <option [ngValue]="null">Provincia</option>
+                    @for (provincia of provincias; track provincia.id) {
+                        <option [value]="provincia.id">{{ provincia.nombre }}</option>
+                    }
                 </select>
-                <label for="direccion">Localidad</label>
-                <select type="text" id="direccion" name="direccion">
-                    <option value="">Selecciona una categoria</option>
-                    <option value=""></option>
-
-                </select>
-
-
-
-
+                <select class="form-select" aria-label="Localidad" name="ciudad" [(ngModel)]="poblacion" [disabled]="!provincia">
+                    <option [ngValue]="null">Localidad</option>                
+                    @for (poblacion of poblaciones; track poblacion.id) {
+                        <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
+                    }
+                </select>                
             </div>
+
             <div class=" list-item-content">
-
                 <label for="direccion">Transacción</label>
-                <div class="transaccion-input"><input type="text" id="direccion"
-                        name="direccion"><button>+</button><button>+</button></div>
+                <div class="transaccion-input">
+                    <input type="text" id="direccion" name="direccion">
+                    <button>-</button><button>+</button>
+                </div>
 
-                <label for="direccion">Descripción</label>
-                <textarea name="" id=""></textarea>
+                <label for="descripcion">Descripción</label>
+                <textarea name="descripcion" id="descripcion" [(ngModel)]="descripcion"></textarea>
 
-                <label for="direccion">Imagen</label>
-                <input type="file" id="direccion" name="direccion">
+                <!-- <label for="direccion">Imagen</label>
+                <input type="file" id="direccion" name="direccion"> -->
 
 
-                <button type="submit" [class]="'btn btn-primary w-100'">
+                <button type="submit" [class]="'btn btn-primary w-100'" [disabled]="!formOferta.form.valid">
                     Crear Oferta
                 </button>
-
-
             </div>
 
 
@@ -72,7 +61,7 @@
 
 
 
-        </div>
+        </form>
 
 
 

@@ -11,6 +11,7 @@ import { OfertasDetalle } from './pages/ofertas-detalle/ofertas-detalle';
 import { CrearOfertas } from './pages/crear-ofertas/crear-ofertas';
 import { Perfil } from './pages/perfil/perfil';
 import { Mensajes } from './pages/mensajes/mensajes';
+import { DemandasDetalle } from './pages/demandas-detalle/demandas-detalle';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ export const routes: Routes = [
     { path: 'ofertasdetalle', component: OfertasDetalle },
     { path: 'crearoferta', component: CrearOfertas },
     { path: 'demandas', component: DemandasComponent },
+    { path: 'demandasdetalle', component: DemandasDetalle },
     { path: 'usuarios', component: UsuariosComponent },
     { path: 'quienes-somos', component: QuienesSomos },
     { path: 'registro', component: Registro },

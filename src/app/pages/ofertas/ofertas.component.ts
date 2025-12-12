@@ -24,6 +24,7 @@ import { CategoriasService } from '../../services/categorias.service';
 export class OfertasComponent implements OnInit {
 
   ngOnInit(): void {
+    sessionStorage.removeItem('ofertaSeleccionada');
     this.loadCategorias();
     this.loadProvincias();
     this.loadTodasPoblaciones();
@@ -142,17 +143,17 @@ export class OfertasComponent implements OnInit {
 
     if (this.categoria !== null) {
       const cat = Number(this.categoria);
-      this.ofertasFiltradas = this.ofertasFiltradas.filter(o => o.categoria.id === cat);
+      this.ofertasFiltradas = this.ofertasFiltradas.filter(o => o.categoria!.id === cat);
     }
 
     if (this.provincia !== null) {
       const prov = Number(this.provincia);
-      this.ofertasFiltradas = this.ofertasFiltradas.filter(o => o.ciudad_relacion.provincia_id === prov);
+      this.ofertasFiltradas = this.ofertasFiltradas.filter(o => o.ciudad_relacion!.provincia_id === prov);
     }
 
     if (this.poblacion !== null) {
       const pob = Number(this.poblacion);
-      this.ofertasFiltradas = this.ofertasFiltradas.filter(o => o.ciudad_relacion.id === pob);
+      this.ofertasFiltradas = this.ofertasFiltradas.filter(o => o.ciudad_relacion!.id === pob);
     }
 
     if (this.tituloFilter && this.tituloFilter.trim() !== '') {
@@ -179,5 +180,10 @@ export class OfertasComponent implements OnInit {
   cambiarPagina(page: number) { 
     if (page < 1 || page > this.totalPages) return; this.pagActual = page; this.updateOfertas(); 
   }
+
+  guardarOferta(oferta: any) {
+    sessionStorage.setItem('ofertaSeleccionada', JSON.stringify(oferta));
+  }
+
 
 }

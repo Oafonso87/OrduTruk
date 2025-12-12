@@ -2,15 +2,14 @@
 <div class="row">
     <div class="col-md-12 oferta-detalle">
         <div class="header">
-            <h1 class="title">Ofertas</h1>
+            <h1 class="title">Demandas</h1>
             <div class="filter-container">
-                <h2 class="content">Explora los servicios que tu comunidad está ofreciendo</h2>
+                <h2 class="content">Explora los servicios que tu comunidad está demandando</h2>
             </div>
         </div>
 
-
         <div class="row back-link">
-            <a href="/ofertas" class="arrow-link-back mb-4 d-inline-block">Volver al listado de Ofertas</a>
+            <a href="/demandas" class="arrow-link-back mb-4 d-inline-block">Volver al listado de Demandas</a>
         </div>
         <div class="row content-list-detail">
 
@@ -18,11 +17,11 @@
                 <img src="/assets/img/ofertasdetalle.png" alt="Oferta">
             </div>
             <div class=" list-item-content">
-                <h3 class="item-title">{{oferta?.titulo}}</h3>
-                <p class="item-transaccion">Transacción <span><i class="bi bi-clock me-1"></i>{{oferta?.horas_estimadas}}</span></p>
+                <h3 class="item-title">{{demanda?.titulo}}</h3>
+                <p class="item-transaccion">Transacción <span><i class="bi bi-clock me-1"></i>{{demanda?.horas_estimadas}}</span></p>
 
                 <p class="item-content">
-                    {{oferta?.descripcion}}</p>
+                    {{demanda?.descripcion}}</p>
 
                 <p class="item-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
@@ -36,47 +35,35 @@
 
 
                 <div class="btn-group">
-                    <app-button label="Aceptar Oferta" [class]="'btn btn-primary me-1'"></app-button>
+                    <app-button label="Aceptar Demanda" [class]="'btn btn-primary me-1'"></app-button>
                     <app-button label="Contactar" [class]="'btn btn-outline-primary'"></app-button>
                 </div>
 
-
             </div>
-
-
-
 
             <div class="detalles">
                 <h2> Detalles</h2>
 
                 <ul>
-                    <li><strong>Voluntario</strong>: {{oferta?.usuario?.nombre}} {{oferta?.usuario?.apellido}}</li>
+                    <li><strong>Voluntario</strong>: {{demanda?.usuario?.nombre}} {{demanda?.usuario?.apellido}}</li>
                     <li><strong>Valoraciones</strong>:
-                         @for (star of [].constructor(oferta?.usuario?.valoracion); track $index) {                            
+                         @for (star of [].constructor(demanda?.usuario?.valoracion); track $index) {                            
                             <i class="bi bi-star-fill text-warning"></i>                            
                         }
-                         @for (star of [].constructor(5 - oferta?.usuario?.valoracion!); track $index) {                            
+                         @for (star of [].constructor(5 - demanda?.usuario?.valoracion!); track $index) {                            
                             <i class="bi bi-star text-warning"></i>                            
                         }
                     </li>
-                    <li><strong>Categoria</strong>: {{oferta?.categoria?.nombre}}</li>
-                    <li><strong>Provincia</strong>: {{oferta?.provincia_relacion?.nombre}}</li>
-                    <li><strong>Localidad</strong>: {{oferta?.ciudad_relacion?.nombre}}</li>
+                    <li><strong>Categoria</strong>: {{demanda?.categoria?.nombre}}</li>
+                    <li><strong>Provincia</strong>: {{demanda?.provincia_relacion?.nombre}}</li>
+                    <li><strong>Localidad</strong>: {{demanda?.ciudad_relacion?.nombre}}</li>
                 </ul>
             </div>
 
         </div>
 
-
-
     </div>
 
-
-
-
-
 </div>
-
-
 
 <app-footer></app-footer>

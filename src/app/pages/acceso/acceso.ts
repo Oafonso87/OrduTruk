@@ -34,6 +34,7 @@ export class Acceso {
         console.log('Login exitoso:', response);
         
         sessionStorage.setItem('access_token', response.access_token);
+        sessionStorage.setItem('user', JSON.stringify(response.user));
         
         this._router.navigate(['/ofertas']);
       },

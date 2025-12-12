@@ -12,27 +12,29 @@
                     </button>
                 </div>
             </div>
-            <div class="filtro" *ngIf="mostrarFiltro">
-                <select class="form-select" aria-label="Categoría" name="categoria" [(ngModel)]="categoria" (ngModelChange)="onCategoriaChange($event)">
-                    <option [ngValue]="null">Categoría</option>
-                    @for (categoria of categorias; track categoria.id) {
-                        <option [value]="categoria.id">{{ categoria.nombre }}</option>
-                    }
-                </select>
-                <select class="form-select" aria-label="Provincia" name="provincia" [(ngModel)]="provincia" (ngModelChange)="onProvinciaChange($event)">
-                    <option [ngValue]="null">Provincia</option>
-                    @for (provincia of provincias; track provincia.id) {
-                        <option [value]="provincia.id">{{ provincia.nombre }}</option>
-                    }
-                </select>
-                <select class="form-select" aria-label="Localidad" name="ciudad" [(ngModel)]="poblacion" [disabled]="!provincia" (ngModelChange)="onPoblacionChange($event)">
-                    <option [ngValue]="null">Localidad</option>                
-                    @for (poblacion of poblaciones; track poblacion.id) {
-                        <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
-                    }
-                </select>                
-                <input type="text" class="form-control" placeholder="Buscar por título" [(ngModel)]="tituloFilter" (ngModelChange)="filterDemandas()">                
-            </div>
+            @if (mostrarFiltro) {
+                <div class="filtro">
+                    <select class="form-select" aria-label="Categoría" name="categoria" [(ngModel)]="categoria" (ngModelChange)="onCategoriaChange($event)">
+                        <option [ngValue]="null">Categoría</option>
+                        @for (categoria of categorias; track categoria.id) {
+                            <option [value]="categoria.id">{{ categoria.nombre }}</option>
+                        }
+                    </select>
+                    <select class="form-select" aria-label="Provincia" name="provincia" [(ngModel)]="provincia" (ngModelChange)="onProvinciaChange($event)">
+                        <option [ngValue]="null">Provincia</option>
+                        @for (provincia of provincias; track provincia.id) {
+                            <option [value]="provincia.id">{{ provincia.nombre }}</option>
+                        }
+                    </select>
+                    <select class="form-select" aria-label="Localidad" name="ciudad" [(ngModel)]="poblacion" [disabled]="!provincia" (ngModelChange)="onPoblacionChange($event)">
+                        <option [ngValue]="null">Localidad</option>                
+                        @for (poblacion of poblaciones; track poblacion.id) {
+                            <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
+                        }
+                    </select>                
+                    <input type="text" class="form-control" placeholder="Buscar por título" [(ngModel)]="tituloFilter" (ngModelChange)="filterDemandas()">                
+                </div>
+            }
         </div>
         <div class="content-list">
             @for (demanda of demandasPaginadas; track demanda.id) {
@@ -42,13 +44,13 @@
                     </div>
                     <div class="col-9 list-item-content">
                         <h3 class="item-title"> 
-                            <a>{{demanda.titulo}}<span><i class="bi bi-clock me-1"></i>{{demanda.horas_estimadas}}</span></a>
+                            <a routerLink="/demandasdetalle" (click)="guardarDemanda(demanda)">{{demanda.titulo}}<span><i class="bi bi-clock me-1"></i>{{demanda.horas_estimadas}}</span></a>
                         </h3>
-                        <p class="item-tag">{{demanda.categoria.nombre}}</p>
+                        <p class="item-tag">{{demanda.categoria?.nombre}}</p>
 
                         <p class="item-content">{{demanda.descripcion}}</p>
 
-                        <span class="badge bg-primary">{{demanda.ciudad_relacion.nombre}}</span>
+                        <span class="badge bg-primary">{{demanda.ciudad_relacion?.nombre}}</span>
 
                     </div>
                 </div>

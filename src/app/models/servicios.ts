@@ -15,8 +15,8 @@ export interface Servicios {
     ciudad: number;
     horas_estimadas: number;
     estado: string;
-    usuario: Usuario;
-    categoria: Categorias;
-    provincia_relacion: Provincias;
-    ciudad_relacion: Poblaciones;
+    usuario?: Usuario;
+    categoria?: Categorias;
+    provincia_relacion?: Provincias;
+    ciudad_relacion?: Poblaciones;
 }

@@ -24,6 +24,7 @@ import { CategoriasService } from '../../services/categorias.service';
 export class DemandasComponent implements OnInit {
 
   ngOnInit(): void {
+    sessionStorage.removeItem('demandaSeleccionada');
     this.loadCategorias();
     this.loadProvincias();
     this.loadTodasPoblaciones();
@@ -142,17 +143,17 @@ export class DemandasComponent implements OnInit {
 
     if (this.categoria !== null) {
       const cat = Number(this.categoria);
-      this.demandasFiltradas = this.demandasFiltradas.filter(o => o.categoria.id === cat);
+      this.demandasFiltradas = this.demandasFiltradas.filter(o => o.categoria!.id === cat);
     }
 
     if (this.provincia !== null) {
       const prov = Number(this.provincia);
-      this.demandasFiltradas = this.demandasFiltradas.filter(o => o.ciudad_relacion.provincia_id === prov);
+      this.demandasFiltradas = this.demandasFiltradas.filter(o => o.ciudad_relacion!.provincia_id === prov);
     }
 
     if (this.poblacion !== null) {
       const pob = Number(this.poblacion);
-      this.demandasFiltradas = this.demandasFiltradas.filter(o => o.ciudad_relacion.id === pob);
+      this.demandasFiltradas = this.demandasFiltradas.filter(o => o.ciudad_relacion!.id === pob);
     }
 
     if (this.tituloFilter && this.tituloFilter.trim() !== '') {
@@ -180,4 +181,7 @@ export class DemandasComponent implements OnInit {
     if (page < 1 || page > this.totalPages) return; this.pagActual = page; this.updateDemandas(); 
   }
 
+  guardarDemanda(demanda: any) {
+    sessionStorage.setItem('demandaSeleccionada', JSON.stringify(demanda));
+  }
 }
