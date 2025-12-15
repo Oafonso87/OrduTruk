@@ -12,19 +12,20 @@ import { CrearOfertas } from './pages/crear-ofertas/crear-ofertas';
 import { Perfil } from './pages/perfil/perfil';
 import { Mensajes } from './pages/mensajes/mensajes';
 import { DemandasDetalle } from './pages/demandas-detalle/demandas-detalle';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'ofertas', component: OfertasComponent },
-    { path: 'ofertasdetalle', component: OfertasDetalle },
-    { path: 'crearoferta', component: CrearOfertas },
-    { path: 'demandas', component: DemandasComponent },
-    { path: 'demandasdetalle', component: DemandasDetalle },
-    { path: 'usuarios', component: UsuariosComponent },
+    { path: 'ofertas', component: OfertasComponent, canActivate:[authGuard] },
+    { path: 'ofertasdetalle', component: OfertasDetalle, canActivate:[authGuard] },
+    { path: 'crearoferta', component: CrearOfertas, canActivate:[authGuard] },
+    { path: 'demandas', component: DemandasComponent, canActivate:[authGuard] },
+    { path: 'demandasdetalle', component: DemandasDetalle, canActivate:[authGuard] },
+    { path: 'usuarios', component: UsuariosComponent, canActivate:[authGuard] },
     { path: 'quienes-somos', component: QuienesSomos },
     { path: 'registro', component: Registro },
     { path: 'acceso', component: Acceso },
-    { path: 'perfil', component: Perfil },
-    { path: 'mensajes', component: Mensajes },
+    { path: 'perfil', component: Perfil, canActivate:[authGuard] },
+    { path: 'mensajes', component: Mensajes, canActivate:[authGuard] },
     { path: '**', component: HomeComponent }
 ];
