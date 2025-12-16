@@ -1,8 +1,29 @@
 <nav class="menu">
-    <ul>
+    @if (isPublic) {
+    <ul class="menu-container">
         <li><app-button label="Quienes somos" routerLink="/quienes-somos"></app-button></li>
-        <!-- <li><app-button label="Ofertas" routerLink="/ofertas"></app-button></li>
-        <li><app-button label="Demandas" routerLink="/demandas"></app-button></li>
-        <li><app-button label="Usuarios" routerLink="/usuarios"></app-button></li> -->
     </ul>
+    } @else {
+
+    <ul class="menu-container">
+        <li>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" (click)="toggleDropdown()"
+                    [attr.aria-expanded]="dropdownOpen">
+                    CREAR
+                </button>
+                <ul class="dropdown-menu" [class.show]="dropdownOpen">
+                    <li><a class="dropdown-item" href="#">Oferta</a></li>
+                    <li><a class="dropdown-item" href="#">Demanda</a></li>
+                </ul>
+            </div>
+        </li>
+        <li><app-button label="Ofertas" routerLink="/ofertas"></app-button></li>
+        <li><app-button label="Demandas" routerLink="/demandas"></app-button></li>
+        <li><span class="bolsa-horas">25H</span></li>
+        <li><app-button label="Perfil" routerLink="/perfil"></app-button></li>
+        <li><app-button label="Mensajes" routerLink="/mensajes"></app-button></li>
+        <li><app-button label="Logout" routerLink="/logout"></app-button></li>
+    </ul>
+    }
 </nav>
