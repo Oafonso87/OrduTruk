@@ -16,19 +16,19 @@
             <input type="text" id="nombreRegistro" name="nombreRegistro" [(ngModel)]="nombre" (blur)="nombre = capitalizar(nombre)"
                 #campoNombre="ngModel" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" />
             @if (campoNombre.touched && nombre.trim() === '') {
-            <span style="display: block; color: red;">El campo Nombre no puede estar vacío</span>
+                <span style="display: block; color: red;">El campo Nombre no puede estar vacío</span>
             }
             @else if (campoNombre.invalid && campoNombre.touched) {
-            <span style="display: block; color: red;">El Nombre solo puede contener letras</span>
+                <span style="display: block; color: red;">El Nombre solo puede contener letras</span>
             }
             <label for="apellidos">Apellidos</label>
             <input type="text" id="apellidos" name="apellidos" [(ngModel)]="apellidos" (blur)="apellidos = capitalizar(apellidos)"
                 #campoApellidos="ngModel" required pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" />
             @if (campoApellidos.touched && apellidos.trim() === '') {
-            <span style="display: block; color: red;">El campo Apellidos no puede estar vacío</span>
+                <span style="display: block; color: red;">El campo Apellidos no puede estar vacío</span>
             }
             @else if (campoApellidos.invalid && campoApellidos.touched) {
-            <span style="display: block; color: red;">Los Apellidos solo pueden contener letras</span>
+                <span style="display: block; color: red;">Los Apellidos solo pueden contener letras</span>
             }
             <label>Provincia</label>
             <select name="provincia" [(ngModel)]="provincia" (ngModelChange)="onProvinciaChange($event)" required>
@@ -55,19 +55,19 @@
             <input type="email" id="mail" name="mail" [(ngModel)]="mail" placeholder=""
                 #campoMail="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
             @if (campoMail.touched && campoMail.errors?.['required']) {
-            <span style="display: block; color: red;">El campo Correo Electrónico no puede estar vacío</span>
+                <span style="display: block; color: red;">El campo Correo Electrónico no puede estar vacío</span>
             }
             @else if (campoMail.touched && campoMail.errors?.['pattern']) {
-            <span style="display: block; color: red;">El correo electrónico no tiene el formato adecuado:
+                <span style="display: block; color: red;">El correo electrónico no tiene el formato adecuado:
                 ****@****.***</span>
             }
             <label for="password1">Contraseña</label>
             <input type="password" id="password1" name="password1" [(ngModel)]="password1"
                 placeholder="Mín. 6 caracteres" #campoPassword1="ngModel" required minlength="6" />
             @if(campoPassword1.touched && password1.trim() === '') {
-            <span style="display: block; color: red;">
-                El campo Contraseña no puede estar vacío
-            </span>
+                <span style="display: block; color: red;">
+                    El campo Contraseña no puede estar vacío
+                </span>
             } @else if (campoPassword1.touched && password1.length < 6) { 
                 <span style="display: block; color: red;">
                     La contraseña tiene que tener como mínimo 6 caracterer
@@ -77,9 +77,9 @@
             <input type="password" id="password2" name="password2" [(ngModel)]="password2"
                 placeholder="Mín. 6 caracteres" #campoPassword2="ngModel" required minlength="6" />
             @if(campoPassword2.touched && password2.trim() === '') {
-            <span style="display: block; color: red;">
-                El campo Repetir contraseña no puede estar vacío
-            </span>
+                <span style="display: block; color: red;">
+                    El campo Repetir contraseña no puede estar vacío
+                </span>
             } @else if (campoPassword2.touched && password2.length < 6) { 
                 <span style="display: block; color: red;">
                     La contraseña tiene que tener como mínimo 6 caracterer

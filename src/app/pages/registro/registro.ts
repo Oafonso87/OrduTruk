@@ -97,8 +97,10 @@ export class Registro implements OnInit {
 
     this._usuariosService.createUsuario(nuevoUsuario).subscribe({
       next: (response: ApiResponse<LoginResponse>) => {
+        sessionStorage.setItem('access_token', response.data.access_token);
+        sessionStorage.setItem('user', JSON.stringify(response.data.user));
         this.resetForm();
-        this._router.navigate(['/ofertas']);
+        this._router.navigate(['/ofertas']);        
       },
       error: (error) => {
         console.error("Error al crear el seguimiento:", error);

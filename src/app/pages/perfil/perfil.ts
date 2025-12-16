@@ -7,7 +7,7 @@ import { Button } from '../../components/button/button';
 @Component({
     selector: 'app-perfil',
     standalone: true,
-    imports: [CommonModule, Header, Footer, Button],
+    imports: [CommonModule, Header, Footer],
     templateUrl: './perfil.html',
     styleUrl: './perfil.scss',
 })

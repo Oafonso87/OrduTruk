@@ -1,0 +1,22 @@
+import { Usuario } from "./usuarios";
+import { Categorias } from "./categorias";
+import { Provincias } from "./provincias";
+import { Poblaciones } from "./poblaciones";
+
+
+export interface Servicios {
+    id: number;
+    usuario_id: number;
+    categoria_id: number;
+    tipo: string;
+    titulo: string;
+    descripcion: string;
+    provincia: number;
+    ciudad: number;
+    horas_estimadas: number;
+    estado: string;
+    usuario?: Usuario;
+    categoria?: Categorias;
+    provincia_relacion?: Provincias;
+    ciudad_relacion?: Poblaciones;
+}

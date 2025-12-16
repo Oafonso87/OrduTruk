@@ -6,21 +6,21 @@ import { Button } from '../../components/button/button';
 import { Servicios } from '../../models/servicios';
 
 @Component({
-  selector: 'app-ofertas-detalle',
+  selector: 'app-demandas-detalle',
   standalone: true,
   imports: [CommonModule, Header, Footer, Button],
-  templateUrl: './ofertas-detalle.html',
-  styleUrl: './ofertas-detalle.scss',
+  templateUrl: './demandas-detalle.html',
+  styleUrl: './demandas-detalle.scss',
 })
 
-export class OfertasDetalle implements OnInit {
+export class DemandasDetalle implements OnInit {
   
-  public oferta : Servicios | null = null;
+  public demanda : Servicios | null = null;
   
   ngOnInit() {
-    const almacenada = sessionStorage.getItem('ofertaSeleccionada');
+    const almacenada = sessionStorage.getItem('demandaSeleccionada');
     if (almacenada) {
-      this.oferta = JSON.parse(almacenada);
+      this.demanda = JSON.parse(almacenada);
     }
     console.log(almacenada);
   }
@@ -28,4 +28,5 @@ export class OfertasDetalle implements OnInit {
   
 
   constructor() {}
+  
 }

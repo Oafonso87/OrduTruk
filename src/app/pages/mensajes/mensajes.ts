@@ -7,7 +7,7 @@ import { Button } from '../../components/button/button';
 @Component({
     selector: 'app-mensajes',
     standalone: true,
-    imports: [CommonModule, Header, Footer, Button],
+    imports: [CommonModule, Header, Footer],
     templateUrl: './mensajes.html',
     styleUrl: './mensajes.scss',
 })
