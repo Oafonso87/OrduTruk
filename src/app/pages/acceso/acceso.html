@@ -18,7 +18,7 @@
         <form class="col-6 form-content" #formAcceso="ngForm" (ngSubmit)="acceder()">
 
             <label for="nombreRegistro">Correo Electrónico</label>
-            <input type="email" id="mailRegistro" name="mailRegistro" [(ngModel)]="email" placeholder=""
+            <input type="email" id="mailRegistro" name="mailRegistro" [(ngModel)]="email" placeholder="" class="form-control"
                 #campoMail="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
             @if (campoMail.touched && campoMail.errors?.['required']) {
                 <span style="display: block; color: red;">
@@ -31,8 +31,13 @@
                 </span>
             }
             <label for="passwordRegistro">Contraseña</label>
-            <input type="password" id="passwordRegistro" name="passwordRegistro" [(ngModel)]="password"
-                placeholder="" #campoPassword="ngModel" required minlength="6" />
+            <div class="password-wrapper">
+                <input [type]="mostrarPassword ? 'text' : 'password'" id="passwordRegistro" name="passwordRegistro" [(ngModel)]="password"
+                    class="form-control" #campoPassword="ngModel" required minlength="6"
+                />
+                <i class="bi {{ mostrarPassword ? 'bi-eye-slash' : 'bi-eye' }} password-icon" (click)="togglePassword()"></i>
+            </div>
+
             @if(campoPassword.touched && password.trim() === '') {
                 <span style="display: block; color: red;">
                     El campo Contraseña no puede estar vacío

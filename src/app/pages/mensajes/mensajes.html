@@ -6,22 +6,19 @@
             <div class="filter-container"></div>
         </div>
 
-
-
-
-
         <div class="row ">
 
-            <div class="row list-item mensaje-list" *ngFor="let oferta of ofertas; let i = index">
-                <ul class="list-item-content">
-                    <li>22/06/2025</li>
-                    <li>Clases de Inglés Básico</li>
-                    <li>Voluntario: John Doe</li>
-                    <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
-                    <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                </ul>
+            <div class="row list-item mensaje-list">
+                @for (mensaje of mensajes; track $index) {
+                    <ul class="list-item-content">
+                        <li>22/06/2025</li>
+                        <li>Clases de Inglés Básico</li>
+                        <li>Voluntario: {{mensaje.emisor.nombre}}</li>
+                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
+                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
+                    </ul>
+                }
             </div>
-
 
             <!-- Paginación -->
             <nav aria-label="Navegación de páginas">

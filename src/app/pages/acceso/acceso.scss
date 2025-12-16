@@ -24,6 +24,7 @@
     align-items: flex-start;
 }
 
+
 .acceso-img {
     background-image: url('/assets/img/registro.png');
     background-position: center;
@@ -31,3 +32,24 @@
     display: flex;
     min-height: 734px;
 }
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  padding-right: 2.5rem; // espacio para el ojo
+}
+
+.password-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 0;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #6c757d;
+}
+

@@ -9,6 +9,6 @@ export interface Usuario {
     horas_saldo: number;
     valoracion: number
     rol_id: number;
-    password: string;
-    direccion: string;    
+    password?: string;
+    direccion?: string;    
 }

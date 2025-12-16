@@ -3,30 +3,47 @@ import { Component, OnInit } from '@angular/core';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Button } from '../../components/button/button';
+import { ApiResponse } from '../../models/apiresponse';
+import { Mensaje } from '../../models/mensaje';
+import { MensajesService } from '../../services/mensajes.service';
+import { FormsModule } from '@angular/forms';
+import { Usuario } from '../../models/usuarios';
 
 @Component({
     selector: 'app-mensajes',
     standalone: true,
-    imports: [CommonModule, Header, Footer],
+    imports: [CommonModule, Header, Footer, FormsModule],
     templateUrl: './mensajes.html',
     styleUrl: './mensajes.scss',
 })
+
 export class Mensajes implements OnInit {
+    
+    public usuario : Usuario |null = null;
+    
     ngOnInit(): void {
+        const userAlmacenado = sessionStorage.getItem('user');
+        if (userAlmacenado) {
+            this.usuario = JSON.parse(userAlmacenado);
+        }
+        console.log(userAlmacenado);
+        this.loadMensajes();
     }
 
-    constructor() { }
+    constructor(private _mensajesService : MensajesService) { }
 
-    public vistaActual: 'listado' | 'detalle' | 'aniadir' = 'listado';
-    public mostrarFiltro: boolean = false;
+    public mensajes : Mensaje[] = [];
 
-    // Array para repetir mensajes 6 veces
-    public mensajes = Array(6).fill(0);
-
-    // Array para repetir ofertas 3 veces
-    public ofertas = Array(3).fill(0);
-
-    toggleFiltro(): void {
-        this.mostrarFiltro = !this.mostrarFiltro;
+    loadMensajes() {
+        this._mensajesService.getMensajesById(this.usuario!.id).subscribe({
+            next: (response: ApiResponse<Mensaje[]>) => {
+            this.mensajes = response.data;
+            console.log('Mensajes cargadas:', this.mensajes);
+            },
+            error: (err) => {
+            console.error('Error al cargar los mensajes:', err);
+            }     
+        });
     }
+
 }
