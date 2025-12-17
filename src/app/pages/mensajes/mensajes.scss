@@ -42,3 +42,25 @@
         transform: translateX(-3px);
     }
 }
+
+.mensaje-list {
+    ul {
+        margin-bottom: 0;
+        width: 100%;
+    }
+}
+.pagination {
+    margin-top: 20px;
+}
+
+.btn-new {
+    background-color: white;
+    color: #0d6efd;
+    text-transform: uppercase;
+    font-weight: 600;
+    min-width: auto;
+    min-height: auto;
+    padding: 0 0.5rem;
+    font-size: 14px;
+    line-height: 1.5rem;
+}

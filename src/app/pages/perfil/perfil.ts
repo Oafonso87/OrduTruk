@@ -26,4 +26,6 @@ export class Perfil implements OnInit {
     toggleFiltro(): void {
         this.mostrarFiltro = !this.mostrarFiltro;
     }
+
+
 }

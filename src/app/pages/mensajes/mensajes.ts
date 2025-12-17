@@ -29,4 +29,10 @@ export class Mensajes implements OnInit {
     toggleFiltro(): void {
         this.mostrarFiltro = !this.mostrarFiltro;
     }
+
+    public activeTab: 'ofertas' | 'demandas' = 'ofertas';
+
+    setActiveTab(tab: 'ofertas' | 'demandas'): void {
+        this.activeTab = tab;
+    }
 }

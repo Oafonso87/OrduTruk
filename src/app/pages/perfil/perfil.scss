@@ -1,51 +1,39 @@
-.perfil-usuario {
-    padding: 50px 65px;
+.header {
+    width: 100%;
 }
 
-.content-list {
-    //padding: 50px 65px;
-    //border: 10px solid green;
-
-    div {
-        border: 1px dotted black;
-    }
+.perfil-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px 65px 50px 65px;
 }
 
-.list-item-img {
-    img {
+.form-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.perfil-img {
+    background-image: url('/assets/img/perfil.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    min-height: 734px;
+    background-size: cover;
+}
+
+.mensaje-list {
+    ul {
+        margin-bottom: 0;
         width: 100%;
     }
 }
 
-.detalles {
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-}
-
-.arrow-link-back {
-    text-decoration: none;
-    color: #0d6efd;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-
-    &::before {
-        content: '←';
-        font-size: 1.2em;
-        transition: transform 0.2s ease;
-    }
-
-    &:hover::before {
-        transform: translateX(-3px);
-    }
-}
-
-.list-item-content {
-    .item-title {
-        font-size: 1rem;
-        font-weight: 700;
-    }
+.pagination {
+    margin-top: 20px;
 }
