@@ -43,8 +43,13 @@
                     <app-button
                         label="Aceptar Oferta"
                         [class]="'btn btn-primary me-1'"
+                        (click)="openModal()"
                     ></app-button>
-                    <app-button label="Contactar" [class]="'btn btn-outline-primary'"></app-button>
+                    <app-button
+                        label="Contactar"
+                        [class]="'btn btn-outline-primary'"
+                        (click)="openModal()"
+                    ></app-button>
                 </div>
             </div>
 
@@ -76,5 +81,10 @@
         </div>
     </div>
 </div>
+
+<app-modal [isOpen]="isModalOpen" [title]="'Nuevo Mensaje'" (closeModal)="closeModal()">
+    <!-- Contenido del modal -->
+    <p>Escribe tu mensaje aquí...</p>
+</app-modal>
 
 <app-footer></app-footer>

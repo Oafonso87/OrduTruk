@@ -4,11 +4,12 @@ import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Button } from '../../components/button/button';
 import { Servicios } from '../../models/servicios';
+import { ModalComponent } from '../../components/modal/modal';
 
 @Component({
   selector: 'app-ofertas-detalle',
   standalone: true,
-  imports: [CommonModule, Header, Footer, Button],
+  imports: [CommonModule, Header, Footer, Button, ModalComponent],
   templateUrl: './ofertas-detalle.html',
   styleUrl: './ofertas-detalle.scss',
 })
@@ -16,6 +17,7 @@ import { Servicios } from '../../models/servicios';
 export class OfertasDetalle implements OnInit {
   
   public oferta : Servicios | null = null;
+  public isModalOpen: boolean = false;
   
   ngOnInit() {
     const almacenada = sessionStorage.getItem('ofertaSeleccionada');
@@ -25,7 +27,13 @@ export class OfertasDetalle implements OnInit {
     console.log(almacenada);
   }
 
-  
+  openModal(): void {
+    this.isModalOpen = true;
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
+  }
 
   constructor() {}
 }

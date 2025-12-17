@@ -2,12 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
+import { ModalComponent } from '../../components/modal/modal';
 import { Button } from '../../components/button/button';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
     selector: 'app-mensajes',
     standalone: true,
-    imports: [CommonModule, Header, Footer],
+    imports: [CommonModule, Header, Footer, FormsModule, HttpClientModule, ModalComponent],
     templateUrl: './mensajes.html',
     styleUrl: './mensajes.scss',
 })
@@ -40,5 +43,15 @@ export class Mensajes implements OnInit {
 
     toggleMessage(index: number): void {
         this.activeMessageIndex = this.activeMessageIndex === index ? null : index;
+    }
+
+    public isModalOpen: boolean = false;
+
+    openModal(): void {
+        this.isModalOpen = true;
+    }
+
+    closeModal(): void {
+        this.isModalOpen = false;
     }
 }

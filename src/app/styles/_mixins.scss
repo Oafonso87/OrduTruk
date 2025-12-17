@@ -1,28 +1,14 @@
 @use 'sass:map';
 
-// Define centralized breakpoints
-$breakpoints: (
-    'tablet': '(min-width: 992px) and (max-width: 1279px)',
-    'mobile': '(max-width: 991px)',
-);
-
 $font-config: (
     'title': (
-        // Base properties
-        font-family: ('Bakbak One', cursive),
+        font-family: (
+            'Bakbak One',
+            cursive,
+        ),
         color: #ffba42,
         font-size: 70px,
         line-height: 70px,
-
-        // Responsive overrides using keys from $breakpoints
-        'tablet': (
-                font-size: 60px,
-                line-height: 60px,
-            ),
-        'mobile': (
-            font-size: 50px,
-            line-height: 50px,
-        ),
     ),
     'subtitle': (
         font-family: (
@@ -32,10 +18,6 @@ $font-config: (
         color: #424242,
         font-size: 32px,
         line-height: 40px,
-        'mobile': (
-            font-size: 24px,
-            line-height: 30px,
-        ),
     ),
     'content': (
         font-family: (
@@ -52,18 +34,6 @@ $font-config: (
     $config: map.get($font-config, $type);
 
     @each $key, $value in $config {
-        // If the key matches a defined breakpoint, render a media query
-        @if map.has-key($breakpoints, $key) {
-            $media-query: map.get($breakpoints, $key);
-            @media #{$media-query} {
-                @each $prop, $val in $value {
-                    #{$prop}: $val;
-                }
-            }
-        }
-        // Otherwise, render as a regular CSS property
-        @else {
-            #{$key}: $value;
-        }
+        #{$key}: $value;
     }
 }
