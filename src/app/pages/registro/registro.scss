@@ -32,10 +32,10 @@
     min-height: 734px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .registro-content {
         flex-direction: column;
-        padding: 20px;
+        padding: 35px;
     }
 
     .intro {
@@ -46,9 +46,5 @@
 
     .form-content {
         width: 100%;
-    }
-
-    .registro-img {
-        display: none; // Hide image on mobile for better focus
     }
 }

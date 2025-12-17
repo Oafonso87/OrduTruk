@@ -31,8 +31,14 @@ export class Mensajes implements OnInit {
     }
 
     public activeTab: 'ofertas' | 'demandas' = 'ofertas';
+    public activeMessageIndex: number | null = null;
 
     setActiveTab(tab: 'ofertas' | 'demandas'): void {
         this.activeTab = tab;
+        this.activeMessageIndex = null;
+    }
+
+    toggleMessage(index: number): void {
+        this.activeMessageIndex = this.activeMessageIndex === index ? null : index;
     }
 }

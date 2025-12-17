@@ -7,6 +7,15 @@
 @use '@fontsource-variable/roboto/wght.css' as *;
 @use '@fontsource-variable/roboto/wght-italic.css' as *;
 
+/*
+* {
+    border: 1px solid red;
+    @media (min-width: 992px) {
+        border: 1px solid blue;
+    }
+}
+    */
+
 app-root {
     overflow-x: hidden;
     display: block;
@@ -238,6 +247,9 @@ select {
 
         &.activa {
             background-color: #ffba42;
+            @media (max-width: 992px) {
+                outline: 1px solid black;
+            }
             li {
                 background-color: #ffba42;
                 font-weight: 400;
@@ -251,6 +263,9 @@ select {
 
         &.inactiva {
             background-color: #f8f9fa;
+            @media (max-width: 992px) {
+                outline: 1px solid black;
+            }
             li {
                 background-color: #f8f9fa;
                 font-weight: 300;
@@ -293,7 +308,7 @@ select {
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .content-list {
         grid-template-columns: 1fr;
     }

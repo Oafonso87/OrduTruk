@@ -27,13 +27,9 @@
     background-size: cover;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .perfil-content {
-        padding: 20px;
-    }
-
-    .perfil-img {
-        display: none;
+        padding: 35px;
     }
 }
 

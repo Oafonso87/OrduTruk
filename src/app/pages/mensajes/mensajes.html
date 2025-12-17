@@ -43,37 +43,46 @@
                             ><i class="bi bi-star-fill text-warning"></i
                             ><i class="bi bi-star text-warning"></i>
                         </li>
-                        <li>
+                        <li (click)="toggleMessage(i)" style="cursor: pointer">
                             <span class="preicons"> Mensajes:</span>
                             <i class="bi bi-chat-dots"></i>
                         </li>
-                    </ul>
-                    <ul>
                         <li>
+                            <button class="btn btn-primary btn-new">Nuevo Mensaje</button>
+                        </li>
+                    </ul>
+                    <ul class="mensajes" *ngIf="activeMessageIndex === i">
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Hola, Carlos! Soy Ana, la profesora de inglés voluntaria del proyecto.
                             Gracias por tu interés. ¿Cómo supiste de nosotros?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Hola, Ana! Un amigo me habló del "Intercambio Solidario". Me dijo que
                             ofrecías clases de inglés. Llevo tiempo queriendo mejorar mi nivel, pero
                             el coste siempre ha sido una barrera.
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Así es. Mi misión es justamente esa: facilitar la enseñanza sin que el
                             dinero sea un problema. Yo ofrezco mi tiempo y conocimientos de forma
                             totalmente voluntaria y gratuita.
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Eso es genial! ¿Y cómo funciona exactamente? ¿Es un curso formal o
                             clases particulares?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Es un poco diferente. Como es voluntariado y el tiempo es lo que
                             intercambiamos, hacemos sesiones semanales de 60 minutos. El formato es
                             más bien conversacional y de refuerzo, adaptado a tus necesidades.
                             Cuéntame, ¿cuál es tu objetivo principal con el inglés?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Necesito mejorar mi inglés para el trabajo. Lo entiendo bastante bien al
                             leer, pero me bloqueo mucho al hablar.
                         </li>
@@ -97,34 +106,45 @@
                             ><i class="bi bi-star-fill text-warning"></i
                             ><i class="bi bi-star text-warning"></i>
                         </li>
-                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                    </ul>
-                    <ul>
+                        <li (click)="toggleMessage(i + 100)" style="cursor: pointer">
+                            Mensajes: <i class="bi bi-chat-dots"></i>
+                        </li>
                         <li>
+                            <button class="btn btn-primary btn-new">Nuevo Mensaje</button>
+                        </li>
+                    </ul>
+                    <ul class="mensajes" *ngIf="activeMessageIndex === i + 100">
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Hola, Carlos! Soy Ana, la profesora de inglés voluntaria del proyecto.
                             Gracias por tu interés. ¿Cómo supiste de nosotros?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Hola, Ana! Un amigo me habló del "Intercambio Solidario". Me dijo que
                             ofrecías clases de inglés. Llevo tiempo queriendo mejorar mi nivel, pero
                             el coste siempre ha sido una barrera.
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Así es. Mi misión es justamente esa: facilitar la enseñanza sin que el
                             dinero sea un problema. Yo ofrezco mi tiempo y conocimientos de forma
                             totalmente voluntaria y gratuita.
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Eso es genial! ¿Y cómo funciona exactamente? ¿Es un curso formal o
                             clases particulares?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Es un poco diferente. Como es voluntariado y el tiempo es lo que
                             intercambiamos, hacemos sesiones semanales de 60 minutos. El formato es
                             más bien conversacional y de refuerzo, adaptado a tus necesidades.
                             Cuéntame, ¿cuál es tu objetivo principal con el inglés?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Necesito mejorar mi inglés para el trabajo. Lo entiendo bastante bien al
                             leer, pero me bloqueo mucho al hablar.
                         </li>
@@ -170,34 +190,45 @@
                             ><i class="bi bi-star-fill text-warning"></i
                             ><i class="bi bi-star text-warning"></i>
                         </li>
-                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                    </ul>
-                    <ul>
+                        <li (click)="toggleMessage(i)" style="cursor: pointer">
+                            Mensajes: <i class="bi bi-chat-dots"></i>
+                        </li>
                         <li>
+                            <button class="btn btn-primary btn-new">Nuevo Mensaje</button>
+                        </li>
+                    </ul>
+                    <ul class="mensajes" *ngIf="activeMessageIndex === i">
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Hola, Carlos! Soy Ana, la profesora de inglés voluntaria del proyecto.
                             Gracias por tu interés. ¿Cómo supiste de nosotros?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Hola, Ana! Un amigo me habló del "Intercambio Solidario". Me dijo que
                             ofrecías clases de inglés. Llevo tiempo queriendo mejorar mi nivel, pero
                             el coste siempre ha sido una barrera.
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Así es. Mi misión es justamente esa: facilitar la enseñanza sin que el
                             dinero sea un problema. Yo ofrezco mi tiempo y conocimientos de forma
                             totalmente voluntaria y gratuita.
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Eso es genial! ¿Y cómo funciona exactamente? ¿Es un curso formal o
                             clases particulares?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Es un poco diferente. Como es voluntariado y el tiempo es lo que
                             intercambiamos, hacemos sesiones semanales de 60 minutos. El formato es
                             más bien conversacional y de refuerzo, adaptado a tus necesidades.
                             Cuéntame, ¿cuál es tu objetivo principal con el inglés?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Necesito mejorar mi inglés para el trabajo. Lo entiendo bastante bien al
                             leer, pero me bloqueo mucho al hablar.
                         </li>
@@ -221,37 +252,46 @@
                             ><i class="bi bi-star-fill text-warning"></i
                             ><i class="bi bi-star text-warning"></i>
                         </li>
-                        <li>
+                        <li (click)="toggleMessage(i + 100)" style="cursor: pointer">
                             <span class="preicons">Mensajes:</span>
                             <i class="bi bi-chat-dots"></i>
                         </li>
-                    </ul>
-                    <ul>
                         <li>
+                            <button class="btn btn-primary btn-new">Nuevo Mensaje</button>
+                        </li>
+                    </ul>
+                    <ul class="mensajes" *ngIf="activeMessageIndex === i + 100">
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Hola, Carlos! Soy Ana, la profesora de inglés voluntaria del proyecto.
                             Gracias por tu interés. ¿Cómo supiste de nosotros?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Hola, Ana! Un amigo me habló del "Intercambio Solidario". Me dijo que
                             ofrecías clases de inglés. Llevo tiempo queriendo mejorar mi nivel, pero
                             el coste siempre ha sido una barrera.
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Así es. Mi misión es justamente esa: facilitar la enseñanza sin que el
                             dinero sea un problema. Yo ofrezco mi tiempo y conocimientos de forma
                             totalmente voluntaria y gratuita.
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             ¡Eso es genial! ¿Y cómo funciona exactamente? ¿Es un curso formal o
                             clases particulares?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Es un poco diferente. Como es voluntariado y el tiempo es lo que
                             intercambiamos, hacemos sesiones semanales de 60 minutos. El formato es
                             más bien conversacional y de refuerzo, adaptado a tus necesidades.
                             Cuéntame, ¿cuál es tu objetivo principal con el inglés?
                         </li>
                         <li>
+                            <i class="bi bi-chat-dots"></i>
                             Necesito mejorar mi inglés para el trabajo. Lo entiendo bastante bien al
                             leer, pero me bloqueo mucho al hablar.
                         </li>
