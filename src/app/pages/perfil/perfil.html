@@ -6,77 +6,31 @@
             <div class="filter-container"></div>
         </div>
 
-
-
-
-
         <div class="row content-list-detail form-content">
-
-
-
-
-
-
-            <div class=" list-item-img">
+            <div class="list-item-img">
                 <label for="direccion">Nombre</label>
-                <input type="text" id="direccion" name="direccion">
+                <input type="text" id="direccion" name="direccion" />
                 <label for="direccion">Apellidos</label>
-                <input type="text" id="direccion" name="direccion">
+                <input type="text" id="direccion" name="direccion" />
                 <label for="direccion">Correo electrónico</label>
-                <input type="text" id="direccion" name="direccion">
+                <input type="text" id="direccion" name="direccion" />
                 <label for="direccion">Contraseña</label>
-                <input type="text" id="direccion" name="direccion">
+                <input type="text" id="direccion" name="direccion" />
                 <label for="direccion">Dirección</label>
-                <input type="text" id="direccion" name="direccion">
+                <input type="text" id="direccion" name="direccion" />
                 <label for="direccion">Habilidades</label>
-                <input type="text" id="direccion" name="direccion">
+                <input type="text" id="direccion" name="direccion" />
 
-                <button type="submit" [class]="'btn btn-primary w-100'">
-                    Modificar
-                </button>
+                <button type="submit" [class]="'btn btn-primary w-100'">Modificar</button>
             </div>
-            <div class=" list-item-content">
+            <div class="list-item-content">
                 <h3 class="item-title">Historial</h3>
-                <p class="item-transaccion">Ofertas </p>
+                <p class="item-transaccion">Ofertas</p>
 
-
-
-
-                <div class="row list-item mensaje-list" *ngFor="let oferta of ofertas; let i = index">
-                    <ul class="list-item-content">
-                        <li>22/06/2025</li>
-                        <li>Clases de Inglés Básico</li>
-                        <li>Voluntario: John Doe</li>
-                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
-                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                    </ul>
-                </div>
-
-
-
-                <!-- Paginación -->
-                <nav aria-label="Navegación de páginas">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                        </li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Siguiente</a>
-                        </li>
-                    </ul>
-                </nav>
-
-
-
-                <hr>
-                <p class="item-transaccion">Demandas </p>
-
-                <div class="row list-item mensaje-list" *ngFor="let oferta of ofertas; let i = index">
+                <div
+                    class="row list-item mensaje-list"
+                    *ngFor="let oferta of ofertas; let i = index"
+                >
                     <ul class="list-item-content">
                         <li>22/06/2025</li>
                         <li>Clases de Inglés Básico</li>
@@ -90,7 +44,9 @@
                 <nav aria-label="Navegación de páginas">
                     <ul class="pagination justify-content-end">
                         <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                                >Anterior</a
+                            >
                         </li>
                         <li class="page-item active" aria-current="page">
                             <a class="page-link" href="#">1</a>
@@ -103,13 +59,43 @@
                     </ul>
                 </nav>
 
+                <hr />
+                <p class="item-transaccion">Demandas</p>
+
+                <div
+                    class="row list-item mensaje-list"
+                    *ngFor="let oferta of ofertas; let i = index"
+                >
+                    <ul class="list-item-content">
+                        <li>22/06/2025</li>
+                        <li>Clases de Inglés Básico</li>
+                        <li>Voluntario: John Doe</li>
+                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
+                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
+                    </ul>
+                </div>
+
+                <!-- Paginación -->
+                <nav aria-label="Navegación de páginas">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                                >Anterior</a
+                            >
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-
-
-
 
             <div class="detalles">
-
                 <!-- 
 
 
@@ -130,20 +116,9 @@
                     <li><strong>Localidad</strong>: Bilbao</li>
                 </ul>
 
-            -->
-            </div>
-
+            --></div>
         </div>
-
-
-
     </div>
-
-
-
-
 </div>
-
-
 
 <app-footer></app-footer>

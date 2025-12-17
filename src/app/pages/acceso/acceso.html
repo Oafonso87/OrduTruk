@@ -1,52 +1,63 @@
 <app-header></app-header>
 <div class="row">
-
     <div class="col-6 acceso-content">
         <div class="col-6 intro">
             <h1 class="title">Acceso</h1>
             <h2 class="subtitle">¡Bienvenido a OrduTruk!</h2>
-            <p class="content">Al continuar, aceptas nuestros <strong>Términos de uso</strong>.
+            <p class="content">Al continuar, aceptas nuestros <strong>Términos de uso</strong>.</p>
+            <hr />
+            <p class="content">
+                Si aún no tienes cuenta <a class="arrow-link" routerLink="/registro">Registrate</a>
             </p>
-            <hr>
-            <p class="content">Si aún no tienes cuenta <a class="arrow-link " routerLink="/registro">Registrate</a></p>
         </div>
 
-
-
-
         <form class="col-6 form-content" #formAcceso="ngForm" (ngSubmit)="acceder()">
-
             <label for="nombreRegistro">Correo Electrónico</label>
-            <input type="email" id="mailRegistro" name="mailRegistro" [(ngModel)]="email" placeholder=""
-                #campoMail="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
+            <input
+                type="email"
+                id="mailRegistro"
+                name="mailRegistro"
+                [(ngModel)]="email"
+                placeholder=""
+                #campoMail="ngModel"
+                required
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            />
             @if (campoMail.touched && campoMail.errors?.['required']) {
-            <span class="error">
-                El campo Correo Electrónico no puede estar vacío
-            </span>
-            }
-            @else if (campoMail.touched && campoMail.errors?.['pattern']) {
-            <span class="error">El correo electrónico no tiene el formato adecuado:
-                ****@****.***
-            </span>
+                <span class="error"> El campo Correo Electrónico no puede estar vacío </span>
+            } @else if (campoMail.touched && campoMail.errors?.['pattern']) {
+                <span class="error"
+                    >El correo electrónico no tiene el formato adecuado: ****@****.***
+                </span>
             }
             <label for="passwordRegistro">Contraseña</label>
-            <input type="password" id="passwordRegistro" name="passwordRegistro" [(ngModel)]="password" placeholder=""
-                #campoPassword="ngModel" required minlength="6" />
-            @if(campoPassword.touched && password.trim() === '') {
-            <span class="error">
-                El campo Contraseña no puede estar vacío
-            </span>
-            } @else if (campoPassword.touched && password.length < 6) { <span class="error">
-                La contraseña tiene que tener como mínimo 6 caracterer
-                </span>
-                }
-                <button [disabled]="!formAcceso.form.valid" label="Acceder" [class]="'btn btn-primary w-100'"
-                    class="w-100">Acceder</button>
+            <input
+                type="password"
+                id="passwordRegistro"
+                name="passwordRegistro"
+                [(ngModel)]="password"
+                placeholder=""
+                #campoPassword="ngModel"
+                required
+                minlength="6"
+            />
+            @if (campoPassword.touched && password.trim() === '') {
+                <span class="error"> El campo Contraseña no puede estar vacío </span>
+            } @else if (campoPassword.touched && password.length < 6) {
+                <span class="error"> La contraseña tiene que tener como mínimo 6 caracterer </span>
+            }
+            <button
+                [disabled]="!formAcceso.form.valid"
+                label="Acceder"
+                [class]="'btn btn-primary w-100'"
+                class="w-100"
+            >
+                Acceder
+            </button>
 
-                <!-- <app-button label="Acceder" [class]="'btn btn-primary w-100'" class="w-100"></app-button> -->
+            <!-- <app-button label="Acceder" [class]="'btn btn-primary w-100'" class="w-100"></app-button> -->
         </form>
     </div>
     <div class="col-6 acceso-img"></div>
-
 </div>
 <app-footer></app-footer>

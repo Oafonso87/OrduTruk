@@ -8,75 +8,73 @@
             </div>
         </div>
 
-
         <div class="row back-link">
-            <a href="/ofertas" class="arrow-link-back mb-4 d-inline-block">Volver al listado de Ofertas</a>
+            <a href="/ofertas" class="arrow-link-back mb-4 d-inline-block"
+                >Volver al listado de Ofertas</a
+            >
         </div>
         <div class="row content-list-detail">
-
-            <div class=" list-item-img">
-                <img src="/assets/img/ofertasdetalle.png" alt="Oferta">
+            <div class="list-item-img">
+                <img src="/assets/img/ofertasdetalle.png" alt="Oferta" />
             </div>
-            <div class=" list-item-content">
-                <h3 class="item-title">{{oferta?.titulo}}</h3>
-                <p class="item-transaccion">Transacción <span><i class="bi bi-clock me-1"></i>{{oferta?.horas_estimadas}}</span></p>
-
-                <p class="item-content">
-                    {{oferta?.descripcion}}</p>
-
-                <p class="item-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                    printer
-                    took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-                    centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                    popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-                    more
-                    recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            <div class="list-item-content">
+                <h3 class="item-title">{{ oferta?.titulo }}</h3>
+                <p class="item-transaccion">
+                    Transacción
+                    <span><i class="bi bi-clock me-1"></i>{{ oferta?.horas_estimadas }}</span>
                 </p>
 
+                <p class="item-content">
+                    {{ oferta?.descripcion }}
+                </p>
+
+                <p class="item-content">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                    unknown printer took a galley of type and scrambled it to make a type specimen
+                    book. It has survived not only five centuries, but also the leap into electronic
+                    typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more
+                    recently with desktop publishing software like Aldus PageMaker including
+                    versions of Lorem Ipsum.
+                </p>
 
                 <div class="btn-group">
-                    <app-button label="Aceptar Oferta" [class]="'btn btn-primary me-1'"></app-button>
+                    <app-button
+                        label="Aceptar Oferta"
+                        [class]="'btn btn-primary me-1'"
+                    ></app-button>
                     <app-button label="Contactar" [class]="'btn btn-outline-primary'"></app-button>
                 </div>
-
-
             </div>
-
-
-
 
             <div class="detalles">
-                <h2> Detalles</h2>
+                <h2>Detalles</h2>
 
                 <ul>
-                    <li><strong>Voluntario</strong>: {{oferta?.usuario?.nombre}} {{oferta?.usuario?.apellido}}</li>
-                    <li><strong>Valoraciones</strong>:
-                         @for (star of [].constructor(oferta?.usuario?.valoracion); track $index) {                            
-                            <i class="bi bi-star-fill text-warning"></i>                            
+                    <li>
+                        <strong>Voluntario</strong>: {{ oferta?.usuario?.nombre }}
+                        {{ oferta?.usuario?.apellido }}
+                    </li>
+                    <li>
+                        <strong>Valoraciones</strong>:
+                        @for (star of [].constructor(oferta?.usuario?.valoracion); track $index) {
+                            <i class="bi bi-star-fill text-warning"></i>
                         }
-                         @for (star of [].constructor(5 - oferta?.usuario?.valoracion!); track $index) {                            
-                            <i class="bi bi-star text-warning"></i>                            
+                        @for (
+                            star of [].constructor(5 - oferta?.usuario?.valoracion!);
+                            track $index
+                        ) {
+                            <i class="bi bi-star text-warning"></i>
                         }
                     </li>
-                    <li><strong>Categoria</strong>: {{oferta?.categoria?.nombre}}</li>
-                    <li><strong>Provincia</strong>: {{oferta?.provincia_relacion?.nombre}}</li>
-                    <li><strong>Localidad</strong>: {{oferta?.ciudad_relacion?.nombre}}</li>
+                    <li><strong>Categoria</strong>: {{ oferta?.categoria?.nombre }}</li>
+                    <li><strong>Provincia</strong>: {{ oferta?.provincia_relacion?.nombre }}</li>
+                    <li><strong>Localidad</strong>: {{ oferta?.ciudad_relacion?.nombre }}</li>
                 </ul>
             </div>
-
         </div>
-
-
-
     </div>
-
-
-
-
-
 </div>
-
-
 
 <app-footer></app-footer>

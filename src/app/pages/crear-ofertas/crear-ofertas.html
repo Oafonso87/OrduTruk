@@ -6,64 +6,98 @@
             <div class="filter-container"></div>
         </div>
 
-        <form class="row content-list-detail form-content" #formOferta="ngForm" (ngSubmit)="publicarOferta()">
-
-            <div class=" list-item-img">
+        <form
+            class="row content-list-detail form-content"
+            #formOferta="ngForm"
+            (ngSubmit)="publicarOferta()"
+        >
+            <div class="list-item-img">
                 <label for="titulo">Titulo</label>
-                <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" #campoTitulo="ngModel" required>
+                <input
+                    type="text"
+                    id="titulo"
+                    name="titulo"
+                    [(ngModel)]="titulo"
+                    #campoTitulo="ngModel"
+                    required
+                />
                 @if (campoTitulo.touched && titulo.trim() === '') {
-                <span class="error">El campo Título no puede estar vacío</span>
+                    <span class="error">El campo Título no puede estar vacío</span>
                 }
-                <select class="form-select" aria-label="Categoría" name="categoria" [(ngModel)]="categoria">
+                <select
+                    class="form-select"
+                    aria-label="Categoría"
+                    name="categoria"
+                    [(ngModel)]="categoria"
+                >
                     <option [ngValue]="null">Categoría</option>
                     @for (categoria of categorias; track categoria.id) {
-                    <option [value]="categoria.id">{{ categoria.nombre }}</option>
+                        <option [value]="categoria.id">{{ categoria.nombre }}</option>
                     }
                 </select>
-                <select class="form-select" aria-label="Provincia" name="provincia" [(ngModel)]="provincia"
-                    (ngModelChange)="onProvinciaChange($event)">
+                <select
+                    class="form-select"
+                    aria-label="Provincia"
+                    name="provincia"
+                    [(ngModel)]="provincia"
+                    (ngModelChange)="onProvinciaChange($event)"
+                >
                     <option [ngValue]="null">Provincia</option>
                     @for (provincia of provincias; track provincia.id) {
-                    <option [value]="provincia.id">{{ provincia.nombre }}</option>
+                        <option [value]="provincia.id">{{ provincia.nombre }}</option>
                     }
                 </select>
-                <select class="form-select" aria-label="Localidad" name="ciudad" [(ngModel)]="poblacion"
-                    [disabled]="!provincia">
+                <select
+                    class="form-select"
+                    aria-label="Localidad"
+                    name="ciudad"
+                    [(ngModel)]="poblacion"
+                    [disabled]="!provincia"
+                >
                     <option [ngValue]="null">Localidad</option>
                     @for (poblacion of poblaciones; track poblacion.id) {
-                    <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
+                        <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
                     }
                 </select>
             </div>
 
-            <div class=" list-item-content">
+            <div class="list-item-content">
                 <label for="transaccion">Transacción de horas</label>
                 <div class="transaccion-input">
-
-                    <input type="number" id="transaccion" name="transaccion" [(ngModel)]="horas">
-                    <button type="button" (click)="decrementarHoras()"><i class="bi bi-dash"></i></button>
-                    <button type="button" (click)="incrementarHoras()"><i class="bi bi-plus"></i></button>
+                    <input type="number" id="transaccion" name="transaccion" [(ngModel)]="horas" />
+                    <button type="button" (click)="decrementarHoras()">
+                        <i class="bi bi-dash"></i>
+                    </button>
+                    <button type="button" (click)="incrementarHoras()">
+                        <i class="bi bi-plus"></i>
+                    </button>
                 </div>
 
                 <label for="descripcion">Descripción</label>
-                <textarea name="descripcion" id="descripcion" class="descripcion" [(ngModel)]="descripcion"></textarea>
+                <textarea
+                    name="descripcion"
+                    id="descripcion"
+                    class="descripcion"
+                    [(ngModel)]="descripcion"
+                ></textarea>
 
                 <div class="mb-3 mt-3">
-                    <input type="file" id="direccion" name="direccion" class="d-none">
+                    <input type="file" id="direccion" name="direccion" class="d-none" />
                     <label for="direccion" class="btn btn-outline-secondary">
                         <i class="bi bi-upload me-2"></i> Subir Imagen
                     </label>
                 </div>
 
-                <button type="submit" [class]="'btn btn-primary'" [disabled]="!formOferta.form.valid">
+                <button
+                    type="submit"
+                    [class]="'btn btn-primary'"
+                    [disabled]="!formOferta.form.valid"
+                >
                     Crear Oferta
                 </button>
             </div>
-
         </form>
-
     </div>
-
 </div>
 
 <app-footer></app-footer>
