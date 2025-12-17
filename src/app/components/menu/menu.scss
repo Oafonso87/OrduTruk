@@ -30,15 +30,15 @@
         ul.menu-container {
             display: none;
             flex-direction: column;
-            position: absolute;
-            top: 100%;
+            position: fixed;
+            top: 110px;
+            left: 0;
             right: 0;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100vw; // Full width or adjust e.g. 250px
+            width: 100%;
             padding: 1rem;
             z-index: 1000;
-            left: -50px; // Alinear a la izquierda restando el padding del header
 
             &.mobile-open {
                 display: flex;
