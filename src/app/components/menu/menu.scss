@@ -88,3 +88,19 @@
         background-color: #e9ecef;
     }
 }
+
+.bolsa-horas {
+    background-color: #fff;
+    border: 1px solid #0D6EFD;
+    border-radius: 4px;
+    min-height: 32px;
+    display: flex;
+    padding: 0 8px;
+    align-items: center;
+    justify-content: center;
+    color: #0D6EFD;
+
+    i {
+        margin-right: 8px;
+    }
+}

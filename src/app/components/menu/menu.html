@@ -21,10 +21,12 @@
         </li>
         <li><app-button [class]="'btn-menu'" label="Ofertas" routerLink="/ofertas"></app-button></li>
         <li><app-button [class]="'btn-menu'" label="Demandas" routerLink="/demandas"></app-button></li>
-        <li><span class="bolsa-horas">25H</span></li>
-        <li><app-button [class]="'btn-menu'" label="Perfil" routerLink="/perfil"></app-button></li>
-        <li><app-button [class]="'btn-menu'" label="Mensajes" routerLink="/mensajes"></app-button></li>
-        <li><app-button [class]="'btn-menu'" label="Logout" routerLink="/logout"></app-button></li>
+        <li><span class="bolsa-horas"><i class="bi bi-clock"></i> 25H</span></li>
+        <li><app-button [class]="'btn-menu btn-link'" label="Perfil" routerLink="/perfil"
+                icon="bi bi-person"></app-button></li>
+        <li><app-button [class]="'btn-menu btn-link'" label="Mensajes" routerLink="/mensajes"
+                icon="bi bi-chat-dots"></app-button></li>
+        <li><app-button [class]="'btn-menu btn-close'" label="" routerLink="/logout"></app-button></li>
     </ul>
     }
 </nav>

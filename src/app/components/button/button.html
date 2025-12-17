@@ -1,1 +1,4 @@
-<button [class]="class" [routerLink]="routerLink">{{ label }}</button>
+<button [class]="class" [routerLink]="routerLink">
+    @if (icon) { <i [class]="icon"></i> }
+    {{ label }}
+</button>
