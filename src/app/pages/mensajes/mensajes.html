@@ -330,9 +330,10 @@
 </div>
 
 <!-- Modal -->
-<app-modal [isOpen]="isModalOpen" [title]="'Nuevo Mensaje'" (closeModal)="closeModal()">
-    <!-- Contenido del modal (textarea, inputs, etc.) -->
-    <p>Escribe tu mensaje aquí...</p>
+<app-modal [isOpen]="isModalOpen" [title]="'Contactar'" (closeModal)="closeModal()">
+    <p>Contenido para Contactar...</p>
+    <textarea class="form-control mb-2" rows="3" placeholder="Escribe tu mensaje..."></textarea>
+    <button class="btn btn-primary">Enviar</button>
 </app-modal>
 
 <app-footer></app-footer>

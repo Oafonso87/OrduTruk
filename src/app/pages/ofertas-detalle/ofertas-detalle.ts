@@ -17,7 +17,8 @@ import { ModalComponent } from '../../components/modal/modal';
 export class OfertasDetalle implements OnInit {
   
   public oferta : Servicios | null = null;
-  public isModalOpen: boolean = false;
+  public isAceptarModalOpen: boolean = false;
+  public isContactarModalOpen: boolean = false;
   
   ngOnInit() {
     const almacenada = sessionStorage.getItem('ofertaSeleccionada');
@@ -27,12 +28,20 @@ export class OfertasDetalle implements OnInit {
     console.log(almacenada);
   }
 
-  openModal(): void {
-    this.isModalOpen = true;
+  openAceptarModal(): void {
+    this.isAceptarModalOpen = true;
   }
 
-  closeModal(): void {
-    this.isModalOpen = false;
+  closeAceptarModal(): void {
+    this.isAceptarModalOpen = false;
+  }
+
+  openContactarModal(): void {
+    this.isContactarModalOpen = true;
+  }
+
+  closeContactarModal(): void {
+    this.isContactarModalOpen = false;
   }
 
   constructor() {}

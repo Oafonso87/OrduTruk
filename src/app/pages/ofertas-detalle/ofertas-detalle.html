@@ -43,12 +43,12 @@
                     <app-button
                         label="Aceptar Oferta"
                         [class]="'btn btn-primary me-1'"
-                        (click)="openModal()"
+                        (click)="openAceptarModal()"
                     ></app-button>
                     <app-button
                         label="Contactar"
                         [class]="'btn btn-outline-primary'"
-                        (click)="openModal()"
+                        (click)="openContactarModal()"
                     ></app-button>
                 </div>
             </div>
@@ -82,9 +82,25 @@
     </div>
 </div>
 
-<app-modal [isOpen]="isModalOpen" [title]="'Nuevo Mensaje'" (closeModal)="closeModal()">
-    <!-- Contenido del modal -->
-    <p>Escribe tu mensaje aquí...</p>
+<app-modal
+    [isOpen]="isAceptarModalOpen"
+    [title]="'Aceptar Oferta'"
+    (closeModal)="closeAceptarModal()"
+>
+    <!-- Contenido del modal Aceptar -->
+    <p>Has aceptado la oferta</p>
+    <button class="btn btn-primary">Cerrar</button>
+</app-modal>
+
+<app-modal
+    [isOpen]="isContactarModalOpen"
+    [title]="'Contactar'"
+    (closeModal)="closeContactarModal()"
+>
+    <!-- Contenido del modal Contactar -->
+    <p>Contenido para Contactar...</p>
+    <textarea class="form-control mb-2" rows="3" placeholder="Escribe tu mensaje..."></textarea>
+    <button class="btn btn-primary">Enviar</button>
 </app-modal>
 
 <app-footer></app-footer>
