@@ -25,8 +25,8 @@ import { CategoriasService } from '../../services/categorias.service';
 
 export class CrearOfertas implements OnInit {
 
-    public usuario : Usuario | null = null;
-    
+    public usuario: Usuario | null = null;
+
     ngOnInit(): void {
         const userAlmacenado = sessionStorage.getItem('user');
         if (userAlmacenado) {
@@ -38,19 +38,19 @@ export class CrearOfertas implements OnInit {
         this.loadPoblaciones();
     }
 
-    constructor(private _router : Router, private _serviciosService : ServiciosService, 
-                private _ubicacionesService : UbicacionesService, private _categoriasService : CategoriasService) {}
+    constructor(private _router: Router, private _serviciosService: ServiciosService,
+        private _ubicacionesService: UbicacionesService, private _categoriasService: CategoriasService) { }
 
-    public titulo : string = '';
-    public descripcion : string = '';
-    public horas : number = 0;
-    public provincias : Provincias[] = [];
-    public poblaciones : Poblaciones[] = [];
-    public todasPoblaciones : Poblaciones[] = [];
-    public categorias : Categorias[] = [];
+    public titulo: string = '';
+    public descripcion: string = '';
+    public horas: number = 0;
+    public provincias: Provincias[] = [];
+    public poblaciones: Poblaciones[] = [];
+    public todasPoblaciones: Poblaciones[] = [];
+    public categorias: Categorias[] = [];
     public provincia: number | null = null;
     public poblacion: number | null = null;
-    public categoria : number | null = null;
+    public categoria: number | null = null;
 
     loadCategorias() {
         this._categoriasService.getCategorias().subscribe({
@@ -60,10 +60,10 @@ export class CrearOfertas implements OnInit {
             },
             error: (err) => {
                 console.error('Error al cargar las categorias:', err);
-            }     
-        });    
+            }
+        });
     }
-    
+
     loadProvincias() {
         this._ubicacionesService.getProvincias().subscribe({
             next: (response: ApiResponse<Provincias[]>) => {
@@ -72,19 +72,19 @@ export class CrearOfertas implements OnInit {
             },
             error: (err) => {
                 console.error('Error al cargar las provincias:', err);
-            } 
+            }
         });
     }
 
     loadPoblaciones() {
         this._ubicacionesService.getPoblaciones().subscribe({
-        next: (response: ApiResponse<Poblaciones[]>) => {
-            this.todasPoblaciones = response.data;
-            console.log('Todas las poblaciones cargadas:', this.todasPoblaciones);
-        },
-        error: (err) => {
-            console.error('Error al cargar todas las poblaciones:', err);
-        }
+            next: (response: ApiResponse<Poblaciones[]>) => {
+                this.todasPoblaciones = response.data;
+                console.log('Todas las poblaciones cargadas:', this.todasPoblaciones);
+            },
+            error: (err) => {
+                console.error('Error al cargar todas las poblaciones:', err);
+            }
         });
     }
 
@@ -95,16 +95,16 @@ export class CrearOfertas implements OnInit {
         this.poblacion = null;
 
         if (provinciaId !== null) {
-        this.poblaciones = this.todasPoblaciones.filter(
-            p => Number(p.provincia_id) === provinciaId
-        );
+            this.poblaciones = this.todasPoblaciones.filter(
+                p => Number(p.provincia_id) === provinciaId
+            );
         } else {
-        this.poblaciones = [];
-        }        
+            this.poblaciones = [];
+        }
     }
 
     publicarOferta() {
-        const nuevaOferta : Servicios = {
+        const nuevaOferta: Servicios = {
             id: 0,
             usuario_id: this.usuario?.id!,
             categoria_id: this.categoria!,
@@ -114,7 +114,7 @@ export class CrearOfertas implements OnInit {
             provincia: this.provincia!,
             ciudad: this.poblacion!,
             horas_estimadas: this.horas,
-            estado: "activo", 
+            estado: "activo",
         };
         console.log(nuevaOferta);
 
@@ -131,13 +131,23 @@ export class CrearOfertas implements OnInit {
         });
     }
 
-    resetForm () {
+    resetForm() {
         this.titulo = '';
         this.descripcion = '';
         this.horas = 0;
         this.provincia = null;
         this.poblacion = null;
-        this.categoria = null;    
+        this.categoria = null;
+    }
+
+    incrementarHoras() {
+        this.horas++;
+    }
+
+    decrementarHoras() {
+        if (this.horas > 0) {
+            this.horas--;
+        }
     }
 
 }

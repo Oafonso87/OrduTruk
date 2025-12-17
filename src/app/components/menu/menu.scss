@@ -1,25 +1,19 @@
-/*
 .menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-    */
-.menu ul.menu-container {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 10px;
+    ul.menu-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 }
 
 .selected {
-    background-color: #0d6efd;
     color: white;
+    background-color: #0d6efd;
 }
 
-/* Dropdown Styles */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -28,10 +22,10 @@
 .dropdown-button {
     min-width: auto;
     min-height: auto;
-    border: none;
     padding: 8px 16px;
-    font-size: 12px;
+    border: none;
     border-radius: 4px;
+    font-size: 12px;
     color: rgba(0, 0, 0, 0.87);
     background-color: #D3F0F9;
 }
@@ -39,48 +33,44 @@
 .dropdown-menu {
     display: none;
     position: absolute;
-    left: 0;
     top: 100%;
+    left: 0;
     z-index: 1000;
+    flex-direction: column;
     min-width: 10rem;
-    padding: 0.5rem 0;
     margin: 0.125rem 0 0;
+    padding: 0.5rem 0;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    background-clip: padding-box;
+    background-color: #fff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     font-size: 1rem;
     color: #212529;
     text-align: left;
     list-style: none;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 0.25rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-
-    display: none;
-    flex-direction: column;
-
-    li {
-        width: 100%;
-    }
 
     &.show {
         display: flex;
     }
 
-
+    li {
+        width: 100%;
+    }
 }
 
 .dropdown-item {
     display: block;
+    clear: both;
     width: 100%;
     padding: 0.25rem 1rem;
-    clear: both;
+    border: 0;
     font-weight: 400;
     color: #212529;
     text-align: inherit;
     text-decoration: none;
     white-space: nowrap;
     background-color: transparent;
-    border: 0;
 
     &:hover,
     &:focus {
@@ -90,15 +80,15 @@
 }
 
 .bolsa-horas {
-    background-color: #fff;
-    border: 1px solid #0D6EFD;
-    border-radius: 4px;
-    min-height: 32px;
     display: flex;
-    padding: 0 8px;
     align-items: center;
     justify-content: center;
+    min-height: 32px;
+    padding: 0 8px;
+    border: 1px solid #0D6EFD;
+    border-radius: 4px;
     color: #0D6EFD;
+    background-color: #fff;
 
     i {
         margin-right: 8px;
