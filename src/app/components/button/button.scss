@@ -1,6 +1,13 @@
-.btn {
-    min-width: 220px;
-    min-height: 60px;
-    font-family: Roboto;
-    font-size: 20px;
+.btn-menu {
+    background-color: #D3F0F9;
+    border: none;
+    color: rgba(0, 0, 0, 0.87);
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    text-transform: uppercase;
 }
