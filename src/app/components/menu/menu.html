@@ -1,6 +1,10 @@
 <nav class="menu">
+    <button class="hamburger-btn" (click)="toggleMenu()">
+        <i class="bi" [class.bi-list]="!isMenuOpen" [class.bi-x-lg]="isMenuOpen"></i>
+    </button>
+
     @if (isPublic) {
-        <ul class="menu-container">
+        <ul class="menu-container" [class.mobile-open]="isMenuOpen">
             <li>
                 <app-button
                     [class]="'btn-menu'"
@@ -10,7 +14,7 @@
             </li>
         </ul>
     } @else {
-        <ul class="menu-container">
+        <ul class="menu-container" [class.mobile-open]="isMenuOpen">
             <li>
                 <div class="dropdown">
                     <button

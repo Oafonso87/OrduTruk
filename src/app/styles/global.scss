@@ -292,3 +292,23 @@ select {
         }
     }
 }
+
+@media (max-width: 992px) {
+    .content-list {
+        grid-template-columns: 1fr;
+    }
+
+    .content-list-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .mensaje-list .list-item-content {
+        flex-direction: column;
+        align-items: stretch;
+
+        li {
+            width: 100%;
+            justify-content: flex-start; // Align text to left
+        }
+    }
+}

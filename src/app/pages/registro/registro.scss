@@ -32,12 +32,23 @@
     min-height: 734px;
 }
 
-/*
-.registro-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: top;
-    align-items: flex-start;
-    padding-top: 100px;
+@media (max-width: 992px) {
+    .registro-content {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .intro {
+        padding-right: 0;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .form-content {
+        width: 100%;
+    }
+
+    .registro-img {
+        display: none; // Hide image on mobile for better focus
+    }
 }
-    */

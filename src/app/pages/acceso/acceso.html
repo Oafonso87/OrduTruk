@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="row">
-    <div class="col-6 acceso-content">
-        <div class="col-6 intro">
+    <div class="col-12 col-lg-6 acceso-content">
+        <div class="col-12 col-lg-6 intro">
             <h1 class="title">Acceso</h1>
             <h2 class="subtitle">¡Bienvenido a OrduTruk!</h2>
             <p class="content">Al continuar, aceptas nuestros <strong>Términos de uso</strong>.</p>
@@ -11,7 +11,7 @@
             </p>
         </div>
 
-        <form class="col-6 form-content" #formAcceso="ngForm" (ngSubmit)="acceder()">
+        <form class="col-12 col-lg-6 form-content" #formAcceso="ngForm" (ngSubmit)="acceder()">
             <label for="nombreRegistro">Correo Electrónico</label>
             <input
                 type="email"
@@ -58,6 +58,6 @@
             <!-- <app-button label="Acceder" [class]="'btn btn-primary w-100'" class="w-100"></app-button> -->
         </form>
     </div>
-    <div class="col-6 acceso-img"></div>
+    <div class="col-12 col-lg-6 acceso-img"></div>
 </div>
 <app-footer></app-footer>

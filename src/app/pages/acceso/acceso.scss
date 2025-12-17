@@ -29,3 +29,24 @@
     display: flex;
     min-height: 734px;
 }
+
+@media (max-width: 992px) {
+    .acceso-content {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .intro {
+        padding-right: 0;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .form-content {
+        width: 100%;
+    }
+
+    .acceso-img {
+        display: none; // Hide image on mobile for better focus
+    }
+}
