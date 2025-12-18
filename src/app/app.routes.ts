@@ -17,7 +17,8 @@ import { authGuard } from './guards/auth-guard';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'ofertas', component: OfertasComponent, canActivate:[authGuard] },
-    { path: 'ofertasdetalle', component: OfertasDetalle, canActivate:[authGuard] },
+    // { path: 'ofertasdetalle', component: OfertasDetalle, canActivate:[authGuard] },
+    { path: 'ofertasdetalle/:id', component: OfertasDetalle, canActivate: [authGuard] },
     { path: 'crearoferta', component: CrearOfertas, canActivate:[authGuard] },
     { path: 'demandas', component: DemandasComponent, canActivate:[authGuard] },
     { path: 'demandasdetalle', component: DemandasDetalle, canActivate:[authGuard] },

@@ -9,7 +9,7 @@ export interface Mensaje {
     mensaje: string,
     leido: boolean,
     created_at: string,
-    emisor: Usuario,
-    receptor: Usuario,
-    servicio: Servicios
+    emisor?: Usuario,
+    receptor?: Usuario,
+    servicio?: Servicios
 }

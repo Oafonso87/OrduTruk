@@ -14,6 +14,8 @@ import { Mensaje } from "../models/mensaje";
 export class MensajesService {
 
   private url: string = 'https://proyecto-daw-backend.onrender.com/api/mensajes';
+  private url2: string = 'https://proyecto-daw-backend.onrender.com/api/mensaje';
+
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -33,7 +35,7 @@ export class MensajesService {
   }
 
   createMensaje(mens: Mensaje): Observable<ApiResponse<Mensaje>> {
-    return this._http.post<ApiResponse<Mensaje>>(this.url, mens, this.httpOptions);
+    return this._http.post<ApiResponse<Mensaje>>(this.url2, mens, this.httpOptions);
   }
 
   updateMensaje(mens: Mensaje): Observable<ApiResponse<Mensaje>> {

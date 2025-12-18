@@ -3,8 +3,10 @@ import { Component, OnInit} from '@angular/core';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Button } from '../../components/button/button';
+import { ActivatedRoute } from '@angular/router';
 import { Servicios } from '../../models/servicios';
 import { ModalComponent } from '../../components/modal/modal';
+import { ServiciosService } from '../../services/servicios.service';
 
 @Component({
   selector: 'app-ofertas-detalle',
@@ -26,6 +28,13 @@ export class OfertasDetalle implements OnInit {
       this.oferta = JSON.parse(almacenada);
     }
     console.log(almacenada);
+    const idStr = this.activRoute.snapshot.paramMap.get('id');
+    console.log('ID de la oferta desde la ruta:', idStr);
+    if (idStr) {
+      const id = parseInt(idStr);
+      console.log(id);
+      this.loadServiceById(id);
+    }
   }
 
   openAceptarModal(): void {
@@ -44,5 +53,9 @@ export class OfertasDetalle implements OnInit {
     this.isContactarModalOpen = false;
   }
 
-  constructor() {}
+  constructor(private activRoute: ActivatedRoute, private serviciosService: ServiciosService ) {}
+
+  loadServiceById(id: number) {
+
+  }
 }
