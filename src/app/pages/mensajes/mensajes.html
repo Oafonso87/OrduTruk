@@ -6,58 +6,334 @@
             <div class="filter-container"></div>
         </div>
 
-        <div class="row ">
-
-            <div class="row list-item mensaje-list">
-                @for (mensaje of mensajes; track $index) {
-                    <ul class="list-item-content">
-                        <li>22/06/2025</li>
-                        <li>Clases de Inglés Básico</li>
-                        <li>Voluntario: {{mensaje.emisor.nombre}}</li>
-                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
-                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                    </ul>
-                }
+        <div class="list-item-content">
+            <div class="tabs-header">
+                <div
+                    class="tab-item"
+                    [class.active]="activeTab === 'ofertas'"
+                    (click)="setActiveTab('ofertas')"
+                >
+                    Ofertas
+                </div>
+                <div
+                    class="tab-item"
+                    [class.active]="activeTab === 'demandas'"
+                    (click)="setActiveTab('demandas')"
+                >
+                    Demandas
+                </div>
             </div>
 
-            <!-- Paginación -->
-            <nav aria-label="Navegación de páginas">
-                <ul class="pagination justify-content-end">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                    </li>
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Siguiente</a>
-                    </li>
-                </ul>
-            </nav>
+            <!-- Ofertas Content -->
+            <div *ngIf="activeTab === 'ofertas'">
+                <div
+                    class="row list-item mensaje-list"
+                    *ngFor="let oferta of ofertas; let i = index"
+                >
+                    <ul class="list-item-content activa">
+                        <li (click)="toggleMessage(i)"><i class="bi bi-activity"></i></li>
+                        <li (click)="toggleMessage(i)">22/06/2025</li>
+                        <li (click)="toggleMessage(i)">Clases de Inglés Básico</li>
+                        <li (click)="toggleMessage(i)">Voluntario: John Doe</li>
+                        <li (click)="toggleMessage(i)">
+                            <span class="preicons"> Valoración:</span>
+                            <i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star text-warning"></i>
+                        </li>
+                        <li (click)="toggleMessage(i)" style="cursor: pointer">
+                            <span class="preicons"> Mensajes:</span>
+                            <i class="bi bi-chat-dots"></i>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary btn-new" (click)="openModal()">
+                                Nuevo Mensaje
+                            </button>
+                        </li>
+                    </ul>
+                    <ul class="mensajes" *ngIf="activeMessageIndex === i">
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Hola, Carlos! Soy Ana, la profesora de inglés voluntaria del proyecto.
+                            Gracias por tu interés. ¿Cómo supiste de nosotros?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Hola, Ana! Un amigo me habló del "Intercambio Solidario". Me dijo que
+                            ofrecías clases de inglés. Llevo tiempo queriendo mejorar mi nivel, pero
+                            el coste siempre ha sido una barrera.
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Así es. Mi misión es justamente esa: facilitar la enseñanza sin que el
+                            dinero sea un problema. Yo ofrezco mi tiempo y conocimientos de forma
+                            totalmente voluntaria y gratuita.
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Eso es genial! ¿Y cómo funciona exactamente? ¿Es un curso formal o
+                            clases particulares?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Es un poco diferente. Como es voluntariado y el tiempo es lo que
+                            intercambiamos, hacemos sesiones semanales de 60 minutos. El formato es
+                            más bien conversacional y de refuerzo, adaptado a tus necesidades.
+                            Cuéntame, ¿cuál es tu objetivo principal con el inglés?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Necesito mejorar mi inglés para el trabajo. Lo entiendo bastante bien al
+                            leer, pero me bloqueo mucho al hablar.
+                        </li>
+                    </ul>
+                </div>
 
+                <div
+                    class="row list-item mensaje-list"
+                    *ngFor="let oferta of ofertas; let i = index"
+                >
+                    <ul class="list-item-content inactiva">
+                        <li (click)="toggleMessage(i + 100)"><i class="bi bi-slash-circle"></i></li>
+                        <li (click)="toggleMessage(i + 100)">22/06/2025</li>
+                        <li (click)="toggleMessage(i + 100)">Clases de Inglés Básico</li>
+                        <li (click)="toggleMessage(i + 100)">Voluntario: John Doe</li>
+                        <li (click)="toggleMessage(i + 100)">
+                            <span class="preicons">Valoración:</span>
+                            <i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star text-warning"></i>
+                        </li>
+                        <li (click)="toggleMessage(i + 100)" style="cursor: pointer">
+                            Mensajes: <i class="bi bi-chat-dots"></i>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary btn-new" (click)="openModal()">
+                                Nuevo Mensaje
+                            </button>
+                        </li>
+                    </ul>
+                    <ul class="mensajes" *ngIf="activeMessageIndex === i + 100">
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Hola, Carlos! Soy Ana, la profesora de inglés voluntaria del proyecto.
+                            Gracias por tu interés. ¿Cómo supiste de nosotros?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Hola, Ana! Un amigo me habló del "Intercambio Solidario". Me dijo que
+                            ofrecías clases de inglés. Llevo tiempo queriendo mejorar mi nivel, pero
+                            el coste siempre ha sido una barrera.
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Así es. Mi misión es justamente esa: facilitar la enseñanza sin que el
+                            dinero sea un problema. Yo ofrezco mi tiempo y conocimientos de forma
+                            totalmente voluntaria y gratuita.
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Eso es genial! ¿Y cómo funciona exactamente? ¿Es un curso formal o
+                            clases particulares?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Es un poco diferente. Como es voluntariado y el tiempo es lo que
+                            intercambiamos, hacemos sesiones semanales de 60 minutos. El formato es
+                            más bien conversacional y de refuerzo, adaptado a tus necesidades.
+                            Cuéntame, ¿cuál es tu objetivo principal con el inglés?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Necesito mejorar mi inglés para el trabajo. Lo entiendo bastante bien al
+                            leer, pero me bloqueo mucho al hablar.
+                        </li>
+                    </ul>
+                </div>
 
+                <!-- Paginación -->
+                <nav aria-label="Navegación de páginas">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                                >Anterior</a
+                            >
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
+            <!-- Demandas Content -->
+            <div *ngIf="activeTab === 'demandas'">
+                <div
+                    class="row list-item mensaje-list"
+                    *ngFor="let oferta of ofertas; let i = index"
+                >
+                    <ul class="list-item-content activa">
+                        <li><i class="bi bi-activity"></i></li>
+                        <li>22/06/2025</li>
+                        <li>Clases de Inglés Básico</li>
+                        <li>Voluntario: John Doe</li>
+                        <li>
+                            <span class="preicons">Valoración:</span>
+                            <i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star text-warning"></i>
+                        </li>
+                        <li (click)="toggleMessage(i)" style="cursor: pointer">
+                            Mensajes: <i class="bi bi-chat-dots"></i>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary btn-new" (click)="openModal()">
+                                Nuevo Mensaje
+                            </button>
+                        </li>
+                    </ul>
+                    <ul class="mensajes" *ngIf="activeMessageIndex === i">
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Hola, Carlos! Soy Ana, la profesora de inglés voluntaria del proyecto.
+                            Gracias por tu interés. ¿Cómo supiste de nosotros?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Hola, Ana! Un amigo me habló del "Intercambio Solidario". Me dijo que
+                            ofrecías clases de inglés. Llevo tiempo queriendo mejorar mi nivel, pero
+                            el coste siempre ha sido una barrera.
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Así es. Mi misión es justamente esa: facilitar la enseñanza sin que el
+                            dinero sea un problema. Yo ofrezco mi tiempo y conocimientos de forma
+                            totalmente voluntaria y gratuita.
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Eso es genial! ¿Y cómo funciona exactamente? ¿Es un curso formal o
+                            clases particulares?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Es un poco diferente. Como es voluntariado y el tiempo es lo que
+                            intercambiamos, hacemos sesiones semanales de 60 minutos. El formato es
+                            más bien conversacional y de refuerzo, adaptado a tus necesidades.
+                            Cuéntame, ¿cuál es tu objetivo principal con el inglés?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Necesito mejorar mi inglés para el trabajo. Lo entiendo bastante bien al
+                            leer, pero me bloqueo mucho al hablar.
+                        </li>
+                    </ul>
+                </div>
 
+                <div
+                    class="row list-item mensaje-list"
+                    *ngFor="let oferta of ofertas; let i = index"
+                >
+                    <ul class="list-item-content inactiva">
+                        <li><i class="bi bi-slash-circle"></i></li>
+                        <li>22/06/2025</li>
+                        <li>Clases de Inglés Básico</li>
+                        <li>Voluntario: John Doe</li>
+                        <li>
+                            <span class="preicons">Valoración:</span>
+                            <i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star-fill text-warning"></i
+                            ><i class="bi bi-star text-warning"></i>
+                        </li>
+                        <li (click)="toggleMessage(i + 100)" style="cursor: pointer">
+                            <span class="preicons">Mensajes:</span>
+                            <i class="bi bi-chat-dots"></i>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary btn-new" (click)="openModal()">
+                                Nuevo Mensaje
+                            </button>
+                        </li>
+                    </ul>
+                    <ul class="mensajes" *ngIf="activeMessageIndex === i + 100">
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Hola, Carlos! Soy Ana, la profesora de inglés voluntaria del proyecto.
+                            Gracias por tu interés. ¿Cómo supiste de nosotros?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Hola, Ana! Un amigo me habló del "Intercambio Solidario". Me dijo que
+                            ofrecías clases de inglés. Llevo tiempo queriendo mejorar mi nivel, pero
+                            el coste siempre ha sido una barrera.
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Así es. Mi misión es justamente esa: facilitar la enseñanza sin que el
+                            dinero sea un problema. Yo ofrezco mi tiempo y conocimientos de forma
+                            totalmente voluntaria y gratuita.
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            ¡Eso es genial! ¿Y cómo funciona exactamente? ¿Es un curso formal o
+                            clases particulares?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Es un poco diferente. Como es voluntariado y el tiempo es lo que
+                            intercambiamos, hacemos sesiones semanales de 60 minutos. El formato es
+                            más bien conversacional y de refuerzo, adaptado a tus necesidades.
+                            Cuéntame, ¿cuál es tu objetivo principal con el inglés?
+                        </li>
+                        <li>
+                            <i class="bi bi-chat-dots"></i>
+                            Necesito mejorar mi inglés para el trabajo. Lo entiendo bastante bien al
+                            leer, pero me bloqueo mucho al hablar.
+                        </li>
+                    </ul>
+                </div>
 
-
-
-
-
-
-
+                <!-- Paginación -->
+                <nav aria-label="Navegación de páginas">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                                >Anterior</a
+                            >
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-
-
-
     </div>
-
-
-
-
 </div>
 
-
+<!-- Modal -->
+<app-modal [isOpen]="isModalOpen" [title]="'Contactar'" (closeModal)="closeModal()">
+    <p>Contenido para Contactar...</p>
+    <textarea class="form-control mb-2" rows="3" placeholder="Escribe tu mensaje..."></textarea>
+    <button class="btn btn-primary">Enviar</button>
+</app-modal>
 
 <app-footer></app-footer>

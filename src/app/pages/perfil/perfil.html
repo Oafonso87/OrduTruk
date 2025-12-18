@@ -1,202 +1,29 @@
 <app-header></app-header>
 <div class="row">
-    <div class="col-md-12 perfil-usuario">
+    <div class="col-12 col-lg-12 col-xl-6 perfil-content">
         <div class="header">
             <h1 class="title">Mi Perfil</h1>
             <div class="filter-container"></div>
         </div>
 
-        <div class="row content-list-detail form-content">
+        <div class="form-content">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" />
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" name="apellidos" />
+            <label for="email">Correo electrónico</label>
+            <input type="text" id="email" name="email" />
+            <label for="password">Contraseña</label>
+            <input type="text" id="password" name="password" />
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" />
+            <label for="habilidades">Habilidades</label>
+            <input type="text" id="habilidades" name="habilidades" />
 
-            <!-- <div class=" list-item-img">
-                <label for="direccion">Nombre</label>
-                <input type="text" id="direccion" name="direccion">
-                <label for="direccion">Apellidos</label>
-                <input type="text" id="direccion" name="direccion">
-                <label for="direccion">Correo electrónico</label>
-                <input type="text" id="direccion" name="direccion">
-                <label for="direccion">Contraseña</label>
-                <input type="text" id="direccion" name="direccion">
-                <label for="direccion">Dirección</label>
-                <input type="text" id="direccion" name="direccion">
-                <label for="direccion">Habilidades</label>
-                <input type="text" id="direccion" name="direccion">
-
-                <button type="submit" [class]="'btn btn-primary w-100'">
-                    Modificar
-                </button>
-            </div> -->
-            <form class="col-6 form-content"  #formMod="ngForm" (ngSubmit)="modificar()">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" [value]="usuario?.nombre" readonly/>
-                <label for="apellidos">Apellidos</label>
-                <input type="text" id="apellidos" name="apellidos" [value]="usuario?.apellido" readonly/>
-                <label>Provincia</label>
-                <select name="provincia" [(ngModel)]="provincia" (ngModelChange)="onProvinciaChange($event)" required>
-                    <option [value]="null" disabled>Selecciona una provincia</option>
-                        @for (provincia of provincias; track provincia.id) {
-                            <option [value]="provincia.id">{{ provincia.nombre }}</option>
-                        }
-                </select>
-                <label>Ciudad</label>
-                <select name="ciudad" [(ngModel)]="ciudad" [disabled]="!provincia" required>
-                    <option value="" disabled selected>Selecciona una población</option>                
-                        @for (poblacion of poblaciones; track poblacion.id) {
-                            <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
-                        }
-                </select>
-                <label for="direccion">Dirección</label>
-                <input type="text" id="direccion" name="direccion" [(ngModel)]="direccion" #campoDireccion="ngModel" (blur)="direccion = capitalizar(direccion)">
-                    @if(campoDireccion.touched && direccion.trim() === '') {
-                        <span style="display: block; color: red;">
-                            El campo Direccion no puede estar vacío
-                        </span>
-                    }
-                <label for="mail">Correo Electrónico</label>
-                <input type="email" id="mail" name="mail" [(ngModel)]="mail" placeholder=""
-                    #campoMail="ngModel" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
-                    @if (campoMail.touched && campoMail.errors?.['required']) {
-                        <span style="display: block; color: red;">El campo Correo Electrónico no puede estar vacío</span>
-                    }
-                    @else if (campoMail.touched && campoMail.errors?.['pattern']) {
-                        <span style="display: block; color: red;">El correo electrónico no tiene el formato adecuado:
-                        ****@****.***</span>
-                    }
-                <label for="password1">Contraseña Antigua</label>
-                <input type="password" id="password1" name="password1" [(ngModel)]="password1"
-                    placeholder="Mín. 6 caracteres" #campoPassword1="ngModel" required minlength="6" />
-                    @if(campoPassword1.touched && password1.trim() === '') {
-                        <span style="display: block; color: red;">
-                            El campo Contraseña no puede estar vacío
-                        </span>
-                    } @else if (campoPassword1.touched && password1.length < 6) { 
-                        <span style="display: block; color: red;">
-                            La contraseña tiene que tener como mínimo 6 caracterer
-                        </span>
-                    }
-                <label for="password2">Repetir contraseña</label>
-                <input type="password" id="password2" name="password2" [(ngModel)]="password2"
-                    placeholder="Mín. 6 caracteres" #campoPassword2="ngModel" required minlength="6" />
-                    @if(campoPassword2.touched && password2.trim() === '') {
-                        <span style="display: block; color: red;">
-                            El campo Repetir contraseña no puede estar vacío
-                        </span>
-                    } @else if (campoPassword2.touched && password2.length < 6) { 
-                        <span style="display: block; color: red;">
-                            La contraseña tiene que tener como mínimo 6 caracterer
-                        </span>
-                    } @else if (campoPassword2.touched && password1 !== password2) { 
-                        <span style="display: block; color: red;">
-                            La contraseña tiene que ser idéntica
-                        </span>
-                    }
-                <button type="submit" [class]="'btn btn-primary w-100'" [disabled]="!formMod.form.valid">
-                    Modificar
-                </button>
-            </form>
-
-            <div class=" list-item-content">
-                <h3 class="item-title">Historial</h3>
-                <p class="item-transaccion">Ofertas </p>
-
-                <div class="row list-item mensaje-list">
-                    <ul class="list-item-content">
-                        <li>22/06/2025</li>
-                        <li>Clases de Inglés Básico</li>
-                        <li>Voluntario: John Doe</li>
-                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
-                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                    </ul>
-                </div>
-
-                <!-- Paginación -->
-                <nav aria-label="Navegación de páginas">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                        </li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Siguiente</a>
-                        </li>
-                    </ul>
-                </nav>
-
-                <hr>
-                <p class="item-transaccion">Demandas </p>
-
-                <div class="row list-item mensaje-list">
-                    <ul class="list-item-content">
-                        <li>22/06/2025</li>
-                        <li>Clases de Inglés Básico</li>
-                        <li>Voluntario: John Doe</li>
-                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
-                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                    </ul>
-                </div>
-
-                <!-- Paginación -->
-                <nav aria-label="Navegación de páginas">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                        </li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Siguiente</a>
-                        </li>
-                    </ul>
-                </nav>
-
-            </div>
-
-
-
-
-            <div class="detalles">
-
-                <!-- 
-
-
-                <h2> Información</h2>
-
-                <ul>
-                    <li><strong>Email</strong>: john.doe@example.com</li>
-                    <li><strong>Valoraciones</strong>:
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star text-warning"></i>
-                        <span class="ms-2">(4.0/5)</span>
-                    </li>
-                    <li><strong>Ofertas Publicadas</strong>: 12</li>
-                    <li><strong>Provincia</strong>: Bizkaia</li>
-                    <li><strong>Localidad</strong>: Bilbao</li>
-                </ul>
-
-            -->
-            </div>
-
+            <button type="submit" [class]="'btn btn-primary w-100 mt-4'">Modificar</button>
         </div>
-
-
-
     </div>
-
-
-
-
+    <div class="col-12 col-xl-6 perfil-img d-none d-xl-flex"></div>
 </div>
-
-
 
 <app-footer></app-footer>

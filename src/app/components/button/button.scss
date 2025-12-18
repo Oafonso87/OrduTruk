@@ -1,6 +1,33 @@
-.btn {
-    min-width: 220px;
-    min-height: 60px;
-    font-family: Roboto;
-    font-size: 20px;
+.btn-menu {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 4px 2px;
+    border: none;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.87);
+    background-color: #d3f0f9;
+    cursor: pointer;
+
+    &.btn-link {
+        background: transparent;
+        text-decoration: underline;
+        padding: 8px 4px;
+    }
+
+    &.btn-close {
+        box-sizing: content-box;
+        padding: 0.5rem;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 1;
+        filter: invert(1);
+    }
+
+    i {
+        margin-right: 8px;
+        font-size: 16px;
+    }
 }

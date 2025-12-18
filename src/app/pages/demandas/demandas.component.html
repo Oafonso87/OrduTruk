@@ -14,25 +14,50 @@
             </div>
             @if (mostrarFiltro) {
                 <div class="filtro">
-                    <select class="form-select" aria-label="Categoría" name="categoria" [(ngModel)]="categoria" (ngModelChange)="onCategoriaChange($event)">
+                    <select
+                        class="form-select"
+                        aria-label="Categoría"
+                        name="categoria"
+                        [(ngModel)]="categoria"
+                        (ngModelChange)="onCategoriaChange($event)"
+                    >
                         <option [ngValue]="null">Categoría</option>
                         @for (categoria of categorias; track categoria.id) {
                             <option [value]="categoria.id">{{ categoria.nombre }}</option>
                         }
                     </select>
-                    <select class="form-select" aria-label="Provincia" name="provincia" [(ngModel)]="provincia" (ngModelChange)="onProvinciaChange($event)">
+                    <select
+                        class="form-select"
+                        aria-label="Provincia"
+                        name="provincia"
+                        [(ngModel)]="provincia"
+                        (ngModelChange)="onProvinciaChange($event)"
+                    >
                         <option [ngValue]="null">Provincia</option>
                         @for (provincia of provincias; track provincia.id) {
                             <option [value]="provincia.id">{{ provincia.nombre }}</option>
                         }
                     </select>
-                    <select class="form-select" aria-label="Localidad" name="ciudad" [(ngModel)]="poblacion" [disabled]="!provincia" (ngModelChange)="onPoblacionChange($event)">
-                        <option [ngValue]="null">Localidad</option>                
+                    <select
+                        class="form-select"
+                        aria-label="Localidad"
+                        name="ciudad"
+                        [(ngModel)]="poblacion"
+                        [disabled]="!provincia"
+                        (ngModelChange)="onPoblacionChange($event)"
+                    >
+                        <option [ngValue]="null">Localidad</option>
                         @for (poblacion of poblaciones; track poblacion.id) {
                             <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
                         }
-                    </select>                
-                    <input type="text" class="form-control" placeholder="Buscar por título" [(ngModel)]="tituloFilter" (ngModelChange)="filterDemandas()">                
+                    </select>
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Buscar por título"
+                        [(ngModel)]="tituloFilter"
+                        (ngModelChange)="filterDemandas()"
+                    />
                 </div>
             }
         </div>
@@ -40,18 +65,23 @@
             @for (demanda of demandasPaginadas; track demanda.id) {
                 <div class="row list-item">
                     <div class="col-3 list-item-img">
-                        <img src="/assets/img/ofertas.png" alt="Oferta">
+                        <img src="/assets/img/ofertas.png" alt="Oferta" />
                     </div>
                     <div class="col-9 list-item-content">
-                        <h3 class="item-title"> 
-                            <a routerLink="/demandasdetalle" (click)="guardarDemanda(demanda)">{{demanda.titulo}}<span><i class="bi bi-clock me-1"></i>{{demanda.horas_estimadas}}</span></a>
+                        <h3 class="item-title">
+                            <a routerLink="/demandasdetalle" (click)="guardarDemanda(demanda)"
+                                >{{ demanda.titulo
+                                }}<span
+                                    ><i class="bi bi-clock me-1"></i
+                                    >{{ demanda.horas_estimadas }}</span
+                                ></a
+                            >
                         </h3>
-                        <p class="item-tag">{{demanda.categoria?.nombre}}</p>
+                        <p class="item-tag">{{ demanda.categoria?.nombre }}</p>
 
-                        <p class="item-content">{{demanda.descripcion}}</p>
+                        <p class="item-content">{{ demanda.descripcion }}</p>
 
-                        <span class="badge bg-primary">{{demanda.ciudad_relacion?.nombre}}</span>
-
+                        <span class="badge bg-primary">{{ demanda.ciudad_relacion?.nombre }}</span>
                     </div>
                 </div>
             }
@@ -61,17 +91,31 @@
             <nav aria-label="Navegación de páginas">
                 <ul class="pagination justify-content-end">
                     <li class="page-item" [class.disabled]="pagActual === 1">
-                        <a class="page-link" style="cursor: pointer !important;" (click)="cambiarPagina(pagActual - 1)">Anterior</a>
+                        <a
+                            class="page-link"
+                            style="cursor: pointer !important"
+                            (click)="cambiarPagina(pagActual - 1)"
+                            >Anterior</a
+                        >
                     </li>
-                    @for(page of [].constructor(totalPages); track $index; let i = $index){
-                        <li class="page-item" [class.active]="pagActual === (i + 1)">
-                            <a class="page-link" style="cursor: pointer !important;" (click)="cambiarPagina(i + 1)">
+                    @for (page of [].constructor(totalPages); track $index; let i = $index) {
+                        <li class="page-item" [class.active]="pagActual === i + 1">
+                            <a
+                                class="page-link"
+                                style="cursor: pointer !important"
+                                (click)="cambiarPagina(i + 1)"
+                            >
                                 {{ i + 1 }}
                             </a>
                         </li>
                     }
                     <li class="page-item" [class.disabled]="pagActual === totalPages">
-                        <a class="page-link" style="cursor: pointer !important;" (click)="cambiarPagina(pagActual + 1)">Siguiente</a>
+                        <a
+                            class="page-link"
+                            style="cursor: pointer !important"
+                            (click)="cambiarPagina(pagActual + 1)"
+                            >Siguiente</a
+                        >
                     </li>
                 </ul>
             </nav>
@@ -79,8 +123,3 @@
     </div>
 </div>
 <app-footer></app-footer>
-
-
-
-
-            
