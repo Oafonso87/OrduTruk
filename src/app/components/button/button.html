@@ -3,13 +3,13 @@
         @if (icon) {
             <i [class]="icon"></i>
         }
-        {{ label }}
+        <span class="btn-label">{{ label }}</span>
     </button>
 } @else {
     <button type="button" [class]="class">
         @if (icon) {
             <i [class]="icon"></i>
         }
-        {{ label }}
+        <span class="btn-label">{{ label }}</span>
     </button>
 }

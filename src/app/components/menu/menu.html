@@ -15,7 +15,7 @@
         </ul>
     } @else {
         <ul class="menu-container" [class.mobile-open]="isMenuOpen">
-            <li>
+            <li class="showdesktop">
                 <div class="dropdown">
                     <button
                         class="dropdown-button dropdown-toggle"
@@ -31,6 +31,24 @@
                     </ul>
                 </div>
             </li>
+            <li class="showmobile">
+                <ul class="crearmobile">
+                    <li>
+                        <app-button
+                            [class]="'btn-menu'"
+                            label="Crear Ofertas"
+                            routerLink="/crearoferta"
+                        ></app-button>
+                    </li>
+                    <li>
+                        <app-button
+                            [class]="'btn-menu'"
+                            label="Crear Demandas"
+                            routerLink="/crearoferta"
+                        ></app-button>
+                    </li>
+                </ul>
+            </li>
             <li>
                 <app-button [class]="'btn-menu'" label="Ofertas" routerLink="/ofertas"></app-button>
             </li>
@@ -41,12 +59,12 @@
                     routerLink="/demandas"
                 ></app-button>
             </li>
-            <li>
+            <li class="showdesktop">
                 <span class="bolsa-horas"><i class="bi bi-clock"></i> 25H</span>
             </li>
             <li>
                 <app-button
-                    [class]="'btn-menu btn-link'"
+                    [class]="'btn-menu btn-link btn-perfil'"
                     label="Perfil"
                     routerLink="/perfil"
                     icon="bi bi-person"
@@ -54,7 +72,7 @@
             </li>
             <li>
                 <app-button
-                    [class]="'btn-menu btn-link'"
+                    [class]="'btn-menu btn-link btn-mensajes'"
                     label="Mensajes"
                     routerLink="/mensajes"
                     icon="bi bi-chat-dots"
@@ -62,9 +80,10 @@
             </li>
             <li>
                 <app-button
-                    [class]="'btn-menu btn-close'"
-                    label=""
+                    [class]="'btn-menu btn-close btn-cerrar'"
+                    label="Cerrar Sesión"
                     routerLink="/logout"
+                    icon="bi bi-x-lg"
                 ></app-button>
             </li>
         </ul>
