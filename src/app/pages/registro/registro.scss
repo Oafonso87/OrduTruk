@@ -8,10 +8,8 @@
     /*align-items: center;
     height: 100vh;*/
 
-    padding: 50px 65px 50px 65px;
+    padding: 20px 65px 50px 65px;
     //border: 1px solid red;
-
-
 }
 
 .intro {
@@ -34,12 +32,19 @@
     min-height: 734px;
 }
 
-/*
-.registro-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: top;
-    align-items: flex-start;
-    padding-top: 100px;
+@media (max-width: 991px) {
+    .registro-content {
+        flex-direction: column;
+        padding: 35px;
+    }
+
+    .intro {
+        padding-right: 0;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .form-content {
+        width: 100%;
+    }
 }
-    */

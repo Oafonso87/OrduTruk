@@ -6,10 +6,8 @@
     /*justify-content: space-between;
     align-items: center;
     height: 100vh;*/
-    padding: 50px 65px 50px 65px;
+    padding: 20px 65px 50px 65px;
     //border: 1px solid red;
-
-
 }
 
 .intro {
@@ -30,4 +28,21 @@
     background-repeat: no-repeat;
     display: flex;
     min-height: 734px;
+}
+
+@media (max-width: 991px) {
+    .acceso-content {
+        flex-direction: column;
+        padding: 35px;
+    }
+
+    .intro {
+        padding-right: 0;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .form-content {
+        width: 100%;
+    }
 }

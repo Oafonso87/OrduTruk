@@ -9,61 +9,82 @@
         </div>
 
         <div class="row back-link">
-            <a href="/demandas" class="arrow-link-back mb-4 d-inline-block">Volver al listado de Demandas</a>
+            <a href="/demandas" class="arrow-link-back mb-4 d-inline-block"
+                >Volver al listado de Demandas</a
+            >
         </div>
         <div class="row content-list-detail">
-
-            <div class=" list-item-img">
-                <img src="/assets/img/ofertasdetalle.png" alt="Oferta">
+            <div class="list-item-img">
+                <img src="/assets/img/ofertasdetalle.png" alt="Oferta" />
             </div>
-            <div class=" list-item-content">
-                <h3 class="item-title">{{demanda?.titulo}}</h3>
-                <p class="item-transaccion">Transacción <span><i class="bi bi-clock me-1"></i>{{demanda?.horas_estimadas}}</span></p>
-
-                <p class="item-content">
-                    {{demanda?.descripcion}}</p>
-
-                <p class="item-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-                    printer
-                    took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-                    centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                    popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-                    more
-                    recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            <div class="list-item-content">
+                <h3 class="item-title">{{ demanda?.titulo }}</h3>
+                <p class="item-transaccion">
+                    Transacción
+                    <span><i class="bi bi-clock me-1"></i>{{ demanda?.horas_estimadas }}</span>
                 </p>
 
+                <p class="item-content">
+                    {{ demanda?.descripcion }}
+                </p>
+
+                <p class="item-content">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                    unknown printer took a galley of type and scrambled it to make a type specimen
+                    book. It has survived not only five centuries, but also the leap into electronic
+                    typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more
+                    recently with desktop publishing software like Aldus PageMaker including
+                    versions of Lorem Ipsum.
+                </p>
 
                 <div class="btn-group">
-                    <app-button label="Aceptar Demanda" [class]="'btn btn-primary me-1'"></app-button>
-                    <app-button label="Contactar" [class]="'btn btn-outline-primary'"></app-button>
+                    <app-button
+                        label="Aceptar Demanda"
+                        [class]="'btn btn-primary me-1'"
+                        (click)="openModal()"
+                    ></app-button>
+                    <app-button
+                        label="Contactar"
+                        [class]="'btn btn-outline-primary'"
+                        (click)="openModal()"
+                    ></app-button>
                 </div>
-
             </div>
 
             <div class="detalles">
-                <h2> Detalles</h2>
+                <h2>Detalles</h2>
 
                 <ul>
-                    <li><strong>Voluntario</strong>: {{demanda?.usuario?.nombre}} {{demanda?.usuario?.apellido}}</li>
-                    <li><strong>Valoraciones</strong>:
-                         @for (star of [].constructor(demanda?.usuario?.valoracion); track $index) {                            
-                            <i class="bi bi-star-fill text-warning"></i>                            
+                    <li>
+                        <strong>Voluntario</strong>: {{ demanda?.usuario?.nombre }}
+                        {{ demanda?.usuario?.apellido }}
+                    </li>
+                    <li>
+                        <strong>Valoraciones</strong>:
+                        @for (star of [].constructor(demanda?.usuario?.valoracion); track $index) {
+                            <i class="bi bi-star-fill text-warning"></i>
                         }
-                         @for (star of [].constructor(5 - demanda?.usuario?.valoracion!); track $index) {                            
-                            <i class="bi bi-star text-warning"></i>                            
+                        @for (
+                            star of [].constructor(5 - demanda?.usuario?.valoracion!);
+                            track $index
+                        ) {
+                            <i class="bi bi-star text-warning"></i>
                         }
                     </li>
-                    <li><strong>Categoria</strong>: {{demanda?.categoria?.nombre}}</li>
-                    <li><strong>Provincia</strong>: {{demanda?.provincia_relacion?.nombre}}</li>
-                    <li><strong>Localidad</strong>: {{demanda?.ciudad_relacion?.nombre}}</li>
+                    <li><strong>Categoria</strong>: {{ demanda?.categoria?.nombre }}</li>
+                    <li><strong>Provincia</strong>: {{ demanda?.provincia_relacion?.nombre }}</li>
+                    <li><strong>Localidad</strong>: {{ demanda?.ciudad_relacion?.nombre }}</li>
                 </ul>
             </div>
-
         </div>
-
     </div>
-
 </div>
+
+<app-modal [isOpen]="isModalOpen" [title]="'Nuevo Mensaje'" (closeModal)="closeModal()">
+    <!-- Contenido del modal -->
+    <p>Escribe tu mensaje aquí...</p>
+</app-modal>
 
 <app-footer></app-footer>

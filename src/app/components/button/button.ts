@@ -12,6 +12,7 @@ export class Button {
   @Input() label: string = '';
   @Input() class: string = '';
   @Input() routerLink: string = '';
+  @Input() icon: string = '';
 
   constructor(private router: Router) { }
 

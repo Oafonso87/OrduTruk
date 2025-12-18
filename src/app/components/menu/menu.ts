@@ -19,9 +19,14 @@ export class Menu {
   }
 
   public dropdownOpen: boolean = false;
+  public isMenuOpen: boolean = false;
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
 }
