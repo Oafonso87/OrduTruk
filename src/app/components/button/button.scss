@@ -1,15 +1,19 @@
 .btn-menu {
-    display: inline-block;
-    padding: 8px 16px;
-    margin: 4px 2px;
     border: none;
-    font-size: 12px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.87);
-    background-color: #d3f0f9;
-    cursor: pointer;
+    background: transparent;
+    @media (min-width: 992px) {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 4px 2px;
+        border: none;
+        font-size: 12px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.87);
+        background-color: #d3f0f9;
+        cursor: pointer;
+    }
 
     &.btn-link {
         background: transparent;
