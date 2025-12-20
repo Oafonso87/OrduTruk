@@ -1,0 +1,15 @@
+@if (routerLink) {
+    <button [class]="class" [routerLink]="routerLink">
+        @if (icon) {
+            <i [class]="icon"></i>
+        }
+        {{ label }}
+    </button>
+} @else {
+    <button type="button" [class]="class">
+        @if (icon) {
+            <i [class]="icon"></i>
+        }
+        {{ label }}
+    </button>
+}

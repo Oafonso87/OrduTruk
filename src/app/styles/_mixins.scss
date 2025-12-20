@@ -1,0 +1,39 @@
+@use 'sass:map';
+
+$font-config: (
+    'title': (
+        font-family: (
+            'Bakbak One',
+            cursive,
+        ),
+        color: #ffba42,
+        font-size: 70px,
+        line-height: 70px,
+    ),
+    'subtitle': (
+        font-family: (
+            'Roboto Variable',
+            sans-serif,
+        ),
+        color: #424242,
+        font-size: 32px,
+        line-height: 40px,
+    ),
+    'content': (
+        font-family: (
+            'Roboto Variable',
+            sans-serif,
+        ),
+        color: #424242,
+        font-size: 16px,
+        line-height: 21px,
+    ),
+);
+
+@mixin font($type) {
+    $config: map.get($font-config, $type);
+
+    @each $key, $value in $config {
+        #{$key}: $value;
+    }
+}

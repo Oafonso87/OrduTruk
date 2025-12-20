@@ -1,0 +1,94 @@
+@use 'styles/mixins' as *;
+
+.home-img {
+    background-image: url('/assets/img/home.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    min-height: 734px;
+}
+
+.home-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: flex-start;
+    padding: 60px 35px 0;
+
+    @media (min-width: 992px) and (max-width: 1279px) {
+        padding: 100px 40px 0;
+    }
+}
+
+h1 {
+    /*
+    font-family: 'Bakbak One', cursive;
+    color: #FFBA42;
+    font-size: 70px;
+    line-height: 70px;
+    */
+    //@include font('title');
+
+    font-family: 'Bakbak One', cursive;
+    color: #ffba42;
+    font-size: 70px;
+    line-height: 70px;
+    margin-bottom: 20px;
+
+    @media (min-width: 992px) and (max-width: 1279px) {
+        font-size: 50px;
+        line-height: 50px;
+    }
+    @media (max-width: 991px) {
+        font-size: 50px;
+        line-height: 50px;
+    }
+}
+
+p {
+    /*
+    font-family: 'Roboto Variable', sans-serif;
+    color: #424242;
+    font-size: 32px;
+    line-height: 40px;
+    */
+    // @include font('subtitle');
+
+    font-family: 'Roboto Variable', sans-serif;
+    color: #424242;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    padding-right: 100px;
+
+    @media (min-width: 992px) and (max-width: 1279px) {
+        font-size: 24px;
+        line-height: 32px;
+    }
+    @media (max-width: 991px) {
+        font-size: 24px;
+        line-height: 32px;
+    }
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 40px;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        width: 100%;
+
+        //border: 2px dotted orange;
+
+        .btn {
+            width: 100% !important;
+            //border: 2px dotted lime;
+        }
+        app-button {
+            display: contents;
+        }
+    }
+}

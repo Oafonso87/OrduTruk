@@ -1,0 +1,45 @@
+.header {
+    width: 100%;
+}
+
+.perfil-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px 65px 50px 65px;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.perfil-img {
+    background-image: url('/assets/img/perfil.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    min-height: 734px;
+    background-size: cover;
+}
+
+@media (max-width: 991px) {
+    .perfil-content {
+        padding: 35px;
+    }
+}
+
+.mensaje-list {
+    ul {
+        margin-bottom: 0;
+        width: 100%;
+    }
+}
+
+.pagination {
+    margin-top: 20px;
+}

@@ -1,0 +1,144 @@
+<app-header></app-header>
+<div class="row">
+    <div class="col-12 col-lg-12 col-xl-6 registro-content">
+        <div class="col-12 col-lg-6 intro">
+            <h1 class="title">Registro</h1>
+            <h2 class="subtitle">¡Bienvenido a OrduTruk!</h2>
+            <p class="content">Al continuar, aceptas nuestros <strong>Términos de uso</strong>.</p>
+            <hr />
+            <p class="content">
+                Si ya tienes cuenta <a class="arrow-link" routerLink="/acceso">Accede</a>
+            </p>
+        </div>
+
+        <form class="col-12 col-lg-6 form-content" #formRegistro="ngForm" (ngSubmit)="registrar()">
+            <label for="nombre">Nombre</label>
+            <input
+                type="text"
+                id="nombreRegistro"
+                name="nombreRegistro"
+                [(ngModel)]="nombre"
+                (blur)="nombre = capitalizar(nombre)"
+                #campoNombre="ngModel"
+                required
+                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+            />
+            @if (campoNombre.touched && nombre.trim() === '') {
+                <span class="error">El campo Nombre no puede estar vacío</span>
+            } @else if (campoNombre.invalid && campoNombre.touched) {
+                <span class="error">El Nombre solo puede contener letras</span>
+            }
+            <label for="apellidos">Apellidos</label>
+            <input
+                type="text"
+                id="apellidos"
+                name="apellidos"
+                [(ngModel)]="apellidos"
+                (blur)="apellidos = capitalizar(apellidos)"
+                #campoApellidos="ngModel"
+                required
+                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+            />
+            @if (campoApellidos.touched && apellidos.trim() === '') {
+                <span class="error">El campo Apellidos no puede estar vacío</span>
+            } @else if (campoApellidos.invalid && campoApellidos.touched) {
+                <span class="error">Los Apellidos solo pueden contener letras</span>
+            }
+            <label>Provincia</label>
+            <select
+                name="provincia"
+                [(ngModel)]="provincia"
+                (ngModelChange)="onProvinciaChange($event)"
+                required
+            >
+                <option [value]="null" disabled>Selecciona una provincia</option>
+                @for (provincia of provincias; track provincia.id) {
+                    <option [value]="provincia.id">{{ provincia.nombre }}</option>
+                }
+            </select>
+            <label>Ciudad</label>
+            <select name="ciudad" [(ngModel)]="ciudad" [disabled]="!provincia" required>
+                <option value="" disabled selected>Selecciona una población</option>
+                @for (poblacion of poblaciones; track poblacion.id) {
+                    <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
+                }
+            </select>
+            <label for="direccion">Dirección</label>
+            <input
+                type="text"
+                id="direccion"
+                name="direccion"
+                [(ngModel)]="direccion"
+                #campoDireccion="ngModel"
+                (blur)="direccion = capitalizar(direccion)"
+            />
+            @if (campoDireccion.touched && direccion.trim() === '') {
+                <span class="error"> El campo Direccion no puede estar vacío </span>
+            }
+            <label for="mail">Correo Electrónico</label>
+            <input
+                type="email"
+                id="mail"
+                name="mail"
+                [(ngModel)]="mail"
+                placeholder=""
+                #campoMail="ngModel"
+                required
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            />
+            @if (campoMail.touched && campoMail.errors?.['required']) {
+                <span class="error">El campo Correo Electrónico no puede estar vacío</span>
+            } @else if (campoMail.touched && campoMail.errors?.['pattern']) {
+                <span class="error"
+                    >El correo electrónico no tiene el formato adecuado: ****@****.***</span
+                >
+            }
+            <label for="password1">Contraseña</label>
+            <input
+                type="password"
+                id="password1"
+                name="password1"
+                [(ngModel)]="password1"
+                placeholder="Mín. 6 caracteres"
+                #campoPassword1="ngModel"
+                required
+                minlength="6"
+            />
+            @if (campoPassword1.touched && password1.trim() === '') {
+                <span class="error"> El campo Contraseña no puede estar vacío </span>
+            } @else if (campoPassword1.touched && password1.length < 6) {
+                <span class="error"> La contraseña tiene que tener como mínimo 6 caracterer </span>
+            }
+            <label for="password2">Repetir contraseña</label>
+            <input
+                type="password"
+                id="password2"
+                name="password2"
+                [(ngModel)]="password2"
+                placeholder="Mín. 6 caracteres"
+                #campoPassword2="ngModel"
+                required
+                minlength="6"
+            />
+            @if (campoPassword2.touched && password2.trim() === '') {
+                <span class="error"> El campo Repetir contraseña no puede estar vacío </span>
+            } @else if (campoPassword2.touched && password2.length < 6) {
+                <span class="error"> La contraseña tiene que tener como mínimo 6 caracterer </span>
+            } @else if (campoPassword2.touched && password1 !== password2) {
+                <span class="error"> La contraseña tiene que ser idéntica </span>
+            }
+            <button
+                type="submit"
+                [class]="'btn btn-primary w-100'"
+                [disabled]="!formRegistro.form.valid"
+            >
+                Registrarse
+            </button>
+            <!-- Al ser app-button un componente no le puedo asociar disabled, hay dos opciones, o se puede implementar el disabled en el
+            componente del boton o configuras el botón en el html -->
+            <!-- <app-button label="Registrarse" [class]="'btn btn-primary'" class="w-100" ></app-button> -->
+        </form>
+    </div>
+    <div class="col-12 col-xl-6 registro-img d-none d-xl-flex"></div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,78 @@
+<nav class="menu">
+    <button class="hamburger-btn" (click)="toggleMenu()">
+        <i class="bi" [class.bi-list]="!isMenuOpen" [class.bi-x-lg]="isMenuOpen"></i>
+    </button>
+
+    @if (isPublic) {
+        <ul class="menu-container" [class.mobile-open]="isMenuOpen">
+            <li>
+                <app-button
+                    [class]="'btn-menu'"
+                    label="Quienes somos"
+                    routerLink="/quienes-somos"
+                ></app-button>
+            </li>
+        </ul>
+    } @else {
+        <ul class="menu-container" [class.mobile-open]="isMenuOpen">
+            <li>
+                <div class="dropdown">
+                    <button
+                        class="dropdown-button dropdown-toggle"
+                        type="button"
+                        (click)="toggleDropdown()"
+                        [attr.aria-expanded]="dropdownOpen"
+                    >
+                        CREAR
+                    </button>
+                    <ul class="dropdown-menu" [class.show]="dropdownOpen">
+                        <li>
+                            <a class="dropdown-item" routerLink="/crearoferta" role="button">
+                                Oferta
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/demandas" role="button">
+                                Demanda
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <app-button [class]="'btn-menu'" label="Ofertas" routerLink="/ofertas"></app-button>
+            </li>
+            <li>
+                <app-button
+                    [class]="'btn-menu'"
+                    label="Demandas"
+                    routerLink="/demandas"
+                ></app-button>
+            </li>
+            <li>
+                <span class="bolsa-horas"
+                    ><i class="bi bi-clock"></i>{{ usuario?.horas_saldo }}</span
+                >
+            </li>
+            <li>
+                <app-button
+                    [class]="'btn-menu btn-link'"
+                    label="Perfil"
+                    routerLink="/perfil"
+                    icon="bi bi-person"
+                ></app-button>
+            </li>
+            <li>
+                <app-button
+                    [class]="'btn-menu btn-link'"
+                    label="Mensajes"
+                    routerLink="/mensajes"
+                    icon="bi bi-chat-dots"
+                ></app-button>
+            </li>
+            <li>
+                <app-button [class]="'btn-menu btn-close'" label="" (click)="logout()"></app-button>
+            </li>
+        </ul>
+    }
+</nav>

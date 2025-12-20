@@ -1,0 +1,71 @@
+.mensajes-usuario {
+    padding: 50px 65px;
+}
+
+.content-list {
+    //padding: 50px 65px;
+    //border: 10px solid green;
+
+    div {
+        border: 1px dotted black;
+    }
+}
+
+.list-item-img {
+    img {
+        width: 100%;
+    }
+}
+
+.detalles {
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+}
+
+.arrow-link-back {
+    text-decoration: none;
+    color: #0d6efd;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    &::before {
+        content: '←';
+        font-size: 1.2em;
+        transition: transform 0.2s ease;
+    }
+
+    &:hover::before {
+        transform: translateX(-3px);
+    }
+}
+
+.mensaje-list {
+    ul {
+        margin-bottom: 0;
+        width: 100%;
+    }
+}
+.pagination {
+    margin-top: 20px;
+}
+
+.btn-new {
+    background-color: white;
+    color: #0d6efd;
+    text-transform: uppercase;
+    font-weight: 600;
+    min-width: auto;
+    min-height: auto;
+    padding: 0 0.5rem;
+    font-size: 14px;
+    line-height: 1.5rem;
+}
+
+.mensajes {
+    list-style: none;
+    padding: 0;
+}

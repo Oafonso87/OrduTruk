@@ -6,19 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
-  },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
+    "test": "ng test",
+    "format": "prettier --write \"src/**/*.{html,js,scss,css,json}\""
   },
   "private": true,
   "dependencies": {
@@ -28,6 +17,9 @@
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@fontsource-variable/roboto": "^5.2.9",
+    "@fontsource/bakbak-one": "^5.2.8",
+    "bootstrap": "^5.3.8",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -44,6 +36,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ngx-gh": "^0.0.2",
+    "prettier": "^3.7.4",
     "typescript": "~5.9.2"
   }
 }

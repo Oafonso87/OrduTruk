@@ -1,0 +1,146 @@
+<app-header></app-header>
+<div class="row">
+    <div class="col-md-12 mensajes-usuario">
+        <div class="header">
+            <h1 class="title">Mensajes</h1>
+            <div class="filter-container"></div>
+        </div>
+
+        <div class="list-item-content">
+            <div class="tabs-header">
+                <div
+                    class="tab-item"
+                    [class.active]="activeTab === 'ofertas'"
+                    (click)="setActiveTab('ofertas')"
+                >
+                    Ofertas
+                </div>
+                <div
+                    class="tab-item"
+                    [class.active]="activeTab === 'demandas'"
+                    (click)="setActiveTab('demandas')"
+                >
+                    Demandas
+                </div>
+            </div>
+
+            <!-- Ofertas Content -->
+            @for (grupo of mensajes; track $index; let i = $index) {
+                @if (
+                    activeTab === (grupo[0].servicio!.tipo === 'demanda' ? 'demandas' : 'ofertas')
+                ) {
+                    <div>
+                        <div class="row list-item mensaje-list">
+                            <ul class="list-item-content activa">
+                                <li (click)="toggleMessage(i)"><i class="bi bi-activity"></i></li>
+                                <li (click)="toggleMessage(i)">
+                                    {{ grupo[0].created_at | date: 'dd/MM/yyyy' }}
+                                </li>
+                                <li (click)="toggleMessage(i)">{{ grupo[0].servicio!.titulo }}</li>
+                                <li (click)="toggleMessage(i)">
+                                    Voluntario:
+                                    {{
+                                        grupo[0].emisor!.id === usuario?.id
+                                            ? grupo[0].receptor!.nombre
+                                            : grupo[0].emisor!.nombre
+                                    }}
+                                    {{
+                                        grupo[0].emisor!.id === usuario?.id
+                                            ? grupo[0].receptor!.apellido
+                                            : grupo[0].emisor!.apellido
+                                    }}
+                                </li>
+                                <li (click)="toggleMessage(i)">
+                                    <span class="preicons"> Valoración:</span>
+                                    @for (star of [1, 2, 3, 4, 5]; track star) {
+                                        <i
+                                            class="bi"
+                                            [ngClass]="
+                                                star <=
+                                                (grupo[0].emisor!.id === usuario?.id
+                                                    ? grupo[0].receptor!.valoracion
+                                                    : grupo[0].emisor!.valoracion)
+                                                    ? 'bi-star-fill text-warning'
+                                                    : 'bi-star text-warning'
+                                            "
+                                        ></i>
+                                    }
+                                </li>
+                                <li (click)="toggleMessage(i)" style="cursor: pointer">
+                                    <span class="preicons"> Mensajes:</span>
+                                    <i class="bi bi-chat-dots"></i>
+                                </li>
+                                <li>
+                                    <button
+                                        class="btn btn-primary btn-new"
+                                        (click)="openModal(grupo)"
+                                    >
+                                        Nuevo Mensaje
+                                    </button>
+                                </li>
+                            </ul>
+                            @if (activeMessageIndex === i) {
+                                <ul class="mensajes">
+                                    @for (mensaje of grupo; track $index) {
+                                        <li class="d-flex align-items-center mb-2">
+                                            @if (mensaje.emisor!.id === usuario?.id) {
+                                                <i class="bi bi-arrow-right-short text-primary"></i>
+                                            } @else {
+                                                <i class="bi bi-arrow-left-short text-success"></i>
+                                            }
+
+                                            <i class="bi bi-chat-dots ms-2 me-2"></i>
+
+                                            <span class="flex-grow-1">
+                                                {{ mensaje.mensaje }}
+                                                <small class="text-muted ms-2">
+                                                    ||
+                                                    {{
+                                                        mensaje.created_at
+                                                            | date: 'dd/MM/yyyy HH:mm:ss'
+                                                    }}
+                                                </small>
+                                            </span>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            <!-- Paginación -->
+            <nav aria-label="Navegación de páginas">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                            >Anterior</a
+                        >
+                    </li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Siguiente</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<app-modal [isOpen]="isModalOpen" [title]="'Contactar'" (closeModal)="closeModal()">
+    <p>Contenido para Contactar...</p>
+    <textarea
+        class="form-control mb-2"
+        rows="3"
+        placeholder="Escribe tu mensaje..."
+        [(ngModel)]="nuevoMensaje"
+    ></textarea>
+    <button class="btn btn-primary" (click)="publicarMensaje()">Enviar</button>
+</app-modal>
+
+<app-footer></app-footer>

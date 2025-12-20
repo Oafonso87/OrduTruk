@@ -1,0 +1,153 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Header } from '../../components/header/header';
+import { Footer } from '../../components/footer/footer';
+import { Button } from '../../components/button/button';
+import { FormsModule } from '@angular/forms';
+import { ApiResponse } from '../../models/apiresponse';
+import { Usuario } from '../../models/usuarios';
+import { Servicios } from '../../models/servicios';
+import { Categorias } from '../../models/categorias';
+import { Provincias } from '../../models/provincias';
+import { Poblaciones } from '../../models/poblaciones';
+import { ServiciosService } from '../../services/servicios.service';
+import { UbicacionesService } from '../../services/ubicaciones.service';
+import { CategoriasService } from '../../services/categorias.service';
+
+@Component({
+    selector: 'app-crear-ofertas',
+    standalone: true,
+    imports: [CommonModule, Header, Footer, FormsModule],
+    templateUrl: './crear-ofertas.html',
+    styleUrl: './crear-ofertas.scss',
+})
+
+export class CrearOfertas implements OnInit {
+
+    public usuario: Usuario | null = null;
+
+    ngOnInit(): void {
+        const userAlmacenado = sessionStorage.getItem('user');
+        if (userAlmacenado) {
+            this.usuario = JSON.parse(userAlmacenado);
+        }
+        console.log(userAlmacenado);
+        this.loadCategorias();
+        this.loadProvincias();
+        this.loadPoblaciones();
+    }
+
+    constructor(private _router: Router, private _serviciosService: ServiciosService,
+        private _ubicacionesService: UbicacionesService, private _categoriasService: CategoriasService) { }
+
+    public titulo: string = '';
+    public descripcion: string = '';
+    public horas: number = 0;
+    public provincias: Provincias[] = [];
+    public poblaciones: Poblaciones[] = [];
+    public todasPoblaciones: Poblaciones[] = [];
+    public categorias: Categorias[] = [];
+    public provincia: number | null = null;
+    public poblacion: number | null = null;
+    public categoria: number | null = null;
+
+    loadCategorias() {
+        this._categoriasService.getCategorias().subscribe({
+            next: (response: ApiResponse<Categorias[]>) => {
+                this.categorias = response.data;
+                console.log('Categorias cargadas:', this.categorias);
+            },
+            error: (err) => {
+                console.error('Error al cargar las categorias:', err);
+            }
+        });
+    }
+
+    loadProvincias() {
+        this._ubicacionesService.getProvincias().subscribe({
+            next: (response: ApiResponse<Provincias[]>) => {
+                this.provincias = response.data;
+                console.log('Provincias cargadas:', this.provincias);
+            },
+            error: (err) => {
+                console.error('Error al cargar las provincias:', err);
+            }
+        });
+    }
+
+    loadPoblaciones() {
+        this._ubicacionesService.getPoblaciones().subscribe({
+            next: (response: ApiResponse<Poblaciones[]>) => {
+                this.todasPoblaciones = response.data;
+                console.log('Todas las poblaciones cargadas:', this.todasPoblaciones);
+            },
+            error: (err) => {
+                console.error('Error al cargar todas las poblaciones:', err);
+            }
+        });
+    }
+
+    onProvinciaChange(valor: number | null) {
+        const provinciaId = valor !== null ? Number(valor) : null;
+
+        this.provincia = provinciaId;
+        this.poblacion = null;
+
+        if (provinciaId !== null) {
+            this.poblaciones = this.todasPoblaciones.filter(
+                p => Number(p.provincia_id) === provinciaId
+            );
+        } else {
+            this.poblaciones = [];
+        }
+    }
+
+    publicarOferta() {
+        const nuevaOferta: Servicios = {
+            id: 0,
+            usuario_id: this.usuario?.id!,
+            categoria_id: this.categoria!,
+            tipo: "oferta",
+            titulo: this.titulo,
+            descripcion: this.descripcion,
+            provincia: this.provincia!,
+            ciudad: this.poblacion!,
+            horas_estimadas: this.horas,
+            estado: "activo",
+        };
+        console.log(nuevaOferta);
+
+        this._serviciosService.createServicio(nuevaOferta).subscribe({
+            next: (response: ApiResponse<Servicios>) => {
+                setTimeout(() => {
+                    this.resetForm();
+                    this._router.navigate(['/ofertas']);
+                }, 1500);
+            },
+            error: (error) => {
+                console.error("Error al crear la oferta:", error);
+            }
+        });
+    }
+
+    resetForm() {
+        this.titulo = '';
+        this.descripcion = '';
+        this.horas = 0;
+        this.provincia = null;
+        this.poblacion = null;
+        this.categoria = null;
+    }
+
+    incrementarHoras() {
+        this.horas++;
+    }
+
+    decrementarHoras() {
+        if (this.horas > 0) {
+            this.horas--;
+        }
+    }
+
+}
