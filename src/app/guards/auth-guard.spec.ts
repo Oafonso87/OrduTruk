@@ -18,7 +18,7 @@ describe('authGuard', () => {
   });
 
   it('should allow access if token exists', () => {
-    sessionStorage.setItem('access_token', '123');
+    localStorage.setItem('access_token', '123');
     expect(guard.canActivate()).toBeTrue();
   });
 

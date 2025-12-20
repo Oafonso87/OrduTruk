@@ -26,8 +26,16 @@
                         CREAR
                     </button>
                     <ul class="dropdown-menu" [class.show]="dropdownOpen">
-                        <li><a class="dropdown-item" href="#">Oferta</a></li>
-                        <li><a class="dropdown-item" href="#">Demanda</a></li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/crearoferta" role="button">
+                                Oferta
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/demandas" role="button">
+                                Demanda
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -60,7 +68,9 @@
                 ></app-button>
             </li>
             <li class="showdesktop">
-                <span class="bolsa-horas"><i class="bi bi-clock"></i> 25H</span>
+                <span class="bolsa-horas"
+                    ><i class="bi bi-clock"></i>{{ usuario?.horas_saldo }}</span
+                >
             </li>
             <li>
                 <app-button
@@ -84,6 +94,7 @@
                     label="Cerrar Sesión"
                     routerLink="/logout"
                     icon="bi bi-x-lg"
+                    (click)="logout()"
                 ></app-button>
             </li>
         </ul>
