@@ -25,4 +25,12 @@ export class LoginService {
     return this._http.post<LoginResponse>(`${this.url}/login`, credenciales);  
   }
 
+  logout(): Observable<any> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this._http.post<any>(`${this.url}/logout`, {}, { headers });
+  }
+
 }
