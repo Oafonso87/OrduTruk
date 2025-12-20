@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   constructor(private titulo: Title) {
-    this.titulo.setTitle("Ordutruk");
+    this.titulo.setTitle("OrduTruk");
   }
 
   // public vistaActual: 'index' | 'descripcion' | 'registrar' | 'acceder' = 'index';
