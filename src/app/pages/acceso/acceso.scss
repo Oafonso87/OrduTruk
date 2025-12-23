@@ -9,7 +9,10 @@
     padding: 20px 65px 50px 65px;
     //border: 1px solid red;
 }
-
+.terminos {
+    color: #000;
+    font-weight: 400;
+}
 .intro {
     padding-right: 65px;
     // border: 1px solid blue;
@@ -21,7 +24,6 @@
     justify-content: center;
     align-items: flex-start;
 }
-
 
 .acceso-img {
     background-image: url('/assets/img/registro.png');

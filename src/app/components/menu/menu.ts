@@ -30,8 +30,8 @@ export class Menu implements OnInit {
     return publicRoutes.includes(this._router.url);
   }
 
-  get isQuienesSomos(): boolean {
-    return this._router.url === '/quienes-somos';
+  get isInfoPage(): boolean {
+    return ['/quienes-somos', '/terminos-uso'].includes(this._router.url);
   }
 
   public dropdownOpen: boolean = false;

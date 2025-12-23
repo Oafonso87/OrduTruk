@@ -1,5 +1,5 @@
 <nav class="menu">
-    @if (!isQuienesSomos) {
+    @if (!isInfoPage) {
         <button class="hamburger-btn" (click)="toggleMenu()">
             <i class="bi" [class.bi-list]="!isMenuOpen" [class.bi-x-lg]="isMenuOpen"></i>
         </button>
@@ -15,7 +15,7 @@
                 ></app-button>
             </li>
         </ul>
-    } @else if (isQuienesSomos) {
+    } @else if (isInfoPage) {
     } @else {
         <ul class="menu-container" [class.mobile-open]="isMenuOpen">
             <li class="showdesktop">
