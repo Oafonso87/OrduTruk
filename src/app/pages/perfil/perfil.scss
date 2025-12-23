@@ -12,8 +12,7 @@
 
 .form-content {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: flex-start;
     width: 100%;
 }
@@ -29,7 +28,17 @@
 
 @media (max-width: 991px) {
     .perfil-content {
-        padding: 35px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .perfil-content {
+        padding: 15px;
+    }
+
+    .pagination {
+        justify-content: center !important;
     }
 }
 
@@ -42,4 +51,23 @@
 
 .pagination {
     margin-top: 20px;
+}
+
+.form-content {
+    gap: 0;
+}
+
+.list-item-content {
+    .item-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .item-transaccion {
+        color: #ffba42;
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: 'Bakbak One', cursive;
+    }
 }
