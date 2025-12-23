@@ -1,0 +1,151 @@
+h1 {
+    /*
+    font-family: 'Bakbak One', cursive;
+    color: #FFBA42;
+    font-size: 70px;
+    line-height: 70px;
+    */
+    //@include font('title');
+
+    font-family: 'Bakbak One', cursive;
+    color: #ffba42;
+    font-size: 70px;
+    line-height: 70px;
+    margin-bottom: 20px;
+    text-align: center;
+
+    @media (min-width: 992px) and (max-width: 1279px) {
+        font-size: 50px;
+        line-height: 50px;
+    }
+    @media (max-width: 991px) {
+        font-size: 50px;
+        line-height: 50px;
+    }
+}
+
+.quienes {
+    padding: 0 10%;
+    text-align: center;
+    @media (max-width: 768px) {
+        padding: 0 20px;
+        margin-bottom: 40px;
+    }
+}
+
+.row {
+    width: 100%;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Roboto Variable', sans-serif;
+    color: #424242;
+
+    &.valores {
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Roboto Variable', sans-serif;
+    color: #424242;
+}
+
+.col-4,
+.col-12.col-md-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 40px;
+
+    @media (max-width: 768px) {
+        margin-bottom: 20px;
+        padding: 10px 20px;
+    }
+}
+
+.mision {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    padding: 60px 40px;
+
+    @media (max-width: 768px) {
+        padding: 40px 20px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .txt {
+        @media (min-width: 1280px) {
+            max-width: 75%;
+        }
+    }
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.quienes-somos-img {
+    background-image: url('/assets/img/quienessomos.png');
+    background-size: contain;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    @media (max-width: 991px) {
+        min-height: 250px;
+    }
+    min-height: 360px;
+}
+
+.txt {
+    font-family: 'Roboto Variable', sans-serif;
+    color: #424242;
+    font-size: 16px;
+    line-height: 21px;
+    font-weight: 300;
+}
+
+.valores-bg {
+    background-color: #e9e3cf;
+    padding: 60px 20px;
+}
+
+.funciona {
+    padding: 60px 0;
+    text-align: center;
+    width: 100%;
+
+    .txt {
+        padding: 0 20%;
+        @media (max-width: 768px) {
+            padding: 0 5%;
+        }
+    }
+}
+
+.heart {
+    background-color: #ffba42;
+    color: white;
+}
+
+.people {
+    background-color: #e66f3f;
+    color: white;
+}
+
+.shield {
+    background-color: #2d787d;
+    color: white;
+}

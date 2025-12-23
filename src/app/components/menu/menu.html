@@ -1,7 +1,9 @@
 <nav class="menu">
-    <button class="hamburger-btn" (click)="toggleMenu()">
-        <i class="bi" [class.bi-list]="!isMenuOpen" [class.bi-x-lg]="isMenuOpen"></i>
-    </button>
+    @if (!isQuienesSomos) {
+        <button class="hamburger-btn" (click)="toggleMenu()">
+            <i class="bi" [class.bi-list]="!isMenuOpen" [class.bi-x-lg]="isMenuOpen"></i>
+        </button>
+    }
 
     @if (isPublic) {
         <ul class="menu-container" [class.mobile-open]="isMenuOpen">
@@ -13,6 +15,7 @@
                 ></app-button>
             </li>
         </ul>
+    } @else if (isQuienesSomos) {
     } @else {
         <ul class="menu-container" [class.mobile-open]="isMenuOpen">
             <li class="showdesktop">

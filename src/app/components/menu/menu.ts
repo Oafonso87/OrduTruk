@@ -30,6 +30,10 @@ export class Menu implements OnInit {
     return publicRoutes.includes(this._router.url);
   }
 
+  get isQuienesSomos(): boolean {
+    return this._router.url === '/quienes-somos';
+  }
+
   public dropdownOpen: boolean = false;
   public isMenuOpen: boolean = false;
 
