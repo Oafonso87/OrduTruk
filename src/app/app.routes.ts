@@ -13,6 +13,7 @@ import { Perfil } from './pages/perfil/perfil';
 import { Mensajes } from './pages/mensajes/mensajes';
 import { DemandasDetalle } from './pages/demandas-detalle/demandas-detalle';
 import { authGuard } from './guards/auth-guard';
+import { TerminosUso } from './pages/terminos-uso/terminos-uso';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: 'demandasdetalle', component: DemandasDetalle, canActivate:[authGuard] },
     { path: 'usuarios', component: UsuariosComponent, canActivate:[authGuard] },
     { path: 'quienes-somos', component: QuienesSomos },
+    { path: 'terminos-uso', component: TerminosUso },
     { path: 'registro', component: Registro },
     { path: 'acceso', component: Acceso },
     { path: 'perfil', component: Perfil, canActivate:[authGuard] },

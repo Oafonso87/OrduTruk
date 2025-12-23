@@ -16,6 +16,22 @@ h1 {
     }
 }
 
+.align {
+    text-align: center;
+    padding: 20px 10%;
+
+    .txt.proyecto {
+        margin-bottom: 30px;
+        @media (min-width: 992px) {
+            padding: 0 20%;
+        }
+
+        &.dos {
+            margin-bottom: 30px;
+        }
+    }
+}
+
 .quienes {
     padding: 0 10%;
     text-align: center;
@@ -55,9 +71,7 @@ h3 {
     align-items: center;
     justify-content: center;
     padding: 10px 40px;
-    @media (min-width: 1450px) {
-        padding: 10px 80px;
-    }
+
     @media (max-width: 768px) {
         margin-bottom: 20px;
         padding: 10px 20px;
@@ -142,8 +156,4 @@ h3 {
 .shield {
     background-color: #2d787d;
     color: white;
-}
-
-.valores-bg .col-md-4 .txt {
-    text-align: center;
 }

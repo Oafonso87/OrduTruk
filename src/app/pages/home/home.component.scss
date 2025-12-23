@@ -21,14 +21,6 @@
 }
 
 h1 {
-    /*
-    font-family: 'Bakbak One', cursive;
-    color: #FFBA42;
-    font-size: 70px;
-    line-height: 70px;
-    */
-    //@include font('title');
-
     font-family: 'Bakbak One', cursive;
     color: #ffba42;
     font-size: 70px;
@@ -46,14 +38,6 @@ h1 {
 }
 
 p {
-    /*
-    font-family: 'Roboto Variable', sans-serif;
-    color: #424242;
-    font-size: 32px;
-    line-height: 40px;
-    */
-    // @include font('subtitle');
-
     font-family: 'Roboto Variable', sans-serif;
     color: #424242;
     font-size: 32px;
@@ -81,11 +65,8 @@ p {
         flex-direction: column;
         width: 100%;
 
-        //border: 2px dotted orange;
-
         .btn {
             width: 100% !important;
-            //border: 2px dotted lime;
         }
         app-button {
             display: contents;

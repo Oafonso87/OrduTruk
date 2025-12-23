@@ -18,13 +18,10 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
-
-    // Desktop layout (default)
     width: 50vw;
     min-width: 500px;
     min-height: 170px;
 
-    // Mobile/Tablet responsive layout (Bottom Sheet)
     @media (max-width: 991px) {
         width: 100%;
         min-width: auto;
