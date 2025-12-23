@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 @use 'styles/mixins' as *;
 
 @use '@fontsource/bakbak-one' as *;
@@ -6,15 +5,6 @@
 @use '@fontsource-variable/roboto' as *;
 @use '@fontsource-variable/roboto/wght.css' as *;
 @use '@fontsource-variable/roboto/wght-italic.css' as *;
-
-/*
-* {
-    border: 1px solid red;
-    @media (min-width: 992px) {
-        border: 1px solid blue;
-    }
-}
-    */
 
 app-root {
     overflow-x: hidden;
@@ -104,17 +94,14 @@ select {
 .form-content {
     display: flex;
     flex-direction: column;
-    //gap: 10px;
 
     label {
-        //border: 1px solid red;
         width: 100%;
         margin-bottom: 8px;
         color: #1e2124;
     }
 
     input {
-        //border: 1px solid red;
         width: 100%;
         min-height: 46px;
         border-radius: 10px;
@@ -170,7 +157,6 @@ select {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-bottom: 50px;
-    //border: 1px solid red;
 }
 
 .content-list-detail {
@@ -178,7 +164,6 @@ select {
     grid-template-columns: 30% 50% 20%;
     gap: 20px;
     margin-bottom: 50px;
-    //border: 1px solid red;
 }
 
 .list-item {
@@ -190,10 +175,6 @@ select {
         align-items: flex-start;
         justify-content: center;
     }
-
-    // .list-item-content {}
-
-    //border: 1px solid blue
 
     .item-title {
         font-family: 'Roboto Variable', sans-serif;
@@ -232,10 +213,8 @@ select {
     .list-item-content {
         display: flex;
         flex-direction: row;
-        //gap: 10px;
         list-style: none;
         padding: 0;
-        //border: 1px solid red;
 
         li {
             outline: 1px solid #ebebeb;
@@ -295,8 +274,7 @@ select {
         transition: all 0.2s ease-in-out;
 
         &.active {
-            color: #0d6efd; // Bootstrap primary
-            //font-weight: 700;
+            color: #0d6efd;
             border-bottom: 3px solid #0d6efd;
         }
 
@@ -323,7 +301,7 @@ select {
 
         li {
             width: 100%;
-            justify-content: flex-start; // Align text to left
+            justify-content: flex-start;
         }
     }
 }
