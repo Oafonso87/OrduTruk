@@ -55,7 +55,9 @@ h3 {
     align-items: center;
     justify-content: center;
     padding: 10px 40px;
-
+    @media (min-width: 1450px) {
+        padding: 10px 80px;
+    }
     @media (max-width: 768px) {
         margin-bottom: 20px;
         padding: 10px 20px;
@@ -95,10 +97,10 @@ h3 {
     background-size: contain;
     background-position: right bottom;
     background-repeat: no-repeat;
+    min-height: 360px;
     @media (max-width: 991px) {
         min-height: 250px;
     }
-    min-height: 360px;
 }
 
 .txt {
@@ -140,4 +142,8 @@ h3 {
 .shield {
     background-color: #2d787d;
     color: white;
+}
+
+.valores-bg .col-md-4 .txt {
+    text-align: center;
 }

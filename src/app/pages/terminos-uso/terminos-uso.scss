@@ -21,10 +21,10 @@ h1 {
     padding: 20px 10%;
 
     .txt.proyecto {
+        margin-bottom: 30px;
         @media (min-width: 992px) {
             padding: 0 20%;
         }
-        margin-bottom: 30px;
 
         &.dos {
             margin-bottom: 30px;
@@ -111,10 +111,10 @@ h3 {
     background-size: contain;
     background-position: right bottom;
     background-repeat: no-repeat;
+    min-height: 360px;
     @media (max-width: 991px) {
         min-height: 250px;
     }
-    min-height: 360px;
 }
 
 .txt {
