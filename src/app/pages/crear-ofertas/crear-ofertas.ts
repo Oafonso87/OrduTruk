@@ -51,6 +51,7 @@ export class CrearOfertas implements OnInit {
     public provincia: number | null = null;
     public poblacion: number | null = null;
     public categoria: number | null = null;
+    public archivo : File | null = null;
 
     loadCategorias() {
         this._categoriasService.getCategorias().subscribe({
@@ -147,6 +148,13 @@ export class CrearOfertas implements OnInit {
     decrementarHoras() {
         if (this.horas > 0) {
             this.horas--;
+        }
+    }
+
+    onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+        if (file) {
+            this.archivo = file;
         }
     }
 
