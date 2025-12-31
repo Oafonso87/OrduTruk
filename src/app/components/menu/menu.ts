@@ -23,7 +23,7 @@ export class Menu implements OnInit {
       console.log(userAlmacenado);
   }
 
-  constructor(private _router: Router, private _loginService: LoginService) { }
+  constructor(private readonly _router: Router, private readonly _loginService: LoginService) { }
 
   get isPublic(): boolean {
     const publicRoutes = ['/', '/acceso', '/registro'];
@@ -35,10 +35,16 @@ export class Menu implements OnInit {
   }
 
   public dropdownOpen: boolean = false;
+  public menuPerfilAbierto: boolean = false;
   public isMenuOpen: boolean = false;
+  public mensajesNoLeidos: number = 5;
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  toggleMenuPerfil() {
+    this.menuPerfilAbierto = !this.menuPerfilAbierto;
   }
 
   toggleMenu() {
