@@ -32,12 +32,12 @@ export class UsuariosService {
     return this._http.get<ApiResponse<Usuario>>(`${this.url}/users/${id}`);
   }
 
-  createUsuario(user: Usuario): Observable<ApiResponse<LoginResponse>> {
-    return this._http.post<ApiResponse<LoginResponse>>(`${this.url}/register`, user, this.httpOptions);
+  createUsuario(formData: FormData): Observable<LoginResponse> {
+    return this._http.post<LoginResponse>(`${this.url}/register`, formData);
   }
 
-  updateUsuario(user: Usuario): Observable<ApiResponse<Usuario>> {
-    return this._http.put<ApiResponse<Usuario>>(`${this.url}/users/${user.id}`, user, this.httpOptions);
+  updateUsuario(id: number, formData: FormData): Observable<ApiResponse<Usuario>> {
+    return this._http.post<ApiResponse<Usuario>>(`${this.url}/users/${id}?_method=PUT`, formData);
   }
 
   deleteUsuario(id: number): Observable<ApiResponse<any>> {
