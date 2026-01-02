@@ -69,22 +69,19 @@
                     </div>
                     <div class="col-9 list-item-content">
                         <h3 class="item-title">
-                            <!-- <a routerLink="/ofertasdetalle" (click)="guardarOferta(oferta)"
-                                >{{ oferta.titulo
-                                }}<span -->
                             <a [routerLink]="['/ofertasdetalle', oferta.id]">
                                 {{ oferta.titulo }}
-                                <span
-                                    ><i class="bi bi-clock me-1"></i
-                                    >{{ oferta.horas_estimadas }}</span
-                                ></a
-                            >
+                                <span>
+                                    <i class="bi bi-clock me-1"></i>
+                                    {{ oferta.horas_estimadas }}
+                                </span>
+                            </a>
                         </h3>
-                        <p class="item-tag">{{ oferta.categoria!.nombre }}</p>
+                        <p class="item-tag">{{ oferta.categoria?.nombre }}</p>
 
                         <p class="item-content">{{ oferta.descripcion }}</p>
 
-                        <span class="badge bg-primary">{{ oferta.ciudad_relacion!.nombre }}</span>
+                        <span class="badge bg-primary">{{ oferta.ciudad_relacion?.nombre }}</span>
                     </div>
                 </div>
             }

@@ -76,6 +76,31 @@
                 #campoDireccion="ngModel"
                 (blur)="direccion = capitalizar(direccion)"
             />
+
+            <label for="doc" class="text-start">Imagen de Perfil (Opcional)</label>
+            <!-- <input
+                type="file"
+                id="doc"
+                name="doc"
+                class="form-control"
+                (change)="onFileSelected($event)"
+            /> -->
+            <div class="mb-3 mt-3">
+                <input
+                    type="file"
+                    id="archivo"
+                    name="archivo"
+                    class="d-none"
+                    (change)="onFileSelected($event)"
+                />
+                <label for="archivo" class="btn btn-outline-secondary">
+                    <i class="bi bi-upload me-2"></i> Subir Imagen
+                </label>
+                <span class="ms-2 text-muted small">
+                    {{ imagen?.name }}
+                </span>
+            </div>
+
             @if (campoDireccion.touched && direccion.trim() === '') {
                 <span class="error"> El campo Direccion no puede estar vacío </span>
             }

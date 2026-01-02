@@ -42,6 +42,7 @@ export class Registro implements OnInit {
   public direccion : string = '';
   public provincia: number | null = null;
   public ciudad : string = '';
+  public imagen: File | null = null;
 
   loadProvincias() {
     this._ubicacionesService.getProvincias().subscribe({
@@ -90,7 +91,9 @@ export class Registro implements OnInit {
     nuevoUsuario.append('descripcion', '');
     nuevoUsuario.append('horas_saldo', '5');
     nuevoUsuario.append('valoracion', '0');
-    nuevoUsuario.append('img_perfil', '');
+    if (this.imagen) {
+      nuevoUsuario.append('img', this.imagen);
+    }
     nuevoUsuario.append('rol_id', '3');
     nuevoUsuario.append('password', this.password1);
     nuevoUsuario.append('direccion', this.direccion);
@@ -130,6 +133,8 @@ export class Registro implements OnInit {
       .join(' ');
   }
 
-
+  onFileSelected(event: any) {
+    this.imagen = event.target.files[0];
+  }
 
 }

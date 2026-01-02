@@ -8,7 +8,7 @@ export interface Usuario {
     descripcion: string;
     horas_saldo: number;
     valoracion: number;
-    img_perfil: string;
+    ruta_img: string;
     rol_id: number;
     password?: string;
     direccion?: string;    

@@ -7,7 +7,6 @@ import { Usuario } from "../models/usuarios";
 import { LoginResponse } from "../models/loginresponse";
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,11 +14,11 @@ export class UsuariosService {
 
   private url: string = 'https://proyecto-daw-backend.onrender.com/api';
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  // private httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type': 'application/json'
+  //   })
+  // };
 
   constructor(public _http: HttpClient) { }
 

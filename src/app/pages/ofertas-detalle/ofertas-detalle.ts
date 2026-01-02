@@ -3,7 +3,7 @@ import { Component, OnInit} from '@angular/core';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Button } from '../../components/button/button';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Servicios } from '../../models/servicios';
 import { ModalComponent } from '../../components/modal/modal';
 import { ServiciosService } from '../../services/servicios.service';
@@ -23,11 +23,6 @@ export class OfertasDetalle implements OnInit {
   public isContactarModalOpen: boolean = false;
   
   ngOnInit() {
-    const almacenada = sessionStorage.getItem('ofertaSeleccionada');
-    if (almacenada) {
-      this.oferta = JSON.parse(almacenada);
-    }
-    console.log(almacenada);
     const idStr = this.activRoute.snapshot.paramMap.get('id');
     console.log('ID de la oferta desde la ruta:', idStr);
     if (idStr) {
@@ -53,9 +48,42 @@ export class OfertasDetalle implements OnInit {
     this.isContactarModalOpen = false;
   }
 
-  constructor(private activRoute: ActivatedRoute, private serviciosService: ServiciosService ) {}
+  finalizarYAceptar() {
+    this.isAceptarModalOpen = false; // Cierras el modal
+    this._router.navigate(['/ofertas']); // Rediriges a la lista
+  }
+
+  constructor(private activRoute: ActivatedRoute, private serviciosService: ServiciosService, private _router: Router) {}
 
   loadServiceById(id: number) {
-
+    this.serviciosService.getServiciosById(id).subscribe({
+      next: (response) => {
+        this.oferta = response.data;
+        console.log(this.oferta);
+      },
+      error: (error) => {
+        console.error('Error al cargar la oferta:', error);
+      }
+    });
   }
+
+  aceptarOferta(): void {
+    if (!this.oferta) return;
+
+    // 1. Creamos el objeto con el estado actualizado
+    const ofertaActualizada = { ...this.oferta, estado: 'en_proceso' };
+
+    // 2. Llamamos al servicio
+    this.serviciosService.updateServicio(ofertaActualizada).subscribe({
+      next: (res) => {
+        console.log('Oferta actualizada con éxito');
+        this.isAceptarModalOpen = true;
+      },
+      error: (err) => {
+        console.error('Error al actualizar la oferta:', err);
+        alert('No se pudo aceptar la oferta en este momento.');
+      }
+    });
+  }
+  
 }

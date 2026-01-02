@@ -78,7 +78,21 @@
             <li class="showdesktop">
                 <div class="contenedor-perfil">
                     <div class="avatar-perfil" (click)="toggleMenuPerfil()">
-                        <img src="assets/img/perfil.png" alt="User Avatar" class="imagen-avatar" />
+                        <!-- <img src="assets/img/perfil.png" alt="User Avatar" class="imagen-avatar" /> -->
+
+                        @if (usuario?.ruta_img) {
+                            <img
+                                [src]="usuario?.ruta_img"
+                                alt="User Avatar"
+                                class="imagen-avatar"
+                            />
+                        } @else {
+                            <img
+                                src="assets/img/perfil.png"
+                                alt="Generic Avatar"
+                                class="imagen-avatar"
+                            />
+                        }
                     </div>
                     <ul class="menu-desplegable-perfil" [class.show]="menuPerfilAbierto">
                         <li>

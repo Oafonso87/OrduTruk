@@ -28,7 +28,7 @@
                     {{ oferta?.descripcion }}
                 </p>
 
-                <p class="item-content">
+                <!-- <p class="item-content">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                     Ipsum has been the industry's standard dummy text ever since the 1500s, when an
                     unknown printer took a galley of type and scrambled it to make a type specimen
@@ -37,13 +37,13 @@
                     with the release of Letraset sheets containing Lorem Ipsum passages, and more
                     recently with desktop publishing software like Aldus PageMaker including
                     versions of Lorem Ipsum.
-                </p>
+                </p> -->
 
                 <div class="btn-group">
                     <app-button
                         label="Aceptar Oferta"
                         [class]="'btn btn-primary me-1'"
-                        (click)="openAceptarModal()"
+                        (click)="aceptarOferta()"
                     ></app-button>
                     <app-button
                         label="Contactar"
@@ -89,7 +89,7 @@
 >
     <!-- Contenido del modal Aceptar -->
     <p>Has aceptado la oferta</p>
-    <button class="btn btn-primary">Cerrar</button>
+    <button class="btn btn-primary" (click)="finalizarYAceptar()">Cerrar</button>
 </app-modal>
 
 <app-modal

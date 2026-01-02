@@ -28,19 +28,19 @@ export class ServiciosService {
   }
 
   getServiciosById(id: number): Observable<ApiResponse<Servicios>> {
-    return this._http.get<ApiResponse<Servicios>>(`${this.url}/servicios/${id}`);
+    return this._http.get<ApiResponse<Servicios>>(`${this.url}/servicio/${id}`);
   }
 
   createServicio(serv: Servicios): Observable<ApiResponse<Servicios>> {
-    return this._http.post<ApiResponse<Servicios>>(`${this.url}/servicios`, serv, this.httpOptions);
+    return this._http.post<ApiResponse<Servicios>>(`${this.url}/servicio`, serv, this.httpOptions);
   }
 
   updateServicio(serv: Servicios): Observable<ApiResponse<Servicios>> {
-    return this._http.put<ApiResponse<Servicios>>(`${this.url}/servicios/${serv.id}`, serv, this.httpOptions);
+    return this._http.put<ApiResponse<Servicios>>(`${this.url}/servicio/${serv.id}`, serv, this.httpOptions);
   }
 
   deleteServicio(id: number): Observable<ApiResponse<any>> {
-    return this._http.delete<ApiResponse<any>>(`${this.url}/servicios/${id}`);
+    return this._http.delete<ApiResponse<any>>(`${this.url}/servicio/${id}`);
   }
 
 }
