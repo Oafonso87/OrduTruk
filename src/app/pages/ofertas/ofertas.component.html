@@ -65,7 +65,12 @@
             @for (oferta of ofertasPaginadas; track oferta.id) {
                 <div class="row list-item">
                     <div class="col-3 list-item-img">
-                        <img src="/assets/img/ofertas.png" alt="Oferta" />
+                        <!-- <img src="/assets/img/ofertas.png" alt="Oferta" /> -->
+                        @if (oferta?.ruta_img) {
+                            <img [src]="oferta?.ruta_img" alt="Oferta" />
+                        } @else {
+                            <img src="assets/img/ofertas.png" alt="Oferta" />
+                        }
                     </div>
                     <div class="col-9 list-item-content">
                         <h3 class="item-title">

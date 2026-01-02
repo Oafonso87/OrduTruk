@@ -64,7 +64,14 @@
             <div class="list-item-content">
                 <label for="transaccion">Transacción de horas</label>
                 <div class="transaccion-input">
-                    <input type="number" id="transaccion" name="transaccion" [(ngModel)]="horas" required min="1" />
+                    <input
+                        type="number"
+                        id="transaccion"
+                        name="transaccion"
+                        [(ngModel)]="horas"
+                        required
+                        min="1"
+                    />
                     <button type="button" (click)="decrementarHoras()">
                         <i class="bi bi-dash"></i>
                     </button>
@@ -78,17 +85,23 @@
                     name="descripcion"
                     id="descripcion"
                     class="descripcion"
-                    [(ngModel)]="descripcion" 
+                    [(ngModel)]="descripcion"
                     required
                 ></textarea>
 
                 <div class="mb-3 mt-3">
-                    <input type="file" id="archivo" name="archivo" class="d-none" (change)="onFileSelected($event)"/>
+                    <input
+                        type="file"
+                        id="archivo"
+                        name="archivo"
+                        class="d-none"
+                        (change)="onFileSelected($event)"
+                    />
                     <label for="archivo" class="btn btn-outline-secondary">
                         <i class="bi bi-upload me-2"></i> Subir Imagen
                     </label>
                     <span class="ms-2 text-muted small">
-                        {{ archivo?.name }}
+                        {{ imagen?.name }}
                     </span>
                 </div>
 

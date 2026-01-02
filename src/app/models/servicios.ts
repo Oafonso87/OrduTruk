@@ -11,6 +11,7 @@ export interface Servicios {
     tipo: string;
     titulo: string;
     descripcion: string;
+    ruta_img: string;
     provincia: number;
     ciudad: number;
     horas_estimadas: number;
