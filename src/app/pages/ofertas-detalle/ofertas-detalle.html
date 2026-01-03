@@ -94,8 +94,13 @@
 >
     <!-- Contenido del modal Contactar -->
     <p>Contenido para Contactar...</p>
-    <textarea class="form-control mb-2" rows="3" placeholder="Escribe tu mensaje..."></textarea>
-    <button class="btn btn-primary">Enviar</button>
+    <textarea
+        class="form-control mb-2"
+        rows="3"
+        placeholder="Escribe tu mensaje..."
+        [(ngModel)]="nuevoMensaje"
+    ></textarea>
+    <button class="btn btn-primary" (click)="enviarMensaje()">Enviar</button>
 </app-modal>
 
 <app-footer></app-footer>
