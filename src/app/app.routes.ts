@@ -9,6 +9,7 @@ import { Registro } from './pages/registro/registro';
 import { Acceso } from './pages/acceso/acceso';
 import { OfertasDetalle } from './pages/ofertas-detalle/ofertas-detalle';
 import { CrearOfertas } from './pages/crear-ofertas/crear-ofertas';
+import { CrearDemandas } from './pages/crear-demandas/crear-demandas';
 import { Perfil } from './pages/perfil/perfil';
 import { Mensajes } from './pages/mensajes/mensajes';
 import { DemandasDetalle } from './pages/demandas-detalle/demandas-detalle';
@@ -18,11 +19,11 @@ import { TerminosUso } from './pages/terminos-uso/terminos-uso';
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'ofertas', component: OfertasComponent, canActivate:[authGuard] },
-    // { path: 'ofertasdetalle', component: OfertasDetalle, canActivate:[authGuard] },
     { path: 'ofertasdetalle/:id', component: OfertasDetalle, canActivate: [authGuard] },
     { path: 'crearoferta', component: CrearOfertas, canActivate:[authGuard] },
     { path: 'demandas', component: DemandasComponent, canActivate:[authGuard] },
-    { path: 'demandasdetalle', component: DemandasDetalle, canActivate:[authGuard] },
+    { path: 'demandasdetalle/:id', component: DemandasDetalle, canActivate:[authGuard] },
+    { path: 'creardemanda', component: CrearDemandas, canActivate:[authGuard] },
     { path: 'usuarios', component: UsuariosComponent, canActivate:[authGuard] },
     { path: 'quienes-somos', component: QuienesSomos },
     { path: 'terminos-uso', component: TerminosUso },
