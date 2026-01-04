@@ -100,6 +100,7 @@ h3 {
     min-height: 360px;
     @media (max-width: 991px) {
         min-height: 250px;
+        background-position: center;
     }
 }
 
@@ -146,4 +147,9 @@ h3 {
 
 .valores-bg .col-md-4 .txt {
     text-align: center;
+}
+
+.quienes-somos {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
 }

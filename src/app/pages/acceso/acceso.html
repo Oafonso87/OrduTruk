@@ -11,7 +11,7 @@
             </p>
             <hr />
             <p class="content">
-                Si aún no tienes cuenta <a class="arrow-link" routerLink="/registro">Registrate</a>
+                Si aún no tienes cuenta <a class="arrow-link" routerLink="/registro">Regístrate</a>
             </p>
         </div>
 
@@ -48,7 +48,7 @@
             @if (campoPassword.touched && password.trim() === '') {
                 <span class="error"> El campo Contraseña no puede estar vacío </span>
             } @else if (campoPassword.touched && password.length < 6) {
-                <span class="error"> La contraseña tiene que tener como mínimo 6 caracterer </span>
+                <span class="error"> La contraseña tiene que tener como mínimo 6 caracteres </span>
             }
             <button
                 [disabled]="!formAcceso.form.valid"

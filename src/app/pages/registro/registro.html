@@ -102,7 +102,7 @@
             </div>
 
             @if (campoDireccion.touched && direccion.trim() === '') {
-                <span class="error"> El campo Direccion no puede estar vacío </span>
+                <span class="error"> El campo Dirección no puede estar vacío </span>
             }
             <label for="mail">Correo Electrónico</label>
             <input
@@ -136,7 +136,7 @@
             @if (campoPassword1.touched && password1.trim() === '') {
                 <span class="error"> El campo Contraseña no puede estar vacío </span>
             } @else if (campoPassword1.touched && password1.length < 6) {
-                <span class="error"> La contraseña tiene que tener como mínimo 6 caracterer </span>
+                <span class="error"> La contraseña tiene que tener como mínimo 6 caracteres </span>
             }
             <label for="password2">Repetir contraseña</label>
             <input
@@ -152,7 +152,7 @@
             @if (campoPassword2.touched && password2.trim() === '') {
                 <span class="error"> El campo Repetir contraseña no puede estar vacío </span>
             } @else if (campoPassword2.touched && password2.length < 6) {
-                <span class="error"> La contraseña tiene que tener como mínimo 6 caracterer </span>
+                <span class="error"> La contraseña tiene que tener como mínimo 6 caracteres </span>
             } @else if (campoPassword2.touched && password1 !== password2) {
                 <span class="error"> La contraseña tiene que ser idéntica </span>
             }
