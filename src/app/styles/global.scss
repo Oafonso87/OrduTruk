@@ -1,3 +1,4 @@
+@use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
 @use '@fontsource/bakbak-one' as *;
@@ -6,21 +7,24 @@
 @use '@fontsource-variable/roboto/wght.css' as *;
 @use '@fontsource-variable/roboto/wght-italic.css' as *;
 
+// Estilos base para el root de la aplicación
 app-root {
     overflow-x: hidden;
     display: block;
 }
 
+// Reset de estilos base y configuración del body
 body {
     margin: 0;
     padding: 0;
     background-color: #fff;
 
     @media (max-width: 991px) {
-        padding-top: 110px;
+        padding-top: 110px; // Espacio para el header móvil fijo
     }
 }
 
+// Clases globales de tipografía
 .title {
     @include font('title');
 }
@@ -35,6 +39,7 @@ body {
     font-weight: 300;
 }
 
+// Enlaces con flecha animada
 .arrow-link {
     text-decoration: none;
     color: #0d6efd;
@@ -54,19 +59,22 @@ body {
     }
 }
 
+// Estilos base para botones personalizados
 .btn {
     min-width: 220px;
     min-height: 60px;
-    font-family: Roboto;
+    font-family: $font-family-base;
     font-size: 20px;
 }
 
+// Estilos para selectores y menús desplegables
 select,
 .form-select {
     width: 100%;
     min-height: 48px;
-    padding: 10px;
-    border-radius: 10px;
+    padding: $spacing-xs $spacing-sm;
+    padding-right: 2.5rem;
+    border-radius: $border-radius;
 
     appearance: none;
     -webkit-appearance: none;
@@ -76,14 +84,9 @@ select,
 
     background-repeat: no-repeat;
     background-position: right 1rem center;
-
     background-size: 1em;
-
     background-color: white;
-    border: 1px solid #ccc;
-    padding: 0.5rem;
-
-    padding-right: 2.5rem;
+    border: 1px solid $color-border-light;
 
     font-size: 16px;
     cursor: pointer;
@@ -92,16 +95,18 @@ select,
     &:focus {
         border-color: #86b7fe;
         outline: 0;
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        box-shadow: $box-shadow-focus;
     }
 }
 
+// Mensajes de error en formularios
 .error {
-    color: #c00000;
+    color: $color-error;
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: $spacing-sm;
 }
 
+// Contenedor estándar para elementos de formulario
 .form-content {
     display: flex;
     flex-direction: column;
@@ -109,26 +114,27 @@ select,
     label {
         width: 100%;
         margin-bottom: 8px;
-        color: #1e2124;
+        color: $color-text;
     }
 
     input {
         width: 100%;
         min-height: 46px;
-        border-radius: 10px;
+        border-radius: $border-radius;
         padding: 0px 10px;
         margin-bottom: 16px;
-        border: 1px solid #ebebeb;
+        border: 1px solid $color-border;
     }
 }
 
+// Contenedor para filtros de búsqueda
 .filter-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid $color-border;
 
     .content {
         margin-bottom: 0px;
@@ -142,8 +148,8 @@ select,
 
         button {
             margin-left: 10px;
-            width: 24px;
-            height: 24px;
+            width: $touch-target-min;
+            height: $touch-target-min;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -153,6 +159,7 @@ select,
     }
 }
 
+// Barra de filtros con espaciado consistente
 .filtro {
     display: flex;
     gap: 15px;
@@ -160,28 +167,40 @@ select,
     margin-top: 20px;
     margin-bottom: 40px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid $color-border;
 
     @media (max-width: 768px) {
         flex-direction: column;
-        gap: 10px; // Slightly smaller gap for vertical stacking
+        gap: 10px; // Espaciado ligeramente menor para apilado vertical
     }
 
     input {
         min-height: 48px;
         height: 48px;
-        border-radius: 10px;
-        border: 1px solid #ccc;
+        border-radius: $border-radius;
+        border: 1px solid $color-border-light;
     }
 }
 
+// Sistema de rejilla para listados de contenido
 .content-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: 1fr;
+    gap: $grid-gap;
     margin-bottom: 50px;
+
+    // Tablet: 2 columnas
+    @media (min-width: $breakpoint-md) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    // Desktop: 3 columnas
+    @media (min-width: $breakpoint-xl) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
+// Rejilla específica para detalles del contenido
 .content-list-detail {
     display: grid;
     grid-template-columns: 30% 50% 20%;
@@ -189,9 +208,10 @@ select,
     margin-bottom: 50px;
 }
 
+// Estilos para elementos individuales de las listas
 .list-item {
     display: flex;
-    font-family: 'Roboto Variable', sans-serif;
+    font-family: $font-family-base;
 
     .list-item-img {
         display: flex;
@@ -200,35 +220,36 @@ select,
     }
 
     .item-title {
-        font-family: 'Roboto Variable', sans-serif;
+        font-family: $font-family-base;
 
         span {
-            color: #949494;
+            color: $color-text-muted;
             padding: 5px;
-            border-radius: 5px;
-            font-family: 'Roboto Variable', sans-serif;
+            border-radius: $border-radius-sm;
+            font-family: $font-family-base;
             font-size: 16px;
 
             i {
                 font-size: 16px;
-                color: #949494;
+                color: $color-text-muted;
             }
         }
     }
 
     .item-tag {
-        font-family: 'Roboto Variable', sans-serif;
-        color: #949494;
-        margin-bottom: 8px;
+        font-family: $font-family-base;
+        color: $color-text-muted;
+        margin-bottom: $spacing-xs;
     }
 
     .item-content {
-        font-family: 'Roboto Variable', sans-serif;
+        font-family: $font-family-base;
         font-size: 16px;
-        line-height: 21px;
+        line-height: $font-size-lg + 1px; // Basado en 21px aproximado
     }
 }
 
+// Listado de mensajes con estados activo/inactivo
 .mensaje-list {
     display: flex;
     flex-direction: column;
@@ -240,7 +261,7 @@ select,
         padding: 0;
 
         li {
-            outline: 1px solid #ebebeb;
+            outline: 1px solid $color-border;
             padding: 4px 10px;
             display: flex;
             align-items: center;
@@ -248,12 +269,12 @@ select,
         }
 
         &.activa {
-            background-color: #ffba42;
+            background-color: $color-primary;
             @media (max-width: 992px) {
                 outline: 1px solid black;
             }
             li {
-                background-color: #ffba42;
+                background-color: $color-primary;
                 font-weight: 400;
                 font-size: 14px;
 
@@ -264,12 +285,12 @@ select,
         }
 
         &.inactiva {
-            background-color: #f8f9fa;
+            background-color: $color-bg-gray-light;
             @media (max-width: 992px) {
                 outline: 1px solid black;
             }
             li {
-                background-color: #f8f9fa;
+                background-color: $color-bg-gray-light;
                 font-weight: 300;
                 font-size: 14px;
             }
@@ -277,13 +298,15 @@ select,
     }
 }
 
+// Iconos auxiliares
 .preicons {
     display: inline-block;
     margin-right: 5px;
 }
 
+// Cabecera de pestañas (Tabs)
 .tabs-header {
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid $color-border;
     display: flex;
     gap: 1.5rem;
     margin-bottom: 1.5rem;
@@ -293,25 +316,29 @@ select,
         cursor: pointer;
         position: relative;
         font-weight: 400;
-        color: #495057;
-        transition: all 0.2s ease-in-out;
+        color: $color-text;
+        transition: all $transition-duration-fast $transition-easing-in-out;
 
         &.active {
-            color: #0d6efd;
-            border-bottom: 3px solid #0d6efd;
+            color: $color-primary-blue;
+            border-bottom: 3px solid $color-primary-blue;
         }
 
         &:hover:not(.active) {
-            color: #0d6efd;
+            color: $color-primary-blue;
             opacity: 0.7;
             border-bottom: 3px solid transparent;
         }
     }
 }
 
-@media (max-width: 991px) {
+@media (max-width: $breakpoint-max-lg) {
     .content-list {
         grid-template-columns: 1fr;
+
+        @media (min-width: $breakpoint-md) {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
     .content-list-detail {
@@ -326,5 +353,145 @@ select,
             width: 100%;
             justify-content: flex-start;
         }
+    }
+}
+
+// ============================================
+// ACCESSIBILIDAD: Reduced Motion
+// ============================================
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+// ============================================
+// ACCESSIBILIDAD: Estados Focus
+// ============================================
+
+// Focus visible consistente para todos los elementos
+*:focus-visible {
+    outline: 2px solid $color-primary-blue;
+    outline-offset: 2px;
+}
+
+// Focus específico para botones
+button:focus-visible,
+.btn:focus-visible {
+    outline: 2px solid $color-primary-blue;
+    outline-offset: 2px;
+    box-shadow: $box-shadow-focus;
+}
+
+// Focus para enlaces
+a:focus-visible {
+    outline: 2px solid $color-primary-blue;
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
+}
+
+// Focus para inputs y selects
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid $color-primary-blue;
+    outline-offset: 1px;
+}
+
+// ============================================
+// LAYOUT: Container con Max-Width
+// ============================================
+
+.page-container {
+    max-width: $max-width-container;
+    margin: 0 auto;
+    width: 100%;
+}
+
+// ============================================
+// ESTILOS COMPARTIDOS: Detalles
+// ============================================
+
+.detalles {
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.arrow-link-back {
+    text-decoration: none;
+    color: $color-primary-blue;
+    font-weight: $font-weight-semibold;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color $transition-duration-fast $transition-easing;
+
+    &::before {
+        content: '←';
+        font-size: 1.2em;
+        transition: transform $transition-duration-fast $transition-easing;
+    }
+
+    &:hover {
+        color: darken($color-primary-blue, 10%);
+
+        &::before {
+            transform: translateX(-3px);
+        }
+    }
+
+    &:focus-visible {
+        outline: 2px solid $color-primary-blue;
+        outline-offset: 2px;
+        border-radius: $border-radius-sm;
+    }
+}
+
+// ============================================
+// ACCESSIBILIDAD: Screen Reader Only
+// ============================================
+
+// Oculta visualmente pero mantiene para lectores de pantalla
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+// ============================================
+// ACCESSIBILIDAD: Skip Link
+// ============================================
+
+// Permite saltar al contenido principal
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: $color-primary-blue;
+    color: white;
+    padding: $spacing-xs $spacing-sm;
+    z-index: $z-index-tooltip;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    transition: top $transition-duration-fast $transition-easing;
+
+    &:focus {
+        top: 0;
+        outline: 2px solid white;
+        outline-offset: -2px;
     }
 }

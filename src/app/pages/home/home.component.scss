@@ -1,13 +1,25 @@
+@use 'styles/variables' as *;
 @use 'styles/mixins' as *;
 
+// Estilos para el banner/imagen de la home
 .home-img {
     background-image: url('/assets/img/home.png');
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
-    min-height: 734px;
+    min-height: 50vh;
+
+    @media (min-width: $breakpoint-md) {
+        min-height: 60vh;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        min-height: 734px;
+    }
 }
 
+// Contenedor principal del texto en la home
 .home-content {
     display: flex;
     flex-direction: column;
@@ -24,11 +36,9 @@
     }
 }
 
+// Titular principal con estilo decorativo
 h1 {
-    font-family: 'Bakbak One', cursive;
-    color: #ffba42;
-    font-size: 70px;
-    line-height: 70px;
+    @include font('title');
     margin-bottom: 20px;
 
     @media (min-width: 992px) and (max-width: 1279px) {

@@ -1,8 +1,14 @@
-.ofertas {
-    padding: 50px 65px;
+@use 'styles/variables' as *;
 
-    @media (max-width: 768px) {
-        padding: 20px 45px;
+.ofertas {
+    padding: $page-padding-desktop;
+
+    @media (max-width: $breakpoint-max-lg) {
+        padding: $page-padding-tablet;
+    }
+
+    @media (max-width: $breakpoint-max-md) {
+        padding: $page-padding-mobile;
     }
 }
 

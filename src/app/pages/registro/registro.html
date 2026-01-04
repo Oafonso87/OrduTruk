@@ -16,7 +16,7 @@
         </div>
 
         <form class="col-12 col-lg-6 form-content" #formRegistro="ngForm" (ngSubmit)="registrar()">
-            <label for="nombre">Nombre</label>
+            <label for="nombreRegistro">Nombre</label>
             <input
                 type="text"
                 id="nombreRegistro"
@@ -48,8 +48,9 @@
             } @else if (campoApellidos.invalid && campoApellidos.touched) {
                 <span class="error">Los Apellidos solo pueden contener letras</span>
             }
-            <label>Provincia</label>
+            <label for="provincia">Provincia</label>
             <select
+                id="provincia"
                 name="provincia"
                 [(ngModel)]="provincia"
                 (ngModelChange)="onProvinciaChange($event)"
@@ -60,8 +61,8 @@
                     <option [value]="provincia.id">{{ provincia.nombre }}</option>
                 }
             </select>
-            <label>Ciudad</label>
-            <select name="ciudad" [(ngModel)]="ciudad" [disabled]="!provincia" required>
+            <label for="ciudad">Ciudad</label>
+            <select id="ciudad" name="ciudad" [(ngModel)]="ciudad" [disabled]="!provincia" required>
                 <option value="" disabled selected>Selecciona una población</option>
                 @for (poblacion of poblaciones; track poblacion.id) {
                     <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
@@ -77,14 +78,8 @@
                 (blur)="direccion = capitalizar(direccion)"
             />
 
-            <label for="doc" class="text-start">Imagen de Perfil (Opcional)</label>
-            <!-- <input
-                type="file"
-                id="doc"
-                name="doc"
-                class="form-control"
-                (change)="onFileSelected($event)"
-            /> -->
+            <label for="archivo" class="text-start">Imagen de Perfil (Opcional)</label>
+
             <div class="mb-3 mt-3">
                 <input
                     type="file"
@@ -163,9 +158,6 @@
             >
                 Registrarse
             </button>
-            <!-- Al ser app-button un componente no le puedo asociar disabled, hay dos opciones, o se puede implementar el disabled en el
-            componente del boton o configuras el botón en el html -->
-            <!-- <app-button label="Registrarse" [class]="'btn btn-primary'" class="w-100" ></app-button> -->
         </form>
     </div>
     <div class="col-12 col-xl-6 registro-img d-none d-xl-flex"></div>

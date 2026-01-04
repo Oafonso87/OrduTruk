@@ -1,9 +1,12 @@
+@use 'styles/variables' as *;
+
 .btn-menu {
     border: none;
     background: transparent;
-    @media (min-width: 992px) {
+
+    @media (min-width: $breakpoint-lg) {
         display: inline-block;
-        padding: 8px 16px;
+        padding: $spacing-xs $spacing-sm;
         margin: 4px 2px;
         border: none;
         font-size: 12px;
@@ -11,27 +14,32 @@
         text-decoration: none;
         text-transform: uppercase;
         color: rgba(0, 0, 0, 0.87);
-        background-color: #d3f0f9;
+        background-color: $color-bg-light-blue;
         cursor: pointer;
+        transition: background-color $transition-duration-fast $transition-easing;
+
+        &:hover {
+            background-color: darken($color-bg-light-blue, 5%);
+        }
     }
 
     &.btn-link {
         background: transparent;
         text-decoration: underline;
-        padding: 8px 4px;
+        padding: $spacing-xs 4px;
     }
 
     &.btn-close {
         box-sizing: content-box;
         padding: 0.5rem;
         background-color: white;
-        border-radius: 50%;
+        border-radius: $border-radius-circle;
         opacity: 1;
         filter: invert(1);
     }
 
     i {
-        margin-right: 8px;
-        font-size: 16px;
+        margin-right: $spacing-xs;
+        font-size: $font-size-base;
     }
 }
