@@ -15,7 +15,11 @@
         </div>
         <div class="row content-list-detail">
             <div class="list-item-img">
-                <img src="/assets/img/ofertasdetalle.png" alt="Oferta" />
+                @if (demanda?.ruta_img) {
+                    <img [src]="demanda?.ruta_img" alt="Demanda" />
+                } @else {
+                    <img src="assets/img/ofertas.png" alt="Demanda" />
+                }
             </div>
             <div class="list-item-content">
                 <h3 class="item-title">{{ demanda?.titulo }}</h3>
@@ -28,29 +32,20 @@
                     {{ demanda?.descripcion }}
                 </p>
 
-                <p class="item-content">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                    unknown printer took a galley of type and scrambled it to make a type specimen
-                    book. It has survived not only five centuries, but also the leap into electronic
-                    typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more
-                    recently with desktop publishing software like Aldus PageMaker including
-                    versions of Lorem Ipsum.
-                </p>
-
-                <div class="btn-group">
-                    <app-button
-                        label="Aceptar Demanda"
-                        [class]="'btn btn-primary me-1'"
-                        (click)="openModal()"
-                    ></app-button>
-                    <app-button
-                        label="Contactar"
-                        [class]="'btn btn-outline-primary'"
-                        (click)="openModal()"
-                    ></app-button>
-                </div>
+                @if (demanda?.usuario_id != usuario?.id) {
+                    <div class="btn-group">
+                        <app-button
+                            label="Aceptar Demanda"
+                            [class]="'btn btn-primary me-1'"
+                            (click)="aceptarDemanda()"
+                        ></app-button>
+                        <app-button
+                            label="Contactar"
+                            [class]="'btn btn-outline-primary'"
+                            (click)="openContactarModal()"
+                        ></app-button>
+                    </div>
+                }
             </div>
 
             <div class="detalles">
@@ -82,9 +77,30 @@
     </div>
 </div>
 
-<app-modal [isOpen]="isModalOpen" [title]="'Nuevo Mensaje'" (closeModal)="closeModal()">
-    <!-- Contenido del modal -->
-    <p>Escribe tu mensaje aquí...</p>
+<app-modal
+    [isOpen]="isAceptarModalOpen"
+    [title]="'Aceptar Demanda'"
+    (closeModal)="closeAceptarModal()"
+>
+    <!-- Contenido del modal Aceptar -->
+    <p>Has aceptado la demanda</p>
+    <button class="btn btn-primary" (click)="finalizarYAceptar()">Cerrar</button>
+</app-modal>
+
+<app-modal
+    [isOpen]="isContactarModalOpen"
+    [title]="'Contactar'"
+    (closeModal)="closeContactarModal()"
+>
+    <!-- Contenido del modal Contactar -->
+    <p>Contenido para Contactar...</p>
+    <textarea
+        class="form-control mb-2"
+        rows="3"
+        placeholder="Escribe tu mensaje..."
+        [(ngModel)]="nuevoMensaje"
+    ></textarea>
+    <button class="btn btn-primary" (click)="enviarMensaje()">Enviar</button>
 </app-modal>
 
 <app-footer></app-footer>

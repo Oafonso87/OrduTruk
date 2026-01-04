@@ -9,19 +9,75 @@
         <div class="row content-list-detail form-content">
             <div class="list-item-img col-12 col-md-6 mb-4 mb-md-0">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" id="nombre" name="nombre" class="form-control mb-3" />
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    class="form-control mb-3"
+                    [value]="usuario?.nombre"
+                    readonly
+                />
 
                 <label for="apellidos" class="form-label">Apellidos</label>
-                <input type="text" id="apellidos" name="apellidos" class="form-control mb-3" />
+                <input
+                    type="text"
+                    id="apellidos"
+                    name="apellidos"
+                    class="form-control mb-3"
+                    [value]="usuario?.apellido"
+                    readonly
+                />
+
+                <label class="form-label">Provincia</label>
+                <select
+                    name="provincia"
+                    [(ngModel)]="provincia"
+                    (ngModelChange)="onProvinciaChange($event)"
+                    class="form-select mb-3"
+                >
+                    <option [ngValue]="null" disabled>Selecciona provincia</option>
+                    @for (p of provincias; track p.id) {
+                        <option [ngValue]="p.id">{{ p.nombre }}</option>
+                    }
+                </select>
+
+                <label class="form-label">Ciudad</label>
+                <select
+                    name="ciudad"
+                    [(ngModel)]="ciudad"
+                    [disabled]="!provincia"
+                    class="form-select mb-3"
+                >
+                    <option [ngValue]="null" disabled>Selecciona población</option>
+                    @for (p of poblaciones; track p.id) {
+                        <option [ngValue]="p.id">{{ p.nombre }}</option>
+                    }
+                </select>
 
                 <label for="email" class="form-label">Correo electrónico</label>
-                <input type="email" id="email" name="email" class="form-control mb-3" />
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control mb-3"
+                    [value]="usuario?.email"
+                    readonly
+                />
 
-                <label for="password" class="form-label">Contraseña</label>
+                <label for="password" class="form-label">Nueva Contraseña</label>
                 <input type="password" id="password" name="password" class="form-control mb-3" />
 
+                <label for="password2" class="form-label">Confirmar Nueva Contraseña</label>
+                <input type="password2" id="password2" name="password2" class="form-control mb-3" />
+
                 <label for="direccion" class="form-label">Dirección</label>
-                <input type="text" id="direccion" name="direccion" class="form-control mb-3" />
+                <input
+                    type="text"
+                    id="direccion"
+                    name="direccion"
+                    class="form-control mb-3"
+                    [value]="usuario?.direccion"
+                />
 
                 <label for="imagen-perfil" class="form-label">Imagen de Perfil</label>
                 <input
@@ -68,6 +124,39 @@
 
                 <hr />
                 <p class="item-transaccion">Demandas</p>
+
+                <div class="row list-item mensaje-list">
+                    <ul class="list-item-content">
+                        <li>22/06/2025</li>
+                        <li>Clases de Inglés Básico</li>
+                        <li>Voluntario: John Doe</li>
+                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
+                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
+                    </ul>
+                </div>
+
+                <!-- Paginación -->
+                <nav aria-label="Navegación de páginas">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                                >Anterior</a
+                            >
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <hr />
+
+                <p class="item-transaccion">Transacciones</p>
 
                 <div class="row list-item mensaje-list">
                     <ul class="list-item-content">
