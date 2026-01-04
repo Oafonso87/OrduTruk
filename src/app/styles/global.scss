@@ -89,23 +89,6 @@ select,
     cursor: pointer;
     margin-bottom: 16px;
 
-    /* Ensure options are legible */
-    option {
-        font-size: 16px;
-        padding: 10px;
-        background-color: white;
-        color: #333;
-    }
-
-    /* Mobile specific overrides to force legibility in native controls */
-    @media (max-width: 768px) {
-        font-size: 16px !important;
-
-        option {
-            font-size: 16px !important;
-        }
-    }
-
     &:focus {
         border-color: #86b7fe;
         outline: 0;
@@ -182,6 +165,13 @@ select,
     @media (max-width: 768px) {
         flex-direction: column;
         gap: 10px; // Slightly smaller gap for vertical stacking
+    }
+
+    input {
+        min-height: 48px;
+        height: 48px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
     }
 }
 
