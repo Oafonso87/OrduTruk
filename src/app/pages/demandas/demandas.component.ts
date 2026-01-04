@@ -24,7 +24,7 @@ import { CategoriasService } from '../../services/categorias.service';
 export class DemandasComponent implements OnInit {
 
   ngOnInit(): void {
-    sessionStorage.removeItem('demandaSeleccionada');
+    // sessionStorage.removeItem('demandaSeleccionada');
     this.loadCategorias();
     this.loadProvincias();
     this.loadTodasPoblaciones();
@@ -60,7 +60,7 @@ export class DemandasComponent implements OnInit {
   loadServicios() {
     this._serviciosService.getServicios().subscribe({
       next: (response: ApiResponse<Servicios[]>) => {
-        this.demandas = response.data.filter(s => s.tipo === 'demanda');
+        this.demandas = response.data.filter(s => s.tipo === 'demanda' && s.estado === 'activo');
         this.demandasFiltradas = [...this.demandas];
         this.updateDemandas();
         console.log('Demandas cargadas:', this.demandas);
@@ -181,7 +181,7 @@ export class DemandasComponent implements OnInit {
     if (page < 1 || page > this.totalPages) return; this.pagActual = page; this.updateDemandas(); 
   }
 
-  guardarDemanda(demanda: any) {
-    sessionStorage.setItem('demandaSeleccionada', JSON.stringify(demanda));
-  }
+  // guardarDemanda(demanda: any) {
+  //   sessionStorage.setItem('demandaSeleccionada', JSON.stringify(demanda));
+  // }
 }

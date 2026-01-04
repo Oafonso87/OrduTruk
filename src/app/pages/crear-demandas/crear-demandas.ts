@@ -14,16 +14,17 @@ import { Poblaciones } from '../../models/poblaciones';
 import { ServiciosService } from '../../services/servicios.service';
 import { UbicacionesService } from '../../services/ubicaciones.service';
 import { CategoriasService } from '../../services/categorias.service';
+import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
-    selector: 'app-crear-ofertas',
+    selector: 'app-crear-demandas',
     standalone: true,
     imports: [CommonModule, Header, Footer, FormsModule],
-    templateUrl: './crear-ofertas.html',
-    styleUrl: './crear-ofertas.scss',
+    templateUrl: './crear-demandas.html',
+    styleUrl: './crear-demandas.scss',
 })
 
-export class CrearOfertas implements OnInit {
+export class CrearDemandas implements OnInit {
 
     public usuario: Usuario | null = null;
 
@@ -39,7 +40,8 @@ export class CrearOfertas implements OnInit {
     }
 
     constructor(private _router: Router, private _serviciosService: ServiciosService,
-        private _ubicacionesService: UbicacionesService, private _categoriasService: CategoriasService) { }
+        private _ubicacionesService: UbicacionesService, private _categoriasService: CategoriasService,
+        private _usuariosService: UsuariosService) { }
 
     public titulo: string = '';
     public descripcion: string = '';
@@ -104,32 +106,62 @@ export class CrearOfertas implements OnInit {
         }
     }
 
-    publicarOferta() {
-        const nuevaOferta = new FormData();
-        nuevaOferta.append('id', '0');
-        nuevaOferta.append('usuario_id', String(this.usuario?.id));
-        nuevaOferta.append('categoria_id', String(this.categoria));
-        nuevaOferta.append('tipo', 'oferta');
-        nuevaOferta.append('titulo', this.titulo);
-        nuevaOferta.append('descripcion', this.descripcion);
-        if (this.imagen) {
-            nuevaOferta.append('img', this.imagen);
-        }
-        nuevaOferta.append('provincia_id', String(this.provincia));
-        nuevaOferta.append('ciudad_id', String(this.poblacion));
-        nuevaOferta.append('horas_estimadas', String(this.horas));
-        nuevaOferta.append('estado', 'activo');
-        console.log(nuevaOferta);
+    publicarDemanda() {
+        if (!this.usuario) return;
 
-        this._serviciosService.createServicio(nuevaOferta).subscribe({
+        const saldoActual = Number(this.usuario.horas_saldo);
+        const horasDemanda = Number(this.horas);
+        const nuevoSaldo = saldoActual - horasDemanda;
+
+        if (nuevoSaldo < 0) {
+            window.alert(`No tienes saldo suficiente para publicar esta demanda. \nSaldo: ${saldoActual}h | Requerido: ${horasDemanda}h`);
+            return;
+        }
+
+        const nuevaDemanda = new FormData();
+        nuevaDemanda.append('id', '0');
+        nuevaDemanda.append('usuario_id', String(this.usuario?.id));
+        nuevaDemanda.append('categoria_id', String(this.categoria));
+        nuevaDemanda.append('tipo', 'demanda');
+        nuevaDemanda.append('titulo', this.titulo);
+        nuevaDemanda.append('descripcion', this.descripcion);
+        if (this.imagen) {
+            nuevaDemanda.append('img', this.imagen);
+        }
+        nuevaDemanda.append('provincia_id', String(this.provincia));
+        nuevaDemanda.append('ciudad_id', String(this.poblacion));
+        nuevaDemanda.append('horas_estimadas', String(this.horas));
+        nuevaDemanda.append('estado', 'activo');
+        console.log(nuevaDemanda);
+        this._serviciosService.createServicio(nuevaDemanda).subscribe({
             next: (response: ApiResponse<Servicios>) => {
-                setTimeout(() => {
-                    this.resetForm();
-                    this._router.navigate(['/ofertas']);
-                }, 1500);
+                console.log('Demanda creada con éxito. Procediendo a bloquear horas...');            
+                this.descontarHorasUsuario(nuevoSaldo);
             },
             error: (error) => {
-                console.error("Error al crear la oferta:", error);
+                console.error("Error al crear la demanda:", error);
+            }
+        });
+    }
+
+    private descontarHorasUsuario(nuevoSaldo: number) {
+        const userData = new FormData();
+        userData.append('horas_saldo', String(nuevoSaldo));
+
+        this._usuariosService.updateUsuario(this.usuario!.id, userData).subscribe({
+            next: (res) => {
+                console.log('Saldo del demandante actualizado');                
+                this.usuario!.horas_saldo = nuevoSaldo;
+                sessionStorage.setItem('user', JSON.stringify(this.usuario));
+                this._usuariosService.notificarCambioSaldo();
+                setTimeout(() => {
+                    this.resetForm();
+                    this._router.navigate(['/demandas']);
+                }, 1000);
+            },
+            error: (err) => {
+                console.error('Error al descontar saldo:', err);
+                this._router.navigate(['/demandas']);
             }
         });
     }
