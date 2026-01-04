@@ -51,6 +51,7 @@ export class CrearOfertas implements OnInit {
     public provincia: number | null = null;
     public poblacion: number | null = null;
     public categoria: number | null = null;
+    public imagen : File | null = null;
 
     loadCategorias() {
         this._categoriasService.getCategorias().subscribe({
@@ -104,18 +105,20 @@ export class CrearOfertas implements OnInit {
     }
 
     publicarOferta() {
-        const nuevaOferta: Servicios = {
-            id: 0,
-            usuario_id: this.usuario?.id!,
-            categoria_id: this.categoria!,
-            tipo: "oferta",
-            titulo: this.titulo,
-            descripcion: this.descripcion,
-            provincia: this.provincia!,
-            ciudad: this.poblacion!,
-            horas_estimadas: this.horas,
-            estado: "activo",
-        };
+        const nuevaOferta = new FormData();
+        nuevaOferta.append('id', '0');
+        nuevaOferta.append('usuario_id', String(this.usuario?.id));
+        nuevaOferta.append('categoria_id', String(this.categoria));
+        nuevaOferta.append('tipo', 'oferta');
+        nuevaOferta.append('titulo', this.titulo);
+        nuevaOferta.append('descripcion', this.descripcion);
+        if (this.imagen) {
+            nuevaOferta.append('img', this.imagen);
+        }
+        nuevaOferta.append('provincia_id', String(this.provincia));
+        nuevaOferta.append('ciudad_id', String(this.poblacion));
+        nuevaOferta.append('horas_estimadas', String(this.horas));
+        nuevaOferta.append('estado', 'activo');
         console.log(nuevaOferta);
 
         this._serviciosService.createServicio(nuevaOferta).subscribe({
@@ -147,6 +150,13 @@ export class CrearOfertas implements OnInit {
     decrementarHoras() {
         if (this.horas > 0) {
             this.horas--;
+        }
+    }
+
+    onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+        if (file) {
+            this.imagen = file;
         }
     }
 

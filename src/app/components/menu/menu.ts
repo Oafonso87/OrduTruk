@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Button } from '../button/button';
 import { Usuario } from '../../models/usuarios';
 import { LoginService } from '../../services/login.service';
+import { Subscription } from 'rxjs';
+import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,19 +13,27 @@ import { LoginService } from '../../services/login.service';
   templateUrl: './menu.html',
   styleUrl: './menu.scss',
 })
-export class Menu implements OnInit {
+export class Menu implements OnInit, OnDestroy {
 
   public usuario : Usuario | null = null;
+  private saldoSub: Subscription | null = null;
 
   ngOnInit(): void {
-    const userAlmacenado = sessionStorage.getItem('user');
-      if (userAlmacenado) {
-          this.usuario = JSON.parse(userAlmacenado);
-      }
-      console.log(userAlmacenado);
+    this.cargarUsuarioDeStorage();
+
+    this.saldoSub = this._usuariosService.actualizarSaldo$.subscribe(() => {
+      this.refrescarDatosUsuario();
+    });
   }
 
-  constructor(private readonly _router: Router, private readonly _loginService: LoginService) { }
+  ngOnDestroy(): void {
+    if (this.saldoSub) {
+      this.saldoSub.unsubscribe();
+    }
+  }
+
+  constructor(private readonly _router: Router, private readonly _loginService: LoginService, 
+    private readonly _usuariosService: UsuariosService) {}
 
   get isPublic(): boolean {
     const publicRoutes = ['/', '/acceso', '/registro'];
@@ -51,6 +61,26 @@ export class Menu implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  private cargarUsuarioDeStorage() {
+    const userAlmacenado = sessionStorage.getItem('user');
+    if (userAlmacenado) {
+      this.usuario = JSON.parse(userAlmacenado);
+    }
+  }
+
+  private refrescarDatosUsuario() {
+    if (this.usuario?.id) {
+      this._usuariosService.getUsuarioById(this.usuario.id).subscribe({
+        next: (response) => {
+          this.usuario = response.data;
+          sessionStorage.setItem('user', JSON.stringify(this.usuario));
+          console.log('Saldo actualizado en tiempo real:', this.usuario.horas_saldo);
+        },
+        error: (err) => console.error('Error al refrescar saldo:', err)
+      });
+    }
+  }
+
   logout() {
     this._loginService.logout().subscribe({
       next: () => {
@@ -65,4 +95,3 @@ export class Menu implements OnInit {
     });    
   }
 }
-

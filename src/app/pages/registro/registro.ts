@@ -42,6 +42,7 @@ export class Registro implements OnInit {
   public direccion : string = '';
   public provincia: number | null = null;
   public ciudad : string = '';
+  public imagen: File | null = null;
 
   loadProvincias() {
     this._ubicacionesService.getProvincias().subscribe({
@@ -80,30 +81,32 @@ export class Registro implements OnInit {
 
   registrar() {
 
-    const nuevoUsuario : Usuario = {
-      id : 0,
-      nombre : this.nombre,
-      apellido : this. apellidos,
-      email : this.mail,
-      provincia_id: Number(this.provincia),
-      ciudad_id: Number(this.ciudad),
-      descripcion: '',
-      horas_saldo: 5,
-      valoracion: 0,
-      rol_id: 3,
-      password: this.password1,
-      direccion: this.direccion,
-    };
+    const nuevoUsuario = new FormData();
+    nuevoUsuario.append('id', '0');
+    nuevoUsuario.append('nombre', this.nombre);
+    nuevoUsuario.append('apellido', this.apellidos);
+    nuevoUsuario.append('email', this.mail);
+    nuevoUsuario.append('provincia_id', String(this.provincia));
+    nuevoUsuario.append('ciudad_id', String(this.ciudad));
+    nuevoUsuario.append('descripcion', '');
+    nuevoUsuario.append('horas_saldo', '5');
+    nuevoUsuario.append('valoracion', '0');
+    if (this.imagen) {
+      nuevoUsuario.append('img', this.imagen);
+    }
+    nuevoUsuario.append('rol_id', '3');
+    nuevoUsuario.append('password', this.password1);
+    nuevoUsuario.append('direccion', this.direccion);
 
     this._usuariosService.createUsuario(nuevoUsuario).subscribe({
-      next: (response: ApiResponse<LoginResponse>) => {
-        localStorage.setItem('access_token', response.data.access_token);
-        sessionStorage.setItem('user', JSON.stringify(response.data.user));
+      next: (response: LoginResponse) => {
+        localStorage.setItem('access_token', response.access_token);
+        sessionStorage.setItem('user', JSON.stringify(response.user));
         this.resetForm();
         this._router.navigate(['/ofertas']);        
       },
       error: (error) => {
-        console.error("Error al crear el seguimiento:", error);
+        console.error("Error al crear al usuario:", error);
       } 
     });
     
@@ -130,6 +133,8 @@ export class Registro implements OnInit {
       .join(' ');
   }
 
-
+  onFileSelected(event: any) {
+    this.imagen = event.target.files[0];
+  }
 
 }

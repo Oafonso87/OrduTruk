@@ -14,12 +14,6 @@ export class ServiciosService {
 
   private url: string = 'https://proyecto-daw-backend.onrender.com/api';
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
-
   constructor(public _http: HttpClient) { }
 
 
@@ -28,19 +22,22 @@ export class ServiciosService {
   }
 
   getServiciosById(id: number): Observable<ApiResponse<Servicios>> {
-    return this._http.get<ApiResponse<Servicios>>(`${this.url}/servicios/${id}`);
+    return this._http.get<ApiResponse<Servicios>>(`${this.url}/servicio/${id}`);
   }
 
-  createServicio(serv: Servicios): Observable<ApiResponse<Servicios>> {
-    return this._http.post<ApiResponse<Servicios>>(`${this.url}/servicios`, serv, this.httpOptions);
+  createServicio(formData: FormData): Observable<ApiResponse<Servicios>> {
+    return this._http.post<ApiResponse<Servicios>>(`${this.url}/servicio`, formData);
   }
 
-  updateServicio(serv: Servicios): Observable<ApiResponse<Servicios>> {
-    return this._http.put<ApiResponse<Servicios>>(`${this.url}/servicios/${serv.id}`, serv, this.httpOptions);
+  updateServicio(id: number, formData: FormData): Observable<ApiResponse<Servicios>> {
+    if (!formData.has('_method')) {
+      formData.append('_method', 'PUT');
+    }
+    return this._http.post<ApiResponse<Servicios>>(`${this.url}/servicio/${id}`, formData);
   }
 
   deleteServicio(id: number): Observable<ApiResponse<any>> {
-    return this._http.delete<ApiResponse<any>>(`${this.url}/servicios/${id}`);
+    return this._http.delete<ApiResponse<any>>(`${this.url}/servicio/${id}`);
   }
 
 }
