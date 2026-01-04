@@ -17,7 +17,7 @@ import { CategoriasService } from '../../services/categorias.service';
 import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
-    selector: 'app-crear-ofertas',
+    selector: 'app-crear-demandas',
     standalone: true,
     imports: [CommonModule, Header, Footer, FormsModule],
     templateUrl: './crear-demandas.html',

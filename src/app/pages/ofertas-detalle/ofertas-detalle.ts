@@ -123,6 +123,7 @@ export class OfertasDetalle implements OnInit {
         sessionStorage.setItem('user', JSON.stringify(this.usuario));
 
         this._usuariosService.notificarCambioSaldo();
+        this.mensajeConfirmacion();
 
         this.isAceptarModalOpen = true;
       },
@@ -175,6 +176,28 @@ export class OfertasDetalle implements OnInit {
       }
     });
     this.isContactarModalOpen = false;    
+  }
+
+  mensajeConfirmacion() {
+    const nuevo: Mensaje = {
+            id: 0,
+            emisor_id: this.usuario!.id,
+            receptor_id: this.oferta!.usuario_id,
+            servicio_id: this.oferta!.id,
+            mensaje: "Oferta Aceptada",
+            leido: false,
+            created_at: new Date().toISOString()
+    };
+    console.log("Mensaje a enviar:", nuevo);
+    this._mensajesService.createMensaje(nuevo).subscribe({
+      next: (response: ApiResponse<Mensaje>) => {
+          console.log('Mensaje publicado:', response.message);                    
+          this.nuevoMensaje = '';
+      },
+      error: (err) => {
+          console.error('Error al publicar el mensaje:', err);
+      }
+    });
   }
 
 }

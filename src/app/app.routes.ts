@@ -15,6 +15,7 @@ import { Mensajes } from './pages/mensajes/mensajes';
 import { DemandasDetalle } from './pages/demandas-detalle/demandas-detalle';
 import { authGuard } from './guards/auth-guard';
 import { TerminosUso } from './pages/terminos-uso/terminos-uso';
+import { TransaccionDetalle } from './pages/transaccion-detalle/transaccion-detalle';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -31,5 +32,6 @@ export const routes: Routes = [
     { path: 'acceso', component: Acceso },
     { path: 'perfil', component: Perfil, canActivate:[authGuard] },
     { path: 'mensajes', component: Mensajes, canActivate:[authGuard] },
+    { path: 'transaccion-detalle/:id', component: TransaccionDetalle, canActivate:[authGuard] },
     { path: '**', component: HomeComponent }
 ];
