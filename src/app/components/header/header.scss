@@ -1,5 +1,5 @@
 :host(.header) {
-    background-image: url('/assets/img/bg-header.png');
+    background: url('/assets/img/bg-header.png') white;
     background-position: center;
     display: flex;
     justify-content: space-between;
@@ -9,5 +9,12 @@
     @media (min-width: 992px) {
         padding: 20px 50px 50px;
         min-height: 130px;
+    }
+
+    @media (max-width: 991px) {
+        position: fixed;
+        top: 0;
+        left: 0; // Ensure it anchors to the left
+        z-index: 1020;
     }
 }

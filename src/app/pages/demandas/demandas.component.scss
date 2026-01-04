@@ -1,5 +1,9 @@
 .demandas {
     padding: 50px 65px;
+
+    @media (max-width: 768px) {
+        padding: 20px 45px;
+    }
 }
 
 h3 a {

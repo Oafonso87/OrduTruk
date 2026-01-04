@@ -44,3 +44,9 @@
         width: 100%;
     }
 }
+
+@media (max-width: 576px) {
+    .acceso-content {
+        padding: 20px 45px;
+    }
+}

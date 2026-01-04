@@ -64,10 +64,10 @@
         <div class="content-list">
             @for (demanda of demandasPaginadas; track demanda.id) {
                 <div class="row list-item">
-                    <div class="col-3 list-item-img">
+                    <div class="col-12 col-md-3 list-item-img">
                         <img src="/assets/img/ofertas.png" alt="Oferta" />
                     </div>
-                    <div class="col-9 list-item-content">
+                    <div class="col-12 col-md-9 list-item-content">
                         <h3 class="item-title">
                             <a routerLink="/demandasdetalle" (click)="guardarDemanda(demanda)"
                                 >{{ demanda.titulo
