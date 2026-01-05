@@ -1,7 +1,17 @@
 <nav class="menu">
     @if (!isInfoPage) {
-        <button class="hamburger-btn" (click)="toggleMenu()">
-            <i class="bi" [class.bi-list]="!isMenuOpen" [class.bi-x-lg]="isMenuOpen"></i>
+        <button
+            class="hamburger-btn"
+            (click)="toggleMenu()"
+            aria-label="Abrir menú de navegación"
+            [attr.aria-expanded]="isMenuOpen"
+        >
+            <i
+                class="bi"
+                [class.bi-list]="!isMenuOpen"
+                [class.bi-x-lg]="isMenuOpen"
+                aria-hidden="true"
+            ></i>
         </button>
     }
 
@@ -10,7 +20,7 @@
             <li>
                 <app-button
                     [class]="'btn-menu'"
-                    label="Quienes somos"
+                    label="Quiénes somos"
                     routerLink="/quienes-somos"
                 ></app-button>
             </li>
@@ -25,14 +35,13 @@
                         type="button"
                         (click)="toggleDropdown()"
                         [attr.aria-expanded]="dropdownOpen"
+                        aria-label="Menú crear oferta o demanda"
                     >
                         CREAR
                     </button>
                     <ul class="dropdown-menu" [class.show]="dropdownOpen">
                         <li>
-                            <a class="dropdown-item" routerLink="/crearoferta" role="button">
-                                Oferta
-                            </a>
+                            <a class="dropdown-item" routerLink="/crearoferta"> Oferta </a>
                         </li>
                         <li>
                             <a class="dropdown-item" routerLink="/creardemanda" role="button">
@@ -42,7 +51,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="showmobile">
+            <li class="showmobile haschild">
                 <ul class="crearmobile">
                     <li>
                         <app-button

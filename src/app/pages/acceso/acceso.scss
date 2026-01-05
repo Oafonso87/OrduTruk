@@ -1,3 +1,6 @@
+@use 'styles/variables' as *;
+
+// Contenedor principal de la página de acceso/login
 .acceso-content {
     display: flex;
     flex-direction: row;
@@ -9,10 +12,12 @@
     color: #000;
     font-weight: 400;
 }
+// Introducción al formulario de acceso
 .intro {
     padding-right: 65px;
 }
 
+// Formulario de login
 .form-content {
     display: flex;
     flex-direction: column;
@@ -20,12 +25,22 @@
     align-items: flex-start;
 }
 
+// Imagen decorativa del acceso
 .acceso-img {
     background-image: url('/assets/img/registro.png');
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
-    min-height: 734px;
+    min-height: 50vh;
+
+    @media (min-width: $breakpoint-md) {
+        min-height: 60vh;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        min-height: 734px;
+    }
 }
 
 @media (max-width: 991px) {
@@ -42,5 +57,11 @@
 
     .form-content {
         width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .acceso-content {
+        padding: 20px 45px;
     }
 }

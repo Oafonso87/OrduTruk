@@ -1,1 +1,39 @@
+@use 'styles/variables' as *;
 
+.transaccion-detalle {
+    padding: $page-padding-desktop;
+
+    @media (max-width: $breakpoint-max-lg) {
+        padding: $page-padding-tablet;
+    }
+
+    @media (max-width: $breakpoint-max-md) {
+        padding: $page-padding-mobile;
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+
+        // Solo en desktop (>1024px)
+        @media (min-width: 1024px) {
+            app-button ::ng-deep .btn {
+                min-height: 48px;
+            }
+        }
+    }
+}
+
+.list-item-img {
+    img {
+        width: 100%;
+    }
+}
+
+.content-list-detail {
+    display: flex;
+    gap: 0px;
+    margin-bottom: 50px;
+}

@@ -1,8 +1,9 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// Titular de la sección
 h1 {
-    font-family: 'Bakbak One', cursive;
-    color: #ffba42;
-    font-size: 70px;
-    line-height: 70px;
+    @include font('title');
     margin-bottom: 20px;
     text-align: center;
 
@@ -16,6 +17,7 @@ h1 {
     }
 }
 
+// Texto descriptivo de la sección
 .quienes {
     padding: 0 10%;
     text-align: center;
@@ -100,6 +102,7 @@ h3 {
     min-height: 360px;
     @media (max-width: 991px) {
         min-height: 250px;
+        background-position: center;
     }
 }
 
@@ -111,6 +114,7 @@ h3 {
     font-weight: 300;
 }
 
+// Sección de valores con fondo destacado
 .valores-bg {
     background-color: #e9e3cf;
     padding: 60px 20px;
@@ -130,7 +134,7 @@ h3 {
 }
 
 .heart {
-    background-color: #ffba42;
+    background-color: $color-primary;
     color: white;
 }
 
@@ -146,4 +150,9 @@ h3 {
 
 .valores-bg .col-md-4 .txt {
     text-align: center;
+}
+
+.quienes-somos {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
 }

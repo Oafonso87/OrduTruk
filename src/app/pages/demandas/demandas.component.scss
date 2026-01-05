@@ -1,5 +1,15 @@
+@use 'styles/variables' as *;
+
 .demandas {
-    padding: 50px 65px;
+    padding: $page-padding-desktop;
+
+    @media (max-width: $breakpoint-max-lg) {
+        padding: $page-padding-tablet;
+    }
+
+    @media (max-width: $breakpoint-max-md) {
+        padding: $page-padding-mobile;
+    }
 }
 
 h3 a {

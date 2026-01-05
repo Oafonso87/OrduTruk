@@ -1,8 +1,9 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// Título de los Términos de Uso
 h1 {
-    font-family: 'Bakbak One', cursive;
-    color: #ffba42;
-    font-size: 70px;
-    line-height: 70px;
+    @include font('title');
     margin-bottom: 20px;
     text-align: center;
 
@@ -16,6 +17,7 @@ h1 {
     }
 }
 
+// Alineación y espaciado general del contenido
 .align {
     text-align: center;
     padding: 20px 10%;
@@ -98,6 +100,7 @@ h3 {
     }
 }
 
+// Contenedor flexible para el contenido
 .content-container {
     display: flex;
     flex-direction: column;
@@ -125,6 +128,7 @@ h3 {
     font-weight: 300;
 }
 
+// Fondo destacado para la sección de valores
 .valores-bg {
     background-color: #e9e3cf;
     padding: 60px 20px;
@@ -144,7 +148,7 @@ h3 {
 }
 
 .heart {
-    background-color: #ffba42;
+    background-color: $color-primary;
     color: white;
 }
 

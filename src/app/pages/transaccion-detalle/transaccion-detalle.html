@@ -1,2 +1,72 @@
 <app-header></app-header>
+
+<div class="row">
+    <div class="col-md-12 transaccion-detalle">
+        <div class="header">
+            <h1 class="title">Transacción</h1>
+            <div class="filter-container">
+                <h2 class="content">Detalles de la transacción seleccionada</h2>
+            </div>
+        </div>
+
+        <div class="row back-link">
+            <a routerLink="/ofertas" class="arrow-link-back mb-4 d-inline-block"
+                >Volver al Perfil</a
+            >
+        </div>
+        <div class="row content-list-detail">
+            <!-- 
+            <div class="list-item-img">
+                <img src="assets/img/ofertas.png" alt="Oferta" />
+            </div>
+            -->
+            <div class="list-item-content col-md-6">
+                <h3 class="item-title">titulo</h3>
+                <p class="item-transaccion">
+                    Transacción
+                    <span><i class="bi bi-clock me-1"></i>horas_estimadas </span>
+                </p>
+
+                <p class="item-content">descripcion</p>
+            </div>
+            <div class="list-item-content col-md-6">
+                <h3 class="item-title">Lo que recibes a cambio</h3>
+
+                <h4 class="exchange-title">Reparación de Bicicleta</h4>
+                <p class="item-transaccion">
+                    <span><i class="bi bi-clock me-1"></i>2 horas</span>
+                </p>
+
+                <p class="item-content">
+                    Revisión completa de frenos, cambios y ajuste de ruedas. Incluye limpieza de
+                    cadena y engrase.
+                </p>
+
+                <div class="user-info mt-3">
+                    <p><strong>Voluntario:</strong> María González</p>
+                    <p>
+                        <strong>Valoración:</strong>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                    </p>
+                    <p><strong>Categoría:</strong> Reparaciones</p>
+                    <p><strong>Provincia:</strong> Bizkaia</p>
+                    <p><strong>Localidad:</strong> Bilbao</p>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <app-button
+                    label="Acuerdo completado"
+                    [class]="'btn btn-primary me-1'"
+                ></app-button>
+                <app-button label="Rechazar" [class]="'btn btn-danger'"></app-button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <app-footer></app-footer>
