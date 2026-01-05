@@ -11,7 +11,15 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 20px 65px 50px 65px;
+    padding: $page-padding-desktop;
+
+    @media (max-width: $breakpoint-max-lg) {
+        padding: $page-padding-tablet;
+    }
+
+    @media (max-width: $breakpoint-max-md) {
+        padding: $page-padding-mobile;
+    }
 }
 
 // Distribución del contenido del perfil
@@ -21,31 +29,11 @@
     align-items: flex-start;
     width: 100%;
     gap: 0;
-}
 
-// Imagen de fondo de la sección de perfil
-.perfil-img {
-    background-image: url('/assets/img/perfil.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    min-height: 734px;
-    background-size: cover;
-}
-
-@media (max-width: 991px) {
-    .perfil-content {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 576px) {
-    .perfil-content {
-        padding: 15px;
-    }
-
-    .pagination {
-        justify-content: center !important;
+    @media (max-width: $breakpoint-max-md) {
+        .pagination {
+            justify-content: center !important;
+        }
     }
 }
 
@@ -63,7 +51,6 @@
 
 .list-item-content {
     .item-title {
-        font-size: 16px;
         font-weight: bold;
         color: black;
     }

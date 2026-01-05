@@ -45,6 +45,8 @@ h1 {
 
 .row {
     width: 100%;
+    --bs-gutter-x: 0rem;
+    --bs-gutter-y: 0;
 }
 
 h2 {
@@ -109,6 +111,14 @@ h3 {
     width: 100%;
 }
 
+// Eliminar padding de Bootstrap en móvil para anchura completa
+.row > .content-container {
+    @media (max-width: $breakpoint-max-md) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 .quienes-somos-img {
     background-image: url('/assets/img/quienessomos.png');
     background-size: contain;
@@ -120,13 +130,7 @@ h3 {
     }
 }
 
-.txt {
-    font-family: 'Roboto Variable', sans-serif;
-    color: #424242;
-    font-size: 16px;
-    line-height: 21px;
-    font-weight: 300;
-}
+// La clase .txt usa los estilos heredados del body (16px desktop, 20px móvil)
 
 // Fondo destacado para la sección de valores
 .valores-bg {

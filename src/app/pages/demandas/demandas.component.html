@@ -64,7 +64,7 @@
         <div class="content-list">
             @for (demanda of demandasPaginadas; track demanda.id) {
                 <div class="row list-item">
-                    <div class="col-3 list-item-img">
+                    <div class="col-12 col-md-3 list-item-img">
                         @if (demanda?.ruta_img) {
                             <img [src]="demanda?.ruta_img" alt="Demanda" />
                         } @else {
