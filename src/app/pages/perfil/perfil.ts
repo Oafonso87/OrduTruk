@@ -11,6 +11,11 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { UbicacionesService } from '../../services/ubicaciones.service';
 import { Provincias } from '../../models/provincias';
 import { Poblaciones } from '../../models/poblaciones';
+import { Servicios } from '../../models/servicios';
+import { ServiciosService } from '../../services/servicios.service';
+import { Transacciones } from '../../models/transacciones';
+import { TransaccionesService } from '../../services/transacciones.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
     selector: 'app-perfil',
@@ -37,9 +42,12 @@ export class Perfil implements OnInit {
     
     this.loadProvincias();
     this.loadTodasPoblaciones();
+    this.loadServicios();
+    this.loadTransacciones();
   }
 
-  constructor(private _ubicacionesService: UbicacionesService) { }
+  constructor(private _ubicacionesService: UbicacionesService, private _serviciosService: ServiciosService,
+     private _transaccionesService: TransaccionesService, private _loginService: LoginService) {}
 
   public provincias: Provincias[] = [];
   public poblaciones: Poblaciones[] = [];
@@ -50,6 +58,10 @@ export class Perfil implements OnInit {
   public direccion : string = '';
   public provincia: number | null = null;
   public ciudad : number | null = null;
+
+  public ofertas : Servicios[] = [];
+  public demandas : Servicios[] = [];
+  public transacciones : Transacciones[] = [];
 
   modificar() {}
 
@@ -88,6 +100,50 @@ export class Perfil implements OnInit {
       p => Number(p.provincia_id) === this.provincia
     );
   }  
+
+  loadServicios() {
+    this._serviciosService.getServicios().subscribe({
+      next: (response: ApiResponse<Servicios[]>) => {
+        const servicios = response.data.filter(s => s.usuario_id === this.usuario?.id);
+        this.ofertas = servicios.filter(s => s.tipo === 'oferta');
+        this.demandas = servicios.filter(s => s.tipo === 'demanda');
+      },
+      error: (err) => console.error('Error:', err)
+    });
+  }
+
+  loadTransacciones() {
+    this._transaccionesService.getTransacciones().subscribe({
+      next: (response: ApiResponse<Transacciones[]>) => {
+        this.transacciones = response.data.filter(t => 
+          t.usuario_solicitante_id === this.usuario?.id || 
+          t.usuario_ofertante_id === this.usuario?.id
+        );
+
+        console.log('Mis transacciones implicadas:', this.transacciones);
+      },
+      error: (err) => console.error('Error al cargar transacciones:', err)
+    });
+  }
+
+  cambiarContraseña() {
+    if (this.password1 === this.password2 && this.usuario?.id) {
+      this._loginService.cambiarContraseña(this.usuario.id, this.password1).subscribe({
+        next: (response) => {
+          console.log('Contraseña cambiada con éxito:', response);
+          alert('Contraseña cambiada con éxito.');
+        },
+        error: (err) => {
+          console.error('Error al cambiar la contraseña:', err);
+          alert('Error al cambiar la contraseña.');
+        }
+      });
+    } else {
+      alert('Las contraseñas no coinciden o no hay usuario.');
+    }
+  }
+
+  modifircarPerfil() {}
 
   capitalizar(texto: string): string {
     if (!texto) return '';

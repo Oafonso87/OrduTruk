@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 
 import { LoginRequest } from "../models/loginrequest";
 import { LoginResponse } from "../models/loginresponse";
+import { ApiResponse } from "../models/apiresponse";
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,11 @@ export class LoginService {
       Authorization: `Bearer ${token}`
     });
     return this._http.post<any>(`${this.url}/logout`, {}, { headers });
+  }
+
+  cambiarContraseña(id : number, password : string) : Observable<any> {
+    const data = { password: password };
+    return this._http.post<any>(`${this.url}/users/${id}/change-password`, data, this.httpOptions);
   }
 
 }
