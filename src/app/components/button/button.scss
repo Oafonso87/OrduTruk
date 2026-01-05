@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'styles/variables' as *;
 
 .btn-menu {
@@ -19,7 +20,7 @@
         transition: background-color $transition-duration-fast $transition-easing;
 
         &:hover {
-            background-color: darken($color-bg-light-blue, 5%);
+            background-color: color.adjust($color-bg-light-blue, $lightness: -5%);
         }
     }
 
