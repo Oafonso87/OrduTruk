@@ -64,12 +64,6 @@
                     readonly
                 />
 
-                <label for="password" class="form-label">Nueva Contraseña</label>
-                <input type="password" id="password" name="password" class="form-control mb-3" />
-
-                <label for="password2" class="form-label">Confirmar Nueva Contraseña</label>
-                <input type="password2" id="password2" name="password2" class="form-control mb-3" />
-
                 <label for="direccion" class="form-label">Dirección</label>
                 <input
                     type="text"
@@ -77,79 +71,218 @@
                     name="direccion"
                     class="form-control mb-3"
                     [value]="usuario?.direccion"
+                    [(ngModel)]="direccion"
                 />
 
                 <label for="imagen-perfil" class="form-label">Imagen de Perfil</label>
                 <div class="mb-3 mt-3">
-                    <input type="file" id="imagen-perfil" name="imagen-perfil" class="d-none" />
+                    <input
+                        type="file"
+                        id="imagen-perfil"
+                        name="imagen-perfil"
+                        class="d-none"
+                        (change)="onFileSelected($event)"
+                    />
                     <label for="imagen-perfil" class="btn btn-outline-secondary">
                         <i class="bi bi-upload me-2"></i> Subir Imagen
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">Modificar</button>
+                <button type="submit" class="btn btn-primary w-100" (click)="modificarPerfil()">
+                    Modificar
+                </button>
+
+                <hr />
+
+                <p class="password-change">Cambiar Contraseña</p>
+                <label for="password" class="form-label">Nueva Contraseña</label>
+                <input
+                    type="password"
+                    id="password1"
+                    name="password1"
+                    class="form-control mb-3"
+                    [(ngModel)]="password1"
+                    placeholder="La contraseña debe ser diferente a la actual"
+                />
+
+                <label for="password2" class="form-label">Confirmar Nueva Contraseña</label>
+                <input
+                    type="password"
+                    id="password2"
+                    name="password2"
+                    class="form-control mb-3"
+                    [(ngModel)]="password2"
+                />
+
+                <button type="submit" class="btn btn-primary w-100" (click)="cambiarPassword()">
+                    Modificar
+                </button>
             </div>
+
             <div class="list-item-content col-md-6">
                 <h3 class="item-title">Historial</h3>
                 <p class="item-transaccion">Ofertas</p>
 
                 <div class="row list-item mensaje-list">
-                    <ul class="list-item-content">
-                        <li>22/06/2025</li>
-                        <li>Clases de Inglés Básico</li>
-                        <li>Voluntario: John Doe</li>
-                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
-                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                    </ul>
+                    @for (oferta of ofertasPaginadas; track oferta.id) {
+                        <ul class="list-item-content">
+                            <li>22/06/2025</li>
+                            <li>{{ oferta.titulo }}</li>
+                            <li>Horas a recibir: {{ oferta.horas_estimadas }}</li>
+                            <li>
+                                @switch (oferta.estado) {
+                                    @case ('activo') {
+                                        <span class="badge bg-success-subtle text-success"
+                                            >Activo</span
+                                        >
+                                    }
+                                    @case ('en_proceso') {
+                                        <span class="badge bg-warning-subtle text-warning"
+                                            >En Curso</span
+                                        >
+                                    }
+                                    @case ('finalizado') {
+                                        <span class="badge bg-warning-subtle">Finalizado</span>
+                                    }
+                                    @case ('cancelado') {
+                                        <span class="badge bg-danger-subtle text-danger"
+                                            >Cancelado</span
+                                        >
+                                    }
+                                }
+                            </li>
+                            @if (oferta.estado === 'activo') {
+                                <div class="btn-group ms-3">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        > <i class="bi bi-pencil"></i> Actualizar
+                                    </button>
+                                    <button
+                                        class="btn btn-sm btn-outline-danger"
+                                        (click)="cancelar(oferta.id)"
+                                    >
+                                        <i class="bi bi-x-circle"></i> Cancelar
+                                    </button>
+                                </div>
+                            }
+                        </ul>
+                    }
                 </div>
 
-                <!-- Paginación -->
                 <nav aria-label="Navegación de páginas">
                     <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                        <li class="page-item" [class.disabled]="p_actual === 1">
+                            <a
+                                class="page-link"
+                                (click)="p_actual = p_actual - 1"
+                                style="cursor: pointer"
                                 >Anterior</a
                             >
                         </li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Siguiente</a>
+
+                        @for (pagina of totalPaginasOfertas; track pagina) {
+                            <li class="page-item" [class.active]="p_actual === pagina">
+                                <a
+                                    class="page-link"
+                                    (click)="p_actual = pagina"
+                                    style="cursor: pointer"
+                                    >{{ pagina }}</a
+                                >
+                            </li>
+                        }
+
+                        <li
+                            class="page-item"
+                            [class.disabled]="p_actual === totalPaginasOfertas.length"
+                        >
+                            <a
+                                class="page-link"
+                                (click)="p_actual = p_actual + 1"
+                                style="cursor: pointer"
+                                >Siguiente</a
+                            >
                         </li>
                     </ul>
                 </nav>
 
                 <hr />
                 <p class="item-transaccion">Demandas</p>
-
                 <div class="row list-item mensaje-list">
-                    <ul class="list-item-content">
-                        <li>22/06/2025</li>
-                        <li>Clases de Inglés Básico</li>
-                        <li>Voluntario: John Doe</li>
-                        <li>Valoración: <i class="bi bi-hand-thumbs-up"></i></li>
-                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                    </ul>
+                    @for (demanda of demandasPaginadas; track demanda.id) {
+                        <ul class="list-item-content">
+                            <li>22/06/2025</li>
+                            <li>{{ demanda.titulo }}</li>
+                            <li>Horas a entregar: {{ demanda.horas_estimadas }}</li>
+                            <li>
+                                @switch (demanda.estado) {
+                                    @case ('activo') {
+                                        <span class="badge bg-success-subtle text-success"
+                                            >Activo</span
+                                        >
+                                    }
+                                    @case ('en_proceso') {
+                                        <span class="badge bg-warning-subtle text-warning"
+                                            >En Curso</span
+                                        >
+                                    }
+                                    @case ('finalizado') {
+                                        <span class="badge bg-warning-subtle">Finalizado</span>
+                                    }
+                                    @case ('cancelado') {
+                                        <span class="badge bg-danger-subtle text-danger"
+                                            >Cancelado</span
+                                        >
+                                    }
+                                }
+                            </li>
+                            @if (demanda.estado === 'activo') {
+                                <div class="btn-group ms-3">
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        > <i class="bi bi-pencil"></i> Actualizar
+                                    </button>
+                                    <button
+                                        class="btn btn-sm btn-outline-danger"
+                                        (click)="cancelar(demanda.id)"
+                                    >
+                                        <i class="bi bi-x-circle"></i> Cancelar
+                                    </button>
+                                </div>
+                            }
+                        </ul>
+                    }
                 </div>
 
-                <!-- Paginación -->
                 <nav aria-label="Navegación de páginas">
                     <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                        <li class="page-item" [class.disabled]="p_actual === 1">
+                            <a
+                                class="page-link"
+                                (click)="p_actual = p_actual - 1"
+                                style="cursor: pointer"
                                 >Anterior</a
                             >
                         </li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Siguiente</a>
+
+                        @for (pagina of totalPaginasDemandas; track pagina) {
+                            <li class="page-item" [class.active]="p_actual === pagina">
+                                <a
+                                    class="page-link"
+                                    (click)="p_actual = pagina"
+                                    style="cursor: pointer"
+                                    >{{ pagina }}</a
+                                >
+                            </li>
+                        }
+
+                        <li
+                            class="page-item"
+                            [class.disabled]="p_actual === totalPaginasDemandas.length"
+                        >
+                            <a
+                                class="page-link"
+                                (click)="p_actual = p_actual + 1"
+                                style="cursor: pointer"
+                                >Siguiente</a
+                            >
                         </li>
                     </ul>
                 </nav>
@@ -159,32 +292,86 @@
                 <p class="item-transaccion">Transacciones</p>
 
                 <div class="row list-item mensaje-list">
-                    <ul class="list-item-content">
-                        <li>22/06/2025</li>
-                        <li>Clases de Inglés Básico</li>
-
-                        <li>Mensajes: <i class="bi bi-chat-dots"></i></li>
-                    </ul>
+                    @for (transaccion of transaccionesPaginadas; track transaccion.id) {
+                        <ul
+                            class="list-item-content"
+                            [routerLink]="['/transaccion-detalle', transaccion.id]"
+                            style="cursor: pointer"
+                        >
+                            <li>{{ transaccion.created_at | date: 'dd/MM/yyyy' }}</li>
+                            <li>{{ transaccion.servicio?.titulo }}</li>
+                            <li>Horas: {{ transaccion.servicio?.horas_estimadas }}</li>
+                            <li>
+                                @switch (transaccion.estado) {
+                                    @case ('pendiente') {
+                                        <span class="badge bg-primary-subtle text-primary"
+                                            >En Curso</span
+                                        >
+                                    }
+                                    @case ('confirmado') {
+                                        <span class="badge bg-warning-subtle text-success"
+                                            >Confirmado</span
+                                        >
+                                    }
+                                    @case ('cancelado') {
+                                        <span class="badge bg-warning-subtle text-warning"
+                                            >Rechazado</span
+                                        >
+                                    }
+                                }
+                            </li>
+                            @if (
+                                transaccion.estado === 'pendiente' &&
+                                transaccion.usuario_ofertante_id === usuario?.id
+                            ) {
+                                <button
+                                    class="btn btn-sm btn-outline-danger"
+                                    (click)="rechazar(transaccion.id); $event.stopPropagation()"
+                                >
+                                    <i class="bi bi-x-circle"></i> Rechazar
+                                </button>
+                            }
+                        </ul>
+                    }
                 </div>
 
-                <!-- Paginación -->
                 <nav aria-label="Navegación de páginas">
                     <ul class="pagination justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+                        <li class="page-item" [class.disabled]="p_actual === 1">
+                            <a
+                                class="page-link"
+                                (click)="p_actual = p_actual - 1"
+                                style="cursor: pointer"
                                 >Anterior</a
                             >
                         </li>
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Siguiente</a>
+
+                        @for (pagina of totalPaginasTransaccion; track pagina) {
+                            <li class="page-item" [class.active]="p_actual === pagina">
+                                <a
+                                    class="page-link"
+                                    (click)="p_actual = pagina"
+                                    style="cursor: pointer"
+                                    >{{ pagina }}</a
+                                >
+                            </li>
+                        }
+
+                        <li
+                            class="page-item"
+                            [class.disabled]="p_actual === totalPaginasTransaccion.length"
+                        >
+                            <a
+                                class="page-link"
+                                (click)="p_actual = p_actual + 1"
+                                style="cursor: pointer"
+                                >Siguiente</a
+                            >
                         </li>
                     </ul>
                 </nav>
+
+                <hr />
             </div>
         </div>
     </div>

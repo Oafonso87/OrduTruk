@@ -5,6 +5,8 @@ import { Usuario } from '../../models/usuarios';
 import { LoginService } from '../../services/login.service';
 import { Subscription } from 'rxjs';
 import { UsuariosService } from '../../services/usuarios.service';
+import { Mensaje } from '../../models/mensaje';
+import { MensajesService } from '../../services/mensajes.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +22,7 @@ export class Menu implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.cargarUsuarioDeStorage();
+    this.loadMensajes();
 
     this.saldoSub = this._usuariosService.actualizarSaldo$.subscribe(() => {
       this.refrescarDatosUsuario();
@@ -33,7 +36,7 @@ export class Menu implements OnInit, OnDestroy {
   }
 
   constructor(private readonly _router: Router, private readonly _loginService: LoginService, 
-    private readonly _usuariosService: UsuariosService) {}
+    private readonly _usuariosService: UsuariosService, private readonly _mensajesService: MensajesService) {}
 
   get isPublic(): boolean {
     const publicRoutes = ['/', '/acceso', '/registro'];
@@ -47,7 +50,7 @@ export class Menu implements OnInit, OnDestroy {
   public dropdownOpen: boolean = false;
   public menuPerfilAbierto: boolean = false;
   public isMenuOpen: boolean = false;
-  public mensajesNoLeidos: number = 5;
+  public mensajesNoLeidos: Mensaje[] = [];
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
@@ -80,6 +83,41 @@ export class Menu implements OnInit, OnDestroy {
       });
     }
   }
+
+  loadMensajes() {
+    if (this.usuario?.id) {
+      this._mensajesService.getMensajesById(this.usuario.id).subscribe({
+        next: (response) => {
+          const todosLosMensajes = response.data;
+          this.mensajesNoLeidos = todosLosMensajes.filter(mensaje => !mensaje.leido && mensaje.receptor_id === this.usuario?.id);
+          console.log('Mensajes no leídos cargados:', this.mensajesNoLeidos);
+        }
+      });
+    }
+  }
+
+  irAMensajes() {
+    if (this.mensajesNoLeidos.length > 0) {
+      // Creamos un array de promesas/peticiones para actualizar todos a la vez
+      this.mensajesNoLeidos.forEach(mensaje => {
+        // Creamos una copia del mensaje con el estado cambiado
+        const mensajeLeido = { ...mensaje, leido: true };
+        
+        this._mensajesService.updateMensaje(mensajeLeido).subscribe({
+          next: () => {
+            console.log(`Mensaje ${mensaje.id} marcado como leído`);
+          },
+          error: (err) => console.error('Error al actualizar mensaje', err)
+        });
+      });
+
+      // Limpiamos la lista local para que el badge desaparezca al instante
+      this.mensajesNoLeidos = [];
+  }
+  
+  // Navegamos a la página de mensajes
+  this._router.navigate(['/mensajes']);
+}
 
   logout() {
     this._loginService.logout().subscribe({
