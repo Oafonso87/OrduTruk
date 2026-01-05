@@ -108,10 +108,14 @@
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item item-mensajes" routerLink="/mensajes">
+                            <a
+                                class="dropdown-item item-mensajes"
+                                (click)="irAMensajes()"
+                                style="cursor: pointer"
+                            >
                                 <i class="bi bi-chat-dots"></i> Mensajes
-                                @if (mensajesNoLeidos > 0) {
-                                    <span class="badge">{{ mensajesNoLeidos }}</span>
+                                @if (mensajesNoLeidos.length > 0) {
+                                    <span class="badge">{{ mensajesNoLeidos.length }}</span>
                                 }
                             </a>
                         </li>

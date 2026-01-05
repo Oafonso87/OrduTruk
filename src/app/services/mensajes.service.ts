@@ -39,7 +39,7 @@ export class MensajesService {
   }
 
   updateMensaje(mens: Mensaje): Observable<ApiResponse<Mensaje>> {
-    return this._http.put<ApiResponse<Mensaje>>(`${this.url}/${mens.id}`, mens, this.httpOptions);
+    return this._http.put<ApiResponse<Mensaje>>(`${this.url2}/${mens.id}`, mens, this.httpOptions);
   }
 
   deleteMensaje(id: number): Observable<ApiResponse<any>> {

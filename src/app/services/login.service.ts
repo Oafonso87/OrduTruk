@@ -34,9 +34,11 @@ export class LoginService {
     return this._http.post<any>(`${this.url}/logout`, {}, { headers });
   }
 
-  cambiarContraseña(id : number, password : string) : Observable<any> {
-    const data = { password: password };
-    return this._http.post<any>(`${this.url}/users/${id}/change-password`, data, this.httpOptions);
+
+  cambiarContraseña(id: number, password: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('password', password);  
+    return this._http.post<any>(`${this.url}/users/${id}/change-password`, formData);
   }
 
 }
