@@ -322,7 +322,7 @@ app-button::ng-deep .btn-cerrar {
         }
 
         &.item-mensajes {
-            justify-content: space-between;
+            justify-content: left;
 
             .badge {
                 background-color: #00bcd4;
@@ -335,6 +335,7 @@ app-button::ng-deep .btn-cerrar {
                 justify-content: center;
                 font-size: 10px;
                 font-weight: bold;
+                margin-left: 10px;
             }
         }
 
