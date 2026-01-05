@@ -1,35 +1,37 @@
 @use 'sass:map';
+@use 'variables' as *;
 
+// ============================================
+// MIXINS - OrduTruk
+// ============================================
+
+// Configuración de tipografía centralizada
 $font-config: (
     'title': (
-        font-family: (
-            'Bakbak One',
-            cursive,
-        ),
-        color: #ffba42,
+        // Estilo para titulares principales
+        font-family: ('Bakbak One', cursive),
+        color: $color-primary,
         font-size: 70px,
         line-height: 70px,
+        'text-shadow': $text-shadow-title,
     ),
     'subtitle': (
-        font-family: (
-            'Roboto Variable',
-            sans-serif,
-        ),
+        // Estilo para subtítulos o secciones secundarias
+        font-family: ('Roboto Variable', sans-serif),
         color: #424242,
         font-size: 32px,
         line-height: 40px,
     ),
     'content': (
-        font-family: (
-            'Roboto Variable',
-            sans-serif,
-        ),
+        // Estilo para el cuerpo de texto estándar
+        font-family: ('Roboto Variable', sans-serif),
         color: #424242,
         font-size: 16px,
         line-height: 21px,
     ),
 );
 
+// Mixin para aplicar estilos de fuente basados en la configuración anterior
 @mixin font($type) {
     $config: map.get($font-config, $type);
 

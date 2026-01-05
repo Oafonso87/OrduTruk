@@ -1,7 +1,11 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
 .header {
     width: 100%;
 }
 
+// Contenedor principal del perfil de usuario
 .perfil-content {
     display: flex;
     flex-direction: column;
@@ -10,13 +14,16 @@
     padding: 20px 65px 50px 65px;
 }
 
+// Distribución del contenido del perfil
 .form-content {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     width: 100%;
+    gap: 0;
 }
 
+// Imagen de fondo de la sección de perfil
 .perfil-img {
     background-image: url('/assets/img/perfil.png');
     background-position: center;
@@ -42,6 +49,7 @@
     }
 }
 
+// Listado de mensajes en el perfil
 .mensaje-list {
     ul {
         margin-bottom: 0;
@@ -53,10 +61,6 @@
     margin-top: 20px;
 }
 
-.form-content {
-    gap: 0;
-}
-
 .list-item-content {
     .item-title {
         font-size: 16px;
@@ -65,7 +69,7 @@
     }
 
     .item-transaccion {
-        color: #ffba42;
+        color: $color-primary;
         font-size: 1.5rem;
         font-weight: bold;
         font-family: 'Bakbak One', cursive;
