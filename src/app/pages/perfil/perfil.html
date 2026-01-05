@@ -75,13 +75,18 @@
                 />
 
                 <label for="imagen-perfil" class="form-label">Imagen de Perfil</label>
-                <input
-                    type="file"
-                    id="imagen-perfil"
-                    name="imagen-perfil"
-                    class="form-control mb-3"
-                    (change)="onFileSelected($event)"
-                />
+                <div class="mb-3 mt-3">
+                    <input
+                        type="file"
+                        id="imagen-perfil"
+                        name="imagen-perfil"
+                        class="d-none"
+                        (change)="onFileSelected($event)"
+                    />
+                    <label for="imagen-perfil" class="btn btn-outline-secondary">
+                        <i class="bi bi-upload me-2"></i> Subir Imagen
+                    </label>
+                </div>
 
                 <button type="submit" class="btn btn-primary w-100" (click)="modificarPerfil()">
                     Modificar

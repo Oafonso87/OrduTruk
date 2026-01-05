@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="row">
-    <div class="col-md-12 oferta-detalle">
+    <div class="col-md-12 ofertas-detalle">
         <div class="header">
             <h1 class="title">Ofertas</h1>
             <div class="filter-container">
@@ -14,18 +14,18 @@
             >
         </div>
         <div class="row content-list-detail">
-            <div class="list-item-img">
+            <div class="col-12 col-md-12 list-item-img">
                 @if (oferta?.ruta_img) {
                     <img [src]="oferta?.ruta_img" alt="Oferta" />
                 } @else {
                     <img src="assets/img/ofertas.png" alt="Oferta" />
                 }
             </div>
-            <div class="list-item-content">
+            <div class="col-12 col-md-12 list-item-content">
                 <h3 class="item-title">{{ oferta?.titulo }}</h3>
                 <p class="item-transaccion">
-                    Transacción
-                    <span><i class="bi bi-clock me-1"></i>{{ oferta?.horas_estimadas }}</span>
+                    Transacción:
+                    <span><i class="bi bi-clock me-1"></i>{{ oferta?.horas_estimadas }}h</span>
                 </p>
 
                 <p class="item-content">
@@ -48,7 +48,7 @@
                 }
             </div>
 
-            <div class="detalles">
+            <div class="col-12 detalles">
                 <h2>Detalles</h2>
 
                 <ul>

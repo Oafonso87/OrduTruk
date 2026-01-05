@@ -1,8 +1,18 @@
+@use 'sass:color';
 @use 'styles/variables' as *;
 
 .btn-menu {
     border: none;
     background: transparent;
+    color: black;
+
+    // Asegurar color negro en todos los estados
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+        color: black;
+    }
 
     @media (min-width: $breakpoint-lg) {
         display: inline-block;
@@ -19,14 +29,22 @@
         transition: background-color $transition-duration-fast $transition-easing;
 
         &:hover {
-            background-color: darken($color-bg-light-blue, 5%);
+            background-color: color.adjust($color-bg-light-blue, $lightness: -5%);
         }
     }
 
     &.btn-link {
         background: transparent;
+        color: black;
         text-decoration: underline;
         padding: $spacing-xs 4px;
+
+        &:link,
+        &:visited,
+        &:hover,
+        &:active {
+            color: black;
+        }
     }
 
     &.btn-close {

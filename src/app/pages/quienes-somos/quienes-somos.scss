@@ -106,13 +106,7 @@ h3 {
     }
 }
 
-.txt {
-    font-family: 'Roboto Variable', sans-serif;
-    color: #424242;
-    font-size: 16px;
-    line-height: 21px;
-    font-weight: 300;
-}
+// La clase .txt usa los estilos heredados del body (16px desktop, 20px móvil)
 
 // Sección de valores con fondo destacado
 .valores-bg {
