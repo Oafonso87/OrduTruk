@@ -4,6 +4,15 @@
 .btn-menu {
     border: none;
     background: transparent;
+    color: black;
+
+    // Asegurar color negro en todos los estados
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+        color: black;
+    }
 
     @media (min-width: $breakpoint-lg) {
         display: inline-block;
@@ -26,8 +35,16 @@
 
     &.btn-link {
         background: transparent;
+        color: black;
         text-decoration: underline;
         padding: $spacing-xs 4px;
+
+        &:link,
+        &:visited,
+        &:hover,
+        &:active {
+            color: black;
+        }
     }
 
     &.btn-close {

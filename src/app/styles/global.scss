@@ -132,6 +132,10 @@ select,
         width: 100%;
         margin-bottom: 8px;
         color: $color-text;
+
+        &.btn {
+            width: auto;
+        }
     }
 
     input {
@@ -510,5 +514,25 @@ textarea:focus-visible {
         top: 0;
         outline: 2px solid white;
         outline-offset: -2px;
+    }
+}
+
+.btn-group,
+.btn-group-vertical {
+    position: relative;
+    display: flex;
+    vertical-align: middle;
+
+    @media (max-width: 1279px) {
+        flex-direction: column;
+    }
+
+    app-button {
+        margin-bottom: 16px;
+        display: block;
+
+        @media (max-width: $breakpoint-max-md) {
+            text-align: center;
+        }
     }
 }
