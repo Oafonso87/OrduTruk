@@ -19,9 +19,18 @@ body {
     margin: 0;
     padding: 0;
     background-color: #fff;
+    font-family: $font-family-base;
+    font-size: $font-size-base; // 16px para desktop
+    line-height: $line-height-base; // 21px para desktop
 
     @media (max-width: 991px) {
         padding-top: 110px; // Espacio para el header móvil fijo
+    }
+
+    // Tamaño de fuente global optimizado para móvil
+    @media (max-width: $breakpoint-max-md) {
+        font-size: 20px;
+        line-height: 27px;
     }
 }
 
@@ -38,6 +47,12 @@ body {
 .content {
     @include font('content');
     font-weight: 300;
+
+    // Tamaño optimizado para móvil (mejor legibilidad en pantallas táctiles)
+    @media (max-width: $breakpoint-max-md) {
+        font-size: 20px;
+        line-height: 27px;
+    }
 }
 
 // Enlaces con flecha animada
@@ -90,6 +105,7 @@ select,
     border: 1px solid $color-border-light;
 
     font-size: 16px;
+    color: $color-text; // Evita el color azul por defecto del navegador
     cursor: pointer;
     margin-bottom: 16px;
 

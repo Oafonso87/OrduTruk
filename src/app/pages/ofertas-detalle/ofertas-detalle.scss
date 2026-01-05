@@ -1,5 +1,13 @@
 @use 'styles/variables' as *;
 
+// Fix para el .row padre que causa desbordamiento en móvil
+.row {
+    @media (max-width: $breakpoint-max-md) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
 .ofertas-detalle {
     padding: $page-padding-desktop;
 
@@ -10,6 +18,14 @@
     @media (max-width: $breakpoint-max-md) {
         padding: $page-padding-mobile;
     }
+
+    // Prevenir desbordamiento de .row en móvil
+    .row {
+        @media (max-width: $breakpoint-max-md) {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
 }
 
 .content-list {
@@ -18,9 +34,20 @@
     }
 }
 
+.content-list-detail {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
 .list-item-img {
     img {
         width: 100%;
+    }
+
+    @media (max-width: $breakpoint-max-md) {
+        margin-bottom: $spacing-md;
     }
 }
 
