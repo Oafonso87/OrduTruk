@@ -154,10 +154,9 @@ export class CrearDemandas implements OnInit {
                 this.usuario!.horas_saldo = nuevoSaldo;
                 sessionStorage.setItem('user', JSON.stringify(this.usuario));
                 this._usuariosService.notificarCambioSaldo();
-                setTimeout(() => {
+                    window.alert('Demanda publicada correctamente. Se han retenido ' + this.horas + ' horas de tu saldo.');
                     this.resetForm();
                     this._router.navigate(['/demandas']);
-                }, 1000);
             },
             error: (err) => {
                 console.error('Error al descontar saldo:', err);

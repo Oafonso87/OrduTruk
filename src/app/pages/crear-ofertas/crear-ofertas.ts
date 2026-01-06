@@ -123,10 +123,9 @@ export class CrearOfertas implements OnInit {
 
         this._serviciosService.createServicio(nuevaOferta).subscribe({
             next: (response: ApiResponse<Servicios>) => {
-                setTimeout(() => {
-                    this.resetForm();
-                    this._router.navigate(['/ofertas']);
-                }, 1500);
+                alert(response.message || 'Oferta creada con éxito');
+                this.resetForm();
+                this._router.navigate(['/ofertas']);                
             },
             error: (error) => {
                 console.error("Error al crear la oferta:", error);

@@ -26,8 +26,8 @@ export class TransaccionesService {
     return this._http.get<ApiResponse<Transacciones[]>>(`${this.url}/transacciones`);
   }
 
-  getTransaccionesById(id: number): Observable<ApiResponse<Transacciones[]>> {
-    return this._http.get<ApiResponse<Transacciones[]>>(`${this.url}/transacciones/${id}`);
+  getTransaccionesById(id: number): Observable<ApiResponse<Transacciones>> {
+    return this._http.get<ApiResponse<Transacciones>>(`${this.url}/transacciones/${id}`);
   }
 
   createTransaccion(transaccion: any): Observable<ApiResponse<Transacciones>> {
