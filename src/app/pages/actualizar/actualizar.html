@@ -1,0 +1,120 @@
+<app-header></app-header>
+<div class="row">
+    <div class="col-md-12 crear-oferta">
+        <div class="header">
+            <h1 class="title">Actualizar Servicio</h1>
+            <div class="filter-container"></div>
+        </div>
+
+        <form
+            class="row content-list-detail form-content"
+            #formOferta="ngForm"
+            (ngSubmit)="actualizarServicio()"
+        >
+            <div class="list-item-img">
+                <label for="titulo">Título</label>
+                <input
+                    type="text"
+                    id="titulo"
+                    name="titulo"
+                    [(ngModel)]="titulo"
+                    #campoTitulo="ngModel"
+                    required
+                />
+                @if (campoTitulo.touched && titulo.trim() === '') {
+                    <span class="error">El campo Título no puede estar vacío</span>
+                }
+                <select
+                    class="form-select"
+                    aria-label="Categoría"
+                    name="categoria"
+                    [(ngModel)]="categoria"
+                >
+                    <option [ngValue]="null">Categoría</option>
+                    @for (categoria of categorias; track categoria.id) {
+                        <option [value]="categoria.id">{{ categoria.nombre }}</option>
+                    }
+                </select>
+                <select
+                    class="form-select"
+                    aria-label="Provincia"
+                    name="provincia"
+                    [(ngModel)]="provincia"
+                    (ngModelChange)="onProvinciaChange($event)"
+                >
+                    <option [ngValue]="null">Provincia</option>
+                    @for (provincia of provincias; track provincia.id) {
+                        <option [value]="provincia.id">{{ provincia.nombre }}</option>
+                    }
+                </select>
+                <select
+                    class="form-select"
+                    aria-label="Localidad"
+                    name="ciudad"
+                    [(ngModel)]="poblacion"
+                    [disabled]="!provincia"
+                >
+                    <option [ngValue]="null">Localidad</option>
+                    @for (poblacion of poblaciones; track poblacion.id) {
+                        <option [value]="poblacion.id">{{ poblacion.nombre }}</option>
+                    }
+                </select>
+            </div>
+
+            <div class="list-item-content">
+                <label for="transaccion">Transacción de horas</label>
+                <div class="transaccion-input">
+                    <input
+                        type="number"
+                        id="transaccion"
+                        name="transaccion"
+                        [(ngModel)]="horas"
+                        required
+                        min="1"
+                    />
+                    <button type="button" (click)="decrementarHoras()">
+                        <i class="bi bi-dash"></i>
+                    </button>
+                    <button type="button" (click)="incrementarHoras()">
+                        <i class="bi bi-plus"></i>
+                    </button>
+                </div>
+
+                <label for="descripcion">Descripción</label>
+                <textarea
+                    name="descripcion"
+                    id="descripcion"
+                    class="descripcion"
+                    [(ngModel)]="descripcion"
+                    required
+                ></textarea>
+
+                <div class="mb-3 mt-3">
+                    <input
+                        type="file"
+                        id="archivo"
+                        name="archivo"
+                        class="d-none"
+                        (change)="onFileSelected($event)"
+                    />
+                    <label for="archivo" class="btn btn-outline-secondary">
+                        <i class="bi bi-upload me-2"></i> Subir Imagen
+                    </label>
+                    <span class="ms-2 text-muted small">
+                        {{ imagen?.name }}
+                    </span>
+                </div>
+
+                <button
+                    type="submit"
+                    [class]="'btn btn-primary'"
+                    [disabled]="!formOferta.form.valid"
+                >
+                    Actualizar Servicio
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-footer></app-footer>

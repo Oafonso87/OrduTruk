@@ -89,7 +89,7 @@ export class Registro implements OnInit {
     nuevoUsuario.append('provincia_id', String(this.provincia));
     nuevoUsuario.append('ciudad_id', String(this.ciudad));
     nuevoUsuario.append('descripcion', '');
-    nuevoUsuario.append('horas_saldo', '5');
+    nuevoUsuario.append('horas_saldo', '20');
     nuevoUsuario.append('valoracion', '0');
     if (this.imagen) {
       nuevoUsuario.append('img', this.imagen);

@@ -12,8 +12,8 @@ export interface Servicios {
     titulo: string;
     descripcion: string;
     ruta_img: string;
-    provincia: number;
-    ciudad: number;
+    provincia_id: number;
+    ciudad_id: number;
     horas_estimadas: number;
     estado: string;
     created_at: string;
