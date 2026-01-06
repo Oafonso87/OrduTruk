@@ -152,16 +152,18 @@
                                 }
                             </li>
                             @if (oferta.estado === 'activo') {
-                                <div class="btn-group ms-3">
+                                <div class="btn-group-actions ms-3">
                                     <button
-                                        class="btn btn-sm btn-outline-primary"
+                                        class="btn-icon btn-icon-primary"
                                         [routerLink]="['/actualizar', oferta.id]"
+                                        title="Actualizar"
                                     >
-                                        > <i class="bi bi-pencil"></i> Actualizar
+                                        <i class="bi bi-pencil"></i> Actualizar
                                     </button>
                                     <button
-                                        class="btn btn-sm btn-outline-danger"
+                                        class="btn-icon btn-icon-danger"
                                         (click)="cancelar(oferta.id)"
+                                        title="Cancelar"
                                     >
                                         <i class="bi bi-x-circle"></i> Cancelar
                                     </button>
@@ -238,16 +240,18 @@
                                 }
                             </li>
                             @if (demanda.estado === 'activo') {
-                                <div class="btn-group ms-3">
+                                <div class="btn-group-actions ms-3">
                                     <button
-                                        class="btn btn-sm btn-outline-primary"
+                                        class="btn-icon btn-icon-primary"
                                         [routerLink]="['/actualizar', demanda.id]"
+                                        title="Actualizar"
                                     >
-                                        > <i class="bi bi-pencil"></i> Actualizar
+                                        <i class="bi bi-pencil"></i> Actualizar
                                     </button>
                                     <button
-                                        class="btn btn-sm btn-outline-danger"
+                                        class="btn-icon btn-icon-danger"
                                         (click)="cancelar(demanda.id)"
+                                        title="Cancelar"
                                     >
                                         <i class="bi bi-x-circle"></i> Cancelar
                                     </button>
@@ -331,8 +335,9 @@
                                 transaccion.usuario_ofertante_id === usuario?.id
                             ) {
                                 <button
-                                    class="btn btn-sm btn-outline-danger"
+                                    class="btn-icon btn-icon-danger"
                                     (click)="rechazar(transaccion.id); $event.stopPropagation()"
+                                    title="Rechazar"
                                 >
                                     <i class="bi bi-x-circle"></i> Rechazar
                                 </button>
