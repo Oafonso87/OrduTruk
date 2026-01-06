@@ -71,7 +71,6 @@ export class Perfil implements OnInit {
   public p_actual: number = 1;
   public itemsPorPagina: number = 3;
 
-  modificar() {}
 
   loadProvincias() {
     this._ubicacionesService.getProvincias().subscribe({

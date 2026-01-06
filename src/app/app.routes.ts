@@ -16,6 +16,7 @@ import { DemandasDetalle } from './pages/demandas-detalle/demandas-detalle';
 import { authGuard } from './guards/auth-guard';
 import { TerminosUso } from './pages/terminos-uso/terminos-uso';
 import { TransaccionDetalle } from './pages/transaccion-detalle/transaccion-detalle';
+import { Actualizar } from './pages/actualizar/actualizar';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -33,5 +34,6 @@ export const routes: Routes = [
     { path: 'perfil', component: Perfil, canActivate:[authGuard] },
     { path: 'mensajes', component: Mensajes, canActivate:[authGuard] },
     { path: 'transaccion-detalle/:id', component: TransaccionDetalle, canActivate:[authGuard] },
+    { path: 'actualizar/:id', component: Actualizar, canActivate:[authGuard] },
     { path: '**', component: HomeComponent }
 ];

@@ -126,7 +126,7 @@
                 <div class="row list-item mensaje-list">
                     @for (oferta of ofertasPaginadas; track oferta.id) {
                         <ul class="list-item-content">
-                            <li>22/06/2025</li>
+                            <li>{{ oferta.created_at | date: 'dd/MM/yyyy' }}</li>
                             <li>{{ oferta.titulo }}</li>
                             <li>Horas a recibir: {{ oferta.horas_estimadas }}</li>
                             <li>
@@ -153,7 +153,10 @@
                             </li>
                             @if (oferta.estado === 'activo') {
                                 <div class="btn-group ms-3">
-                                    <button class="btn btn-sm btn-outline-primary">
+                                    <button
+                                        class="btn btn-sm btn-outline-primary"
+                                        [routerLink]="['/actualizar', oferta.id]"
+                                    >
                                         > <i class="bi bi-pencil"></i> Actualizar
                                     </button>
                                     <button
@@ -209,7 +212,7 @@
                 <div class="row list-item mensaje-list">
                     @for (demanda of demandasPaginadas; track demanda.id) {
                         <ul class="list-item-content">
-                            <li>22/06/2025</li>
+                            <li>{{ demanda.created_at | date: 'dd/MM/yyyy' }}</li>
                             <li>{{ demanda.titulo }}</li>
                             <li>Horas a entregar: {{ demanda.horas_estimadas }}</li>
                             <li>
@@ -236,7 +239,10 @@
                             </li>
                             @if (demanda.estado === 'activo') {
                                 <div class="btn-group ms-3">
-                                    <button class="btn btn-sm btn-outline-primary">
+                                    <button
+                                        class="btn btn-sm btn-outline-primary"
+                                        [routerLink]="['/actualizar', demanda.id]"
+                                    >
                                         > <i class="bi bi-pencil"></i> Actualizar
                                     </button>
                                     <button
@@ -314,7 +320,7 @@
                                         >
                                     }
                                     @case ('cancelado') {
-                                        <span class="badge bg-warning-subtle text-warning"
+                                        <span class="badge bg-danger-subtle text-danger"
                                             >Rechazado</span
                                         >
                                     }
