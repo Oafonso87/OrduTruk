@@ -103,6 +103,7 @@ export class Registro implements OnInit {
         localStorage.setItem('access_token', response.access_token);
         sessionStorage.setItem('user', JSON.stringify(response.user));
         this.resetForm();
+        window.alert('Usuario creado con éxito, se le redireccionará a la sección de ofertas.');
         this._router.navigate(['/ofertas']);        
       },
       error: (error) => {
