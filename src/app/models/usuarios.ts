@@ -7,7 +7,8 @@ export interface Usuario {
     ciudad_id: number;
     descripcion: string;
     horas_saldo: number;
-    valoracion: number
+    valoracion: number;
+    ruta_img: string;
     rol_id: number;
     password?: string;
     direccion?: string;    

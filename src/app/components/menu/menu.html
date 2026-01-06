@@ -1,43 +1,73 @@
 <nav class="menu">
-    <button class="hamburger-btn" (click)="toggleMenu()">
-        <i class="bi" [class.bi-list]="!isMenuOpen" [class.bi-x-lg]="isMenuOpen"></i>
-    </button>
+    @if (!isInfoPage) {
+        <button
+            class="hamburger-btn"
+            (click)="toggleMenu()"
+            aria-label="Abrir menú de navegación"
+            [attr.aria-expanded]="isMenuOpen"
+        >
+            <i
+                class="bi"
+                [class.bi-list]="!isMenuOpen"
+                [class.bi-x-lg]="isMenuOpen"
+                aria-hidden="true"
+            ></i>
+        </button>
+    }
 
     @if (isPublic) {
         <ul class="menu-container" [class.mobile-open]="isMenuOpen">
             <li>
                 <app-button
                     [class]="'btn-menu'"
-                    label="Quienes somos"
+                    label="Quiénes somos"
                     routerLink="/quienes-somos"
                 ></app-button>
             </li>
         </ul>
+    } @else if (isInfoPage) {
     } @else {
         <ul class="menu-container" [class.mobile-open]="isMenuOpen">
-            <li>
+            <li class="showdesktop">
                 <div class="dropdown">
                     <button
                         class="dropdown-button dropdown-toggle"
                         type="button"
                         (click)="toggleDropdown()"
                         [attr.aria-expanded]="dropdownOpen"
+                        aria-label="Menú crear oferta o demanda"
                     >
                         CREAR
                     </button>
                     <ul class="dropdown-menu" [class.show]="dropdownOpen">
                         <li>
-                            <a class="dropdown-item" routerLink="/crearoferta" role="button">
-                                Oferta
-                            </a>
+                            <a class="dropdown-item" routerLink="/crearoferta"> Oferta </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" routerLink="/demandas" role="button">
+                            <a class="dropdown-item" routerLink="/creardemanda" role="button">
                                 Demanda
                             </a>
                         </li>
                     </ul>
                 </div>
+            </li>
+            <li class="showmobile haschild">
+                <ul class="crearmobile">
+                    <li>
+                        <app-button
+                            [class]="'btn-menu'"
+                            label="Crear Ofertas"
+                            routerLink="/crearoferta"
+                        ></app-button>
+                    </li>
+                    <li>
+                        <app-button
+                            [class]="'btn-menu'"
+                            label="Crear Demandas"
+                            routerLink="/creardemanda"
+                        ></app-button>
+                    </li>
+                </ul>
             </li>
             <li>
                 <app-button [class]="'btn-menu'" label="Ofertas" routerLink="/ofertas"></app-button>
@@ -49,29 +79,83 @@
                     routerLink="/demandas"
                 ></app-button>
             </li>
-            <li>
+            <li class="showdesktop">
                 <span class="bolsa-horas"
                     ><i class="bi bi-clock"></i>{{ usuario?.horas_saldo }}</span
                 >
             </li>
-            <li>
+            <li class="showdesktop">
+                <div class="contenedor-perfil">
+                    <div class="avatar-perfil" (click)="toggleMenuPerfil()">
+                        @if (usuario?.ruta_img) {
+                            <img
+                                [src]="usuario?.ruta_img"
+                                alt="User Avatar"
+                                class="imagen-avatar"
+                            />
+                        } @else {
+                            <img
+                                src="assets/img/perfil.png"
+                                alt="Generic Avatar"
+                                class="imagen-avatar"
+                            />
+                        }
+                    </div>
+                    <ul class="menu-desplegable-perfil" [class.show]="menuPerfilAbierto">
+                        <li>
+                            <a class="dropdown-item" routerLink="/perfil">
+                                <i class="bi bi-person"></i> Perfil
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                class="dropdown-item item-mensajes"
+                                (click)="irAMensajes()"
+                                style="cursor: pointer"
+                            >
+                                <i class="bi bi-chat-dots"></i> Mensajes
+                                @if (mensajesNoLeidos.length > 0) {
+                                    <span class="badge">{{ mensajesNoLeidos.length }}</span>
+                                }
+                            </a>
+                        </li>
+                        <hr class="dropdown-divider" />
+                        <li>
+                            <a
+                                class="dropdown-item item-cerrar-sesion"
+                                (click)="logout()"
+                                role="button"
+                            >
+                                <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="showmobile">
                 <app-button
-                    [class]="'btn-menu btn-link'"
+                    [class]="'btn-menu btn-link btn-perfil'"
                     label="Perfil"
                     routerLink="/perfil"
                     icon="bi bi-person"
                 ></app-button>
             </li>
-            <li>
+            <li class="showmobile">
                 <app-button
-                    [class]="'btn-menu btn-link'"
+                    [class]="'btn-menu btn-link btn-mensajes'"
                     label="Mensajes"
                     routerLink="/mensajes"
                     icon="bi bi-chat-dots"
                 ></app-button>
             </li>
-            <li>
-                <app-button [class]="'btn-menu btn-close'" label="" (click)="logout()"></app-button>
+            <li class="showmobile">
+                <app-button
+                    [class]="'btn-menu btn-close btn-cerrar'"
+                    label="Cerrar Sesión"
+                    routerLink="/logout"
+                    icon="bi bi-x-lg"
+                    (click)="logout()"
+                ></app-button>
             </li>
         </ul>
     }

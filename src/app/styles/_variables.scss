@@ -1,0 +1,165 @@
+// ============================================
+// TOKENS DE DISEÑO - OrduTruk
+// ============================================
+// Sistema centralizado de variables de diseño
+// ============================================
+
+// --------------------------------------------
+// COLORES
+// --------------------------------------------
+
+// Colores Primarios
+$color-primary: #ffba42; // Color original de marca (Restaurado por preferencia estética del usuario)
+$color-primary-blue: #0d6efd;
+
+// Colores de Acento
+$color-accent-orange: #e66f3f;
+$color-accent-teal: #2d787d;
+$color-accent-cyan: #00bcd4;
+$color-bg-light-blue: #d3f0f9;
+$color-bg-beige: #e9e3cf;
+
+// Colores de Texto
+$color-text: #424242;
+$color-text-muted: #757575; // Mejorado de #949494 para mejor contraste
+$color-text-white: #fff;
+$color-text-black: #000;
+
+// Colores de Estado
+$color-error: #c00000;
+$color-success: #28a745;
+$color-warning: #ffc107;
+
+// Colores de Borde y Fondo
+$color-border: #ebebeb;
+$color-border-light: #ccc;
+$color-bg-white: #fff;
+$color-bg-gray-light: #f8f9fa;
+
+// --------------------------------------------
+// ESPACIADO
+// --------------------------------------------
+
+$spacing-xs: 8px;
+$spacing-sm: 16px;
+$spacing-md: 24px;
+$spacing-lg: 40px;
+$spacing-xl: 64px;
+
+// Padding específico de páginas
+$page-padding-desktop: 50px 65px;
+$page-padding-tablet: 35px 45px;
+$page-padding-mobile: 20px 45px;
+
+// --------------------------------------------
+// TIPOGRAFÍA
+// --------------------------------------------
+
+// Familias tipográficas
+$font-family-display: 'Bakbak One', cursive;
+$font-family-base: 'Roboto Variable', sans-serif;
+
+// Tamaños de fuente
+$font-size-base: 16px;
+$font-size-sm: 14px;
+$font-size-lg: 20px;
+$font-size-xl: 32px;
+$font-size-title: 70px;
+
+// Interlineado
+$line-height-base: 21px;
+$line-height-relaxed: 40px;
+$line-height-title: 70px; // Mantenido como está por petición del usuario
+
+// Pesos de fuente
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-semibold: 600;
+
+// --------------------------------------------
+// BORDES Y RADIOS
+// --------------------------------------------
+
+$border-radius: 10px;
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-xl: 20px;
+$border-radius-circle: 50%;
+
+// --------------------------------------------
+// SOMBRAS
+// --------------------------------------------
+
+$box-shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.15);
+$box-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+$box-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+$box-shadow-focus: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+$text-shadow-title: 0 4px 12px rgba(0, 0, 0, 0.08); // Sombra muy suave y difuminada para un efecto premium
+
+// --------------------------------------------
+// BREAKPOINTS
+// --------------------------------------------
+// Alineados con Bootstrap para consistencia
+
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Max-widths para uso con max-width
+$breakpoint-max-sm: 575.98px;
+$breakpoint-max-md: 767.98px;
+$breakpoint-max-lg: 991.98px; // Para mantener compatibilidad con código existente
+$breakpoint-max-xl: 1199.98px;
+
+// --------------------------------------------
+// TAMAÑOS DE COMPONENTES
+// --------------------------------------------
+
+// Botones
+$btn-min-width: 220px;
+$btn-min-height: 60px;
+$btn-min-height-sm: 44px;
+
+// Campos de formulario
+$input-min-height: 46px;
+$select-min-height: 48px;
+
+// Touch targets (accesibilidad)
+$touch-target-min: 44px;
+
+// --------------------------------------------
+// Z-INDEX
+// --------------------------------------------
+
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// --------------------------------------------
+// TRANSICIONES Y ANIMACIONES
+// --------------------------------------------
+
+$transition-duration-fast: 0.2s;
+$transition-duration-normal: 0.3s;
+$transition-duration-slow: 0.5s;
+
+$transition-easing: ease;
+$transition-easing-in-out: ease-in-out;
+$transition-easing-out: ease-out;
+
+// --------------------------------------------
+// LAYOUT
+// --------------------------------------------
+
+$max-width-container: 1400px;
+$grid-gap: 20px;
+$grid-gap-sm: 10px;
+$grid-gap-lg: 30px;

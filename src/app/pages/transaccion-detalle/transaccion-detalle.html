@@ -1,0 +1,205 @@
+<!-- <app-header></app-header>
+
+<div class="row">
+    <div class="col-md-12 transaccion-detalle">
+        <div class="header">
+            <h1 class="title">Transacción</h1>
+            <div class="filter-container">
+                <h2 class="content">Detalles de la transacción seleccionada</h2>
+            </div>
+        </div>
+
+        <div class="row back-link">
+            <a routerLink="/perfil" class="arrow-link-back mb-4 d-inline-block">Volver al Perfil</a>
+        </div>
+        <div class="row content-list-detail">
+            
+            <div class="list-item-content col-md-6">
+                <h3 class="item-title">{{ transaccion?.servicio?.titulo }}</h3>
+                <p class="item-transaccion">
+                    Transacción
+                    <span
+                        ><i class="bi bi-clock me-1"> {{ transaccion?.horas }}</i
+                        >horas_estimadas
+                    </span>
+                </p>
+
+                <p class="item-content">{{ transaccion?.servicio?.descripcion }}</p>
+            </div>
+            <div class="list-item-content col-md-6">
+                <h3 class="item-title">Lo que recibes a cambio</h3>
+
+                <h4 class="exchange-title">Reparación de Bicicleta</h4>
+                <p class="item-transaccion">
+                    <span><i class="bi bi-clock me-1"></i>2 horas</span>
+                </p>
+
+                <p class="item-content">
+                    Revisión completa de frenos, cambios y ajuste de ruedas. Incluye limpieza de
+                    cadena y engrase.
+                </p>
+
+                <div class="user-info mt-3">
+                    <p><strong>Voluntario:</strong> María González</p>
+                    <p>
+                        <strong>Valoración:</strong>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                    </p>
+                    <p><strong>Categoría:</strong> Reparaciones</p>
+                    <p><strong>Provincia:</strong> Bizkaia</p>
+                    <p><strong>Localidad:</strong> Bilbao</p>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <app-button
+                    label="Acuerdo completado"
+                    [class]="'btn btn-primary me-1'"
+                ></app-button>
+                <app-button label="Rechazar" [class]="'btn btn-danger'"></app-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer> -->
+<app-header></app-header>
+
+<div class="row">
+    <div class="col-md-12 transaccion-detalle">
+        <div class="header">
+            <h1 class="title">Detalle del Intercambio</h1>
+            <div class="filter-container">
+                <h2 class="content">Información sobre el servicio y contacto</h2>
+            </div>
+        </div>
+
+        <div class="row back-link">
+            <a routerLink="/perfil" class="arrow-link-back mb-4 d-inline-block">Volver al Perfil</a>
+        </div>
+
+        @if (transaccion) {
+            <div class="row content-list-detail">
+                <div class="list-item-content col-md-6 border-end">
+                    <h3 class="item-title">Servicio solicitado</h3>
+                    <h4 class="text-primary">{{ transaccion.servicio?.titulo }}</h4>
+
+                    <p class="item-transaccion">
+                        <span
+                            ><i class="bi bi-clock me-1"></i> {{ transaccion.horas }} horas
+                            acordadas</span
+                        >
+                        <br />
+                        <small class="text-muted"
+                            >Solicitado el: {{ transaccion.created_at | date: 'dd/MM/yyyy' }}</small
+                        >
+                    </p>
+
+                    <p class="item-content">{{ transaccion.servicio?.descripcion }}</p>
+
+                    <div class="mt-4">
+                        <span
+                            class="badge"
+                            [ngClass]="{
+                                'bg-warning-subtle text-warning':
+                                    transaccion.estado === 'pendiente',
+                                'bg-success-subtle text-success':
+                                    transaccion.estado === 'confirmado',
+                                'bg-danger-subtle text-danger': transaccion.estado === 'cancelado',
+                            }"
+                        >
+                            Estado: {{ transaccion.estado | uppercase }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="list-item-content col-md-6">
+                    <h3 class="item-title">Datos del Intercambio</h3>
+
+                    @if (usuarioLogueado?.id === transaccion.usuario_solicitante_id) {
+                        <h4 class="exchange-title">Estás contactando con (Ofertante):</h4>
+                        <div class="user-info mt-3">
+                            <p>
+                                <strong>Nombre:</strong> {{ transaccion.usuario_ofertante?.nombre }}
+                                {{ transaccion.usuario_ofertante?.apellido }}
+                            </p>
+                            <p>
+                                <strong>Email:</strong> {{ transaccion.usuario_ofertante?.email }}
+                            </p>
+                            <div class="rating-container mt-4 p-3 border rounded bg-light">
+                                <h6>Valorar al voluntario:</h6>
+                                <div class="stars fs-4">
+                                    @for (star of [1, 2, 3, 4, 5]; track star) {
+                                        <i
+                                            class="bi pointer"
+                                            [ngClass]="
+                                                star <= puntuacionSeleccionada
+                                                    ? 'bi-star-fill text-warning'
+                                                    : 'bi-star text-secondary'
+                                            "
+                                            (click)="setRating(star)"
+                                            style="cursor: pointer"
+                                        >
+                                        </i>
+                                    }
+                                    <span class="ms-2 fs-6"
+                                        >({{ puntuacionSeleccionada }} / 5)</span
+                                    >
+                                </div>
+                                <small class="text-muted"
+                                    >Haz clic en las estrellas para puntuar</small
+                                >
+                            </div>
+                        </div>
+                    } @else {
+                        <h4 class="exchange-title">Te ha contactado (Solicitante):</h4>
+                        <div class="user-info mt-3">
+                            <p>
+                                <strong>Nombre:</strong>
+                                {{ transaccion.usuario_solicitante?.nombre }}
+                                {{ transaccion.usuario_solicitante?.apellido }}
+                            </p>
+                            <p>
+                                <strong>Email:</strong> {{ transaccion.usuario_solicitante?.email }}
+                            </p>
+                        </div>
+                    }
+
+                    <div class="mt-4 p-3 bg-light rounded">
+                        <h6><i class="bi bi-info-circle"></i> Recordatorio:</h6>
+                        <small
+                            >Una vez realizado el servicio, el solicitante debe marcar el acuerdo
+                            como completado para transferir las horas.</small
+                        >
+                    </div>
+                </div>
+
+                <div class="btn-group mt-5">
+                    @if (transaccion.estado === 'pendiente') {
+                        @if (usuarioLogueado?.id === transaccion.usuario_solicitante_id) {
+                            <app-button
+                                (click)="aceptarOferta()"
+                                label="He recibido el servicio (Pagar)"
+                                [class]="'btn btn-success me-2'"
+                            >
+                            </app-button>
+
+                            <app-button
+                                (click)="rechazar()"
+                                label="Cancelar Transacción"
+                                [class]="'btn btn-outline-danger'"
+                            >
+                            </app-button>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<app-footer></app-footer>

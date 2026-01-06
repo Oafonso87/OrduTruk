@@ -1,8 +1,40 @@
+@use 'styles/variables' as *;
+
 .ofertas {
-    padding: 50px 65px;
+    padding: $page-padding-desktop;
+
+    @media (max-width: $breakpoint-max-lg) {
+        padding: $page-padding-tablet;
+    }
+
+    @media (max-width: $breakpoint-max-md) {
+        padding: $page-padding-mobile;
+    }
 }
 
 h3 a {
     text-decoration: none;
     color: black;
+}
+
+.item-title {
+    a {
+        @media (max-width: $breakpoint-max-md) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
+
+.list-item-img {
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    @media (max-width: $breakpoint-max-md) {
+        margin-bottom: $spacing-md;
+    }
 }

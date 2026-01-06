@@ -60,7 +60,7 @@ export class OfertasComponent implements OnInit {
   loadServicios() {
     this._serviciosService.getServicios().subscribe({
       next: (response: ApiResponse<Servicios[]>) => {
-        this.ofertas = response.data.filter(s => s.tipo === 'oferta');
+        this.ofertas = response.data.filter(s => s.tipo === 'oferta' && s.estado === 'activo');
         this.ofertasFiltradas = [...this.ofertas];
         this.updateOfertas();
         console.log('Ofertas cargadas:', this.ofertas);

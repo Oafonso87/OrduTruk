@@ -1,3 +1,5 @@
+@use 'styles/variables' as *;
+
 // Modal Styles
 .modal-overlay {
     position: fixed;
@@ -9,31 +11,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: $z-index-modal;
 }
 
 .modal-content {
     background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: $spacing-lg;
+    border-radius: $border-radius-md;
+    box-shadow: $box-shadow-md;
     position: relative;
-
-    // Desktop layout (default)
     width: 50vw;
     min-width: 500px;
     min-height: 170px;
 
-    // Mobile/Tablet responsive layout (Bottom Sheet)
-    @media (max-width: 991px) {
+    @media (max-width: $breakpoint-max-lg) {
         width: 100%;
         min-width: auto;
-        padding: 20px;
+        padding: $spacing-lg;
         position: absolute;
         bottom: 0;
         left: 0;
-        border-radius: 20px 20px 0 0;
-        animation: slideUp 0.3s ease-out;
+        border-radius: $border-radius-xl $border-radius-xl 0 0;
+        animation: slideUp $transition-duration-normal $transition-easing-out;
     }
 }
 
@@ -41,24 +40,32 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: $spacing-lg;
 
     h2 {
         margin: 0;
-        font-size: 24px;
-        color: #333;
+        font-size: $font-size-xl;
+        color: $color-text;
+        font-family: $font-family-base;
     }
 
     .close-btn {
         background: none;
         border: none;
-        font-size: 24px;
+        font-size: $font-size-xl;
         cursor: pointer;
         padding: 0;
-        color: #666;
+        color: $color-text-muted;
+        transition: color $transition-duration-fast $transition-easing;
 
         &:hover {
-            color: #333;
+            color: $color-text;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-primary-blue;
+            outline-offset: 2px;
+            border-radius: $border-radius-sm;
         }
     }
 }
@@ -80,7 +87,7 @@
     .btn {
         min-width: auto !important;
         min-height: auto !important;
-        font-family: Roboto;
-        font-size: 16px;
+        font-family: $font-family-base;
+        font-size: $font-size-base;
     }
 }

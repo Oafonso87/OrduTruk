@@ -11,10 +11,12 @@ export interface Servicios {
     tipo: string;
     titulo: string;
     descripcion: string;
-    provincia: number;
-    ciudad: number;
+    ruta_img: string;
+    provincia_id: number;
+    ciudad_id: number;
     horas_estimadas: number;
     estado: string;
+    created_at: string;
     usuario?: Usuario;
     categoria?: Categorias;
     provincia_relacion?: Provincias;

@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 import { ApiResponse } from "../models/apiresponse";
 import { Usuario } from "../models/usuarios";
 import { LoginResponse } from "../models/loginresponse";
-
 
 
 @Injectable({
@@ -15,14 +14,14 @@ export class UsuariosService {
 
   private url: string = 'https://proyecto-daw-backend.onrender.com/api';
 
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  private actualizarSaldoSource = new Subject<void>();
+  actualizarSaldo$ = this.actualizarSaldoSource.asObservable();
 
   constructor(public _http: HttpClient) { }
 
+  notificarCambioSaldo() {
+    this.actualizarSaldoSource.next();
+  }
 
   getUsuarios(): Observable<ApiResponse<Usuario[]>> {
     return this._http.get<ApiResponse<Usuario[]>>(`${this.url}/users`);
@@ -32,12 +31,15 @@ export class UsuariosService {
     return this._http.get<ApiResponse<Usuario>>(`${this.url}/users/${id}`);
   }
 
-  createUsuario(user: Usuario): Observable<ApiResponse<LoginResponse>> {
-    return this._http.post<ApiResponse<LoginResponse>>(`${this.url}/register`, user, this.httpOptions);
-  }
+  createUsuario(formData: FormData): Observable<LoginResponse> {
+    return this._http.post<LoginResponse>(`${this.url}/register`, formData);
+  }  
 
-  updateUsuario(user: Usuario): Observable<ApiResponse<Usuario>> {
-    return this._http.put<ApiResponse<Usuario>>(`${this.url}/users/${user.id}`, user, this.httpOptions);
+  updateUsuario(id: number, formData: FormData): Observable<ApiResponse<Usuario>> {
+    if (!formData.has('_method')) {
+    formData.append('_method', 'PUT');
+    }    
+    return this._http.post<ApiResponse<Usuario>>(`${this.url}/users/${id}`, formData);
   }
 
   deleteUsuario(id: number): Observable<ApiResponse<any>> {

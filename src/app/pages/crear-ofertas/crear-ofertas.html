@@ -12,7 +12,7 @@
             (ngSubmit)="publicarOferta()"
         >
             <div class="list-item-img">
-                <label for="titulo">Titulo</label>
+                <label for="titulo">Título</label>
                 <input
                     type="text"
                     id="titulo"
@@ -64,7 +64,14 @@
             <div class="list-item-content">
                 <label for="transaccion">Transacción de horas</label>
                 <div class="transaccion-input">
-                    <input type="number" id="transaccion" name="transaccion" [(ngModel)]="horas" />
+                    <input
+                        type="number"
+                        id="transaccion"
+                        name="transaccion"
+                        [(ngModel)]="horas"
+                        required
+                        min="1"
+                    />
                     <button type="button" (click)="decrementarHoras()">
                         <i class="bi bi-dash"></i>
                     </button>
@@ -79,13 +86,23 @@
                     id="descripcion"
                     class="descripcion"
                     [(ngModel)]="descripcion"
+                    required
                 ></textarea>
 
                 <div class="mb-3 mt-3">
-                    <input type="file" id="direccion" name="direccion" class="d-none" />
-                    <label for="direccion" class="btn btn-outline-secondary">
+                    <input
+                        type="file"
+                        id="archivo"
+                        name="archivo"
+                        class="d-none"
+                        (change)="onFileSelected($event)"
+                    />
+                    <label for="archivo" class="btn btn-outline-secondary">
                         <i class="bi bi-upload me-2"></i> Subir Imagen
                     </label>
+                    <span class="ms-2 text-muted small">
+                        {{ imagen?.name }}
+                    </span>
                 </div>
 
                 <button

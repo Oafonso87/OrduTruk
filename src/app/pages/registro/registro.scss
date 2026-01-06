@@ -1,22 +1,24 @@
+@use 'styles/variables' as *;
+
+// Contenedor principal de la página de registro
 .registro-content {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-    /*justify-content: space-between;
-
-    /*align-items: center;
-    height: 100vh;*/
-
     padding: 20px 65px 50px 65px;
-    //border: 1px solid red;
 }
 
+// Introducción al formulario
 .intro {
     padding-right: 65px;
-    //border: 1px solid blue;
+}
+.terminos {
+    color: #000;
+    font-weight: 400;
 }
 
+// Formulario de registro (columna izquierda/superior)
 .form-content {
     display: flex;
     flex-direction: column;
@@ -24,12 +26,22 @@
     align-items: flex-start;
 }
 
+// Imagen decorativa del registro (columna derecha)
 .registro-img {
     background-image: url('/assets/img/registro.png');
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
-    min-height: 734px;
+    min-height: 50vh;
+
+    @media (min-width: $breakpoint-md) {
+        min-height: 60vh;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        min-height: 734px;
+    }
 }
 
 @media (max-width: 991px) {
@@ -46,5 +58,11 @@
 
     .form-content {
         width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .registro-content {
+        padding: 20px 45px;
     }
 }

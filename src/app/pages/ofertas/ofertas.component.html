@@ -64,27 +64,29 @@
         <div class="content-list">
             @for (oferta of ofertasPaginadas; track oferta.id) {
                 <div class="row list-item">
-                    <div class="col-3 list-item-img">
-                        <img src="/assets/img/ofertas.png" alt="Oferta" />
+                    <div class="col-12 col-md-3 list-item-img">
+                        <!-- <img src="/assets/img/ofertas.png" alt="Oferta" /> -->
+                        @if (oferta?.ruta_img) {
+                            <img [src]="oferta?.ruta_img" alt="Oferta" />
+                        } @else {
+                            <img src="assets/img/ofertas.png" alt="Oferta" />
+                        }
                     </div>
-                    <div class="col-9 list-item-content">
+                    <div class="col-12 col-md-9 list-item-content">
                         <h3 class="item-title">
-                            <!-- <a routerLink="/ofertasdetalle" (click)="guardarOferta(oferta)"
-                                >{{ oferta.titulo
-                                }}<span -->
                             <a [routerLink]="['/ofertasdetalle', oferta.id]">
                                 {{ oferta.titulo }}
-                                <span
-                                    ><i class="bi bi-clock me-1"></i
-                                    >{{ oferta.horas_estimadas }}</span
-                                ></a
-                            >
+                                <span>
+                                    <i class="bi bi-clock me-1"></i>
+                                    {{ oferta.horas_estimadas }}
+                                </span>
+                            </a>
                         </h3>
-                        <p class="item-tag">{{ oferta.categoria!.nombre }}</p>
+                        <p class="item-tag">{{ oferta.categoria?.nombre }}</p>
 
                         <p class="item-content">{{ oferta.descripcion }}</p>
 
-                        <span class="badge bg-primary">{{ oferta.ciudad_relacion!.nombre }}</span>
+                        <span class="badge bg-primary">{{ oferta.ciudad_relacion?.nombre }}</span>
                     </div>
                 </div>
             }
