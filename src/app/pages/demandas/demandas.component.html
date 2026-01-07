@@ -62,34 +62,50 @@
             }
         </div>
         <div class="content-list">
-            @for (demanda of demandasPaginadas; track demanda.id) {
-                <div class="row list-item">
-                    <div class="col-12 col-md-3 list-item-img">
-                        @if (demanda?.ruta_img) {
-                            <img [src]="demanda?.ruta_img" alt="Demanda" />
-                        } @else {
-                            <img src="assets/img/ofertas.png" alt="Demanda" />
-                        }
+            @if (loading) {
+                <div class="text-center mt-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
                     </div>
-                    <div class="col-12 col-md-9 list-item-content">
-                        <h3 class="item-title">
-                            <a
-                                routerLink="/demandasdetalle"
-                                [routerLink]="['/demandasdetalle', demanda.id]"
-                                >{{ demanda.titulo
-                                }}<span
-                                    ><i class="bi bi-clock me-1"></i
-                                    >{{ demanda.horas_estimadas }}</span
-                                ></a
-                            >
-                        </h3>
-                        <p class="item-tag">{{ demanda.categoria?.nombre }}</p>
-
-                        <p class="item-content">{{ demanda.descripcion }}</p>
-
-                        <span class="badge bg-primary">{{ demanda.ciudad_relacion?.nombre }}</span>
-                    </div>
+                    <p class="mt-2 text-muted">Buscando Demandas...</p>
                 </div>
+            } @else {
+                @for (demanda of demandasPaginadas; track demanda.id) {
+                    <div class="row list-item">
+                        <div class="col-12 col-md-3 list-item-img">
+                            @if (demanda?.ruta_img) {
+                                <img [src]="demanda?.ruta_img" alt="Demanda" />
+                            } @else {
+                                <img src="assets/img/ofertas.png" alt="Demanda" />
+                            }
+                        </div>
+                        <div class="col-12 col-md-9 list-item-content">
+                            <h3 class="item-title">
+                                <a
+                                    routerLink="/demandasdetalle"
+                                    [routerLink]="['/demandasdetalle', demanda.id]"
+                                    >{{ demanda.titulo
+                                    }}<span
+                                        ><i class="bi bi-clock me-1"></i
+                                        >{{ demanda.horas_estimadas }}</span
+                                    ></a
+                                >
+                            </h3>
+                            <p class="item-tag">{{ demanda.categoria?.nombre }}</p>
+
+                            <p class="item-content">{{ demanda.descripcion }}</p>
+
+                            <span class="badge bg-primary">{{
+                                demanda.ciudad_relacion?.nombre
+                            }}</span>
+                        </div>
+                    </div>
+                } @empty {
+                    <div class="alert alert-info text-center mt-4">
+                        <i class="bi bi-info-circle me-2"></i>
+                        No hay resultados coincidentes con tu búsqueda.
+                    </div>
+                }
             }
         </div>
         <!-- Paginación -->

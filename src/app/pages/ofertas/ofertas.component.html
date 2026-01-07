@@ -62,33 +62,48 @@
             }
         </div>
         <div class="content-list">
-            @for (oferta of ofertasPaginadas; track oferta.id) {
-                <div class="row list-item">
-                    <div class="col-12 col-md-3 list-item-img">
-                        <!-- <img src="/assets/img/ofertas.png" alt="Oferta" /> -->
-                        @if (oferta?.ruta_img) {
-                            <img [src]="oferta?.ruta_img" alt="Oferta" />
-                        } @else {
-                            <img src="assets/img/ofertas.png" alt="Oferta" />
-                        }
+            @if (loading) {
+                <div class="text-center mt-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Cargando...</span>
                     </div>
-                    <div class="col-12 col-md-9 list-item-content">
-                        <h3 class="item-title">
-                            <a [routerLink]="['/ofertasdetalle', oferta.id]">
-                                {{ oferta.titulo }}
-                                <span>
-                                    <i class="bi bi-clock me-1"></i>
-                                    {{ oferta.horas_estimadas }}
-                                </span>
-                            </a>
-                        </h3>
-                        <p class="item-tag">{{ oferta.categoria?.nombre }}</p>
-
-                        <p class="item-content">{{ oferta.descripcion }}</p>
-
-                        <span class="badge bg-primary">{{ oferta.ciudad_relacion?.nombre }}</span>
-                    </div>
+                    <p class="mt-2 text-muted">Buscando ofertas...</p>
                 </div>
+            } @else {
+                @for (oferta of ofertasPaginadas; track oferta.id) {
+                    <div class="row list-item">
+                        <div class="col-12 col-md-3 list-item-img">
+                            @if (oferta?.ruta_img) {
+                                <img [src]="oferta?.ruta_img" alt="Oferta" />
+                            } @else {
+                                <img src="assets/img/ofertas.png" alt="Oferta" />
+                            }
+                        </div>
+                        <div class="col-12 col-md-9 list-item-content">
+                            <h3 class="item-title">
+                                <a [routerLink]="['/ofertasdetalle', oferta.id]">
+                                    {{ oferta.titulo }}
+                                    <span>
+                                        <i class="bi bi-clock me-1"></i>
+                                        {{ oferta.horas_estimadas }}
+                                    </span>
+                                </a>
+                            </h3>
+                            <p class="item-tag">{{ oferta.categoria?.nombre }}</p>
+
+                            <p class="item-content">{{ oferta.descripcion }}</p>
+
+                            <span class="badge bg-primary">{{
+                                oferta.ciudad_relacion?.nombre
+                            }}</span>
+                        </div>
+                    </div>
+                } @empty {
+                    <div class="alert alert-info text-center mt-4">
+                        <i class="bi bi-info-circle me-2"></i>
+                        No hay resultados coincidentes con tu búsqueda.
+                    </div>
+                }
             }
         </div>
         <!-- Paginación -->

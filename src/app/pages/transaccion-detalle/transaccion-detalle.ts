@@ -13,6 +13,8 @@ import { ValoracionesService } from '../../services/valoraciones.service';
 import { Usuario } from '../../models/usuarios';
 import { ServiciosService } from '../../services/servicios.service';
 import { UsuariosService } from '../../services/usuarios.service';
+import { Mensaje } from '../../models/mensaje';
+import { MensajesService } from '../../services/mensajes.service';
 
 @Component({
     selector: 'app-transaccion-detalle',
@@ -27,11 +29,13 @@ export class TransaccionDetalle implements OnInit {
     public transaccion: Transacciones | null = null;
     public usuarioLogueado: Usuario | null = null;
     public puntuacionSeleccionada: number = 0;
+    public nuevoMensaje: string = '';
+
 
 
     constructor( private readonly route: ActivatedRoute, private _transaccionesService: TransaccionesService,
         private _valoracionesService: ValoracionesService, private _serviciosService: ServiciosService,
-        private _usuariosService: UsuariosService, private _router: Router) {}    
+        private _usuariosService: UsuariosService, private _router: Router, private _mensajesService : MensajesService) {}    
         
 
     ngOnInit() {
@@ -108,19 +112,43 @@ export class TransaccionDetalle implements OnInit {
 
                 this._serviciosService.updateServicio(this.transaccion!.servicio_id, fdServicio).subscribe({
                     next: () => {
-                        const fdUsuario = new FormData();
-                        const saldoActualOfertante = Number(this.transaccion?.usuario_ofertante?.horas_saldo || 0);
-                        const nuevoSaldo = saldoActualOfertante + Number(this.transaccion?.horas);
-                        
-                        fdUsuario.append('horas_saldo', nuevoSaldo.toString());
-                        fdUsuario.append('_method', 'PUT');
+                        if (this.transaccion?.servicio?.tipo === "oferta") {
+                            const fdUsuario = new FormData();
+                            const saldoActualOfertante = Number(this.transaccion?.usuario_ofertante?.horas_saldo || 0);
+                            const nuevoSaldo = saldoActualOfertante + Number(this.transaccion?.horas);
+                            
+                            fdUsuario.append('horas_saldo', nuevoSaldo.toString());
+                            fdUsuario.append('_method', 'PUT');
 
-                        this._usuariosService.updateUsuario(this.transaccion!.usuario_ofertante_id, fdUsuario).subscribe({
-                            next: () => {                                
-                                this.enviarValoracionFinal();
-                            },
-                            error: (err) => console.error('Error al pagar horas:', err)
-                        });
+                            this._usuariosService.updateUsuario(this.transaccion!.usuario_ofertante_id, fdUsuario).subscribe({
+                                next: () => {
+                                    this.transaccion!.usuario_ofertante!.horas_saldo = nuevoSaldo;
+                                    sessionStorage.setItem('user', JSON.stringify(this.transaccion!.usuario_ofertante!));
+                                    this._usuariosService.notificarCambioSaldo();
+                                    this.mensajeConfirmacion();                                
+                                    this.enviarValoracionFinal();
+                                },
+                                error: (err) => console.error('Error al pagar horas:', err)
+                            });
+                        } else if (this.transaccion?.servicio?.tipo === "demanda") {
+                            const fdUsuario = new FormData();
+                            const saldoActualOfertante = Number(this.transaccion?.usuario_solicitante?.horas_saldo || 0);
+                            const nuevoSaldo = saldoActualOfertante + Number(this.transaccion?.horas);
+                            
+                            fdUsuario.append('horas_saldo', nuevoSaldo.toString());
+                            fdUsuario.append('_method', 'PUT');
+
+                            this._usuariosService.updateUsuario(this.transaccion!.usuario_solicitante_id, fdUsuario).subscribe({
+                                next: () => {      
+                                    this.transaccion!.usuario_solicitante!.horas_saldo = nuevoSaldo;
+                                    sessionStorage.setItem('user', JSON.stringify(this.transaccion!.usuario_solicitante!));
+                                    this._usuariosService.notificarCambioSaldo(); 
+                                    this.mensajeConfirmacion();                             
+                                    this.enviarValoracionFinal();
+                                },
+                                error: (err) => console.error('Error al pagar horas:', err)
+                            });
+                        }
                     },
                     error: (err) => console.error('Error al finalizar servicio:', err)
                 });
@@ -130,15 +158,26 @@ export class TransaccionDetalle implements OnInit {
     }
 
     private enviarValoracionFinal() {
-        const nuevaValoracion: Valoraciones = {
-            transaccion_id: this.id!,
-            valorador_id: this.usuarioLogueado!.id,
-            valorado_id: this.transaccion!.usuario_ofertante_id,
-            puntuacion: this.puntuacionSeleccionada,
-            comentario: ""
-        };
+        let nuevaValoracion: Valoraciones | null = null;
+        if(this.transaccion?.servicio?.tipo === "oferta") {
+            nuevaValoracion = {
+                transaccion_id: this.id!,
+                valorador_id: this.transaccion!.usuario_solicitante_id,
+                valorado_id: this.transaccion!.usuario_ofertante_id,
+                puntuacion: this.puntuacionSeleccionada,
+                comentario: ""
+            };
+        } else if (this.transaccion?.servicio?.tipo === "demanda") {
+            nuevaValoracion = {
+                transaccion_id: this.id!,
+                valorador_id: this.transaccion!.usuario_ofertante_id,
+                valorado_id: this.transaccion!.usuario_solicitante_id,
+                puntuacion: this.puntuacionSeleccionada,
+                comentario: ""
+            };  
+        }
 
-        this._valoracionesService.createValoracion(nuevaValoracion).subscribe({
+        this._valoracionesService.createValoracion(nuevaValoracion!).subscribe({
             next: () => {
                 alert('¡Transacción finalizada con éxito! Horas enviadas y voluntario valorado.');
                 this._router.navigate(['/perfil']);
@@ -163,25 +202,47 @@ export class TransaccionDetalle implements OnInit {
 
                 this._serviciosService.updateServicio(this.transaccion!.servicio_id, fdServicio).subscribe({
                     next: () => {
-                        const fdUsuario = new FormData();
-                        const saldoActual = Number(this.usuarioLogueado!.horas_saldo || 0);
-                        const horasADevolver = Number(this.transaccion?.horas);
-                        const nuevoSaldo = saldoActual + horasADevolver;
-                        
-                        fdUsuario.append('horas_saldo', nuevoSaldo.toString());
-                        fdUsuario.append('_method', 'PUT');
+                        if (this.transaccion?.servicio?.tipo === "oferta"){
+                            const fdUsuario = new FormData();
+                            const saldoActual = Number(this.transaccion.usuario_solicitante!.horas_saldo || 0);
+                            const horasADevolver = Number(this.transaccion?.horas);
+                            const nuevoSaldo = saldoActual + horasADevolver;
+                            
+                            fdUsuario.append('horas_saldo', nuevoSaldo.toString());
+                            fdUsuario.append('_method', 'PUT');
 
-                        this._usuariosService.updateUsuario(this.usuarioLogueado!.id, fdUsuario).subscribe({
-                            next: () => {
-                                this.usuarioLogueado!.horas_saldo = nuevoSaldo;
-                                sessionStorage.setItem('user', JSON.stringify(this.usuarioLogueado));
-                                this._usuariosService.notificarCambioSaldo();
+                            this._usuariosService.updateUsuario(this.transaccion.usuario_solicitante!.id, fdUsuario).subscribe({
+                                next: () => {
+                                    this.transaccion!.usuario_solicitante!.horas_saldo = nuevoSaldo;
+                                    sessionStorage.setItem('user', JSON.stringify(this.transaccion!.usuario_solicitante!));
+                                    this._usuariosService.notificarCambioSaldo();
 
-                                alert('Transacción cancelada. Las horas han sido devueltas a tu saldo y el servicio vuelve a estar disponible.');
-                                this._router.navigate(['/perfil']);
-                            },
-                            error: (err) => console.error('Error al devolver horas:', err)
-                        });
+                                    alert('Transacción cancelada. Las horas han sido devueltas a tu saldo y el servicio vuelve a estar disponible.');
+                                    this._router.navigate(['/perfil']);
+                                },
+                                error: (err) => console.error('Error al devolver horas:', err)
+                            });
+                        } else if (this.transaccion?.servicio?.tipo === "demanda") { 
+                            const fdUsuario = new FormData();
+                            const saldoActual = Number(this.transaccion.usuario_ofertante!.horas_saldo || 0);
+                            const horasADevolver = Number(this.transaccion?.horas);
+                            const nuevoSaldo = saldoActual + horasADevolver;
+                            
+                            fdUsuario.append('horas_saldo', nuevoSaldo.toString());
+                            fdUsuario.append('_method', 'PUT');
+
+                            this._usuariosService.updateUsuario(this.transaccion.usuario_ofertante!.id, fdUsuario).subscribe({
+                                next: () => {
+                                    this.transaccion!.usuario_ofertante!.horas_saldo = nuevoSaldo;
+                                    sessionStorage.setItem('user', JSON.stringify(this.transaccion!.usuario_ofertante!));
+                                    this._usuariosService.notificarCambioSaldo();
+
+                                    alert('Transacción cancelada. Las horas han sido devueltas a tu saldo y el servicio vuelve a estar disponible.');
+                                    this._router.navigate(['/perfil']);
+                                },
+                                error: (err) => console.error('Error al devolver horas:', err)
+                            });
+                        }
                     },
                     error: (err) => console.error('Error al reactivar servicio:', err)
                 });
@@ -189,5 +250,40 @@ export class TransaccionDetalle implements OnInit {
             error: (err) => console.error('Error al cancelar transacción:', err)
         });
     }
+
+    mensajeConfirmacion() {
+        let nuevo : Mensaje | null = null;
+        if (this.transaccion?.servicio?.tipo === "oferta") {
+            nuevo = {
+                    id: 0,
+                    emisor_id: this.transaccion.usuario_solicitante_id,
+                    receptor_id: this.transaccion.usuario_ofertante_id,
+                    servicio_id: this.transaccion.servicio_id,
+                    mensaje: "Transacción completada.",
+                    leido: false,
+                    created_at: new Date().toISOString()
+            };
+        } else if (this.transaccion?.servicio?.tipo === "demanda") {
+            nuevo = {
+                    id: 0,
+                    emisor_id: this.transaccion.usuario_ofertante_id,
+                    receptor_id: this.transaccion.usuario_solicitante_id,
+                    servicio_id: this.transaccion.servicio_id,
+                    mensaje: "Transacción completada.",
+                    leido: false,
+                    created_at: new Date().toISOString()
+            };
+        }
+        console.log("Mensaje a enviar:", nuevo);
+        this._mensajesService.createMensaje(nuevo!).subscribe({
+        next: (response: ApiResponse<Mensaje>) => {
+            console.log('Mensaje publicado:', response.message);                    
+        },
+        error: (err) => {
+            console.error('Error al publicar el mensaje:', err);
+        }
+        });
+    }
+    
     
 }
