@@ -30,6 +30,8 @@ export class DemandasDetalle implements OnInit {
   public isContactarModalOpen: boolean = false;
   public usuario: Usuario | null = null;
   public nuevoMensaje: string = '';
+  protected Math = Math;
+
   
   ngOnInit() {
     const userAlmacenado = sessionStorage.getItem('user');

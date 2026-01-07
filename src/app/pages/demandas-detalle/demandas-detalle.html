@@ -58,15 +58,25 @@
                     </li>
                     <li>
                         <strong>Valoraciones</strong>:
-                        @for (star of [].constructor(demanda?.usuario?.valoracion); track $index) {
+                        @for (
+                            star of [].constructor(Math.round(demanda?.usuario?.valoracion || 0));
+                            track $index
+                        ) {
                             <i class="bi bi-star-fill text-warning"></i>
                         }
+
                         @for (
-                            star of [].constructor(5 - demanda?.usuario?.valoracion!);
+                            star of [].constructor(
+                                5 - Math.round(demanda?.usuario?.valoracion || 0)
+                            );
                             track $index
                         ) {
                             <i class="bi bi-star text-warning"></i>
                         }
+
+                        <span class="ms-2 text-muted"
+                            >({{ demanda?.usuario?.valoracion | number: '1.1-1' }})</span
+                        >
                     </li>
                     <li><strong>Categoría</strong>: {{ demanda?.categoria?.nombre }}</li>
                     <li><strong>Provincia</strong>: {{ demanda?.provincia_relacion?.nombre }}</li>

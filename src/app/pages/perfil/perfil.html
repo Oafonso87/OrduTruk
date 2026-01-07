@@ -137,12 +137,14 @@
                                         >
                                     }
                                     @case ('en_proceso') {
-                                        <span class="badge bg-warning-subtle text-warning"
+                                        <span class="badge bg-primary-subtle text-primary"
                                             >En Curso</span
                                         >
                                     }
                                     @case ('finalizado') {
-                                        <span class="badge bg-warning-subtle">Finalizado</span>
+                                        <span class="badge bg-dark-subtle text-body-secondary"
+                                            >Finalizado</span
+                                        >
                                     }
                                     @case ('cancelado') {
                                         <span class="badge bg-danger-subtle text-danger"
@@ -172,42 +174,43 @@
                         </ul>
                     }
                 </div>
-
-                <nav aria-label="Navegación de páginas">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item" [class.disabled]="p_actual === 1">
-                            <a
-                                class="page-link"
-                                (click)="p_actual = p_actual - 1"
-                                style="cursor: pointer"
-                                >Anterior</a
-                            >
-                        </li>
-
-                        @for (pagina of totalPaginasOfertas; track pagina) {
-                            <li class="page-item" [class.active]="p_actual === pagina">
+                @if (totalPaginasOfertas.length > 1) {
+                    <nav aria-label="Navegación de páginas">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item" [class.disabled]="p_actual === 1">
                                 <a
                                     class="page-link"
-                                    (click)="p_actual = pagina"
+                                    (click)="p_actual = p_actual - 1"
                                     style="cursor: pointer"
-                                    >{{ pagina }}</a
+                                    >Anterior</a
                                 >
                             </li>
-                        }
 
-                        <li
-                            class="page-item"
-                            [class.disabled]="p_actual === totalPaginasOfertas.length"
-                        >
-                            <a
-                                class="page-link"
-                                (click)="p_actual = p_actual + 1"
-                                style="cursor: pointer"
-                                >Siguiente</a
+                            @for (pagina of totalPaginasOfertas; track pagina) {
+                                <li class="page-item" [class.active]="p_actual === pagina">
+                                    <a
+                                        class="page-link"
+                                        (click)="p_actual = pagina"
+                                        style="cursor: pointer"
+                                        >{{ pagina }}</a
+                                    >
+                                </li>
+                            }
+
+                            <li
+                                class="page-item"
+                                [class.disabled]="p_actual === totalPaginasOfertas.length"
                             >
-                        </li>
-                    </ul>
-                </nav>
+                                <a
+                                    class="page-link"
+                                    (click)="p_actual = p_actual + 1"
+                                    style="cursor: pointer"
+                                    >Siguiente</a
+                                >
+                            </li>
+                        </ul>
+                    </nav>
+                }
 
                 <hr />
                 <p class="item-transaccion">Demandas</p>
@@ -225,12 +228,14 @@
                                         >
                                     }
                                     @case ('en_proceso') {
-                                        <span class="badge bg-warning-subtle text-warning"
+                                        <span class="badge bg-primary-subtle text-primary"
                                             >En Curso</span
                                         >
                                     }
                                     @case ('finalizado') {
-                                        <span class="badge bg-warning-subtle">Finalizado</span>
+                                        <span class="badge bg-dark-subtle text-body-secondary"
+                                            >Finalizado</span
+                                        >
                                     }
                                     @case ('cancelado') {
                                         <span class="badge bg-danger-subtle text-danger"
@@ -260,42 +265,43 @@
                         </ul>
                     }
                 </div>
-
-                <nav aria-label="Navegación de páginas">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item" [class.disabled]="p_actual === 1">
-                            <a
-                                class="page-link"
-                                (click)="p_actual = p_actual - 1"
-                                style="cursor: pointer"
-                                >Anterior</a
-                            >
-                        </li>
-
-                        @for (pagina of totalPaginasDemandas; track pagina) {
-                            <li class="page-item" [class.active]="p_actual === pagina">
+                @if (totalPaginasDemandas.length > 1) {
+                    <nav aria-label="Navegación de páginas">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item" [class.disabled]="p_actual === 1">
                                 <a
                                     class="page-link"
-                                    (click)="p_actual = pagina"
+                                    (click)="p_actual = p_actual - 1"
                                     style="cursor: pointer"
-                                    >{{ pagina }}</a
+                                    >Anterior</a
                                 >
                             </li>
-                        }
 
-                        <li
-                            class="page-item"
-                            [class.disabled]="p_actual === totalPaginasDemandas.length"
-                        >
-                            <a
-                                class="page-link"
-                                (click)="p_actual = p_actual + 1"
-                                style="cursor: pointer"
-                                >Siguiente</a
+                            @for (pagina of totalPaginasDemandas; track pagina) {
+                                <li class="page-item" [class.active]="p_actual === pagina">
+                                    <a
+                                        class="page-link"
+                                        (click)="p_actual = pagina"
+                                        style="cursor: pointer"
+                                        >{{ pagina }}</a
+                                    >
+                                </li>
+                            }
+
+                            <li
+                                class="page-item"
+                                [class.disabled]="p_actual === totalPaginasDemandas.length"
                             >
-                        </li>
-                    </ul>
-                </nav>
+                                <a
+                                    class="page-link"
+                                    (click)="p_actual = p_actual + 1"
+                                    style="cursor: pointer"
+                                    >Siguiente</a
+                                >
+                            </li>
+                        </ul>
+                    </nav>
+                }
 
                 <hr />
 
@@ -319,7 +325,7 @@
                                         >
                                     }
                                     @case ('confirmado') {
-                                        <span class="badge bg-warning-subtle text-success"
+                                        <span class="badge bg-success-subtle text-success"
                                             >Confirmado</span
                                         >
                                     }
@@ -345,42 +351,43 @@
                         </ul>
                     }
                 </div>
-
-                <nav aria-label="Navegación de páginas">
-                    <ul class="pagination justify-content-end">
-                        <li class="page-item" [class.disabled]="p_actual === 1">
-                            <a
-                                class="page-link"
-                                (click)="p_actual = p_actual - 1"
-                                style="cursor: pointer"
-                                >Anterior</a
-                            >
-                        </li>
-
-                        @for (pagina of totalPaginasTransaccion; track pagina) {
-                            <li class="page-item" [class.active]="p_actual === pagina">
+                @if (totalPaginasTransaccion.length > 1) {
+                    <nav aria-label="Navegación de páginas">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item" [class.disabled]="p_actual === 1">
                                 <a
                                     class="page-link"
-                                    (click)="p_actual = pagina"
+                                    (click)="p_actual = p_actual - 1"
                                     style="cursor: pointer"
-                                    >{{ pagina }}</a
+                                    >Anterior</a
                                 >
                             </li>
-                        }
 
-                        <li
-                            class="page-item"
-                            [class.disabled]="p_actual === totalPaginasTransaccion.length"
-                        >
-                            <a
-                                class="page-link"
-                                (click)="p_actual = p_actual + 1"
-                                style="cursor: pointer"
-                                >Siguiente</a
+                            @for (pagina of totalPaginasTransaccion; track pagina) {
+                                <li class="page-item" [class.active]="p_actual === pagina">
+                                    <a
+                                        class="page-link"
+                                        (click)="p_actual = pagina"
+                                        style="cursor: pointer"
+                                        >{{ pagina }}</a
+                                    >
+                                </li>
+                            }
+
+                            <li
+                                class="page-item"
+                                [class.disabled]="p_actual === totalPaginasTransaccion.length"
                             >
-                        </li>
-                    </ul>
-                </nav>
+                                <a
+                                    class="page-link"
+                                    (click)="p_actual = p_actual + 1"
+                                    style="cursor: pointer"
+                                    >Siguiente</a
+                                >
+                            </li>
+                        </ul>
+                    </nav>
+                }
 
                 <hr />
             </div>
