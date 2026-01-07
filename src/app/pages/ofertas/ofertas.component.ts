@@ -52,17 +52,20 @@ export class OfertasComponent implements OnInit {
   public tituloFilter : string = '';
 
   public mostrarFiltro: boolean = false;
+  public loading: boolean = true;
 
   toggleFiltro(): void {
     this.mostrarFiltro = !this.mostrarFiltro;
   }
 
   loadServicios() {
+    this.loading = true;
     this._serviciosService.getServicios().subscribe({
       next: (response: ApiResponse<Servicios[]>) => {
         this.ofertas = response.data.filter(s => s.tipo === 'oferta' && s.estado === 'activo');
         this.ofertasFiltradas = [...this.ofertas];
         this.updateOfertas();
+        this.loading = false;
         console.log('Ofertas cargadas:', this.ofertas);
       },
       error: (err) => {

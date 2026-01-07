@@ -52,17 +52,20 @@ export class DemandasComponent implements OnInit {
   public tituloFilter : string = '';
 
   public mostrarFiltro: boolean = false;
+  public loading : boolean = true;
 
   toggleFiltro(): void {
     this.mostrarFiltro = !this.mostrarFiltro;
   }
 
   loadServicios() {
+    this.loading = true;
     this._serviciosService.getServicios().subscribe({
       next: (response: ApiResponse<Servicios[]>) => {
         this.demandas = response.data.filter(s => s.tipo === 'demanda' && s.estado === 'activo');
         this.demandasFiltradas = [...this.demandas];
         this.updateDemandas();
+        this.loading = false;
         console.log('Demandas cargadas:', this.demandas);
       },
       error: (err) => {

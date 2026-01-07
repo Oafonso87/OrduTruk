@@ -68,7 +68,9 @@ export class Perfil implements OnInit {
   public demandas : Servicios[] = [];
   public transacciones : Transacciones[] = [];
 
-  public p_actual: number = 1;
+  public p_ofertas: number = 1;
+  public p_demandas: number = 1;
+  public p_transacciones: number = 1;
   public itemsPorPagina: number = 3;
 
 
@@ -198,7 +200,7 @@ export class Perfil implements OnInit {
   }
 
   get ofertasPaginadas(): Servicios[] {
-    const inicio = (this.p_actual - 1) * this.itemsPorPagina;
+    const inicio = (this.p_ofertas - 1) * this.itemsPorPagina;
     const fin = inicio + this.itemsPorPagina;
     return this.ofertas.slice(inicio, fin);
   }
@@ -209,7 +211,7 @@ export class Perfil implements OnInit {
   }
 
   get demandasPaginadas(): Servicios[] {
-    const inicio = (this.p_actual - 1) * this.itemsPorPagina;
+    const inicio = (this.p_demandas - 1) * this.itemsPorPagina;
     const fin = inicio + this.itemsPorPagina;
     return this.demandas.slice(inicio, fin);
   }
@@ -220,7 +222,7 @@ export class Perfil implements OnInit {
   }
 
   get transaccionesPaginadas(): Transacciones[] {
-    const inicio = (this.p_actual - 1) * this.itemsPorPagina;
+    const inicio = (this.p_transacciones - 1) * this.itemsPorPagina;
     const fin = inicio + this.itemsPorPagina;
     return this.transacciones.slice(inicio, fin);
   }
