@@ -172,6 +172,11 @@
                                 </div>
                             }
                         </ul>
+                    } @empty {
+                        <div class="alert alert-info text-center mt-4">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Aún no has publicado ofertas.
+                        </div>
                     }
                 </div>
                 @if (totalPaginasOfertas.length > 1) {
@@ -263,6 +268,11 @@
                                 </div>
                             }
                         </ul>
+                    } @empty {
+                        <div class="alert alert-info text-center mt-4">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Aún no has publicado demandas.
+                        </div>
                     }
                 </div>
                 @if (totalPaginasDemandas.length > 1) {
@@ -349,6 +359,11 @@
                                 </button>
                             }
                         </ul>
+                    } @empty {
+                        <div class="alert alert-info text-center mt-4">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Aún no tienes transacciones.
+                        </div>
                     }
                 </div>
                 @if (totalPaginasTransaccion.length > 1) {
