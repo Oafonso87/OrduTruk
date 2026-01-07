@@ -13,6 +13,8 @@ import { ValoracionesService } from '../../services/valoraciones.service';
 import { Usuario } from '../../models/usuarios';
 import { ServiciosService } from '../../services/servicios.service';
 import { UsuariosService } from '../../services/usuarios.service';
+import { Mensaje } from '../../models/mensaje';
+import { MensajesService } from '../../services/mensajes.service';
 
 @Component({
     selector: 'app-transaccion-detalle',
@@ -27,11 +29,13 @@ export class TransaccionDetalle implements OnInit {
     public transaccion: Transacciones | null = null;
     public usuarioLogueado: Usuario | null = null;
     public puntuacionSeleccionada: number = 0;
+    public nuevoMensaje: string = '';
+
 
 
     constructor( private readonly route: ActivatedRoute, private _transaccionesService: TransaccionesService,
         private _valoracionesService: ValoracionesService, private _serviciosService: ServiciosService,
-        private _usuariosService: UsuariosService, private _router: Router) {}    
+        private _usuariosService: UsuariosService, private _router: Router, private _mensajesService : MensajesService) {}    
         
 
     ngOnInit() {
@@ -120,7 +124,8 @@ export class TransaccionDetalle implements OnInit {
                                 next: () => {
                                     this.transaccion!.usuario_ofertante!.horas_saldo = nuevoSaldo;
                                     sessionStorage.setItem('user', JSON.stringify(this.transaccion!.usuario_ofertante!));
-                                    this._usuariosService.notificarCambioSaldo();                                
+                                    this._usuariosService.notificarCambioSaldo();
+                                    this.mensajeConfirmacion();                                
                                     this.enviarValoracionFinal();
                                 },
                                 error: (err) => console.error('Error al pagar horas:', err)
@@ -137,7 +142,8 @@ export class TransaccionDetalle implements OnInit {
                                 next: () => {      
                                     this.transaccion!.usuario_solicitante!.horas_saldo = nuevoSaldo;
                                     sessionStorage.setItem('user', JSON.stringify(this.transaccion!.usuario_solicitante!));
-                                    this._usuariosService.notificarCambioSaldo();                          
+                                    this._usuariosService.notificarCambioSaldo(); 
+                                    this.mensajeConfirmacion();                             
                                     this.enviarValoracionFinal();
                                 },
                                 error: (err) => console.error('Error al pagar horas:', err)
@@ -245,6 +251,39 @@ export class TransaccionDetalle implements OnInit {
         });
     }
 
+    mensajeConfirmacion() {
+        let nuevo : Mensaje | null = null;
+        if (this.transaccion?.servicio?.tipo === "oferta") {
+            nuevo = {
+                    id: 0,
+                    emisor_id: this.transaccion.usuario_solicitante_id,
+                    receptor_id: this.transaccion.usuario_ofertante_id,
+                    servicio_id: this.transaccion.servicio_id,
+                    mensaje: "Transacción completada.",
+                    leido: false,
+                    created_at: new Date().toISOString()
+            };
+        } else if (this.transaccion?.servicio?.tipo === "demanda") {
+            nuevo = {
+                    id: 0,
+                    emisor_id: this.transaccion.usuario_ofertante_id,
+                    receptor_id: this.transaccion.usuario_solicitante_id,
+                    servicio_id: this.transaccion.servicio_id,
+                    mensaje: "Transacción completada.",
+                    leido: false,
+                    created_at: new Date().toISOString()
+            };
+        }
+        console.log("Mensaje a enviar:", nuevo);
+        this._mensajesService.createMensaje(nuevo!).subscribe({
+        next: (response: ApiResponse<Mensaje>) => {
+            console.log('Mensaje publicado:', response.message);                    
+        },
+        error: (err) => {
+            console.error('Error al publicar el mensaje:', err);
+        }
+        });
+    }
     
     
 }

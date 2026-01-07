@@ -177,20 +177,20 @@
                 @if (totalPaginasOfertas.length > 1) {
                     <nav aria-label="Navegación de páginas">
                         <ul class="pagination justify-content-end">
-                            <li class="page-item" [class.disabled]="p_actual === 1">
+                            <li class="page-item" [class.disabled]="p_ofertas === 1">
                                 <a
                                     class="page-link"
-                                    (click)="p_actual = p_actual - 1"
+                                    (click)="p_ofertas = p_ofertas - 1"
                                     style="cursor: pointer"
                                     >Anterior</a
                                 >
                             </li>
 
                             @for (pagina of totalPaginasOfertas; track pagina) {
-                                <li class="page-item" [class.active]="p_actual === pagina">
+                                <li class="page-item" [class.active]="p_ofertas === pagina">
                                     <a
                                         class="page-link"
-                                        (click)="p_actual = pagina"
+                                        (click)="p_ofertas = pagina"
                                         style="cursor: pointer"
                                         >{{ pagina }}</a
                                     >
@@ -199,11 +199,11 @@
 
                             <li
                                 class="page-item"
-                                [class.disabled]="p_actual === totalPaginasOfertas.length"
+                                [class.disabled]="p_ofertas === totalPaginasOfertas.length"
                             >
                                 <a
                                     class="page-link"
-                                    (click)="p_actual = p_actual + 1"
+                                    (click)="p_ofertas = p_ofertas + 1"
                                     style="cursor: pointer"
                                     >Siguiente</a
                                 >
@@ -268,20 +268,20 @@
                 @if (totalPaginasDemandas.length > 1) {
                     <nav aria-label="Navegación de páginas">
                         <ul class="pagination justify-content-end">
-                            <li class="page-item" [class.disabled]="p_actual === 1">
+                            <li class="page-item" [class.disabled]="p_demandas === 1">
                                 <a
                                     class="page-link"
-                                    (click)="p_actual = p_actual - 1"
+                                    (click)="p_demandas = p_demandas - 1"
                                     style="cursor: pointer"
                                     >Anterior</a
                                 >
                             </li>
 
                             @for (pagina of totalPaginasDemandas; track pagina) {
-                                <li class="page-item" [class.active]="p_actual === pagina">
+                                <li class="page-item" [class.active]="p_demandas === pagina">
                                     <a
                                         class="page-link"
-                                        (click)="p_actual = pagina"
+                                        (click)="p_demandas = pagina"
                                         style="cursor: pointer"
                                         >{{ pagina }}</a
                                     >
@@ -290,11 +290,11 @@
 
                             <li
                                 class="page-item"
-                                [class.disabled]="p_actual === totalPaginasDemandas.length"
+                                [class.disabled]="p_demandas === totalPaginasDemandas.length"
                             >
                                 <a
                                     class="page-link"
-                                    (click)="p_actual = p_actual + 1"
+                                    (click)="p_demandas = p_demandas + 1"
                                     style="cursor: pointer"
                                     >Siguiente</a
                                 >
@@ -354,20 +354,20 @@
                 @if (totalPaginasTransaccion.length > 1) {
                     <nav aria-label="Navegación de páginas">
                         <ul class="pagination justify-content-end">
-                            <li class="page-item" [class.disabled]="p_actual === 1">
+                            <li class="page-item" [class.disabled]="p_transacciones === 1">
                                 <a
                                     class="page-link"
-                                    (click)="p_actual = p_actual - 1"
+                                    (click)="p_transacciones = p_transacciones - 1"
                                     style="cursor: pointer"
                                     >Anterior</a
                                 >
                             </li>
 
                             @for (pagina of totalPaginasTransaccion; track pagina) {
-                                <li class="page-item" [class.active]="p_actual === pagina">
+                                <li class="page-item" [class.active]="p_transacciones === pagina">
                                     <a
                                         class="page-link"
-                                        (click)="p_actual = pagina"
+                                        (click)="p_transacciones = pagina"
                                         style="cursor: pointer"
                                         >{{ pagina }}</a
                                     >
@@ -376,11 +376,13 @@
 
                             <li
                                 class="page-item"
-                                [class.disabled]="p_actual === totalPaginasTransaccion.length"
+                                [class.disabled]="
+                                    p_transacciones === totalPaginasTransaccion.length
+                                "
                             >
                                 <a
                                     class="page-link"
-                                    (click)="p_actual = p_actual + 1"
+                                    (click)="p_transacciones = p_transacciones + 1"
                                     style="cursor: pointer"
                                     >Siguiente</a
                                 >
