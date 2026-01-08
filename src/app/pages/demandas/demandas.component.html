@@ -92,9 +92,10 @@
                                 >
                             </h3>
                             <p class="item-tag">{{ demanda.categoria?.nombre }}</p>
-
-                            <p class="item-content">{{ demanda.descripcion }}</p>
-
+                            <p class="item-content">
+                                {{ demanda.descripcion.slice(0, 200)
+                                }}{{ demanda.descripcion.length > 200 ? '...' : '' }}
+                            </p>
                             <span class="badge bg-primary">{{
                                 demanda.ciudad_relacion?.nombre
                             }}</span>

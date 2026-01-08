@@ -3,7 +3,7 @@ import { Component, OnInit} from '@angular/core';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Button } from '../../components/button/button';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Servicios } from '../../models/servicios';
 import { ModalComponent } from '../../components/modal/modal';
 import { ApiResponse } from '../../models/apiresponse';
@@ -18,7 +18,7 @@ import { TransaccionesService } from '../../services/transacciones.service';
 @Component({
   selector: 'app-ofertas-detalle',
   standalone: true,
-  imports: [CommonModule, Header, Footer, Button, ModalComponent, FormsModule],
+  imports: [CommonModule, Header, Footer, Button, ModalComponent, FormsModule, RouterLink],
   templateUrl: './ofertas-detalle.html',
   styleUrl: './ofertas-detalle.scss',
 })

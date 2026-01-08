@@ -91,7 +91,10 @@
                             </h3>
                             <p class="item-tag">{{ oferta.categoria?.nombre }}</p>
 
-                            <p class="item-content">{{ oferta.descripcion }}</p>
+                            <p class="item-content">
+                                {{ oferta.descripcion.slice(0, 200)
+                                }}{{ oferta.descripcion.length > 200 ? '...' : '' }}
+                            </p>
 
                             <span class="badge bg-primary">{{
                                 oferta.ciudad_relacion?.nombre
