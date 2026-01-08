@@ -42,31 +42,37 @@ export class Mensajes implements OnInit {
     public nuevoMensaje: string = '';
     public grupoSeleccionado: Mensaje[] | null = null;
 
+    
     loadMensajes() {
-        this._mensajesService.getMensajesById(this.usuario!.id).subscribe({
-            next: (response: ApiResponse<Mensaje[]>) => {
+    this._mensajesService.getMensajesById(this.usuario!.id).subscribe({
+        next: (response: ApiResponse<Mensaje[]>) => {
             const todosLosMensajes = response.data;
-            
-            // Agrupamos por el ID del servicio
-            const grupos = todosLosMensajes.reduce((acc: { [key: number]: Mensaje[] }, mensaje) => {
+
+            const grupos = todosLosMensajes.reduce((acc: { [key: string]: Mensaje[] }, mensaje) => {
                 const servicioId = mensaje.servicio!.id;
-                if (!acc[servicioId]) {
-                    acc[servicioId] = [];
+                
+                const interlocutorId = mensaje.emisor!.id === this.usuario!.id 
+                    ? mensaje.receptor!.id 
+                    : mensaje.emisor!.id;
+
+                
+                const grupoKey = `s${servicioId}_u${interlocutorId}`;
+
+                if (!acc[grupoKey]) {
+                    acc[grupoKey] = [];
                 }
-                acc[servicioId].push(mensaje);
+                acc[grupoKey].push(mensaje);
                 return acc;
             }, {});
 
-            // Convertimos el objeto en un array de arrays
             this.mensajes = Object.values(grupos);
-            
-            console.log('Mensajes agrupados:', this.mensajes);
+            console.log('Mensajes agrupados por servicio e interlocutor:', this.mensajes);
         },
-            error: (err) => {
+        error: (err) => {
             console.error('Error al cargar los mensajes:', err);
-            }     
-        });
-    }
+        }     
+    });
+}
     
 
     setActiveTab(tab: 'ofertas' | 'demandas'): void {
