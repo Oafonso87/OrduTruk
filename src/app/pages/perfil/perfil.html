@@ -125,7 +125,7 @@
 
                 <div class="row list-item mensaje-list">
                     @for (oferta of ofertasPaginadas; track oferta.id) {
-                        <ul class="list-item-content">
+                        <ul class="list-item-content list-ofertas">
                             <li>{{ oferta.created_at | date: 'dd/MM/yyyy' }}</li>
                             <li>{{ oferta.titulo }}</li>
                             <li>Horas a recibir: {{ oferta.horas_estimadas }}</li>
@@ -221,7 +221,7 @@
                 <p class="item-transaccion">Demandas</p>
                 <div class="row list-item mensaje-list">
                     @for (demanda of demandasPaginadas; track demanda.id) {
-                        <ul class="list-item-content">
+                        <ul class="list-item-content list-demandas">
                             <li>{{ demanda.created_at | date: 'dd/MM/yyyy' }}</li>
                             <li>{{ demanda.titulo }}</li>
                             <li>Horas a entregar: {{ demanda.horas_estimadas }}</li>
@@ -320,7 +320,7 @@
                 <div class="row list-item mensaje-list">
                     @for (transaccion of transaccionesPaginadas; track transaccion.id) {
                         <ul
-                            class="list-item-content"
+                            class="list-item-content list-transacciones"
                             [routerLink]="['/transaccion-detalle', transaccion.id]"
                             style="cursor: pointer"
                         >
@@ -359,6 +359,7 @@
                                 </button>
                             }
                         </ul>
+                        <div class="btn-group-actions ms-3"></div>
                     } @empty {
                         <div class="alert alert-info text-center mt-4">
                             <i class="bi bi-info-circle me-2"></i>
