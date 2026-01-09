@@ -66,7 +66,6 @@ export class OfertasComponent implements OnInit {
         this.ofertasFiltradas = [...this.ofertas];
         this.updateOfertas();
         this.loading = false;
-        console.log('Ofertas cargadas:', this.ofertas);
       },
       error: (err) => {
         console.error('Error al cargar las ofertas:', err);
@@ -78,7 +77,6 @@ export class OfertasComponent implements OnInit {
     this._categoriasService.getCategorias().subscribe({
       next: (response: ApiResponse<Categorias[]>) => {
         this.categorias = response.data;
-        console.log('Categorias cargadas:', this.categorias);
       },
       error: (err) => {
         console.error('Error al cargar las categorias:', err);
@@ -90,7 +88,6 @@ export class OfertasComponent implements OnInit {
     this._ubicacionesService.getProvincias().subscribe({
       next: (response: ApiResponse<Provincias[]>) => {
         this.provincias = response.data;
-        console.log('Provincias cargadas:', this.provincias);
       },
       error: (err) => {
         console.error('Error al cargar las provincias:', err);
@@ -102,7 +99,6 @@ export class OfertasComponent implements OnInit {
     this._ubicacionesService.getPoblaciones().subscribe({
       next: (response: ApiResponse<Poblaciones[]>) => {
         this.todasPoblaciones = response.data;
-        console.log('Todas las poblaciones cargadas:', this.todasPoblaciones);
       },
       error: (err) => {
         console.error('Error al cargar todas las poblaciones:', err);
@@ -131,7 +127,6 @@ export class OfertasComponent implements OnInit {
   onCategoriaChange(valor: number | null) {
     this.categoria = valor;
     this.pagActual = 1;
-    console.log('Categoria seleccionada:', valor);
     this.filterOfertas();
   }
 

@@ -33,7 +33,6 @@ export class CrearDemandas implements OnInit {
         if (userAlmacenado) {
             this.usuario = JSON.parse(userAlmacenado);
         }
-        console.log(userAlmacenado);
         this.loadCategorias();
         this.loadProvincias();
         this.loadPoblaciones();
@@ -59,7 +58,6 @@ export class CrearDemandas implements OnInit {
         this._categoriasService.getCategorias().subscribe({
             next: (response: ApiResponse<Categorias[]>) => {
                 this.categorias = response.data;
-                console.log('Categorias cargadas:', this.categorias);
             },
             error: (err) => {
                 console.error('Error al cargar las categorias:', err);
@@ -71,7 +69,6 @@ export class CrearDemandas implements OnInit {
         this._ubicacionesService.getProvincias().subscribe({
             next: (response: ApiResponse<Provincias[]>) => {
                 this.provincias = response.data;
-                console.log('Provincias cargadas:', this.provincias);
             },
             error: (err) => {
                 console.error('Error al cargar las provincias:', err);
@@ -83,7 +80,6 @@ export class CrearDemandas implements OnInit {
         this._ubicacionesService.getPoblaciones().subscribe({
             next: (response: ApiResponse<Poblaciones[]>) => {
                 this.todasPoblaciones = response.data;
-                console.log('Todas las poblaciones cargadas:', this.todasPoblaciones);
             },
             error: (err) => {
                 console.error('Error al cargar todas las poblaciones:', err);
@@ -132,10 +128,8 @@ export class CrearDemandas implements OnInit {
         nuevaDemanda.append('ciudad_id', String(this.poblacion));
         nuevaDemanda.append('horas_estimadas', String(this.horas));
         nuevaDemanda.append('estado', 'activo');
-        console.log(nuevaDemanda);
         this._serviciosService.createServicio(nuevaDemanda).subscribe({
             next: (response: ApiResponse<Servicios>) => {
-                console.log('Demanda creada con éxito. Procediendo a bloquear horas...');            
                 this.descontarHorasUsuario(nuevoSaldo);
             },
             error: (error) => {
@@ -150,7 +144,6 @@ export class CrearDemandas implements OnInit {
 
         this._usuariosService.updateUsuario(this.usuario!.id, userData).subscribe({
             next: (res) => {
-                console.log('Saldo del demandante actualizado');                
                 this.usuario!.horas_saldo = nuevoSaldo;
                 sessionStorage.setItem('user', JSON.stringify(this.usuario));
                 this._usuariosService.notificarCambioSaldo();

@@ -10,6 +10,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './quienes-somos.html',
   styleUrl: './quienes-somos.scss',
 })
-export class QuienesSomos {
 
+export class QuienesSomos {
 }

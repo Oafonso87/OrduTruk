@@ -29,7 +29,6 @@ export class Mensajes implements OnInit {
         if (userAlmacenado) {
             this.usuario = JSON.parse(userAlmacenado);
         }
-        console.log(userAlmacenado);
         this.loadMensajes();
     }
 
@@ -44,35 +43,34 @@ export class Mensajes implements OnInit {
 
     
     loadMensajes() {
-    this._mensajesService.getMensajesById(this.usuario!.id).subscribe({
-        next: (response: ApiResponse<Mensaje[]>) => {
-            const todosLosMensajes = response.data;
+        this._mensajesService.getMensajesById(this.usuario!.id).subscribe({
+            next: (response: ApiResponse<Mensaje[]>) => {
+                const todosLosMensajes = response.data;
 
-            const grupos = todosLosMensajes.reduce((acc: { [key: string]: Mensaje[] }, mensaje) => {
-                const servicioId = mensaje.servicio!.id;
-                
-                const interlocutorId = mensaje.emisor!.id === this.usuario!.id 
-                    ? mensaje.receptor!.id 
-                    : mensaje.emisor!.id;
+                const grupos = todosLosMensajes.reduce((acc: { [key: string]: Mensaje[] }, mensaje) => {
+                    const servicioId = mensaje.servicio!.id;
+                    
+                    const interlocutorId = mensaje.emisor!.id === this.usuario!.id 
+                        ? mensaje.receptor!.id 
+                        : mensaje.emisor!.id;
 
-                
-                const grupoKey = `s${servicioId}_u${interlocutorId}`;
+                    
+                    const grupoKey = `s${servicioId}_u${interlocutorId}`;
 
-                if (!acc[grupoKey]) {
-                    acc[grupoKey] = [];
-                }
-                acc[grupoKey].push(mensaje);
-                return acc;
-            }, {});
+                    if (!acc[grupoKey]) {
+                        acc[grupoKey] = [];
+                    }
+                    acc[grupoKey].push(mensaje);
+                    return acc;
+                }, {});
 
-            this.mensajes = Object.values(grupos);
-            console.log('Mensajes agrupados por servicio e interlocutor:', this.mensajes);
-        },
-        error: (err) => {
-            console.error('Error al cargar los mensajes:', err);
-        }     
-    });
-}
+                this.mensajes = Object.values(grupos);
+            },
+            error: (err) => {
+                console.error('Error al cargar los mensajes:', err);
+            }     
+        });
+    }
     
 
     setActiveTab(tab: 'ofertas' | 'demandas'): void {
@@ -100,41 +98,34 @@ export class Mensajes implements OnInit {
     }
 
     publicarMensaje(): void {
-    if (this.nuevoMensaje.trim() && this.grupoSeleccionado && this.usuario) {
-        
-        // El primer mensaje del grupo nos sirve de referencia
-        const referencia = this.grupoSeleccionado[0];
-        
-        // El receptor es el interlocutor (el que no soy yo)
-        const receptorId = referencia.emisor!.id === this.usuario.id 
-            ? referencia.receptor!.id 
-            : referencia.emisor!.id;
+        if (this.nuevoMensaje.trim() && this.grupoSeleccionado && this.usuario) {
+            
+            const referencia = this.grupoSeleccionado[0];
+            
+            const receptorId = referencia.emisor!.id === this.usuario.id 
+                ? referencia.receptor!.id 
+                : referencia.emisor!.id;
 
-        const nuevo: Mensaje = {
-            id: 0,
-            emisor_id: this.usuario.id,
-            receptor_id: receptorId, // Dinámico según la conversación
-            servicio_id: referencia.servicio!.id, // El ID del servicio del grupo
-            mensaje: this.nuevoMensaje,
-            leido: false,
-            created_at: new Date().toISOString()
-        };
+            const nuevo: Mensaje = {
+                id: 0,
+                emisor_id: this.usuario.id,
+                receptor_id: receptorId,
+                servicio_id: referencia.servicio!.id,
+                mensaje: this.nuevoMensaje,
+                leido: false,
+                created_at: new Date().toISOString()
+            };
 
-        this._mensajesService.createMensaje(nuevo).subscribe({
-            next: (response: ApiResponse<Mensaje>) => {
-                console.log('Mensaje publicado:', response.message);
-                
-                // OPCIONAL: Añadir el mensaje localmente para que se vea sin refrescar
-                // this.grupoSeleccionado?.push(response.data); 
-                
-                this.nuevoMensaje = '';
-                this.closeModal();
-                this.loadMensajes(); // Recargamos para ver el historial actualizado
-            },
-            error: (err) => {
-                console.error('Error al publicar el mensaje:', err);
-            }
-        });
+            this._mensajesService.createMensaje(nuevo).subscribe({
+                next: (response: ApiResponse<Mensaje>) => {                
+                    this.nuevoMensaje = '';
+                    this.closeModal();
+                    this.loadMensajes();
+                },
+                error: (err) => {
+                    console.error('Error al publicar el mensaje:', err);
+                }
+            });
+        }
     }
-}
 }
