@@ -43,6 +43,184 @@
         margin-bottom: 0;
         width: 100%;
     }
+
+    // Estilos tipo tabla para los ul.list-item-content
+    .list-ofertas,
+    .list-demandas,
+    .list-transacciones {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e0e0e0;
+        list-style: none;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        li {
+            display: inline-block;
+            padding: 0 0.5rem;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    // Anchos fijos para ofertas
+    .list-ofertas {
+        li:nth-child(1) {
+            width: 12%; // Fecha
+            min-width: 100px;
+            @media (max-width: $breakpoint-max-xl) {
+                width: 100%;
+            }
+        }
+
+        li:nth-child(2) {
+            width: 30%; // Título
+            min-width: 150px;
+            @media (max-width: $breakpoint-max-xl) {
+                width: 100%;
+            }
+        }
+
+        li:nth-child(3) {
+            width: 20%; // Horas a recibir
+            min-width: 130px;
+            @media (max-width: $breakpoint-max-xl) {
+                width: 100%;
+            }
+        }
+
+        li:nth-child(4) {
+            width: 10%; // Estado
+            min-width: 100px;
+            @media (max-width: $breakpoint-max-xl) {
+                width: 100%;
+            }
+        }
+
+        .btn-group-actions {
+            min-width: 120px;
+            @media (max-width: $breakpoint-max-xl) {
+                width: 100%;
+                margin-top: 6px;
+                margin-left: 0px !important;
+            }
+        }
+
+        @media (max-width: $breakpoint-max-md) {
+            flex-direction: column;
+            align-items: flex-start;
+
+            li {
+                width: 100% !important;
+                min-width: 100% !important;
+                margin-bottom: 0.25rem;
+            }
+
+            .btn-group-actions {
+                width: 100% !important;
+                min-width: 100% !important;
+                justify-content: flex-start;
+                margin-top: 0.5rem;
+            }
+        }
+    }
+
+    // Anchos fijos para demandas
+    .list-demandas {
+        li:nth-child(1) {
+            width: 12%; // Fecha
+            min-width: 100px;
+        }
+
+        li:nth-child(2) {
+            width: 30%; // Título
+            min-width: 150px;
+        }
+
+        li:nth-child(3) {
+            width: 20%; // Horas a entregar
+            min-width: 130px;
+        }
+
+        li:nth-child(4) {
+            width: 10%; // Estado
+            min-width: 100px;
+        }
+
+        .btn-group-actions {
+            min-width: 120px;
+        }
+
+        @media (max-width: $breakpoint-max-md) {
+            flex-direction: column;
+            align-items: flex-start;
+
+            li {
+                width: 100% !important;
+                min-width: 100% !important;
+                margin-bottom: 0.25rem;
+            }
+
+            .btn-group-actions {
+                width: 100% !important;
+                min-width: 100% !important;
+                justify-content: flex-start;
+                margin-top: 0.5rem;
+            }
+        }
+    }
+
+    // Anchos fijos para transacciones
+    .list-transacciones {
+        li:nth-child(1) {
+            width: 12%; // Fecha
+            min-width: 100px;
+        }
+
+        li:nth-child(2) {
+            width: 30%; // Título del servicio
+            min-width: 150px;
+        }
+
+        li:nth-child(3) {
+            width: 20%; // Horas
+            min-width: 100px;
+        }
+
+        li:nth-child(4) {
+            width: 10%; // Estado
+            min-width: 100px;
+        }
+
+        .btn-icon {
+            min-width: 90px;
+        }
+
+        @media (max-width: $breakpoint-max-md) {
+            flex-direction: column;
+            align-items: flex-start;
+
+            li {
+                width: 100% !important;
+                min-width: 100% !important;
+                margin-bottom: 0.25rem;
+            }
+
+            .btn-icon {
+                width: 100% !important;
+                min-width: 100% !important;
+                justify-content: center;
+                margin-top: 0.5rem;
+            }
+        }
+    }
 }
 
 .pagination {
