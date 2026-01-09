@@ -60,7 +60,6 @@ export class Actualizar implements OnInit {
         this._categoriasService.getCategorias().subscribe({
             next: (response: ApiResponse<Categorias[]>) => {
                 this.categorias = response.data;
-                console.log('Categorias cargadas:', this.categorias);
             },
             error: (err) => {
                 console.error('Error al cargar las categorias:', err);
@@ -72,7 +71,6 @@ export class Actualizar implements OnInit {
         this._ubicacionesService.getProvincias().subscribe({
             next: (response: ApiResponse<Provincias[]>) => {
                 this.provincias = response.data;
-                console.log('Provincias cargadas:', this.provincias);
             },
             error: (err) => {
                 console.error('Error al cargar las provincias:', err);
@@ -115,9 +113,7 @@ export class Actualizar implements OnInit {
                 this.horas = Number(this.servicio.horas_estimadas);
                 this.categoria = Number(this.servicio.categoria_id);
                 this.provincia = Number(this.servicio.provincia_id);
-                console.log("Provincia cargada:", this.provincia);
                 this.poblacion = Number(this.servicio.ciudad_id);
-                console.log("Poblacion cargada:", this.poblacion);
                 this.poblaciones = this.todasPoblaciones.filter(
                     p => Number(p.provincia_id) === this.provincia
                 );

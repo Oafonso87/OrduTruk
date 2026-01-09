@@ -10,6 +10,6 @@ import { Footer } from '../../components/footer/footer';
   templateUrl: './terminos-uso.html',
   styleUrl: './terminos-uso.scss',
 })
-export class TerminosUso {
 
+export class TerminosUso {
 }

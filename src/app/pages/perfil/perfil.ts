@@ -36,7 +36,6 @@ export class Perfil implements OnInit {
     if (userAlmacenado) {
       this.usuario = JSON.parse(userAlmacenado);
       
-      // Inicializamos las variables con los datos actuales
       this.provincia = this.usuario?.provincia_id ? Number(this.usuario.provincia_id) : null;
       this.ciudad = this.usuario?.ciudad_id ? Number(this.usuario.ciudad_id) : null;
       this.direccion = this.usuario?.direccion || '';
@@ -78,7 +77,6 @@ export class Perfil implements OnInit {
     this._ubicacionesService.getProvincias().subscribe({
       next: (response: ApiResponse<Provincias[]>) => {
       this.provincias = response.data;
-      console.log('Provincias cargadas:', this.provincias);
     },
       error: (err) => {
       console.error('Error al cargar las provincias:', err);
@@ -128,8 +126,6 @@ export class Perfil implements OnInit {
           t.usuario_solicitante_id === this.usuario?.id || 
           t.usuario_ofertante_id === this.usuario?.id
         );
-
-        console.log('Mis transacciones implicadas:', this.transacciones);
       },
       error: (err) => console.error('Error al cargar transacciones:', err)
     });
@@ -145,13 +141,11 @@ export class Perfil implements OnInit {
 
       this._loginService.cambiarContraseña(this.usuario.id, this.password1).subscribe({
         next: (response) => {
-          console.log('Contraseña cambiada con éxito:', response);
           alert('Contraseña cambiada con éxito.');
           this.password1 = '';
           this.password2 = '';
         },
         error: (err) => {
-          console.error('Error al cambiar la contraseña:', err);
           const msg = err.error?.message || 'Error al cambiar la contraseña.';
           alert(msg);
         }
@@ -180,7 +174,6 @@ export class Perfil implements OnInit {
 
     this._usuariosService.updateUsuario(this.usuario.id, formData).subscribe({
         next: (response) => {
-            console.log('Perfil actualizado:', response);
             alert('Datos actualizados correctamente');
             
             const usuarioActualizado = { ...this.usuario, ...response.data };
@@ -233,7 +226,6 @@ export class Perfil implements OnInit {
 
     this._serviciosService.updateServicio(id, formData).subscribe({
       next: (resOferta) => {
-        console.log('1. Oferta actualizada a cancelado');
         this.loadServicios();
       },
       error: (err) => {

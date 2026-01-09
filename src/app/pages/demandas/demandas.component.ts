@@ -66,7 +66,6 @@ export class DemandasComponent implements OnInit {
         this.demandasFiltradas = [...this.demandas];
         this.updateDemandas();
         this.loading = false;
-        console.log('Demandas cargadas:', this.demandas);
       },
       error: (err) => {
         console.error('Error al cargar las demandas:', err);
@@ -78,7 +77,6 @@ export class DemandasComponent implements OnInit {
     this._categoriasService.getCategorias().subscribe({
       next: (response: ApiResponse<Categorias[]>) => {
         this.categorias = response.data;
-        console.log('Categorias cargadas:', this.categorias);
       },
       error: (err) => {
         console.error('Error al cargar las categorias:', err);
@@ -90,7 +88,6 @@ export class DemandasComponent implements OnInit {
     this._ubicacionesService.getProvincias().subscribe({
       next: (response: ApiResponse<Provincias[]>) => {
         this.provincias = response.data;
-        console.log('Provincias cargadas:', this.provincias);
       },
       error: (err) => {
         console.error('Error al cargar las provincias:', err);
@@ -102,7 +99,6 @@ export class DemandasComponent implements OnInit {
     this._ubicacionesService.getPoblaciones().subscribe({
       next: (response: ApiResponse<Poblaciones[]>) => {
         this.todasPoblaciones = response.data;
-        console.log('Todas las poblaciones cargadas:', this.todasPoblaciones);
       },
       error: (err) => {
         console.error('Error al cargar todas las poblaciones:', err);
@@ -131,7 +127,6 @@ export class DemandasComponent implements OnInit {
   onCategoriaChange(valor: number | null) {
     this.categoria = valor;
     this.pagActual = 1;
-    console.log('Categoria seleccionada:', valor);
     this.filterDemandas();
   }
 
@@ -184,7 +179,4 @@ export class DemandasComponent implements OnInit {
     if (page < 1 || page > this.totalPages) return; this.pagActual = page; this.updateDemandas(); 
   }
 
-  // guardarDemanda(demanda: any) {
-  //   sessionStorage.setItem('demandaSeleccionada', JSON.stringify(demanda));
-  // }
 }
