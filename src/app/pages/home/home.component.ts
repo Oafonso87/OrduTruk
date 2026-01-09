@@ -24,53 +24,5 @@ export class HomeComponent implements OnInit {
     this.titulo.setTitle("OrduTruk");
   }
 
-  // public vistaActual: 'index' | 'descripcion' | 'registrar' | 'acceder' = 'index';
-  // public usuarios: Usuario[] = [];
-
-  // public nombreRegistro: string = '';
-  // public apellidosRegistro: string = '';
-  // public mailRegistro: string = '';
-  // public passwordRegistro: string = '';
-  // public direccionRegistro: string = '';
-
-
-
-
-
-  // loadUsuario() {
-  //   this._usuariosService.getUsuarios().subscribe({
-  //     next: (response: ApiResponse<Usuario[]>) => {
-  //       this.usuarios = response.data;
-  //       console.log("Estos son los usuarios", this.usuarios);
-  //     },
-  //     error: (error) => {
-  //       console.error("Error al cargar los usuarios:", error);
-  //     }
-  //   });
-  // }
-
-  // registrarse() {
-  //   let nuevoUsuario: Usuario = {
-  //     id: 0,
-  //     nombre: this.nombreRegistro,
-  //     apellidos: this.apellidosRegistro,
-  //     mail: this.mailRegistro,
-  //     password: this.passwordRegistro,
-  //     direccion: this.direccionRegistro
-  //   }
-
-  // }
-
-  // acceder() {
-
-  // }
-
-  // resetForm() {
-  //   this.nombreRegistro = '';
-  //   this.apellidosRegistro = '';
-  //   this.mailRegistro = '';
-  //   this.passwordRegistro = '';
-  //   this.direccionRegistro = '';
-  // }
 
 }

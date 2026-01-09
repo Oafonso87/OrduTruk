@@ -38,12 +38,9 @@ export class DemandasDetalle implements OnInit {
         if (userAlmacenado) {
             this.usuario = JSON.parse(userAlmacenado);
         }
-        console.log(userAlmacenado);
     const idStr = this._activRoute.snapshot.paramMap.get('id');
-    console.log('ID de la demanda desde la ruta:', idStr);
     if (idStr) {
       const id = parseInt(idStr);
-      console.log(id);
       this.loadServiceById(id);
     }
   }
@@ -77,7 +74,6 @@ export class DemandasDetalle implements OnInit {
     this._serviciosService.getServiciosById(id).subscribe({
       next: (response) => {
         this.demanda = response.data;
-        console.log(this.demanda);
       },
       error: (error) => {
         console.error('Error al cargar la demanda:', error);
@@ -97,7 +93,6 @@ export class DemandasDetalle implements OnInit {
 
     this._serviciosService.updateServicio(this.demanda.id, ofertaData).subscribe({
       next: (resDemanda) => {
-        console.log('1. Demanda actualizada a en_proceso');
         this.isAceptarModalOpen = true;
         this.mensajeConfirmacion();
         this.crearTransaccion();
@@ -122,7 +117,6 @@ export class DemandasDetalle implements OnInit {
 
     this._transaccionesService.createTransaccion(nuevaTransaccion).subscribe({
       next: (response) => {
-        console.log('Transacción creada:', response);
       },
       error: (err) => {
         console.error('Error al crear la transacción:', err);
@@ -140,10 +134,8 @@ export class DemandasDetalle implements OnInit {
             leido: false,
             created_at: new Date().toISOString()
     };
-    console.log("Mensaje a enviar:", nuevo);
     this._mensajesService.createMensaje(nuevo).subscribe({
       next: (response: ApiResponse<Mensaje>) => {
-          console.log('Mensaje publicado:', response.message);                    
           this.nuevoMensaje = '';
       },
       error: (err) => {
@@ -163,10 +155,8 @@ export class DemandasDetalle implements OnInit {
             leido: false,
             created_at: new Date().toISOString()
     };
-    console.log("Mensaje a enviar:", nuevo);
     this._mensajesService.createMensaje(nuevo).subscribe({
       next: (response: ApiResponse<Mensaje>) => {
-          console.log('Mensaje publicado:', response.message);                    
           this.nuevoMensaje = '';
       },
       error: (err) => {

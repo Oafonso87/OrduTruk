@@ -23,6 +23,7 @@ import { MensajesService } from '../../services/mensajes.service';
     templateUrl: './transaccion-detalle.html',
     styleUrl: './transaccion-detalle.scss',
 })
+
 export class TransaccionDetalle implements OnInit {
     
     public id: number | null = null;
@@ -55,19 +56,16 @@ export class TransaccionDetalle implements OnInit {
 
     setRating(valor: number) {
         this.puntuacionSeleccionada = valor;
-        console.log('Puntuación elegida:', this.puntuacionSeleccionada);
     }
 
     loadTransaccion() {    
         this._transaccionesService.getTransacciones().subscribe({
             next: (response: ApiResponse<Transacciones[]>) => {
-                console.log('Lista recibida para filtrar:', response.data);
 
                 const encontrada = response.data.find(t => t.id === this.id);
 
                 if (encontrada) {
                     this.transaccion = encontrada;
-                    console.log('Transacción encontrada y asignada:', this.transaccion);
                 } else {
                     console.warn('No se encontró la transacción ' + this.id + ' en la lista del usuario.');
                 }
@@ -87,7 +85,6 @@ export class TransaccionDetalle implements OnInit {
 
         this._valoracionesService.createValoracion(nuevaValoracion).subscribe({
             next: (response: ApiResponse<Valoraciones>) => {
-                console.log('Valoración enviada:', response.data);
             },
             error: (err) => console.error('Error al enviar valoración:', err)
         });
@@ -276,14 +273,13 @@ export class TransaccionDetalle implements OnInit {
         }
         console.log("Mensaje a enviar:", nuevo);
         this._mensajesService.createMensaje(nuevo!).subscribe({
-        next: (response: ApiResponse<Mensaje>) => {
-            console.log('Mensaje publicado:', response.message);                    
-        },
-        error: (err) => {
-            console.error('Error al publicar el mensaje:', err);
-        }
+            next: (response: ApiResponse<Mensaje>) => {
+                console.log('Mensaje publicado:', response.message);                    
+            },
+            error: (err) => {
+                console.error('Error al publicar el mensaje:', err);
+            }
         });
-    }
-    
+    }  
     
 }

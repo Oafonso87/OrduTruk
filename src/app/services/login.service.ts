@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 
 import { LoginRequest } from "../models/loginrequest";
 import { LoginResponse } from "../models/loginresponse";
-import { ApiResponse } from "../models/apiresponse";
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { OfertasComponent } from './pages/ofertas/ofertas.component';
 import { DemandasComponent } from './pages/demandas/demandas.component';
-import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { QuienesSomos } from './pages/quienes-somos/quienes-somos';
 import { Registro } from './pages/registro/registro';
 import { Acceso } from './pages/acceso/acceso';
@@ -26,7 +25,6 @@ export const routes: Routes = [
     { path: 'demandas', component: DemandasComponent, canActivate:[authGuard] },
     { path: 'demandasdetalle/:id', component: DemandasDetalle, canActivate:[authGuard] },
     { path: 'creardemanda', component: CrearDemandas, canActivate:[authGuard] },
-    { path: 'usuarios', component: UsuariosComponent, canActivate:[authGuard] },
     { path: 'quienes-somos', component: QuienesSomos },
     { path: 'terminos-uso', component: TerminosUso },
     { path: 'registro', component: Registro },

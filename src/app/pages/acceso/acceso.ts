@@ -33,7 +33,6 @@ export class Acceso {
 
     this._loginService.login(credenciales).subscribe({
       next: (response: LoginResponse) => {
-        console.log('Login exitoso:', response);
         
         localStorage.setItem('access_token', response.access_token);
         sessionStorage.setItem('user', JSON.stringify(response.user));

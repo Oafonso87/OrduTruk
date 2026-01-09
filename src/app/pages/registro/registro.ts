@@ -48,7 +48,6 @@ export class Registro implements OnInit {
     this._ubicacionesService.getProvincias().subscribe({
       next: (response: ApiResponse<Provincias[]>) => {
       this.provincias = response.data;
-      console.log('Provincias cargadas:', this.provincias);
     },
       error: (err) => {
       console.error('Error al cargar las provincias:', err);
@@ -60,7 +59,6 @@ export class Registro implements OnInit {
     this._ubicacionesService.getPoblaciones().subscribe({
       next: (response: ApiResponse<Poblaciones[]>) => {
         this.todasPoblaciones = response.data;
-        console.log('Todas las poblaciones cargadas:', this.todasPoblaciones);
       },
       error: (err) => {
         console.error('Error al cargar todas las poblaciones:', err);

@@ -37,9 +37,7 @@ export class OfertasDetalle implements OnInit {
         if (userAlmacenado) {
             this.usuario = JSON.parse(userAlmacenado);
         }
-        console.log(userAlmacenado);
     const idStr = this._activRoute.snapshot.paramMap.get('id');
-    console.log('ID de la oferta desde la ruta:', idStr);
     if (idStr) {
       const id = parseInt(idStr);
       console.log(id);
@@ -76,7 +74,6 @@ export class OfertasDetalle implements OnInit {
     this._serviciosService.getServiciosById(id).subscribe({
       next: (response) => {
         this.oferta = response.data;
-        console.log(this.oferta);
       },
       error: (error) => {
         console.error('Error al cargar la oferta:', error);
@@ -100,9 +97,7 @@ export class OfertasDetalle implements OnInit {
     ofertaData.append('estado', 'en_proceso');
 
     this._serviciosService.updateServicio(this.oferta.id, ofertaData).subscribe({
-      next: (resOferta) => {
-        console.log('1. Oferta actualizada a en_proceso');
-        
+      next: (resOferta) => {        
         this.ejecutarRestaDeHoras(nuevoSaldo);
         this.crearTransaccion();
       },
@@ -119,7 +114,6 @@ export class OfertasDetalle implements OnInit {
 
     this._usuariosService.updateUsuario(this.usuario!.id, userData).subscribe({
       next: (resUser) => {
-        console.log('2. Saldo actualizado en el servidor:', nuevoSaldo);
         this.usuario!.horas_saldo = nuevoSaldo;
         sessionStorage.setItem('user', JSON.stringify(this.usuario));
 
@@ -148,7 +142,6 @@ export class OfertasDetalle implements OnInit {
 
     this._transaccionesService.createTransaccion(nuevaTransaccion).subscribe({
       next: (response) => {
-        console.log('Transacción creada:', response);
       },
       error: (err) => {
         console.error('Error al crear la transacción:', err);
@@ -169,7 +162,6 @@ export class OfertasDetalle implements OnInit {
     console.log("Mensaje a enviar:", nuevo);
     this._mensajesService.createMensaje(nuevo).subscribe({
       next: (response: ApiResponse<Mensaje>) => {
-          console.log('Mensaje publicado:', response.message);                    
           this.nuevoMensaje = '';
       },
       error: (err) => {
@@ -192,7 +184,6 @@ export class OfertasDetalle implements OnInit {
     console.log("Mensaje a enviar:", nuevo);
     this._mensajesService.createMensaje(nuevo).subscribe({
       next: (response: ApiResponse<Mensaje>) => {
-          console.log('Mensaje publicado:', response.message);                    
           this.nuevoMensaje = '';
       },
       error: (err) => {
