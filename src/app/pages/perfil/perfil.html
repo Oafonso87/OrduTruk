@@ -129,7 +129,7 @@
                 <div class="row list-item mensaje-list">
                     @for (oferta of ofertasPaginadas; track oferta.id) {
                         <ul class="list-item-content list-ofertas">
-                            <li>{{ oferta.created_at | date: 'dd/MM/yyyy' }}</li>
+                            <li>{{ oferta.created_at | date: 'dd/MM/yy' }}</li>
                             <li>{{ oferta.titulo }}</li>
                             <li>Horas a recibir: {{ oferta.horas_estimadas }}</li>
                             <li>
@@ -225,7 +225,7 @@
                 <div class="row list-item mensaje-list">
                     @for (demanda of demandasPaginadas; track demanda.id) {
                         <ul class="list-item-content list-demandas">
-                            <li>{{ demanda.created_at | date: 'dd/MM/yyyy' }}</li>
+                            <li>{{ demanda.created_at | date: 'dd/MM/yy' }}</li>
                             <li>{{ demanda.titulo }}</li>
                             <li>Horas a entregar: {{ demanda.horas_estimadas }}</li>
                             <li>
@@ -327,7 +327,7 @@
                             [routerLink]="['/transaccion-detalle', transaccion.id]"
                             style="cursor: pointer"
                         >
-                            <li>{{ transaccion.created_at | date: 'dd/MM/yyyy' }}</li>
+                            <li>{{ transaccion.created_at | date: 'dd/MM/yy' }}</li>
                             <li>{{ transaccion.servicio?.titulo }}</li>
                             <li>Horas: {{ transaccion.servicio?.horas_estimadas }}</li>
                             <li>
