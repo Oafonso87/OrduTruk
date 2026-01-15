@@ -162,6 +162,7 @@ export class OfertasDetalle implements OnInit {
     console.log("Mensaje a enviar:", nuevo);
     this._mensajesService.createMensaje(nuevo).subscribe({
       next: (response: ApiResponse<Mensaje>) => {
+          window.alert('Mensaje enviado correctamente.');
           this.nuevoMensaje = '';
       },
       error: (err) => {
