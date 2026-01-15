@@ -137,6 +137,7 @@ export class DemandasDetalle implements OnInit {
     this._mensajesService.createMensaje(nuevo).subscribe({
       next: (response: ApiResponse<Mensaje>) => {
           this.nuevoMensaje = '';
+          window.alert('Mensaje enviado correctamente.');
       },
       error: (err) => {
           console.error('Error al publicar el mensaje:', err);

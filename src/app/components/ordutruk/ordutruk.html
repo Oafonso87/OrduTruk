@@ -1,1 +1,5 @@
-<a href="/"><img src="assets/img/ordutruk.svg" alt="Ortutruk Tu tiempo vale" /></a>
+@if (token !== '') {
+    <a routerLink="/ofertas"><img src="assets/img/ordutruk.svg" alt="Ortutruk Tu tiempo vale" /></a>
+} @else {
+    <a routerLink="/"><img src="assets/img/ordutruk.svg" alt="Ortutruk Tu tiempo vale" /></a>
+}

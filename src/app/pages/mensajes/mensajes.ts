@@ -121,6 +121,7 @@ export class Mensajes implements OnInit {
                     this.nuevoMensaje = '';
                     this.closeModal();
                     this.loadMensajes();
+                    window.alert('Mensaje enviado correctamente.');
                 },
                 error: (err) => {
                     console.error('Error al publicar el mensaje:', err);
