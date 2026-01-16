@@ -99,7 +99,11 @@ export class Menu implements OnInit, OnDestroy {
   irAMensajes() {
     if (this.mensajesNoLeidos.length > 0) {
       // Creamos un array de promesas/peticiones para actualizar todos a la vez
-      this.mensajesNoLeidos.forEach(mensaje => {
+      const mensajesParaActualizar = [...this.mensajesNoLeidos];
+      this.mensajesNoLeidos = [];
+      this.dropdownOpen = false;
+      this.menuPerfilAbierto = false;
+      mensajesParaActualizar.forEach(mensaje => {
         // Creamos una copia del mensaje con el estado cambiado
         const mensajeLeido = { ...mensaje, leido: true };
         
