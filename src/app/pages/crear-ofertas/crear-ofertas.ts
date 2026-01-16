@@ -28,10 +28,12 @@ export class CrearOfertas implements OnInit {
     public usuario: Usuario | null = null;
 
     ngOnInit(): void {
+        // Recuperamos la información del usuario desde el almacenamiento de sesión
         const userAlmacenado = sessionStorage.getItem('user');
         if (userAlmacenado) {
             this.usuario = JSON.parse(userAlmacenado);
         }
+        // Carga de catálogos necesarios para los selectores del formulario
         this.loadCategorias();
         this.loadProvincias();
         this.loadPoblaciones();
@@ -40,6 +42,7 @@ export class CrearOfertas implements OnInit {
     constructor(private _router: Router, private _serviciosService: ServiciosService,
         private _ubicacionesService: UbicacionesService, private _categoriasService: CategoriasService) { }
 
+    // Variables de estado del formulario    
     public titulo: string = '';
     public descripcion: string = '';
     public horas: number = 0;
@@ -52,6 +55,7 @@ export class CrearOfertas implements OnInit {
     public categoria: number | null = null;
     public imagen : File | null = null;
 
+    // Recupera el listado de categorías de servicios disponibles
     loadCategorias() {
         this._categoriasService.getCategorias().subscribe({
             next: (response: ApiResponse<Categorias[]>) => {
@@ -63,6 +67,7 @@ export class CrearOfertas implements OnInit {
         });
     }
 
+    // Obtiene el listado de provincias para el filtrado geográfico
     loadProvincias() {
         this._ubicacionesService.getProvincias().subscribe({
             next: (response: ApiResponse<Provincias[]>) => {
@@ -74,6 +79,7 @@ export class CrearOfertas implements OnInit {
         });
     }
 
+    // Carga todas las poblaciones para permitir el filtrado reactivo en el cliente
     loadPoblaciones() {
         this._ubicacionesService.getPoblaciones().subscribe({
             next: (response: ApiResponse<Poblaciones[]>) => {
@@ -85,6 +91,10 @@ export class CrearOfertas implements OnInit {
         });
     }
 
+   /**
+    * Actualiza el selector de poblaciones basándose en la provincia seleccionada.
+    * Limpia la selección previa de población para asegurar la integridad de los datos.
+    */
     onProvinciaChange(valor: number | null) {
         const provinciaId = valor !== null ? Number(valor) : null;
 
@@ -100,6 +110,10 @@ export class CrearOfertas implements OnInit {
         }
     }
 
+    /**
+     * Envía los datos de la nueva oferta al servidor.
+     * Se utiliza FormData para permitir el envío de documentos (imágenes).
+     */
     publicarOferta() {
         const nuevaOferta = new FormData();
         nuevaOferta.append('id', '0');
@@ -128,6 +142,7 @@ export class CrearOfertas implements OnInit {
         });
     }
 
+    // Reinicia los campos del formulario a sus valores iniciales
     resetForm() {
         this.titulo = '';
         this.descripcion = '';
@@ -148,6 +163,7 @@ export class CrearOfertas implements OnInit {
         }
     }
 
+    // Captura el archivo seleccionado desde el input de tipo file
     onFileSelected(event: any) {
     const file: File = event.target.files[0];
         if (file) {

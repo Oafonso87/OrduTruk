@@ -35,11 +35,13 @@ export class Actualizar implements OnInit {
         if (userAlmacenado) {
             this.usuario = JSON.parse(userAlmacenado);
         }
+        // Obtenemos el ID de la URL para cargar los datos del servicio específico
         const idParam = this.route.snapshot.paramMap.get('id');
         if (idParam) {
             this.id = Number(idParam);
             this.loadServicio();
         }
+        // Carga inicial de catálogos para los selectores del formulario
         this.loadCategorias();
         this.loadProvincias();
         this.loadPoblaciones();
@@ -49,6 +51,7 @@ export class Actualizar implements OnInit {
         private _ubicacionesService: UbicacionesService, private _categoriasService: CategoriasService,
         private readonly route: ActivatedRoute, private _usuariosService: UsuariosService) { }
 
+    // Propiedades vinculadas al formulario    
     public titulo: string = '';
     public descripcion: string = '';
     public horas: number = 0;
@@ -64,7 +67,7 @@ export class Actualizar implements OnInit {
     public imagen : File | null = null;
     public servicio: Servicios | null = null;
 
-
+    // Métodos de carga de datos clave (Categorías, Provincias, Poblaciones)
     loadCategorias() {
         this._categoriasService.getCategorias().subscribe({
             next: (response: ApiResponse<Categorias[]>) => {
@@ -91,7 +94,7 @@ export class Actualizar implements OnInit {
         this._ubicacionesService.getPoblaciones().subscribe({
         next: (response: ApiResponse<Poblaciones[]>) => {
             this.todasPoblaciones = response.data;     
-            
+            // Si ya tenemos provincia (al editar), filtramos las poblaciones correspondientes
             if (this.provincia) {
             this.poblaciones = this.todasPoblaciones.filter(
                 p => Number(p.provincia_id) === this.provincia
@@ -102,15 +105,16 @@ export class Actualizar implements OnInit {
         });
     }
 
+    // Actualiza el listado de poblaciones cuando el usuario selecciona otra provincia
     onProvinciaChange(valor: any) {
         this.provincia = Number(valor);
         this.poblacion = null;
-
         this.poblaciones = this.todasPoblaciones.filter(
         p => Number(p.provincia_id) === this.provincia
         );
     }
 
+    // Recupera los datos del servicio y los mapea a las variables del formulario
     loadServicio() {
         if (!this.id) return;
         this._serviciosService.getServiciosById(this.id).subscribe({
@@ -125,6 +129,7 @@ export class Actualizar implements OnInit {
                 this.categoria = Number(this.servicio.categoria_id);
                 this.provincia = Number(this.servicio.provincia_id);
                 this.poblacion = Number(this.servicio.ciudad_id);
+                // Aseguramos que el combo de poblaciones se llene según la provincia del servicio
                 this.poblaciones = this.todasPoblaciones.filter(
                     p => Number(p.provincia_id) === this.provincia
                 );
@@ -133,6 +138,10 @@ export class Actualizar implements OnInit {
         });
     }
 
+    /**
+     * Procesa la actualización del servicio diferenciando entre ofertas y demandas.
+     * En demandas, gestiona el flujo de reajuste de horas retenidas.
+     */
     actualizarServicio() {
         const actualizacion = new FormData();
         actualizacion.append('titulo', this.titulo);
@@ -145,26 +154,30 @@ export class Actualizar implements OnInit {
             actualizacion.append('img', this.imagen);
         }
 
+        // Flujo para Ofertas: Actualización directa de información
         if (this.tipo === 'oferta') {
-
-        this._serviciosService.updateServicio(this.servicio!.id, actualizacion).subscribe({
-            next: (response: ApiResponse<Servicios>) => {
-                alert('Servicio actualizado exitosamente.');
-                this.resetForm();
-                this._router.navigate(['/perfil']);
-            },
-            error: (err) => {
-                console.error('Error al actualizar servicio:', err);
-                alert('Hubo un error al actualizar el servicio.');
-            }
-        });
+            this._serviciosService.updateServicio(this.servicio!.id, actualizacion).subscribe({
+                next: (response: ApiResponse<Servicios>) => {
+                    alert('Servicio actualizado exitosamente.');
+                    this.resetForm();
+                    this._router.navigate(['/perfil']);
+                },
+                error: (err) => {
+                    console.error('Error al actualizar servicio:', err);
+                    alert('Hubo un error al actualizar el servicio.');
+                }
+            });
+        // Flujo para Demandas: Gestión de saldo de horas del usuario    
         } else if (this.tipo === 'demanda') {
+            // Calculamos la diferencia entre lo que había retenido y lo nuevo
             const diferencia = this.horas_antiguas - this.horas;
             const nuevoSaldo = Number(this.usuario!.horas_saldo) + diferencia;
+            // Bloqueo si el usuario intenta subir horas sin tener saldo suficiente
             if (nuevoSaldo < 0) {
                 alert('No tienes saldo suficiente para aumentar las horas de esta demanda.');
                 return;
             }
+            // Encadenamos: si el servicio se actualiza bien, actualizamos el saldo del usuario
             this._serviciosService.updateServicio(this.servicio!.id, actualizacion).subscribe({
                 next: () => {
                     this.actualizarHorasUsuario(nuevoSaldo);
@@ -174,6 +187,7 @@ export class Actualizar implements OnInit {
         }
     }
 
+    // Actualiza el saldo del usuario en el servidor y sincroniza la sesión local
     private actualizarHorasUsuario(nuevoSaldo: number) {
         const userData = new FormData();
         userData.append('horas_saldo', String(nuevoSaldo));
@@ -194,6 +208,7 @@ export class Actualizar implements OnInit {
         });
     }
 
+    // Limpia el formulario después de una actualización
     resetForm() {
         this.titulo = '';
         this.descripcion = '';

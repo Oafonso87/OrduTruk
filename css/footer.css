@@ -1,0 +1,9 @@
+footer {
+  background: #d3f0f9;
+  min-height: 20px;
+}
+@media (max-width: 991px) {
+  footer {
+    background: #fff;
+  }
+}/*# sourceMappingURL=footer.css.map */

@@ -1,0 +1,23 @@
+:host(.header) {
+  background: url("/assets/img/bg-header.png") white;
+  background-position: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 110px;
+  padding: 20px 20px 20px;
+}
+@media (min-width: 992px) {
+  :host(.header) {
+    padding: 20px 50px 50px;
+    min-height: 130px;
+  }
+}
+@media (max-width: 991px) {
+  :host(.header) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1020;
+  }
+}/*# sourceMappingURL=header.css.map */

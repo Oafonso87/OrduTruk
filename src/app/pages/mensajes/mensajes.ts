@@ -34,6 +34,7 @@ export class Mensajes implements OnInit {
 
     constructor(private _mensajesService : MensajesService) { }
 
+    // Estructura de array bidimensional para gestionar hilos de conversación agrupados
     public mensajes : Mensaje[] [] = [];
     public activeTab: 'ofertas' | 'demandas' = 'ofertas';
     public activeMessageIndex: number | null = null;
@@ -41,20 +42,22 @@ export class Mensajes implements OnInit {
     public nuevoMensaje: string = '';
     public grupoSeleccionado: Mensaje[] | null = null;
 
-    
+    /**
+     * Carga todos los mensajes del usuario y los agrupa por conversación.
+     * Una conversación se define por el ID del servicio y el ID del interlocutor.
+     */
     loadMensajes() {
         this._mensajesService.getMensajesById(this.usuario!.id).subscribe({
             next: (response: ApiResponse<Mensaje[]>) => {
                 const todosLosMensajes = response.data;
-
+                // Lógica de agrupación mediante reduce para crear hilos únicos
                 const grupos = todosLosMensajes.reduce((acc: { [key: string]: Mensaje[] }, mensaje) => {
                     const servicioId = mensaje.servicio!.id;
-                    
+                    // Identificamos quién es la otra persona en la conversación (interlocutor)
                     const interlocutorId = mensaje.emisor!.id === this.usuario!.id 
                         ? mensaje.receptor!.id 
                         : mensaje.emisor!.id;
-
-                    
+                    // Creamos una clave única que combina servicio y usuario para agrupar los mensajes
                     const grupoKey = `s${servicioId}_u${interlocutorId}`;
 
                     if (!acc[grupoKey]) {
@@ -63,7 +66,7 @@ export class Mensajes implements OnInit {
                     acc[grupoKey].push(mensaje);
                     return acc;
                 }, {});
-
+                // Convertimos el objeto de grupos en un array de arrays para el renderizado
                 this.mensajes = Object.values(grupos);
             },
             error: (err) => {
@@ -72,16 +75,18 @@ export class Mensajes implements OnInit {
         });
     }
     
-
+    // Gestiona el cambio de pestaña entre Ofertas y Demandas
     setActiveTab(tab: 'ofertas' | 'demandas'): void {
         this.activeTab = tab;
         this.activeMessageIndex = null;
     }
 
+    // Expande o colapsa el detalle de una conversación en la lista
     toggleMessage(index: number): void {
         this.activeMessageIndex = this.activeMessageIndex === index ? null : index;
     }    
 
+    // Controladores para la gestión del modal de respuesta
     openModal(grupo: Mensaje[]): void {
         this.grupoSeleccionado = grupo;
         this.isModalOpen = true;
@@ -97,11 +102,16 @@ export class Mensajes implements OnInit {
         this.mostrarFiltro = !this.mostrarFiltro;
     }
 
+    /**
+     * Envía un mensaje dentro de una conversación existente.
+     * Determina automáticamente el receptor basándose en quién inició el hilo.
+     */
     publicarMensaje(): void {
         if (this.nuevoMensaje.trim() && this.grupoSeleccionado && this.usuario) {
             
             const referencia = this.grupoSeleccionado[0];
             
+            // Lógica para alternar el receptor: si yo soy el emisor del último, envío al receptor, y viceversa
             const receptorId = referencia.emisor!.id === this.usuario.id 
                 ? referencia.receptor!.id 
                 : referencia.emisor!.id;

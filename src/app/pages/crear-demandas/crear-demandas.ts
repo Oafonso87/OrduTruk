@@ -29,6 +29,7 @@ export class CrearDemandas implements OnInit {
     public usuario: Usuario | null = null;
 
     ngOnInit(): void {
+        // Recuperamos la sesión para validar el saldo disponible del usuario
         const userAlmacenado = sessionStorage.getItem('user');
         if (userAlmacenado) {
             this.usuario = JSON.parse(userAlmacenado);
@@ -42,6 +43,7 @@ export class CrearDemandas implements OnInit {
         private _ubicacionesService: UbicacionesService, private _categoriasService: CategoriasService,
         private _usuariosService: UsuariosService) { }
 
+    // Propiedades del formulario    
     public titulo: string = '';
     public descripcion: string = '';
     public horas: number = 0;
@@ -54,6 +56,7 @@ export class CrearDemandas implements OnInit {
     public categoria: number | null = null;
     public imagen : File | null = null;
 
+    // Métodos de carga para selectores dinámicos    
     loadCategorias() {
         this._categoriasService.getCategorias().subscribe({
             next: (response: ApiResponse<Categorias[]>) => {
@@ -87,6 +90,7 @@ export class CrearDemandas implements OnInit {
         });
     }
 
+    // Filtra el listado de poblaciones localmente según la provincia seleccionada
     onProvinciaChange(valor: number | null) {
         const provinciaId = valor !== null ? Number(valor) : null;
 
@@ -102,9 +106,14 @@ export class CrearDemandas implements OnInit {
         }
     }
 
+    /**
+     * Crea el registro de una nueva demanda.
+     * Valida el saldo, crea el servicio y desencadena la retención de horas.
+     */
     publicarDemanda() {
         if (!this.usuario) return;
 
+        // Validación de saldo: El usuario debe tener horas suficientes para "pagar" la demanda
         const saldoActual = Number(this.usuario.horas_saldo);
         const horasDemanda = Number(this.horas);
         const nuevoSaldo = saldoActual - horasDemanda;
@@ -114,6 +123,7 @@ export class CrearDemandas implements OnInit {
             return;
         }
 
+        // Construcción del FormData para soportar el envío de documentos (imagen)
         const nuevaDemanda = new FormData();
         nuevaDemanda.append('id', '0');
         nuevaDemanda.append('usuario_id', String(this.usuario?.id));
@@ -130,6 +140,7 @@ export class CrearDemandas implements OnInit {
         nuevaDemanda.append('estado', 'activo');
         this._serviciosService.createServicio(nuevaDemanda).subscribe({
             next: (response: ApiResponse<Servicios>) => {
+                // Si la demanda se crea con éxito, procedemos a restar las horas del perfil
                 this.descontarHorasUsuario(nuevoSaldo);
             },
             error: (error) => {
@@ -138,12 +149,14 @@ export class CrearDemandas implements OnInit {
         });
     }
 
+    // Actualiza el saldo del usuario en el servidor tras publicar una demanda
     private descontarHorasUsuario(nuevoSaldo: number) {
         const userData = new FormData();
         userData.append('horas_saldo', String(nuevoSaldo));
 
         this._usuariosService.updateUsuario(this.usuario!.id, userData).subscribe({
             next: (res) => {
+                // Actualizamos sesión local y notificamos al Header para refrescar el UI
                 this.usuario!.horas_saldo = nuevoSaldo;
                 sessionStorage.setItem('user', JSON.stringify(this.usuario));
                 this._usuariosService.notificarCambioSaldo();
@@ -158,6 +171,7 @@ export class CrearDemandas implements OnInit {
         });
     }
 
+    // Resetea el formulario tras publicar la demanda
     resetForm() {
         this.titulo = '';
         this.descripcion = '';

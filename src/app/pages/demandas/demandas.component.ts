@@ -24,7 +24,7 @@ import { CategoriasService } from '../../services/categorias.service';
 export class DemandasComponent implements OnInit {
 
   ngOnInit(): void {
-    // sessionStorage.removeItem('demandaSeleccionada');
+    // Inicialización de catálogos y carga de la lista de servicios
     this.loadCategorias();
     this.loadProvincias();
     this.loadTodasPoblaciones();
@@ -34,18 +34,23 @@ export class DemandasComponent implements OnInit {
   constructor(private _router : Router, private _serviciosService : ServiciosService, 
               private _ubicacionesService : UbicacionesService, private _categoriasService : CategoriasService) {}
 
+  // Arrays para el manejo de datos y filtros            
   public provincias : Provincias[] = [];
   public poblaciones : Poblaciones[] = [];
   public todasPoblaciones : Poblaciones[] = [];
   public categorias : Categorias[] = [];
+
+  // Modelos para los selectores de filtrado
   public provincia: number | null = null;
   public poblacion: number | null = null;
   public categoria : number | null = null;
   public demandas : Servicios [] = [];
 
+  // Configuración de la paginación local
   public numDemandas : number = 6;
   public pagActual : number = 1;
 
+  // Listas derivadas: filtradas (según búsqueda) y paginadas (subconjunto visual)
   public demandasPaginadas: Servicios[] = [];
   public demandasFiltradas: Servicios[] = [];
 
@@ -58,6 +63,10 @@ export class DemandasComponent implements OnInit {
     this.mostrarFiltro = !this.mostrarFiltro;
   }
 
+  /**
+   * Recupera todos los servicios y filtra solo aquellos que son 
+   * 'demanda' y están en estado 'activo'.
+   */
   loadServicios() {
     this.loading = true;
     this._serviciosService.getServicios().subscribe({
@@ -73,6 +82,7 @@ export class DemandasComponent implements OnInit {
     });
   }
 
+  // Métodos de carga de catálogos geográficos y de negocio
   loadCategorias() {
     this._categoriasService.getCategorias().subscribe({
       next: (response: ApiResponse<Categorias[]>) => {
@@ -106,6 +116,7 @@ export class DemandasComponent implements OnInit {
     });
   }
   
+  // Actualiza la lista de poblaciones disponible según la provincia elegida y resetea filtros
   onProvinciaChange(valor: number | null) {
     const provinciaId = valor !== null ? Number(valor) : null;
 
@@ -136,6 +147,10 @@ export class DemandasComponent implements OnInit {
     this.filterDemandas();
   }  
 
+  /**
+   * Aplica un filtrado multidimensional (Categoría, Provincia, Población y Texto)
+   * sobre la colección principal de demandas.
+   */
   filterDemandas() {
     this.demandasFiltradas = this.demandas;
 
@@ -165,10 +180,15 @@ export class DemandasComponent implements OnInit {
     this.updateDemandas();
   }
 
+  // Calcula el número total de páginas basándose en los resultados filtrados
   get totalPages(): number {
     return Math.ceil(this.demandasFiltradas.length / this.numDemandas);
   }
 
+  /**
+   * Extrae el segmento de datos (slice) que corresponde a la página actual 
+   * para su visualización en el HTML.
+   */
   updateDemandas() {
     const inicio = (this.pagActual - 1) * this.numDemandas;
     const fin = inicio + this.numDemandas;
