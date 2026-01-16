@@ -14,6 +14,7 @@ import { Poblaciones } from '../../models/poblaciones';
 import { ServiciosService } from '../../services/servicios.service';
 import { UbicacionesService } from '../../services/ubicaciones.service';
 import { CategoriasService } from '../../services/categorias.service';
+import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
     selector: 'app-actualizar',
@@ -26,9 +27,14 @@ import { CategoriasService } from '../../services/categorias.service';
 export class Actualizar implements OnInit {
 
     public id: number | null = null;
+    public usuario: Usuario | null = null;
+
 
     ngOnInit(): void {
         const userAlmacenado = sessionStorage.getItem('user');
+        if (userAlmacenado) {
+            this.usuario = JSON.parse(userAlmacenado);
+        }
         const idParam = this.route.snapshot.paramMap.get('id');
         if (idParam) {
             this.id = Number(idParam);
@@ -41,11 +47,13 @@ export class Actualizar implements OnInit {
 
     constructor(private _router: Router, private _serviciosService: ServiciosService,
         private _ubicacionesService: UbicacionesService, private _categoriasService: CategoriasService,
-        private readonly route: ActivatedRoute) { }
+        private readonly route: ActivatedRoute, private _usuariosService: UsuariosService) { }
 
     public titulo: string = '';
     public descripcion: string = '';
     public horas: number = 0;
+    public horas_antiguas : number = 0;
+    public tipo: string = '';
     public provincias: Provincias[] = [];
     public poblaciones: Poblaciones[] = [];
     public todasPoblaciones: Poblaciones[] = [];
@@ -55,6 +63,7 @@ export class Actualizar implements OnInit {
     public categoria: number | null = null;
     public imagen : File | null = null;
     public servicio: Servicios | null = null;
+
 
     loadCategorias() {
         this._categoriasService.getCategorias().subscribe({
@@ -111,6 +120,8 @@ export class Actualizar implements OnInit {
                 this.titulo = this.servicio.titulo;
                 this.descripcion = this.servicio.descripcion;
                 this.horas = Number(this.servicio.horas_estimadas);
+                this.horas_antiguas = Number(this.servicio.horas_estimadas);
+                this.tipo = this.servicio.tipo;
                 this.categoria = Number(this.servicio.categoria_id);
                 this.provincia = Number(this.servicio.provincia_id);
                 this.poblacion = Number(this.servicio.ciudad_id);
@@ -123,27 +134,63 @@ export class Actualizar implements OnInit {
     }
 
     actualizarServicio() {
-        const actualización = new FormData();
-        actualización.append('titulo', this.titulo);
-        actualización.append('descripcion', this.descripcion);
-        actualización.append('horas_estimadas', String(this.horas));
-        actualización.append('categoria_id', String(this.categoria));
-        actualización.append('provincia_id', String(this.provincia));
-        actualización.append('ciudad_id', String(this.poblacion));
+        const actualizacion = new FormData();
+        actualizacion.append('titulo', this.titulo);
+        actualizacion.append('descripcion', this.descripcion);
+        actualizacion.append('horas_estimadas', String(this.horas));
+        actualizacion.append('categoria_id', String(this.categoria));
+        actualizacion.append('provincia_id', String(this.provincia));
+        actualizacion.append('ciudad_id', String(this.poblacion));
         if (this.imagen) {
-            actualización.append('img', this.imagen);
+            actualizacion.append('img', this.imagen);
         }
 
-        this._serviciosService.updateServicio(this.servicio!.id, actualización).subscribe({
-        next: (response: ApiResponse<Servicios>) => {
-            alert('Servicio actualizado exitosamente.');
-            this.resetForm();
-            this._router.navigate(['/perfil']);
-        },
-        error: (err) => {
-            console.error('Error al actualizar servicio:', err);
-            alert('Hubo un error al actualizar el servicio.');
+        if (this.tipo === 'oferta') {
+
+        this._serviciosService.updateServicio(this.servicio!.id, actualizacion).subscribe({
+            next: (response: ApiResponse<Servicios>) => {
+                alert('Servicio actualizado exitosamente.');
+                this.resetForm();
+                this._router.navigate(['/perfil']);
+            },
+            error: (err) => {
+                console.error('Error al actualizar servicio:', err);
+                alert('Hubo un error al actualizar el servicio.');
+            }
+        });
+        } else if (this.tipo === 'demanda') {
+            const diferencia = this.horas_antiguas - this.horas;
+            const nuevoSaldo = Number(this.usuario!.horas_saldo) + diferencia;
+            if (nuevoSaldo < 0) {
+                alert('No tienes saldo suficiente para aumentar las horas de esta demanda.');
+                return;
+            }
+            this._serviciosService.updateServicio(this.servicio!.id, actualizacion).subscribe({
+                next: () => {
+                    this.actualizarHorasUsuario(nuevoSaldo);
+                },
+                error: (err) => console.error('Error al actualizar servicio:', err)
+            });        
         }
+    }
+
+    private actualizarHorasUsuario(nuevoSaldo: number) {
+        const userData = new FormData();
+        userData.append('horas_saldo', String(nuevoSaldo));
+
+        this._usuariosService.updateUsuario(this.usuario!.id, userData).subscribe({
+            next: (res) => {
+                this.usuario!.horas_saldo = nuevoSaldo;
+                sessionStorage.setItem('user', JSON.stringify(this.usuario));
+                this._usuariosService.notificarCambioSaldo();
+                window.alert('Servicio actualizado exitosamente.');
+                this.resetForm();
+                this._router.navigate(['/perfil']);
+            },
+            error: (err) => {
+                console.error('Error al descontar saldo:', err);
+                this._router.navigate(['/perfil']);
+            }
         });
     }
 
