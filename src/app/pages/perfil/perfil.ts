@@ -234,17 +234,75 @@ export class Perfil implements OnInit {
   // --- ACCIONES DE SERVICIO Y TRANSACCIÓN ---
 
   // Cancela un servicio publicado para que deje de estar visible en los listados activos
-  cancelar(id : number) {
+  // cancelar(id : number) {
+  //   const formData = new FormData();
+  //   formData.append('estado', 'cancelado');
+  //   if() {
+  //   this._serviciosService.updateServicio(id, formData).subscribe({
+  //     next: (resOferta) => {
+  //       this.loadServicios();
+  //     },
+  //     error: (err) => {
+  //       console.error('Error al actualizar oferta:', err);
+  //       alert('Hubo un error al cancelar la oferta.');
+  //     }
+  //   });
+  // }
+  // }
+
+  /**
+   * Cancela un servicio publicado (Oferta o Demanda).
+   * Si el servicio es una Demanda, restituye las horas al autor, ya que estas 
+   * fueron "retenidas" al momento de la publicación.
+   */
+  cancelar(id: number) {
+    // Buscamos el servicio en nuestras listas locales para saber su tipo y horas
+    const servicio = [...this.ofertas, ...this.demandas].find(s => s.id === id);
+    if (!servicio || !this.usuario) return;
+
+    if (!confirm('¿Estás seguro de que quieres cancelar este servicio?')) return;
+
+    // Cambiamos el estado del servicio a 'cancelado'
     const formData = new FormData();
     formData.append('estado', 'cancelado');
+    formData.append('_method', 'PUT');
 
     this._serviciosService.updateServicio(id, formData).subscribe({
-      next: (resOferta) => {
-        this.loadServicios();
+      next: () => {
+        /**
+         * Si el usuario cancela una DEMANDA propia, le devolvemos las horas 
+         * que el sistema le descontó al publicarla.
+         */
+        if (servicio.tipo === 'demanda') {
+          const saldoActual = Number(this.usuario!.horas_saldo || 0);
+          const horasARecuperar = Number(servicio.horas_estimadas);
+          const nuevoSaldo = saldoActual + horasARecuperar;
+
+          const fdUsuario = new FormData();
+          fdUsuario.append('horas_saldo', nuevoSaldo.toString());
+          fdUsuario.append('_method', 'PUT');
+
+          this._usuariosService.updateUsuario(this.usuario!.id, fdUsuario).subscribe({
+            next: (res) => {
+              // Actualizamos la sesión local y el Header
+              this.usuario!.horas_saldo = nuevoSaldo;
+              sessionStorage.setItem('user', JSON.stringify(this.usuario));
+              this._usuariosService.notificarCambioSaldo();
+              
+              alert('Servicio cancelado. Las horas han sido reintegradas a tu saldo.');
+              this.loadServicios();
+            },
+            error: (err) => console.error('Error al devolver horas al cancelar demanda:', err)
+          });
+        } else {
+          // Si es una oferta, simplemente avisamos y refrescamos
+          alert('Oferta cancelada correctamente.');
+          this.loadServicios();
+        }
       },
       error: (err) => {
-        console.error('Error al actualizar oferta:', err);
-        alert('Hubo un error al cancelar la oferta.');
+        console.error('Error al actualizar servicio:', err);
+        alert('Hubo un error al cancelar el servicio.');
       }
     });
   }
