@@ -24,7 +24,9 @@ import { CategoriasService } from '../../services/categorias.service';
 export class OfertasComponent implements OnInit {
 
   ngOnInit(): void {
+    // Limpieza de datos temporales de navegación previa
     sessionStorage.removeItem('ofertaSeleccionada');
+    // Carga inicial de datos maestros y listado principal
     this.loadCategorias();
     this.loadProvincias();
     this.loadTodasPoblaciones();
@@ -34,18 +36,20 @@ export class OfertasComponent implements OnInit {
   constructor(private _router : Router, private _serviciosService : ServiciosService, 
               private _ubicacionesService : UbicacionesService, private _categoriasService : CategoriasService) {}
 
+  // Listados para selectores y almacenamiento de datos            
   public provincias : Provincias[] = [];
   public poblaciones : Poblaciones[] = [];
   public todasPoblaciones : Poblaciones[] = [];
   public categorias : Categorias[] = [];
+  // Modelos para el control de filtros activos
   public provincia: number | null = null;
   public poblacion: number | null = null;
   public categoria : number | null = null;
   public ofertas : Servicios [] = [];
-
+  // Configuración de paginación en el front-end
   public numOfertas : number = 6;
   public pagActual : number = 1;
-
+  // Subconjuntos de datos para visualización
   public ofertasPaginadas: Servicios[] = [];
   public ofertasFiltradas: Servicios[] = [];
 
@@ -58,6 +62,10 @@ export class OfertasComponent implements OnInit {
     this.mostrarFiltro = !this.mostrarFiltro;
   }
 
+  /**
+   * Obtiene todos los servicios y filtra los de tipo 'oferta' activos.
+   * Centraliza la carga inicial y el estado de carga (loading).
+   */
   loadServicios() {
     this.loading = true;
     this._serviciosService.getServicios().subscribe({
@@ -73,6 +81,7 @@ export class OfertasComponent implements OnInit {
     });
   }
 
+  // Métodos de carga de catálogos mediante servicios inyectados
   loadCategorias() {
     this._categoriasService.getCategorias().subscribe({
       next: (response: ApiResponse<Categorias[]>) => {
@@ -106,6 +115,10 @@ export class OfertasComponent implements OnInit {
     });
   }
   
+  /**
+   * Gestiona el cambio de provincia, actualizando dinámicamente el combo de poblaciones
+   * y disparando el filtrado de la lista principal.
+   */
   onProvinciaChange(valor: number | null) {
     const provinciaId = valor !== null ? Number(valor) : null;
 
@@ -123,7 +136,7 @@ export class OfertasComponent implements OnInit {
     this.filterOfertas();
   }
 
-
+  // Handlers para cambios en filtros de categoría y población específica
   onCategoriaChange(valor: number | null) {
     this.categoria = valor;
     this.pagActual = 1;
@@ -136,6 +149,10 @@ export class OfertasComponent implements OnInit {
     this.filterOfertas();
   }  
 
+  /**
+   * Aplica lógica de filtrado acumulativo sobre la colección de ofertas.
+   * Filtra por categoría, provincia, población y búsqueda textual por título.
+   */
   filterOfertas() {
     this.ofertasFiltradas = this.ofertas;
 
@@ -165,10 +182,14 @@ export class OfertasComponent implements OnInit {
     this.updateOfertas();
   }
 
+  // Getter para calcular el total de páginas necesarias según resultados filtrados
   get totalPages(): number {
     return Math.ceil(this.ofertasFiltradas.length / this.numOfertas);
   }
 
+  /**
+   * Calcula el rango de elementos a mostrar en la vista actual (paginación por slice).
+   */
   updateOfertas() {
     const inicio = (this.pagActual - 1) * this.numOfertas;
     const fin = inicio + this.numOfertas;
@@ -179,9 +200,9 @@ export class OfertasComponent implements OnInit {
     if (page < 1 || page > this.totalPages) return; this.pagActual = page; this.updateOfertas(); 
   }
 
+  // Persiste la oferta en sesión para agilizar la carga en la vista de detalle
   guardarOferta(oferta: any) {
     sessionStorage.setItem('ofertaSeleccionada', JSON.stringify(oferta));
   }
-
 
 }

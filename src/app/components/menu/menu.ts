@@ -23,7 +23,7 @@ export class Menu implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cargarUsuarioDeStorage();
     this.loadMensajes();
-
+    // Escucha cambios globales en el saldo (ej. tras una transacción) para actualizar la cabecera
     this.saldoSub = this._usuariosService.actualizarSaldo$.subscribe(() => {
       this.refrescarDatosUsuario();
     });
@@ -31,6 +31,7 @@ export class Menu implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.saldoSub) {
+    // Liberamos la suscripción al cerrar el componente para evitar consumo de memoria
       this.saldoSub.unsubscribe();
     }
   }
@@ -38,7 +39,8 @@ export class Menu implements OnInit, OnDestroy {
   constructor(private readonly _router: Router, private readonly _loginService: LoginService, 
     private readonly _usuariosService: UsuariosService, private readonly _mensajesService: MensajesService) {}
 
-  get isPublic(): boolean {
+  // Getters para controlar la visibilidad de elementos según la ruta activa
+    get isPublic(): boolean {
     const publicRoutes = ['/', '/acceso', '/registro'];
     return publicRoutes.includes(this._router.url);
   }
@@ -52,6 +54,7 @@ export class Menu implements OnInit, OnDestroy {
   public isMenuOpen: boolean = false;
   public mensajesNoLeidos: Mensaje[] = [];
 
+  // Métodos de control para el despliegue de menús y submenús
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
@@ -71,62 +74,60 @@ export class Menu implements OnInit, OnDestroy {
     }
   }
 
+  // Sincroniza los datos del usuario con el servidor para actualizar el saldo de horas
   private refrescarDatosUsuario() {
     if (this.usuario?.id) {
       this._usuariosService.getUsuarioById(this.usuario.id).subscribe({
         next: (response) => {
           this.usuario = response.data;
           sessionStorage.setItem('user', JSON.stringify(this.usuario));
-          console.log('Saldo actualizado en tiempo real:', this.usuario.horas_saldo);
         },
         error: (err) => console.error('Error al refrescar saldo:', err)
       });
     }
   }
 
+  // Carga y filtra únicamente los mensajes recibidos que aún no han sido leídos por el usuario
   loadMensajes() {
     if (this.usuario?.id) {
       this._mensajesService.getMensajesById(this.usuario.id).subscribe({
         next: (response) => {
           const todosLosMensajes = response.data;
           this.mensajesNoLeidos = todosLosMensajes.filter(mensaje => !mensaje.leido && mensaje.receptor_id === this.usuario?.id);
-          console.log('Mensajes no leídos cargados:', this.mensajesNoLeidos);
         }
       });
     }
   }
 
+  /**
+   * Navega a la bandeja de entrada, limpiando previamente los indicadores visuales 
+   * y lanzando las peticiones para marcar los mensajes como leídos en el servidor.
+   */
   irAMensajes() {
     if (this.mensajesNoLeidos.length > 0) {
-      // Creamos un array de promesas/peticiones para actualizar todos a la vez
       const mensajesParaActualizar = [...this.mensajesNoLeidos];
+      // Reseteamos el estado local para que el badge desaparezca instantáneamente al hacer clic
       this.mensajesNoLeidos = [];
       this.dropdownOpen = false;
       this.menuPerfilAbierto = false;
+      // Actualizamos cada mensaje de forma asíncrona en la base de datos
       mensajesParaActualizar.forEach(mensaje => {
-        // Creamos una copia del mensaje con el estado cambiado
-        const mensajeLeido = { ...mensaje, leido: true };
-        
+        const mensajeLeido = { ...mensaje, leido: true };        
         this._mensajesService.updateMensaje(mensajeLeido).subscribe({
           next: () => {
-            console.log(`Mensaje ${mensaje.id} marcado como leído`);
           },
           error: (err) => console.error('Error al actualizar mensaje', err)
         });
       });
-
-      // Limpiamos la lista local para que el badge desaparezca al instante
       this.mensajesNoLeidos = [];
+    }  
+    this._router.navigate(['/mensajes']);
   }
-  
-  // Navegamos a la página de mensajes
-  this._router.navigate(['/mensajes']);
-}
 
   logout() {
     this._loginService.logout().subscribe({
       next: () => {
-        console.log('Logout exitoso');            
+        // Limpiamos todo rastro de sesión antes de redirigir al inicio
         localStorage.clear();
         sessionStorage.clear();
         this._router.navigate(['/']);

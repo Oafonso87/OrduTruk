@@ -25,6 +25,10 @@ export class Acceso {
   public password : string = '';
   public mostrarPassword = false;
 
+  /**
+   * Gestiona el proceso de autenticación del usuario.
+   * Envía las credenciales al servidor y, en caso de éxito, persiste la sesión.
+   */
   acceder() {    
     const credenciales: LoginRequest = {
       email: this.email,
@@ -33,19 +37,21 @@ export class Acceso {
 
     this._loginService.login(credenciales).subscribe({
       next: (response: LoginResponse) => {
-        
+        // Almacenamos el token JWT para el AuthInterceptor y los datos de usuario para la persistencia local
         localStorage.setItem('access_token', response.access_token);
         sessionStorage.setItem('user', JSON.stringify(response.user));
-        
+        // Redirección al dashboard principal una vez autenticado correctamente
         this._router.navigate(['/ofertas']);
       },
       error: (err) => {
+        // Notificamos el fallo de credenciales en forma de alert para que el usuario lo vea
         window.alert("Credenciales incorrectas. Inténtelo de nuevo.");
         console.error('Error de login:', err);       
       }
     });
   }   
 
+  // Alterna la visibilidad de los caracteres del campo contraseña en el formulario
   togglePassword() {
     this.mostrarPassword = !this.mostrarPassword;
   }

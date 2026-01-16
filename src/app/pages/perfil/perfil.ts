@@ -32,6 +32,7 @@ export class Perfil implements OnInit {
   public usuario : Usuario | null = null;    
 
   ngOnInit(): void {
+    // Recuperamos la sesión y pre-cargamos los campos del formulario de edición
     const userAlmacenado = sessionStorage.getItem('user');
     if (userAlmacenado) {
       this.usuario = JSON.parse(userAlmacenado);
@@ -40,7 +41,7 @@ export class Perfil implements OnInit {
       this.ciudad = this.usuario?.ciudad_id ? Number(this.usuario.ciudad_id) : null;
       this.direccion = this.usuario?.direccion || '';
     }
-    
+    // Inicialización de datos para la gestión de ubicaciones y de actividad
     this.loadProvincias();
     this.loadTodasPoblaciones();
     this.loadServicios();
@@ -51,6 +52,7 @@ export class Perfil implements OnInit {
     private _transaccionesService: TransaccionesService, private _loginService: LoginService,
     private _usuariosService: UsuariosService, private _mensajesService: MensajesService) {}
 
+  // Datos y variables de formulario  
   public provincias: Provincias[] = [];
   public poblaciones: Poblaciones[] = [];
   public todasPoblaciones: Poblaciones[] = [];
@@ -62,16 +64,18 @@ export class Perfil implements OnInit {
   public ciudad : number | null = null;
   public imagen: File | null = null;
 
-
+  // Colecciones para los paneles de actividad del usuario
   public ofertas : Servicios[] = [];
   public demandas : Servicios[] = [];
   public transacciones : Transacciones[] = [];
 
+  // Configuración de paginación interna por sección
   public p_ofertas: number = 1;
   public p_demandas: number = 1;
   public p_transacciones: number = 1;
   public itemsPorPagina: number = 3;
 
+  // --- MÉTODOS DE CARGA DE DATOS ---
 
   loadProvincias() {
     this._ubicacionesService.getProvincias().subscribe({
@@ -108,6 +112,7 @@ export class Perfil implements OnInit {
     );
   }  
 
+  // Carga las ofertas y demandas publicadas específicamente por el usuario identificado
   loadServicios() {
     this._serviciosService.getServicios().subscribe({
       next: (response: ApiResponse<Servicios[]>) => {
@@ -119,6 +124,7 @@ export class Perfil implements OnInit {
     });
   }
 
+  // Carga el historial de intercambios donde el usuario participa como solicitante u ofertante
   loadTransacciones() {
     this._transaccionesService.getTransacciones().subscribe({
       next: (response: ApiResponse<Transacciones[]>) => {
@@ -130,6 +136,8 @@ export class Perfil implements OnInit {
       error: (err) => console.error('Error al cargar transacciones:', err)
     });
   }  
+
+  // --- LÓGICA DE ACTUALIZACIÓN ---
 
   cambiarPassword() {
     if (this.password1 && this.password1 === this.password2 && this.usuario?.id) {
@@ -159,6 +167,7 @@ export class Perfil implements OnInit {
     this.imagen = event.target.files[0];
   }
 
+  // Procesa la actualización de los datos de perfil e imagen mediante FormData
   modificarPerfil() {
     if (!this.usuario?.id) return;
 
@@ -186,6 +195,8 @@ export class Perfil implements OnInit {
         }
     });
   }
+
+  // --- GESTIÓN DE PAGINACIÓN (Getters) ---
 
   get totalPaginasOfertas(): number[] {
     const paginas = Math.ceil(this.ofertas.length / this.itemsPorPagina);
@@ -220,6 +231,9 @@ export class Perfil implements OnInit {
     return this.transacciones.slice(inicio, fin);
   }
 
+  // --- ACCIONES DE SERVICIO Y TRANSACCIÓN ---
+
+  // Cancela un servicio publicado para que deje de estar visible en los listados activos
   cancelar(id : number) {
     const formData = new FormData();
     formData.append('estado', 'cancelado');
@@ -235,6 +249,13 @@ export class Perfil implements OnInit {
     });
   }
 
+  /**
+   * Lógica de Rechazo: 
+   * 1. Cancela la transacción.
+   * 2. Reactiva el servicio original.
+   * 3. Devuelve las horas retenidas al usuario solicitante.
+   * 4. Notifica mediante mensaje interno al afectado.
+   */
   rechazar(id: number) {
     const tOriginal = this.transacciones.find(t => t.id === id);
     if (!tOriginal || !this.usuario) return;
@@ -290,7 +311,7 @@ export class Perfil implements OnInit {
     }
   }
   
-
+  // Utilidad visual para normalizar textos (Nombres Propios, Ciudades, etc.)
   capitalizar(texto: string): string {
     if (!texto) return '';
     return texto

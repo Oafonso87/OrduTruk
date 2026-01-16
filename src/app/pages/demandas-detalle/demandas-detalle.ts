@@ -34,10 +34,12 @@ export class DemandasDetalle implements OnInit {
 
   
   ngOnInit() {
+    // Recuperamos el usuario en sesión
     const userAlmacenado = sessionStorage.getItem('user');
         if (userAlmacenado) {
             this.usuario = JSON.parse(userAlmacenado);
         }
+    // Captura del ID de la demanda desde la URL para cargar su información específica    
     const idStr = this._activRoute.snapshot.paramMap.get('id');
     if (idStr) {
       const id = parseInt(idStr);
@@ -45,6 +47,7 @@ export class DemandasDetalle implements OnInit {
     }
   }
 
+  // Métodos para el control de visibilidad de los componentes modales
   openAceptarModal(): void {
     this.isAceptarModalOpen = true;
   }
@@ -81,6 +84,11 @@ export class DemandasDetalle implements OnInit {
     });
   }
 
+  /**
+   * Procesa la aceptación de una demanda. 
+   * Cambia el estado del servicio a 'en_proceso' para retirarlo de la lista activa
+   * e inicia la creación de la transacción y notificación automática.
+   */
   aceptarDemanda(): void {
     if (!this.demanda || !this.usuario) return;
 
@@ -104,6 +112,7 @@ export class DemandasDetalle implements OnInit {
     });
   }
 
+  // Registra una nueva transacción en estado 'pendiente' vinculando a ambos usuarios y el servicio
   crearTransaccion(): void {
     const nuevaTransaccion = {
       id: 0,
@@ -124,6 +133,7 @@ export class DemandasDetalle implements OnInit {
     });
   }
 
+  // Envía un mensaje manual redactado por el usuario a través del modal de contacto
   enviarMensaje(): void {
     const nuevo: Mensaje = {
             id: 0,
@@ -146,6 +156,7 @@ export class DemandasDetalle implements OnInit {
     this.isContactarModalOpen = false;    
   }  
 
+  // Genera un mensaje automático de sistema para notificar que la demanda ha sido aceptada formalmente
   mensajeConfirmacion() {
     const nuevo: Mensaje = {
             id: 0,

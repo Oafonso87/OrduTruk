@@ -33,18 +33,20 @@ export class OfertasDetalle implements OnInit {
   protected Math = Math;
   
   ngOnInit() {
+    // Recuperamos los datos del usuario en sesión
     const userAlmacenado = sessionStorage.getItem('user');
         if (userAlmacenado) {
             this.usuario = JSON.parse(userAlmacenado);
         }
+    // Obtenemos el ID del servicio desde la URL para cargar su información detallada    
     const idStr = this._activRoute.snapshot.paramMap.get('id');
     if (idStr) {
       const id = parseInt(idStr);
-      console.log(id);
       this.loadServiceById(id);
     }
   }
 
+  // Métodos de control para la apertura y cierre de ventanas modales
   openAceptarModal(): void {
     this.isAceptarModalOpen = true;
   }
@@ -70,6 +72,7 @@ export class OfertasDetalle implements OnInit {
     private _usuariosService: UsuariosService, private _mensajesService: MensajesService, 
     private _transaccionesService: TransaccionesService ) {}
 
+  // Busca el servicio por su Id y carga sus datos  
   loadServiceById(id: number) {
     this._serviciosService.getServiciosById(id).subscribe({
       next: (response) => {
@@ -81,6 +84,11 @@ export class OfertasDetalle implements OnInit {
     });
   }
 
+  /**
+   * Inicia el proceso de aceptación de la oferta.
+   * Valida el saldo del solicitante, actualiza el estado del servicio a 'en_proceso'
+   * y dispara el flujo de cobro y registro de transacción.
+   */
   aceptarOferta(): void {
     if (!this.oferta || !this.usuario) return;
 
@@ -88,12 +96,14 @@ export class OfertasDetalle implements OnInit {
     const horasOferta = Number(this.oferta.horas_estimadas);
     const nuevoSaldo = saldoActual - horasOferta;
 
+    // Validación crítica de saldo antes de proceder con el "pago" de horas
     if (nuevoSaldo < 0) {
       window.alert(`No tienes saldo suficiente. Dispones de ${saldoActual}h y necesitas ${horasOferta}h.`);
       return;
     }
 
     const ofertaData = new FormData();
+    // Cambiamos el estado de la oferta para que deje de estar disponible
     ofertaData.append('estado', 'en_proceso');
 
     this._serviciosService.updateServicio(this.oferta.id, ofertaData).subscribe({
@@ -108,6 +118,7 @@ export class OfertasDetalle implements OnInit {
     });
   }
 
+  // Actualiza el saldo del usuario solicitante tras aceptar la oferta y sincroniza la UI
   private ejecutarRestaDeHoras(nuevoSaldo: number) {
     const userData = new FormData();
     userData.append('horas_saldo', String(nuevoSaldo)); 
@@ -129,6 +140,7 @@ export class OfertasDetalle implements OnInit {
     });
   }
 
+  // Registra el inicio formal de la relación entre los dos usuarios y el servicio
   crearTransaccion(): void {
     const nuevaTransaccion = {
       id: 0,
@@ -149,6 +161,7 @@ export class OfertasDetalle implements OnInit {
     });
   }
 
+  // Gestiona el envío de un mensaje al creador de la oferta
   enviarMensaje(): void {
     const nuevo: Mensaje = {
             id: 0,
@@ -159,7 +172,6 @@ export class OfertasDetalle implements OnInit {
             leido: false,
             created_at: new Date().toISOString()
     };
-    console.log("Mensaje a enviar:", nuevo);
     this._mensajesService.createMensaje(nuevo).subscribe({
       next: (response: ApiResponse<Mensaje>) => {
           window.alert('Mensaje enviado correctamente.');
@@ -172,6 +184,7 @@ export class OfertasDetalle implements OnInit {
     this.isContactarModalOpen = false;    
   }
 
+  // Genera un aviso automático de sistema indicando que la oferta ha sido aceptada
   mensajeConfirmacion() {
     const nuevo: Mensaje = {
             id: 0,
@@ -182,7 +195,6 @@ export class OfertasDetalle implements OnInit {
             leido: false,
             created_at: new Date().toISOString()
     };
-    console.log("Mensaje a enviar:", nuevo);
     this._mensajesService.createMensaje(nuevo).subscribe({
       next: (response: ApiResponse<Mensaje>) => {
           this.nuevoMensaje = '';

@@ -15,7 +15,6 @@ import { LoginResponse } from '../../models/loginresponse';
 @Component({
   selector: 'app-registro',
   standalone: true,
-  // imports: [Button, Header, Footer, RouterLink, FormsModule],
   imports: [ Header, Footer, RouterLink, FormsModule],
   templateUrl: './registro.html',
   styleUrl: './registro.scss',
@@ -23,17 +22,20 @@ import { LoginResponse } from '../../models/loginresponse';
 export class Registro implements OnInit {
 
   ngOnInit(): void {
+    // Inicialización de catálogos geográficos para el formulario de inscripción
     this.loadProvincias();
     this.loadTodasPoblaciones();  
   }
 
   constructor(private _ubicacionesService : UbicacionesService, private _router : Router, private _usuariosService : UsuariosService) {}
 
+  // Colecciones para la gestión de selectores dinámicos
   public usuarios: Usuario[] = [];
   public provincias: Provincias[] = [];
   public poblaciones: Poblaciones[] = [];
   public todasPoblaciones: Poblaciones[] = [];
   
+  // Modelos vinculados a los campos del formulario
   public nombre : string = '';
   public apellidos : string = '';
   public mail : string = '';
@@ -44,6 +46,7 @@ export class Registro implements OnInit {
   public ciudad : string = '';
   public imagen: File | null = null;
 
+  // Recupera el listado de provincias desde la API
   loadProvincias() {
     this._ubicacionesService.getProvincias().subscribe({
       next: (response: ApiResponse<Provincias[]>) => {
@@ -55,6 +58,7 @@ export class Registro implements OnInit {
     });
   }  
 
+  // Carga todas las poblaciones para realizar el filtrado reactivo en el cliente
   loadTodasPoblaciones() {
     this._ubicacionesService.getPoblaciones().subscribe({
       next: (response: ApiResponse<Poblaciones[]>) => {
@@ -66,6 +70,10 @@ export class Registro implements OnInit {
     });
   }
 
+  /**
+   * Actualiza el listado de ciudades según la provincia seleccionada.
+   * Resetea el valor de la ciudad para evitar inconsistencias en el envío.
+   */
   onProvinciaChange(valor: any) {
     const provinciaId = Number(valor);   
     this.provincia = provinciaId;
@@ -77,6 +85,11 @@ export class Registro implements OnInit {
   }
 
 
+  /**
+   * Gestiona el alta de nuevos usuarios.
+   * Define valores por defecto de la plataforma (saldo inicial de 5 horas y rol de usuario).
+   * Al completarse, inicia automáticamente la sesión del usuario.
+   */
   registrar() {
 
     const nuevoUsuario = new FormData();
@@ -87,17 +100,20 @@ export class Registro implements OnInit {
     nuevoUsuario.append('provincia_id', String(this.provincia));
     nuevoUsuario.append('ciudad_id', String(this.ciudad));
     nuevoUsuario.append('descripcion', '');
+    // Lógica de negocio: Todo nuevo usuario comienza con una dotación de 5 horas de tiempo
     nuevoUsuario.append('horas_saldo', '5');
     nuevoUsuario.append('valoracion', '0');
     if (this.imagen) {
       nuevoUsuario.append('img', this.imagen);
     }
+    // Asignación de rol estándar (Usuario)
     nuevoUsuario.append('rol_id', '3');
     nuevoUsuario.append('password', this.password1);
     nuevoUsuario.append('direccion', this.direccion);
 
     this._usuariosService.createUsuario(nuevoUsuario).subscribe({
       next: (response: LoginResponse) => {
+        // Persistencia automática de la sesión tras el registro exitoso
         localStorage.setItem('access_token', response.access_token);
         sessionStorage.setItem('user', JSON.stringify(response.user));
         this.resetForm();
@@ -111,6 +127,7 @@ export class Registro implements OnInit {
     
   }
 
+  // Limpia el estado del formulario
   resetForm() {
     this.nombre = '';
     this.apellidos = '';
@@ -122,6 +139,7 @@ export class Registro implements OnInit {
     this.direccion = '';
   }
 
+  // Normaliza el formato de texto para nombres y apellidos (ej: "juan pérez" -> "Juan Pérez")
   capitalizar(texto: string): string {
     if (!texto) return '';
     return texto
@@ -132,6 +150,7 @@ export class Registro implements OnInit {
       .join(' ');
   }
 
+  // Captura el archivo imagen de perfil para su posterior envío
   onFileSelected(event: any) {
     this.imagen = event.target.files[0];
   }
